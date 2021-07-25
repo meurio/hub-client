@@ -15,8 +15,10 @@ type Props = {
   data: {
     FetchIndividualsForMatch: ({
       children,
+      showAllAvailable,
     }: {
       children: (data: any) => React.ReactElement;
+      showAllAvailable: boolean;
     }) => React.ReactElement | null;
     CreateRelationship: any;
     ColumnsMatch: (
@@ -28,22 +30,19 @@ type Props = {
 };
 
 export default function Match({
-  data: {
-    FetchIndividualsForMatch,
-    ColumnsMatch,
-    CreateRelationship,
-  },
+  data: { FetchIndividualsForMatch, ColumnsMatch, CreateRelationship },
   groups,
 }: Props): React.ReactElement {
   const [createRelationship, { loading }] = useMutation(CreateRelationship);
-  const { user, community } = useSession()
+  const { user, community } = useSession();
   const [isOpen, setModal] = useState<boolean>(false);
+  const [showAllAvailable, setAllAvailable] = useState<boolean>(true);
   const [selectedGroup, isVolunteerSelected] = useSelectedGroup();
   const [state, dispatch] = useFilter();
   const { state: linkState } = useLocation();
   const { goBack } = useHistory();
 
-  const selectedIndividual: Individual = (linkState as unknown) as Individual;
+  const selectedIndividual: Individual = linkState as unknown as Individual;
 
   const matchGroup = getMatchGroup(groups, selectedIndividual);
 
@@ -51,12 +50,10 @@ export default function Match({
     dispatch({
       type: "match",
       value: {
-        [isVolunteerSelected
-          ? "volunteer"
-          : "recipient"]: {
-            ...linkState as Individual,
-            group: selectedGroup
-          },
+        [isVolunteerSelected ? "volunteer" : "recipient"]: {
+          ...(linkState as Individual),
+          group: selectedGroup,
+        },
       },
     });
     dispatch({ type: "rows", value: 30 });
@@ -75,7 +72,10 @@ export default function Match({
           {"< voltar"}
         </Button>
       </div>
-      <FetchIndividualsForMatch {...selectedIndividual}>
+      <FetchIndividualsForMatch
+        showAllAvailable={showAllAvailable}
+        {...selectedIndividual}
+      >
         {({ data, count }) => {
           return count < 1 ? (
             <div
@@ -101,7 +101,19 @@ export default function Match({
                 }
               `}
             >
-              <Header.H4>Match Realizado!</Header.H4>
+              <div>
+                <Header.H4>Match Realizado!</Header.H4>
+                <label>
+                  Mostrar todas as voluntárias disponíveis
+                  <input
+                    type="checkbox"
+                    defaultChecked={showAllAvailable}
+                    onChange={() =>
+                      setAllAvailable((prevChecked) => !prevChecked)
+                    }
+                  />
+                </label>
+              </div>
               <Text>
                 {count} {matchGroup} próximas de {selectedIndividual.firstName}
               </Text>

@@ -21,6 +21,57 @@ import {
   MAPA_TICKET_INDIVIDUAL,
 } from "../../graphql/IndividualFragment.graphql";
 
+export type MatchTickets = {
+  volunteersUserId: number;
+  volunteersTicketId: number;
+  id: number;
+};
+
+type MatchVolunteerIndividual = {
+  id: number;
+  atendimentosEmAndamento: number;
+  email: string;
+  name: string;
+  organizationId: number;
+  latitude: string;
+  longitude: string;
+  whatsapp: string;
+  phone: string;
+  registrationNumber: string;
+  availability: string;
+  pending?: number;
+  availabilityCount?: number;
+};
+
+const filterAvailability = (
+  volunteers: Array<MatchVolunteerIndividual>,
+  pendingTickets: Array<MatchTickets>
+) => {
+  return volunteers
+    .map((user) => {
+      const { id } = user;
+      // Check if the volunteer has a match with status "encaminhamento__realizado" in the last 30 days
+      const countForwardings = pendingTickets.filter(
+        (ticket) => ticket.volunteersUserId === id
+      ).length;
+
+      const availabilityCount = 1 - (countForwardings || 0);
+
+      return {
+        ...user,
+        ultimosEncaminhamentosRealizados: countForwardings,
+        availabilityCount,
+        coordinates: {
+          latitude: user.latitude,
+          longitude: user.longitude,
+        },
+      };
+    })
+    .filter(
+      (user: MatchVolunteerIndividual) => (user.availabilityCount || 0) > 0
+    );
+};
+
 const WrapLoading = styled.div`
   display: flex;
   justify-content: center;
@@ -41,11 +92,10 @@ const VOLUNTEERS_FOR_MATCH = gql`
         registration_number: { _is_null: false }
         atendimentos_em_andamento_calculado_: { _eq: 0 }
         state: { _neq: "int" }
+        organization_id: $volunteerOrganizationId
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
         _and: [
-          {city: { _neq: "Internacional" }}
-          { organization_id: $volunteerOrganizationId }
-          { organization_id: { _is_null: false } }
+          { city: { _neq: "Internacional" } }
           { longitude: { _is_null: false } }
           { longitude: { _neq: "ZERO_RESULTS" } }
           { latitude: { _is_null: false } }
@@ -88,11 +138,11 @@ const RECIPIENTS_FOR_MATCH = gql`
           name: { _is_null: false }
         }
         _and: [
-          { individual: { latitude: {_is_null: false} } }
-          { individual: { longitude: {_is_null: false} } }
-          { individual: { latitude: {_neq: "ZERO_RESULTS"} } }
-          { individual: { longitude: {_neq: "ZERO_RESULTS"} } }
-          { individual: { city: {_neq: "Internacional"} } }
+          { individual: { latitude: { _is_null: false } } }
+          { individual: { longitude: { _is_null: false } } }
+          { individual: { latitude: { _neq: "ZERO_RESULTS" } } }
+          { individual: { longitude: { _neq: "ZERO_RESULTS" } } }
+          { individual: { city: { _neq: "Internacional" } } }
         ]
       }
       order_by: { individual: { data_de_inscricao_no_bonde: asc } }
@@ -112,28 +162,7 @@ type Props = {
     latitude: string;
     longitude: string;
   };
-};
-
-export type MatchTickets = {
-  volunteersUserId: number;
-  volunteersTicketId: number;
-  id: number;
-};
-
-type MatchVolunteerIndividual = {
-  id: number;
-  atendimentosEmAndamento: number;
-  email: string;
-  name: string;
-  organizationId: number;
-  latitude: string;
-  longitude: string;
-  whatsapp: string;
-  phone: string;
-  registrationNumber: string;
-  availability: string;
-  pending?: number;
-  availabilityCount?: number;
+  showAllAvailable: boolean;
 };
 
 const FetchIndividualsForMatch = ({
@@ -142,6 +171,7 @@ const FetchIndividualsForMatch = ({
   children,
   monthlyTimestamp,
   coordinates,
+  showAllAvailable,
 }: Props) => {
   const { rows, offset } = useFilterState();
   const { groups } = useCommunityExtra();
@@ -189,29 +219,17 @@ const FetchIndividualsForMatch = ({
     group = groups.find((group) => !group.isVolunteer);
   } else {
     group = getVolunteerGroup(groups, getVolunteerOrganizationId(subject));
-    individuals = data.volunteers
-      .map((user: MatchVolunteerIndividual) => {
-        const { id } = user;
-        // Check if the volunteer has a match with status "encaminhamento__realizado" in the last 30 days
-        const countForwardings = data.pendingTickets.filter(
-          (ticket: MatchTickets) => ticket.volunteersUserId === id
-        ).length;
-
-        const availabilityCount = 1 - (countForwardings || 0);
-
-        return {
-          ...user,
-          ultimosEncaminhamentosRealizados: countForwardings,
-          availabilityCount,
-          coordinates: {
-            latitude: user.latitude,
-            longitude: user.longitude,
-          },
-        };
-      })
-      .filter(
-        (user: MatchVolunteerIndividual) => (user.availabilityCount || 0) > 0
-      );
+    if (showAllAvailable) {
+      individuals = data.volunteers.map((user: MatchVolunteerIndividual) => ({
+        ...user,
+        coordinates: {
+          latitude: user.latitude,
+          longitude: user.longitude,
+        },
+      }));
+    } else {
+      individuals = filterAvailability(data.volunteers, data.pendingTickets);
+    }
   }
 
   const addDistanceToData = addDistance(coordinates, individuals);

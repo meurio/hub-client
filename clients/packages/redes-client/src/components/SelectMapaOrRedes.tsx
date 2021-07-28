@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, useLocation, Redirect } from "react-router-dom";
+import { Location } from "history";
 import { useSession } from "bonde-core-tools";
 
 import Data from "../data";
@@ -19,6 +20,7 @@ type Props = {
   }) => React.ReactElement | null;
   path?: string;
   exact?: boolean;
+  location?: Location;
 };
 
 const redirect = () => {
@@ -54,7 +56,7 @@ const SelectMapaOrRedes = ({
             }
           />
         );
-        return rest.path === "/match"
+        return rest?.location?.pathname === "/match"
           ? validateIfUserIsSelected(render, state)
           : render;
       }}

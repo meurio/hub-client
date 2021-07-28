@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "bonde-components";
+import { Button, Icon } from "bonde-components";
 import { useSession } from "bonde-core-tools";
 
 import {
@@ -31,6 +31,7 @@ const BtnSearchMatch = ({
         display: "flex",
         justifyContent: "center",
         width: "100%",
+        alignItems: "center",
       }}
     >
       <Link
@@ -49,6 +50,15 @@ const BtnSearchMatch = ({
         >
           Buscar match
         </Button>
+      </Link>
+      <Link
+        style={{ textDecoration: "none" }}
+        to={{
+          pathname: "/match/map",
+          state: { ...original },
+        }}
+      >
+        <Icon name="MapMarker" color={isDisabled ? "#AAAAAA" : "#ee0099"} />
       </Link>
     </div>
   );

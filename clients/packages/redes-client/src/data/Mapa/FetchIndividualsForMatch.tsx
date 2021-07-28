@@ -43,33 +43,29 @@ type MatchVolunteerIndividual = {
   availabilityCount?: number;
 };
 
-const filterAvailability = (
+const addAvailability = (
   volunteers: Array<MatchVolunteerIndividual>,
   pendingTickets: Array<MatchTickets>
 ) => {
-  return volunteers
-    .map((user) => {
-      const { id } = user;
-      // Check if the volunteer has a match with status "encaminhamento__realizado" in the last 30 days
-      const countForwardings = pendingTickets.filter(
-        (ticket) => ticket.volunteersUserId === id
-      ).length;
+  return volunteers.map((user) => {
+    const { id } = user;
+    // Check if the volunteer has a match with status "encaminhamento__realizado" in the last 30 days
+    const countForwardings = pendingTickets.filter(
+      (ticket) => ticket.volunteersUserId === id
+    ).length;
 
-      const availabilityCount = 1 - (countForwardings || 0);
+    const availabilityCount = 1 - (countForwardings || 0);
 
-      return {
-        ...user,
-        ultimosEncaminhamentosRealizados: countForwardings,
-        availabilityCount,
-        coordinates: {
-          latitude: user.latitude,
-          longitude: user.longitude,
-        },
-      };
-    })
-    .filter(
-      (user: MatchVolunteerIndividual) => (user.availabilityCount || 0) > 0
-    );
+    return {
+      ...user,
+      ultimosEncaminhamentosRealizados: countForwardings,
+      availabilityCount,
+      coordinates: {
+        latitude: user.latitude,
+        longitude: user.longitude,
+      },
+    };
+  });
 };
 
 const WrapLoading = styled.div`
@@ -219,16 +215,11 @@ const FetchIndividualsForMatch = ({
     group = groups.find((group) => !group.isVolunteer);
   } else {
     group = getVolunteerGroup(groups, getVolunteerOrganizationId(subject));
-    if (showAllAvailable) {
-      individuals = data.volunteers.map((user: MatchVolunteerIndividual) => ({
-        ...user,
-        coordinates: {
-          latitude: user.latitude,
-          longitude: user.longitude,
-        },
-      }));
-    } else {
-      individuals = filterAvailability(data.volunteers, data.pendingTickets);
+    individuals = addAvailability(data.volunteers, data.pendingTickets);
+    if (!showAllAvailable) {
+      individuals = individuals.filter(
+        (user: MatchVolunteerIndividual) => (user.availabilityCount || 0) > 0
+      );
     }
   }
 

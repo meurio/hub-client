@@ -79,7 +79,7 @@ export const dicio = (
  * @param dicio Dicionary made to transpile msg using volunteer/recipient data
  * @return { string }
  */
-export const customText = (msg = "", dicio: any): string => {
+export const customText = (msg = "", dicio: Record<string, string>): string => {
   const re = new RegExp(Object.keys(dicio).join("|"), "gi");
 
   return msg.replace(re, (matched) => dicio[matched]);
@@ -92,13 +92,13 @@ export const whatsappLink = (number: string, text: string): string =>
 
 type MathArgs = {
   volunteer: Omit<Individual, "userStatus" | "ticketId" | "externalId">;
-  recipient: Individual
-}
+  recipient: Individual;
+};
 
 type Result = {
   volunteerUrl: string;
-  recipientUrl: string
-}
+  recipientUrl: string;
+};
 
 export const createCustomWhatsappLink = (
   { volunteer, recipient }: MathArgs,
@@ -109,7 +109,7 @@ export const createCustomWhatsappLink = (
       ...dicio("v", {
         ...volunteer,
         registeroccupation: volunteer.extras?.register_occupation,
-        agent: agentName
+        agent: agentName,
       }),
       ...dicio("i", { ...recipient, agent: agentName }),
     };
@@ -339,10 +339,7 @@ export const calcDistance = (
   return Number(turf.distance(a, b));
 };
 
-export const addDistance = (
-  coordinates: Coordinates,
-  data?: Individual[]
-): any =>
+export const addDistance = (coordinates: Coordinates, data?: any[]): any =>
   data
     ? data
         .map((i: any) => {

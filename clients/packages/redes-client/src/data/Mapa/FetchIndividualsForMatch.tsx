@@ -1,7 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "bonde-core-tools";
 import { CheckCommunity } from "../../components";
-import { useFilterState } from "../../services/FilterProvider";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 
 import {
@@ -169,7 +168,6 @@ const FetchIndividualsForMatch = ({
   coordinates,
   showAllAvailable,
 }: Props) => {
-  const { rows, offset } = useFilterState();
   const { groups } = useCommunityExtra();
 
   let variables;
@@ -227,7 +225,7 @@ const FetchIndividualsForMatch = ({
   const addGroupToData = addGroup(addDistanceToData, group);
 
   return children({
-    data: addGroupToData.slice(offset, rows + offset),
+    data: addGroupToData,
     count: individuals.length,
   });
 };

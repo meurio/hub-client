@@ -15,10 +15,11 @@
     "@types/normalize-package-data": "^2.4.0",
     "@types/react-table": "^7.0.22",
     "@types/styled-components": "^5.1.10",
-    "deep-object-diff": "^1.1.0",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
     "bonde-components": "workspace:0.0.4-alpha.32",
     "bonde-core-tools": "workspace:0.1.7-alpha.10",
+    "deep-object-diff": "^1.1.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "react-map-gl": "^6.1.16",
     "react-table": "^7.6.0"
   },
   "devDependencies": {

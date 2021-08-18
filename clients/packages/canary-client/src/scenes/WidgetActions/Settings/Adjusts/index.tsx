@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputField, Tooltip } from 'bonde-components';
+import { InputField, Tooltip, Header } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import Panel from '../../../../components/Panel';
 import ColorField from '../../../../components/ColorField';
@@ -14,13 +14,16 @@ const AdjustsFields = ({ widget }: any) => {
       widget={widget}
       initialValues={{
         settings: {
-          show_state:"n",
+          show_state: "n",
           ...widget.settings
         }
       }}
     >
       {() => (
         <Panel>
+          <Header.H3>
+            {t("settings.adjusts.title")}
+          </Header.H3>
           <InputField
             name='settings.call_to_action'
             label={t('settings.adjusts.fields.call_to_action.label')}
@@ -51,7 +54,7 @@ const AdjustsFields = ({ widget }: any) => {
               <Radio value='n'>{t('settings.adjusts.fields.state.radio.no')}</Radio>
             </RadioField>
           )}
-          
+
           <ColorField
             name='settings.main_color'
             label={

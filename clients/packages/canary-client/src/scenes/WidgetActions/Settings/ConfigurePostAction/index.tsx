@@ -7,6 +7,7 @@ import Panel from "../../../../components/Panel";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
+import { Header } from "bonde-components"
 
 type Props = {
   widget: Widget;
@@ -19,7 +20,7 @@ const ConfigurePostAction = ({ widget }: Props): React.ReactElement => {
   const finish_message = !!widget.settings.finish_message && typeof widget.settings.finish_message === 'string'
     ? JSON.parse(widget.settings.finish_message)
     : widget.settings.finish_message
-  ;
+    ;
   const finish_message_type = widget.settings.finish_message_type || 'share';
 
   return (
@@ -34,7 +35,8 @@ const ConfigurePostAction = ({ widget }: Props): React.ReactElement => {
       }}
     >
       {() => (
-        <>
+        <Panel>
+          <Header.H3>Pós-ação</Header.H3>
           <RadioField name='settings.finish_message_type' label={t("settings.finish.title")}>
             <Radio value='share'>
               {t("settings.finish.radio.share")}
@@ -43,15 +45,14 @@ const ConfigurePostAction = ({ widget }: Props): React.ReactElement => {
               {t("settings.finish.radio.custom")}
             </Radio>
           </RadioField>
-          <Panel>
-            <SpyField field='settings.finish_message_type'>
-              {({ value }: any) => value === 'share'
-                ? <DefaultPostAction />
-                : <RichInputField name='settings.finish_message' />
-              }
-            </SpyField>
-          </Panel>
-        </>
+
+          <SpyField field='settings.finish_message_type'>
+            {({ value }: any) => value === 'share'
+              ? <DefaultPostAction />
+              : <RichInputField name='settings.finish_message' />
+            }
+          </SpyField>
+        </Panel>
       )}
     </SettingsForm>
   );

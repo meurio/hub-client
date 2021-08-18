@@ -85,9 +85,9 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 							<OptimizedPressure />
 
 							<div>
-								<Header.H4>
+								<Header.H3>
 									{t("settings.sending.title")}
-								</Header.H4>
+								</Header.H3>
 								<Text style={{ marginBottom: "15px" }}>
 									{t("settings.sending.subtitle")}
 								</Text>

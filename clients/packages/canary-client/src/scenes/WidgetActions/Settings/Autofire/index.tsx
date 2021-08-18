@@ -29,15 +29,12 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
     >
       {() => (
         <>
-          <Header.H4
-            style={{
-              margin: "10px 0",
-            }}
-          >
-            {t("settings.autofire.title")}
-          </Header.H4>
+
 
           <Card padding={{ x: 40, y: 30 }}>
+            <Header.H3>
+              {t("settings.autofire.title")}
+            </Header.H3>
             <InputField
               label={t("settings.autofire.label.sendersName")}
               name="settings.sender_name"

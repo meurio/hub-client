@@ -8,7 +8,7 @@ export const UniqueFormExplainCard = () => (
       Como adicionar alvos
     </Header.H4>
     <Text>Escreva nome e email de contato dos alvos segundo o formato abaixo.</Text>
-    <Header.H4 style={{ marginBottom: "10px" }}>
+    <Header.H4 style={{ marginBottom: "10px", marginTop: "10px" }}>
       Formato do alvo
     </Header.H4>
     <Text>

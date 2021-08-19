@@ -5,11 +5,13 @@ import {
   Card,
   Header,
   Validators,
+  Button
 } from "bonde-components";
 import { useTranslation } from "react-i18next";
 import { Widget } from "../../FetchWidgets";
 import { noSpecialCharacters } from "../../../../services/utils";
 import SettingsForm from '../SettingsForm';
+import { Row } from 'react-grid-system';
 
 type Props = {
   widget: Widget;
@@ -71,6 +73,9 @@ const AutofireForm = ({ widget }: Props): React.ReactElement => {
                 required(t("settings.autofire.validators.required"))
               )}
             />
+            <Row justify='end'>
+              <Button type='submit'> Salvar alterações</Button>
+            </Row>
           </Card>
         </>
       )}

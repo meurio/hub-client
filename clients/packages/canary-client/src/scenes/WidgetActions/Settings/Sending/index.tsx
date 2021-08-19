@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Card, Header, Text, Button, SwitchField } from "bonde-components";
 import { Modal } from "bonde-components";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { OptimizedPressure } from "../../../Community/Domains/Icons";
 import { Flex } from "./Flex";
 import SpyField from "../../../../components/SpyField";
+import { Row } from 'react-grid-system';
 
 type Props = {
 	widget: Widget;
@@ -48,7 +49,7 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
 				style={{ display: "flex", flexDirection: "row" }}
 			>
 				<Button
-					secondary					
+					secondary
 					type="button"
 					onClick={() => {
 						setIsOpen(false)
@@ -78,7 +79,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 				}
 			}}
 		>
-			{({form}: any) => (
+			{({ form }: any) => (
 				<Card padding={{ x: 40, y: 30 }}>
 					<SpyStyled>
 						<Flex spacing="32px">
@@ -109,7 +110,7 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 										/>
 									)}
 								</SpyField>
-								
+
 								<SelectField
 									name='settings.mail_limit'
 									label='Limite de envios únicos'
@@ -129,8 +130,9 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 									<option value={500}>A cada 500 pressões</option>
 									<option value={1000}>A cada 1.000 pressões</option>
 								</SelectField>
-
-								<Button type="submit">Salvar Alterações</Button>
+								<Row justify='end'>
+									<Button type='submit'> Salvar alterações</Button>
+								</Row>
 							</div>
 						</Flex>
 

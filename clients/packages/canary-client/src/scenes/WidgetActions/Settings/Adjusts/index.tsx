@@ -1,10 +1,11 @@
 import React from 'react';
-import { InputField, Tooltip, Header } from 'bonde-components';
+import { InputField, Tooltip, Header, Button } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import Panel from '../../../../components/Panel';
 import ColorField from '../../../../components/ColorField';
 import SettingsForm from '../SettingsForm';
 import RadioField, { Radio } from '../../../../components/Radio';
+import { Row } from 'react-grid-system';
 
 const AdjustsFields = ({ widget }: any) => {
   const { t } = useTranslation('widgetActions');
@@ -64,6 +65,9 @@ const AdjustsFields = ({ widget }: any) => {
               />
             }
           />
+          <Row justify='end'>
+            <Button type='submit'> Salvar alterações</Button>
+          </Row>
         </Panel>
       )}
     </SettingsForm>

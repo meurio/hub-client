@@ -7,7 +7,7 @@ import Panel from "../../../../components/Panel";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
-import { Header } from "bonde-components"
+import { Header, Button } from "bonde-components"
 
 type Props = {
   widget: Widget;
@@ -52,6 +52,8 @@ const ConfigurePostAction = ({ widget }: Props): React.ReactElement => {
               : <RichInputField name='settings.finish_message' />
             }
           </SpyField>
+
+          <Button type='submit'> Salvar alterações</Button>
         </Panel>
       )}
     </SettingsForm>

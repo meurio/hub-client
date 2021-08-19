@@ -4,7 +4,8 @@ import {
 	Header,
 	Text,
 	toast,
-	Success
+	Success,
+	Button
 } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
@@ -19,6 +20,7 @@ import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupFormFields from './GroupForm';
 import { Targets } from "../../../Community/Domains/Icons";
 import { Flex } from "../Sending/Flex";
+import { Row } from 'react-grid-system';
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -145,6 +147,10 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 													<Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
 													<Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
 												</RadioField>
+
+												<Row justify='end'>
+													<Button type='submit'> Salvar alterações</Button>
+												</Row>
 											</div>
 										</Flex>
 

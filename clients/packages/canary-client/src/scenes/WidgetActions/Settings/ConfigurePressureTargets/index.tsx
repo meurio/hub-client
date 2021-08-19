@@ -125,26 +125,26 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 												<Text style={{ marginBottom: '27px' }}>
 													Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
 												</Text>
-													<RadioField
-														name='settings.pressure_type'
-														label={t('settings.pressure.label.pressure_type')}
-													>
-														<Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
-														<Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
-													</RadioField>
+												<RadioField
+													name='settings.pressure_type'
+													label={t('settings.pressure.label.pressure_type')}
+												>
+													<Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
+													<Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
+												</RadioField>
 
-													{value === 'unique'
-														? <UniqueFormFields />
-														: <GroupFormFields form={form} />
-													}
+												{value === 'unique'
+													? <UniqueFormFields />
+													: <GroupFormFields form={form} />
+												}
 
-													<RadioField
-														name='settings.disable_edit_field'
-														label={t('settings.pressure.label.disable_edit_field')}
-													>
-														<Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
-														<Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
-													</RadioField>
+												<RadioField
+													name='settings.disable_edit_field'
+													label={t('settings.pressure.label.disable_edit_field')}
+												>
+													<Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
+													<Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
+												</RadioField>
 											</div>
 										</Flex>
 

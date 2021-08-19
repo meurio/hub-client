@@ -76,12 +76,9 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
       initialValues={{ primaryKey: widget.id, ...initialValues }}
       {...connectedFormProps}
     >
-      {({ submitting, pristine, ...formProps }: any) => (
+      {({ submitting, dirty, ...formProps }: any) => (
         <Box>
-          <div className='floating'>
-            <Button type='submit' disabled={submitting || pristine}>{t('settings.defaultForm.submit')}</Button>
-          </div>
-          {children({ submitting, pristine, ...formProps })}
+          {children({ submitting, dirty, ...formProps })}
         </Box>
       )}
     </ConnectedForm>

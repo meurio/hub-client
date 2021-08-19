@@ -39,7 +39,7 @@
     },
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",
-      "success": "Successo ao salvar as configurações!",
+      "success": "EBA! Suas alterações foram salvas.",
       "submit": "Salvar"
     },
     "adjusts": {

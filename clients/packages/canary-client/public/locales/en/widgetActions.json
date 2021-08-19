@@ -43,6 +43,7 @@
       "submit": "Salvar"
     },
     "adjusts": {
+      "title": "Formulário",
       "fields": {
         "call_to_action": {
           "label": "Título do formulário",

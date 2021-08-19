@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ConnectedForm, toast, Success } from 'bonde-components';
+import { ConnectedForm, toast, Success } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -44,6 +44,7 @@ const Box = styled.div`
   }
 `
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connectedFormProps }: Props) => {
   const [save] = useMutation(UpdateWidgetGQL);
   const { t } = useTranslation('widgetActions');

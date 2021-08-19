@@ -1,7 +1,5 @@
 import React from "react";
-import { TextareaField } from "bonde-components";
 import styled from 'styled-components';
-import { Row, Col } from 'react-grid-system';
 import { useTranslation } from "react-i18next";
 
 const Preview = styled.div`
@@ -55,25 +53,14 @@ const DefaultPostAction = (): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
   return (
-    <Row>
-      <Col xs={6}>
-        <TextareaField
-          label={t("settings.finish.default.whatsapp.label")}
-          name="settings.whatsapp_text"
-          placeholder={t("settings.finish.default.whatsapp.placeholder")}
-        />
-      </Col>
-      <Col xs={6}>
-        <Preview>
-          <h3>{t('settings.finish.default.preview.title')}</h3>
-          <img src={process.env.PUBLIC_URL + '/check-mark-image.png'} alt='Check Mark' />
-          <p>{t('settings.finish.default.preview.message')}</p>
-          <button type='button' className='fb'>{t('settings.finish.default.preview.facebook')}</button>
-          <button type='button' className='tt'>{t('settings.finish.default.preview.twitter')}</button>
-          <button type='button' className='wp'>{t('settings.finish.default.preview.whatsapp')}</button>
-        </Preview>
-      </Col>
-    </Row>
+    <Preview>
+      <h3>{t('settings.finish.default.preview.title')}</h3>
+      <img src={process.env.PUBLIC_URL + '/check-mark-image.png'} alt='Check Mark' />
+      <p>{t('settings.finish.default.preview.message')}</p>
+      <button type='button' className='fb'>{t('settings.finish.default.preview.facebook')}</button>
+      <button type='button' className='tt'>{t('settings.finish.default.preview.twitter')}</button>
+      <button type='button' className='wp'>{t('settings.finish.default.preview.whatsapp')}</button>
+    </Preview>
   );
 }
 

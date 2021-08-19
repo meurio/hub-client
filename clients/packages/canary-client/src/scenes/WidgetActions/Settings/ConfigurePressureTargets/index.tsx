@@ -1,18 +1,19 @@
 import React from "react";
 import {
-	Card,
 	Header,
 	Text,
 	toast,
-	Success,
-	Button
+	Success
 } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
+import { Container, Row, Col } from 'react-grid-system';
+
+import ButtonStyled from "../../../../components/ButtonStyled";
+import Panel from "../../../../components/Panel";
 import RadioField, { Radio } from '../../../../components/Radio';
-import styled from 'styled-components'
 import SpyField from '../../../../components/SpyField';
 import { Widget } from '../../FetchWidgets';
 import SettingsForm from '../SettingsForm';
@@ -20,7 +21,6 @@ import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupFormFields from './GroupForm';
 import { Targets } from "../../../Community/Domains/Icons";
 import { Flex } from "../Sending/Flex";
-import { Row } from 'react-grid-system';
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -60,13 +60,6 @@ const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
 
 	return ret;
 }
-
-const SpyStyled = styled.div`
-	display: grid;
-	grid-template-columns: 55% 45%;
-	grid-column-gap: 20px;
-	height: 100%;
-`;
 
 type Props = {
 	widget: Widget
@@ -113,17 +106,19 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 				}
 			}}
 		>
-			{({ form }: any) => (
-				<>
-					<SpyField field='settings.pressure_type'>
-						{({ value }: any) => (
-							<>
-								<Card padding={{ x: 50, y: 40 }}>
-									<SpyStyled>
+			{({ form, submitting, dirty }: any) => (
+				<Panel>
+					<Container fluid style={{ width: "100%", padding: "0" }}>
+						<Row justify="between">
+							<Col sm={12} md={12} lg={6}>
+								<SpyField field='settings.pressure_type'>
+									{({ value }: any) => (
 										<Flex spacing="32px">
 											<Targets />
 											<div>
-												<Header.H3>Alvos</Header.H3>
+												<div style={{ marginBottom: "10px" }}>
+													<Header.H3>Alvos</Header.H3>
+												</div>
 												<Text style={{ marginBottom: '27px' }}>
 													Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
 												</Text>
@@ -147,24 +142,20 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 													<Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
 													<Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
 												</RadioField>
-
-												<Row justify='end'>
-													<Button type='submit'> Salvar alterações</Button>
-												</Row>
 											</div>
 										</Flex>
-
-										<div>
-											<UniqueFormExplainCard />
-										</div>
-									</SpyStyled>
-
-
-								</Card>
-							</>
-						)}
-					</SpyField>
-				</>
+									)}
+								</SpyField>
+								<Row justify='end'>
+									<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
+								</Row>
+							</Col>
+							<Col sm={12} md={12} lg={5}>
+								<UniqueFormExplainCard />
+							</Col>
+						</Row>
+					</Container>
+				</Panel>
 			)}
 		</SettingsForm>
 	);

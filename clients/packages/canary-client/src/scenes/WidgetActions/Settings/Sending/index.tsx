@@ -1,27 +1,21 @@
 import React, { useState } from "react";
-import { Card, Header, Text, Button, SwitchField } from "bonde-components";
+import { Header, Text, Button, SwitchField } from "bonde-components";
 import { Modal } from "bonde-components";
 import { useTranslation } from "react-i18next";
+import { Container, Row, Col } from 'react-grid-system';
+
+import Panel from "../../../../components/Panel";
+import ButtonStyled from "../../../../components/ButtonStyled";
+import SpyField from "../../../../components/SpyField";
+import SelectField from "../../../../components/SelectField";
+import { OptimizedPressure } from "../../../Community/Domains/Icons";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
-import SelectField from "../../../../components/SelectField";
-import styled from "styled-components";
-import { OptimizedPressure } from "../../../Community/Domains/Icons";
 import { Flex } from "./Flex";
-import SpyField from "../../../../components/SpyField";
-import { Row } from 'react-grid-system';
 
 type Props = {
 	widget: Widget;
 };
-
-const SpyStyled = styled.div`
-	display: grid;
-	grid-template-columns: 55% 45%;
-	grid-column-gap: 20px;
-	height: 100%;
-`;
-
 
 const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
 	const [isOpen, setIsOpen] = useState(defaultIsOpen);
@@ -79,78 +73,78 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 				}
 			}}
 		>
-			{({ form }: any) => (
-				<Card padding={{ x: 40, y: 30 }}>
-					<SpyStyled>
-						<Flex spacing="32px">
-							<OptimizedPressure />
+			{({ form, submitting, dirty }: any) => (
+				<Panel>
+					<Container fluid style={{ width: "100%", padding: "0" }}>
+						<Row justify="between">
+							<Col sm={12} md={12} lg={6}>
+								<Flex spacing="32px">
+									<OptimizedPressure />
+									<div>
+										<div style={{ marginBottom: "10px" }}>
+											<Header.H3>
+												{t("settings.sending.title")}
+											</Header.H3>
+										</div>
+										<Text style={{ marginBottom: "15px" }}>
+											{t("settings.sending.subtitle")}
+										</Text>
 
-							<div>
-								<Header.H3>
-									{t("settings.sending.title")}
-								</Header.H3>
-								<Text style={{ marginBottom: "15px" }}>
-									{t("settings.sending.subtitle")}
-								</Text>
-
-								<SwitchField
-									defaultValue={widget.settings.optimization_enabled}
-									name="settings.optimization_enabled"
-									textOn="ATIVADO"
-									textOff="DESATIVADO"
-								/>
-
-								<SpyField field="settings.optimization_enabled">
-									{({ value, meta }) => (
-										<ConfirmModal
-											defaultIsOpen={!value && meta.modified}
-											onCancel={() => {
-												form.change("settings.optimization_enabled", true)
-											}}
+										<SwitchField
+											defaultValue={widget.settings.optimization_enabled}
+											name="settings.optimization_enabled"
+											textOn="ATIVADO"
+											textOff="DESATIVADO"
 										/>
-									)}
-								</SpyField>
 
-								<SelectField
-									name='settings.mail_limit'
-									label='Limite de envios únicos'
-								>
-									<option value={500}>500 pressões</option>
-									<option value={1000}>1.000 pressões</option>
-									<option value={5000}>5.000 pressões</option>
-									<option value={10000}>10.000 pressões</option>
-								</SelectField>
+										<SpyField field="settings.optimization_enabled">
+											{({ value, meta }) => (
+												<ConfirmModal
+													defaultIsOpen={!value && meta.modified}
+													onCancel={() => {
+														form.change("settings.optimization_enabled", true)
+													}}
+												/>
+											)}
+										</SpyField>
 
-								<SelectField
-									name='settings.batch_limit'
-									label='Intervalo de envio'
-								>
-									<option value={50}>A cada 50 pressões</option>
-									<option value={100}>A cada 100 pressões</option>
-									<option value={500}>A cada 500 pressões</option>
-									<option value={1000}>A cada 1.000 pressões</option>
-								</SelectField>
-								<Row justify='end'>
-									<Button type='submit'> Salvar alterações</Button>
-								</Row>
-							</div>
-						</Flex>
+										<SelectField
+											name='settings.mail_limit'
+											label='Limite de envios únicos'
+										>
+											<option value={500}>500 pressões</option>
+											<option value={1000}>1.000 pressões</option>
+											<option value={5000}>5.000 pressões</option>
+											<option value={10000}>10.000 pressões</option>
+										</SelectField>
 
-						<div>
-							<Header.H4
-								style={{
-									margin: "10px 0",
-								}}
-							>
-								{t("settings.sending.how_it_works.title")}
-							</Header.H4>
-							<Text
-								style={{ marginBottom: "15px" }}
-								dangerouslySetInnerHTML={{ __html: t("settings.sending.how_it_works.description") }}
-							/>
-						</div>
-					</SpyStyled>
-				</Card>
+										<SelectField
+											name='settings.batch_limit'
+											label='Intervalo de envio'
+										>
+											<option value={50}>A cada 50 pressões</option>
+											<option value={100}>A cada 100 pressões</option>
+											<option value={500}>A cada 500 pressões</option>
+											<option value={1000}>A cada 1.000 pressões</option>
+										</SelectField>
+										<Row justify='end'>
+											<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
+										</Row>
+									</div>
+								</Flex>
+							</Col>
+							<Col sm={12} md={12} lg={6}>
+								<Header.H4>
+									{t("settings.sending.how_it_works.title")}
+								</Header.H4>
+								<Text
+									style={{ marginBottom: "15px" }}
+									dangerouslySetInnerHTML={{ __html: t("settings.sending.how_it_works.description") }}
+								/>
+							</Col>
+						</Row>
+					</Container>
+				</Panel>
 			)}
 		</SettingsForm>
 	);

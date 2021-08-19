@@ -1,12 +1,12 @@
 import React from 'react';
-import { InputField, Button, Tooltip, Success, Validators, Text, Header } from 'bonde-components';
+import { InputField, Tooltip, Success, Validators, Text, Header } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from 'react-grid-system';
 import UploadField, { Image } from "../../../components/UploadFile";
 import CommunityForm from '../BaseForm';
+import ButtonStyled from '../../../components/ButtonStyled';
 import Panel from '../../../components/Panel';
-import styled from 'styled-components';
 
 const { isEmail } = Validators;
 
@@ -19,12 +19,6 @@ export const isValidFromEmail = (value: any): string | undefined => {
     return 'Padrão inválido. Ex: Nome do remente <email@host.com>';
   }
 }
-
-const ButtonStyled = styled(Button)`
-  width: auto;
-  min-width: 140px;
-  margin-right: 15px;
-`
 
 const SettingsPage: React.FC = () => {
   const { t } = useTranslation('community');

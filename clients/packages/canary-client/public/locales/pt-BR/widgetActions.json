@@ -104,6 +104,13 @@
           "placeholder": "Defina o valor que ficará ao lado do número de pessoas que agiram",
           "tooltip": "O contador será mostrado se existir um texto"
         },
+        "city": {
+          "title": "Incluir campo de cidade?",
+          "radio": {
+            "yes": "Sim",
+            "no": "Não"
+          }
+        },
         "state": {
           "title": "Incluir campo de estado?",
           "radio": {

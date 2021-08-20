@@ -17,6 +17,7 @@ const AdjustsFields = ({ widget }: any) => {
       widget={widget}
       initialValues={{
         settings: {
+          show_city: "city-false",
           show_state: "n",
           ...widget.settings
         }

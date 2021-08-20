@@ -68,7 +68,7 @@ const Settings = ({ widgets }: Props) => {
       )}
     >
       {/* Corpo */}
-      <Row style={{ marginBottom: "20px" }}>
+      <Row style={{ marginBottom: "4px", marginTop: "16px" }}>
         <Col xs={12}>
           <Header.H3>{t('settings.header', { label: label.title.toLowerCase() })}</Header.H3>
         </Col>

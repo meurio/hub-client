@@ -37,19 +37,22 @@ const ConfirmModal = ({ defaultIsOpen, onCancel }: any) => {
 				onCancel()
 			}}
 		>
-			<Header.H2 mb="18px">Desativar envio otimizado?</Header.H2>
-			<Text>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails.</Text>
+			<Header.H2 style={{ marginBottom: "18px" }}>Desativar envio otimizado?</Header.H2>
+			<Text style={{ marginBottom: "30px" }}>Isso pode gerar custos extras caso sua campanha ultrapasse 100.000 envios de e-mails.</Text>
 			<div
-				style={{ display: "flex", flexDirection: "row" }}
+				style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
 			>
 				<Button
 					secondary
+					align="left"
 					type="button"
 					onClick={() => {
 						setIsOpen(false)
 						onCancel()
 					}}
-				>Cancelar</Button>
+				>
+					Cancelar
+				</Button>
 				<Button type="button" onClick={() => setIsOpen(false)}>
 					Desativar
 				</Button>

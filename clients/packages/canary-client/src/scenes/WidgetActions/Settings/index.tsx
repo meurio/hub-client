@@ -62,7 +62,7 @@ const Settings = ({ widgets }: Props) => {
             active={is(/\/widgets\/\d+\/settings\/*/)}
             onClick={() => push(`settings`)}
           >
-            {t('settings.navigation.targets')}
+            {t('settings.navigation.settings')}
           </Tab>
         </>
       )}

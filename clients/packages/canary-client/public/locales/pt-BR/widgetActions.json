@@ -24,6 +24,7 @@
     "header": "Configurar {{ label }}",
     "navigation": {
       "edit": "Editar",
+      "settings": "Configurações",
       "targets": "Alvos",
       "sending": "Envio",
       "adjusts": "Ajustes",

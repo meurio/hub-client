@@ -6,18 +6,23 @@ type RadioFieldProps = {
   children: any
   label: string
   name: string
-  direction?: 'row' | 'column'
+  columns?: string
 }
 
 const RadioFieldContext = createContext({});
 
-const Box = styled.div<{ direction?: 'row' | 'column' }>`
-  display: flex;
-  flex-direction: ${props => props.direction};
+const Box = styled.div<{ columns?: any }>`
+  display: grid;
+  grid-template-columns: ${props => props.columns};
   margin: 15px 0 0 -15px;
+
+  label {
+    line-height: 1.5;
+  }
 `
 
-const RadioField = ({ children, label, name, direction }: RadioFieldProps) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const RadioField = ({ children, label, name, columns }: RadioFieldProps) => {
   const { input, meta } = useField(name);
 
   return (
@@ -25,7 +30,7 @@ const RadioField = ({ children, label, name, direction }: RadioFieldProps) => {
       <FormField>
         <Label>{label}</Label>
         {meta.error && <Hint color='error'>{meta.error}</Hint>}
-        <Box direction={direction}>
+        <Box columns={columns}>
           {children}
         </Box>
       </FormField>

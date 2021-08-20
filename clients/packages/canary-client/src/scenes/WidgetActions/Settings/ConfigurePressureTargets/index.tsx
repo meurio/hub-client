@@ -125,6 +125,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 												<RadioField
 													name='settings.pressure_type'
 													label={t('settings.pressure.label.pressure_type')}
+													columns="auto auto"
 												>
 													<Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
 													<Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
@@ -138,6 +139,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 												<RadioField
 													name='settings.disable_edit_field'
 													label={t('settings.pressure.label.disable_edit_field')}
+													columns="auto auto 1fr"
 												>
 													<Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
 													<Radio value='n'>{t('settings.pressure.radio.no')}</Radio>

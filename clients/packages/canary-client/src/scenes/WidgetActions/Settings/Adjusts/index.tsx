@@ -56,20 +56,21 @@ const AdjustsFields = ({ widget }: any) => {
                 {widget.kind === "pressure" && (
                   <>
                     <RadioField
-                      name='settings.show_city'
-                      label={t('settings.adjusts.fields.city.title')}
-                      columns="auto auto 1fr"
-                    >
-                      <Radio value='city-true'>{t('settings.adjusts.fields.city.radio.yes')}</Radio>
-                      <Radio value='city-false'>{t('settings.adjusts.fields.city.radio.no')}</Radio>
-                    </RadioField>
-                    <RadioField
                       name='settings.show_state'
                       label={t('settings.adjusts.fields.state.title')}
                       columns="auto auto 1fr"
                     >
                       <Radio value='s'>{t('settings.adjusts.fields.state.radio.yes')}</Radio>
                       <Radio value='n'>{t('settings.adjusts.fields.state.radio.no')}</Radio>
+                    </RadioField>
+
+                    <RadioField
+                      name='settings.show_city'
+                      label={t('settings.adjusts.fields.city.title')}
+                      columns="auto auto 1fr"
+                    >
+                      <Radio value='city-true'>{t('settings.adjusts.fields.city.radio.yes')}</Radio>
+                      <Radio value='city-false'>{t('settings.adjusts.fields.city.radio.no')}</Radio>
                     </RadioField>
                   </>
                 )}

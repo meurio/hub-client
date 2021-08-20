@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Header, Text, Button, SwitchField } from "bonde-components";
 import { Modal } from "bonde-components";
 import { useTranslation } from "react-i18next";
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row, Col, Visible } from 'react-grid-system';
 
 import Panel from "../../../../components/Panel";
 import ButtonStyled from "../../../../components/ButtonStyled";
@@ -11,7 +11,7 @@ import SelectField from "../../../../components/SelectField";
 import { OptimizedPressure } from "../../../Community/Domains/Icons";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
-import { Flex } from "./Flex";
+import { Flex } from "../Sending/Flex";
 
 type Props = {
 	widget: Widget;
@@ -79,8 +79,10 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 						<Row justify="between">
 							<Col sm={12} md={12} lg={6}>
 								<Flex spacing="32px">
-									<OptimizedPressure />
-									<div>
+									<Visible lg xl>
+										<OptimizedPressure />
+									</Visible>
+									<div style={{ flex: 1 }}>
 										<div style={{ marginBottom: "10px" }}>
 											<Header.H3>
 												{t("settings.sending.title")}
@@ -107,7 +109,6 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 												/>
 											)}
 										</SpyField>
-
 										<SelectField
 											name='settings.mail_limit'
 											label='Limite de envios únicos'
@@ -133,14 +134,19 @@ const Sending = ({ widget }: Props): React.ReactElement => {
 									</div>
 								</Flex>
 							</Col>
-							<Col sm={12} md={12} lg={6}>
-								<Header.H4>
+							<Col sm={12} md={12} lg={5}>
+								<Header.H4  style={{ marginBottom: "10px" }}>
 									{t("settings.sending.how_it_works.title")}
 								</Header.H4>
-								<Text
-									style={{ marginBottom: "15px" }}
-									dangerouslySetInnerHTML={{ __html: t("settings.sending.how_it_works.description") }}
-								/>
+								<Text style={{ marginBottom: "10px" }}>
+									{t("settings.sending.how_it_works.description1")}
+								</Text>
+								<Text style={{ marginBottom: "10px" }}>
+									{t("settings.sending.how_it_works.description2")}
+								</Text>
+								<Text>
+									{t("settings.sending.how_it_works.description3")}
+								</Text>
 							</Col>
 						</Row>
 					</Container>

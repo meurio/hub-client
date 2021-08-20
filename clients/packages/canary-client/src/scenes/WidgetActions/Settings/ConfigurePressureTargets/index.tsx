@@ -9,7 +9,7 @@ import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row, Col, Visible } from 'react-grid-system';
 
 import ButtonStyled from "../../../../components/ButtonStyled";
 import Panel from "../../../../components/Panel";
@@ -114,8 +114,10 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 								<SpyField field='settings.pressure_type'>
 									{({ value }: any) => (
 										<Flex spacing="32px">
-											<Targets />
-											<div>
+											<Visible lg xl>
+												<Targets />
+											</Visible>
+											<div style={{ flex: 1 }}>
 												<div style={{ marginBottom: "10px" }}>
 													<Header.H3>Alvos</Header.H3>
 												</div>

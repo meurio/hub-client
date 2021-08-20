@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, Text } from 'bonde-components';
 import SubjectBodyFields from './SubjectBodyFields';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const UniqueFormExplainCard = () => (
   <>
     <Header.H4 style={{ marginBottom: "10px" }}>
@@ -11,11 +12,11 @@ export const UniqueFormExplainCard = () => (
     <Header.H4 style={{ marginBottom: "10px", marginTop: "10px" }}>
       Formato do alvo
     </Header.H4>
-    <Text>
+    <Text style={{ marginBottom: "10px" }}>
       {`Nome <email@provedor.com> (obrigatório usar os caractéres 
         < e >; para agrupar os alvos).`}
     </Text>
-    <Text>
+    <Text style={{ marginBottom: "10px" }}>
       {`Quando acabar, salve as alterações clicando no botão no canto 
       superior direito da tela.`}
     </Text>

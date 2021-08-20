@@ -82,7 +82,9 @@
       "subtitle": "Indicado especialmente para campanhas de grande alcance.",
       "how_it_works": {
         "title": "Como funciona",
-        "description": "O envio otimizado garante que campanhas de alto engajamento não gerem impacto financeiro para a sua organização. </br>Quando sua campanha atingir o limite de envios únicos, o BONDE passará a enviar as pressões em lotes, de acordo com o intervalo de envio definido. <br/>Por ex: Quando sua campanha atingir 1000 pressões, o BONDE passará a enviar 1 e-mail para o alvo a cada 100 pressões, com todas(os) que pressionaram nesse intervalo."
+        "description1": "O envio otimizado garante que campanhas de alto engajamento não gerem impacto financeiro para a sua organização.",
+        "description2": "Quando sua campanha atingir o limite de envios únicos, o BONDE passará a enviar as pressões em lotes, de acordo com o intervalo de envio definido.",
+        "description3": "Por ex: Quando sua campanha atingir 1000 pressões, o BONDE passará a enviar 1 e-mail para o alvo a cada 100 pressões, com todas(os) que pressionaram nesse intervalo."
       }
     },
     "adjusts": {

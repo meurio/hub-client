@@ -27,6 +27,7 @@ import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
 import SuperuserPage from './scenes/Superuser';
 import WidgetsActionsPage from './scenes/WidgetActions';
+import PlaygroundPage from "./scenes/Playground";
 import NotFound from './components/NotFound';
 import LanguageTool from './LanguageTool';
 import * as Flag from './Flag';
@@ -111,6 +112,7 @@ const PageRouting = () => {
       >
         <Switch>
           <Route exact path='/' component={HomePage} />
+          <Route exact path='/playground' component={PlaygroundPage} />
           <Route path='/community' component={CommunityPage} />
           <RouteIsAdmin path='/superuser' component={SuperuserPage} />
           <Route path='/widgets' component={WidgetsActionsPage} />

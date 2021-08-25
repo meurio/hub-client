@@ -8,9 +8,6 @@
     "lint": "eslint . --fix --ext js,ts,tsx"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.6",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "@fnando/cnpj": "^1.0.2",
     "@fnando/cpf": "^1.0.2",
     "@slate-editor/alignment-plugin": "^5.1.0",

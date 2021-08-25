@@ -8,9 +8,6 @@
     "start": "pnpm m run start"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.6",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",

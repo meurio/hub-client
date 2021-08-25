@@ -3090,8 +3090,8 @@ packages:
       '@chakra-ui/transition': 1.3.4_2d100d4b6007d6f7ded6514ed309de9d
       '@chakra-ui/utils': 1.8.2
       '@chakra-ui/visually-hidden': 1.0.14_34ceb43840978d1c33287fd7fb6cf914
-      '@emotion/react': 11.4.1_9096f533e910b3a38c574b960003e784
-      '@emotion/styled': 11.3.0_09984bf53bae42cfbd2a55d1a1aeb0c2
+      '@emotion/react': 11.4.1_19362c72b859bb192e9eed2de8b6f0d4
+      '@emotion/styled': 11.3.0_7d5e4455dadeebf9c25835f584e2ba06
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
       react: 16.14.0
       react-dom: 16.14.0_react@16.14.0
@@ -3197,8 +3197,8 @@ packages:
       '@chakra-ui/react-utils': 1.1.2_react@16.14.0
       '@chakra-ui/styled-system': 1.12.2
       '@chakra-ui/utils': 1.8.2
-      '@emotion/react': 11.4.1_9096f533e910b3a38c574b960003e784
-      '@emotion/styled': 11.3.0_09984bf53bae42cfbd2a55d1a1aeb0c2
+      '@emotion/react': 11.4.1_19362c72b859bb192e9eed2de8b6f0d4
+      '@emotion/styled': 11.3.0_7d5e4455dadeebf9c25835f584e2ba06
       react: 16.14.0
       react-fast-compare: 3.2.0
     dev: false
@@ -10878,18 +10878,6 @@ packages:
         optional: true
     dev: false
 
-  /follow-redirects/1.14.2_debug@4.3.2:
-    resolution: {integrity: sha512-yLR6WaE2lbF0x4K2qE2p9PEXKLDjUjnR/xmjS3wHAYxtlsI9MLLBJUZirAHKzUZDGLxje7w/cXR49WOUo4rbsA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.2_supports-color@6.1.0
-    dev: false
-
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -11697,7 +11685,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.2_debug@4.3.2
+      follow-redirects: 1.14.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug

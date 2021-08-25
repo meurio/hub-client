@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Container,
   JSONSchemaForm,
   SimpleGrid,
   Box
@@ -39,7 +40,7 @@ const UpdateCommunityGQL = gql`
   }
 `;
 
-const SettingsFormPage = () => {
+const Playground = () => {
   const { community, onChangeAsync } = useSession();
   // const { t } = useTranslation('community');
   // const [updateRecipient] = useMutation(UpdateRecipientGQL);
@@ -57,24 +58,27 @@ const SettingsFormPage = () => {
     // TODO: change to update_by_pk
     const { data, errors } = await updateCommunity({ variables: { update_fields, id: community.id } });
     if (data) {
-      return await onChangeAsync({ community: data.update_communities.returning[0] });
+      console.log("data", { data });
+      return await onChangeAsync(data.update_communities.returning[0])
     }
     console.log("errors", { errors });
   }
-
-  return (
-    <SimpleGrid columns={2}>
-      <Box bg="white" p={6}>
-        <JSONSchemaForm
-          {...schemaProps}
-          onSubmit={onSubmit}
-          formData={{
-            ...community
-          }}
-        />
-      </Box>
-    </SimpleGrid>
-  );
+  
+  return community ? (
+    <Container>
+      <SimpleGrid columns={2}>
+        <Box bg="white" p={6}>
+          <JSONSchemaForm
+            {...schemaProps}
+            onSubmit={onSubmit}
+            formData={{
+              ...community
+            }}
+          />
+        </Box>
+      </SimpleGrid>
+    </Container>
+  ) : "Selecione uma comunidade";
 }
 
-export default SettingsFormPage;
+export default Playground;

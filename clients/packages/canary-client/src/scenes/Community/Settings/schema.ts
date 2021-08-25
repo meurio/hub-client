@@ -1,17 +1,11 @@
-import React from "react";
-import {
-  Container,
-  JSONSchemaForm,
-  SimpleGrid,
-  Box
-} from "bonde-components";
-import UploadImageIcon from "../components/UploadFile/UploadImageIcon";
+import UploadImageIcon from "../../../components/UploadFile/UploadImageIcon";
 
-// eslint-disable-next-line
-const emailTemplateFromPattern = "^[a-zà-úA-ZÀ-Ú0-9 ]+<(([^<>()[\\]\\.,;:\\s@\"]+(\\.[^<>()[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))>$"
+// Validate email_template_from pattern
+const emailTemplateFromPattern = "^[a-zà-úA-ZÀ-Ú0-9 ]+<(([^<>()[\\]\\.,;:\\s@\"]+(\\.[^<>()[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))>$";
+
 const emailTemplateFromIsInvalid = "Padrão inválido. Ex: Nome do remente <email@host.com>";
 
-const transformErrors = (errors: any) => {
+export const transformErrors = (errors: any) => {
   return errors.map((error: any) => {
     if (error.name === "pattern") {
       error.message = emailTemplateFromIsInvalid
@@ -20,7 +14,8 @@ const transformErrors = (errors: any) => {
   });
 }
 
-const schema: any = {
+// Define JSON Schema Form
+export const schema: any = {
   type: "object",
   required: ["name", "email_template_from"],
   properties: {
@@ -61,7 +56,7 @@ const schema: any = {
   }
 };
 
-const uiSchema = {
+export const uiSchema = {
   image: {
     "ui:field": "s3",
     "ui:help": "Formato JPEG ou PNG, até 1mb.",
@@ -99,29 +94,3 @@ const uiSchema = {
     }
   }
 }
-
-const Playground = (): React.ReactElement => {
-  const onSubmit = async (formData: any) => {
-    console.log("async submit", { formData });
-  }
-  
-  return (
-    <Container>
-      <SimpleGrid columns={2}>
-        <Box bg="white" p={6}>
-          <JSONSchemaForm
-            formData={{
-              image: "https://s3.amazonaws.com/hub-central-dev/uploads/1615215066_logo_prod_marginal_preto.png"
-            }}
-            schema={schema}
-            uiSchema={uiSchema}
-            onSubmit={onSubmit}
-            transformErrors={transformErrors}
-          />
-        </Box>
-      </SimpleGrid>
-    </Container>
-  )
-}
-
-export default Playground;

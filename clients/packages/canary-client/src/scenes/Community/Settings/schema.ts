@@ -58,7 +58,7 @@ export const schema: any = {
 
 export const uiSchema = {
   image: {
-    "ui:field": "s3",
+    "ui:field": "S3UploadField",
     "ui:help": "Formato JPEG ou PNG, até 1mb.",
     "ui:options": {
       alt: "Upload de image da comunidade",

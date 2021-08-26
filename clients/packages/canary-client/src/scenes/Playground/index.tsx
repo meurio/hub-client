@@ -2,11 +2,29 @@ import React from "react";
 import {
   Container,
   JSONSchemaForm,
-  SimpleGrid,
-  Box
+  Box,
+  UnorderedList,
+  ListItem,
+  Text,
+  Grid,
+  GridItem
 } from "bonde-components";
 import { useSession, useMutation, gql } from "bonde-core-tools";
 import * as schemaProps from "./schema";
+
+const DescriptionBox = () => (
+  <Box>
+    <Text fontWeight="800" fontSize="md" mb={2}>Observações</Text>
+    <UnorderedList>
+      <ListItem>
+        <Text>As doações só ficam disponíveis 31 dias após a transação de cartão de crédito ter sido criada (29 dias corridos + 2 dias úteis) no caso de transações com uma parcela e 2 dias úteis após o pagamento do boleto bancário.</Text>
+      </ListItem>
+      <ListItem>
+        <Text>Caso a transação tenha de 2 a 12 parcelas, o recebimento normal será assim: primeira parcela em 31 dias, segunda em 61, terceira em 91, e assim por diante.</Text>
+      </ListItem>
+    </UnorderedList>
+  </Box>
+);
 
 const UpdateCommunityGQL = gql`
   mutation UpdateCommunity ($update_fields: communities_set_input!, $id: Int!) {
@@ -44,8 +62,8 @@ const Playground = () => {
   const { community, onChangeAsync } = useSession();
   // const { t } = useTranslation('community');
   // const [updateRecipient] = useMutation(UpdateRecipientGQL);
-  const [updateCommunity] = useMutation(UpdateCommunityGQL);
-  
+    const [updateCommunity] = useMutation(UpdateCommunityGQL);
+    
   const onSubmit = async ({ formData, uiSchema }: any) => {
     // Filter formData to submit only schema fields
     const update_fields = Object.keys(formData)
@@ -58,25 +76,37 @@ const Playground = () => {
     // TODO: change to update_by_pk
     const { data, errors } = await updateCommunity({ variables: { update_fields, id: community.id } });
     if (data) {
-      console.log("data", { data });
-      return await onChangeAsync(data.update_communities.returning[0])
+      return await onChangeAsync({ community: data.update_communities.returning[0] });
     }
     console.log("errors", { errors });
   }
-  
+
   return community ? (
     <Container>
-      <SimpleGrid columns={2}>
-        <Box bg="white" p={6}>
-          <JSONSchemaForm
-            {...schemaProps}
-            onSubmit={onSubmit}
-            formData={{
-              ...community
-            }}
-          />
-        </Box>
-      </SimpleGrid>
+      <Box bg="white" p={6}>
+        <Grid templateColumns="repeat(12, 1fr)" gap={12}>
+          <GridItem colSpan={8}>
+            <JSONSchemaForm
+              {...schemaProps}
+              onSubmit={onSubmit}
+              formData={{
+                ...community,
+                recipient: {
+                  ...community.recipient,
+                  // Hack para usar o formulário JSON Schema da maneira correta
+                  transfer: {
+                    transfer_interval: community.recipient.transfer_interval,
+                    transfer_day: community.recipient.transfer_day
+                  }
+                }
+              }}
+            />
+          </GridItem>
+          <GridItem colSpan={4}>
+            <DescriptionBox />
+          </GridItem>
+        </Grid>
+      </Box>
     </Container>
   ) : "Selecione uma comunidade";
 }

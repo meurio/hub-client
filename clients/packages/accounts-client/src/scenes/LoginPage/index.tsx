@@ -40,7 +40,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ to }) => {
                 const nextUrl = urlParams.get('next');
                 window.location.href = nextUrl ? nextUrl : to;
               });
-          } catch (err) {
+          } catch (err: any) {
             if (err.graphQLErrors && err.graphQLErrors.filter((e: any) => e.message === 'email_password_dismatch').length > 0) {
               // return { email: 'Ops! Email ou senha incorretos' };
               return { email: t('form.authError') }

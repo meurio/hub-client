@@ -15,16 +15,21 @@ type RowProps = {
   row: Row
 }
 
-const Expired = (refetch: any) => ({ row: { original: data } }: RowProps) => {
-  const relative = moment(data.expires)
-    .locale('pt-br')
-    .endOf('day')
-    .fromNow();
+const Expired = (refetch: any) => {
+  
+  const ExpiredComponent = ({ row: { original: data } }: RowProps) => {
+    const relative = moment(data.expires)
+      .locale('pt-br')
+      .endOf('day')
+      .fromNow();
 
-  if (relative.indexOf('há') > -1) return <Resend data={data} refetch={refetch} />;
+    if (relative.indexOf('há') > -1) return <Resend data={data} refetch={refetch} />;
 
-  return relative;
-};
+    return relative;
+  }
+
+  return ExpiredComponent;
+}
 
 const Timestamp = ({ row: { original } }: RowProps) => {
   return moment(original.created_at)

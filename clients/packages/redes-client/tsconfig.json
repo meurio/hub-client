@@ -1,7 +1,13 @@
 {
   "extends": "../../tsconfig.json",
-  "types": ["@emotion/react/types/css-prop"],
+  "types": [
+    "@emotion/react/types/css-prop"
+  ],
   "include": [
     "src"
-  ]
+  ],
+  "compilerOptions": {
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react"
+  }
 }

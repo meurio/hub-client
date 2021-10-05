@@ -61,14 +61,18 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
   );
 };
 
-const createDeleteButton = (refetch: any) => (props: any) => <Delete {...props} refetch={refetch} />;
+const createDeleteButton = (refetch: any) => {
+  const DeleteButtonComponent = (props: any) => <Delete {...props} refetch={refetch} />;
+
+  return DeleteButtonComponent;
+}
 
 type Props = {
   data: any[]
   refetch: any
 }
 
-function UsersTable({ data: defaultData, refetch }: Props) {
+const UsersTable = ({ data: defaultData, refetch }: Props) => {
   const columns = React.useMemo(
     () => [
       {

@@ -6,12 +6,12 @@ import {
   ConnectedForm,
   InputField,
   Validators,
+  S3UploadField,
   toast
 } from 'bonde-components';
 import { Row, Col } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 
-import UploadField from "../../components/UploadFile";
 import Panel from '../../components/Panel';
 
 const { isEmail, required } = Validators;
@@ -89,11 +89,18 @@ const CommunityForm: React.FC = () => {
         <Row>
           <Col sm={12} lg={6}>
             <Panel>
-              <UploadField
+              <S3UploadField
+                label={t('info.form.fields.image.label')}
+                helpText={t('app:upload.information')}
+                name='image'
+                disabled={!user.isAdmin}
+                signingUrl={process.env.REACT_APP_UPLOADS_URL}
+              />
+              {/* <UploadField
                 label={t('info.form.fields.image.label')}
                 name='image'
                 validate={required('Preenchimento da Imagem é obrigatório')}
-              />
+              /> */}
               <InputField
                 name='name'
                 label={t('info.form.fields.name.label')}

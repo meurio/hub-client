@@ -8,9 +8,6 @@
     "lint": "eslint . --fix --ext js,ts,tsx"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.6",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "@fnando/cnpj": "^1.0.2",
     "@fnando/cpf": "^1.0.2",
     "@slate-editor/alignment-plugin": "^5.1.0",
@@ -28,25 +25,17 @@
     "@slate-editor/strikethrough-plugin": "^5.1.0",
     "@slate-editor/toggle-readonly": "^5.1.0",
     "@slate-editor/underline-plugin": "^5.1.0",
-    "@types/downloadjs": "^1.4.2",
-    "@types/graceful-fs": "^4.1.5",
-    "@types/lodash": "^4.14.168",
-    "@types/normalize-package-data": "^2.4.0",
-    "@types/react-color": "^3.0.4",
-    "@types/react-table": "^7.0.22",
     "bonde-components": "workspace:*",
     "bonde-core-tools": "workspace:*",
     "bonde-styleguide": "^0.16.5-alpha.5",
     "clipboard-copy": "^3.1.0",
     "downloadjs": "^1.4.7",
     "final-form-arrays": "^3.0.2",
-    "framer-motion": "^4",
     "lodash": "^4.17.21",
     "moment": "^2.27.0",
     "react-color": "^2.19.3",
     "react-final-form-arrays": "^3.1.3",
     "react-number-format": "^4.4.1",
-    "react-s3-uploader": "^4.9.3",
     "react-table": "^7.5.0",
     "react-toastify": "6.0.8",
     "slate-editor": "^5.1.1",
@@ -54,7 +43,10 @@
     "slugify": "^1.4.6"
   },
   "devDependencies": {
-    "@types/prettier": "^2.2.3",
-    "@types/scheduler": "^0.16.1"
+    "@types/downloadjs": "^1.4.2",
+    "@types/graceful-fs": "^4.1.5",
+    "@types/lodash": "^4.14.168",
+    "@types/normalize-package-data": "^2.4.0",
+    "@types/react-table": "^7.0.22"
   }
 }

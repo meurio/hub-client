@@ -8,9 +8,11 @@ import {
   InfoIcon,
   Stack,
   Message,
-  Hint
+  Hint,
+  Heading,
+  Flex
 } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container } from 'react-grid-system';
 import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
 import TotalActivists from './TotalActivists';
@@ -49,18 +51,27 @@ type PositionProps = {
 const Position = styled.div<PositionProps>`
   ${Message} {
     ${props => props.direction === 'right' ? 'right: -20px' : 'left: -20px'};
-  }Heading
-`
+  }
+`;
+
 Position.defaultProps = {
   direction: 'left'
 }
 
 const AnalyticsCard = ({ label, tooltip, children, full }: any) => {
-  const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px', whiteSpace: 'nowrap' }} uppercase>{label}</Header.H5>;
   return (
     <Styles full={full}>
-      <Stack direction="row" spacing={2} mt={4} align="center">
-        {Label}
+      <Stack direction="row" marginBottom="12px" spacing={2} mt={4} alignItems="center">
+        <Heading
+          as="h3"
+          size="xs"
+          color="gray.400"
+          fontWeight="600"
+          textTransform="uppercase"
+        >
+          {label}
+        </Heading>
+
         {tooltip && (
           <Tooltip label={label}>
             <InfoIcon color="gray.200" boxSize={3} />
@@ -115,115 +126,106 @@ const Number = ({ query: Query, children, format }: NumberProps) => {
 Number.defaultProps = {
   format: 'default'
 }
-const Analytics = ():JSX.Element => (
+const Analytics = (): JSX.Element => (
   <Container fluid style={{ width: "100%", padding: "0" }}>
-    <Row>
-      <Col xs={12}>
-        <Header.H5 style={{ fontWeight: 800, marginBottom: '12px', marginTop: '7px' }} uppercase>Baixar relatórios</Header.H5>
-      </Col>
+    <Heading
+      as="h3"
+      size="xs"
+      color="gray.400"
+      fontWeight="600"
+      textTransform="uppercase"
+      marginTop={2}
+      marginBottom={3}
+    >
+      Baixar relatórios
+    </Heading>
 
-      <Col xs={12} style={{ display: 'flex', alignItems: 'center'}}>
-          <DownloadCSV
-            label='Relatórios de doações'
-            icon='Ticket'
-            path='donation_reports'
-          />
-        <DownloadCSV
-          label='Doadores recorrentes'
-          icon='TicketRecurring'
-          path='download_subscriptions'
-        />
+    <DownloadCSV
+      label='Relatórios de doações'
+      icon='Ticket'
+      path='donation_reports'
+    />
 
-        <DownloadCSV
-          label='Relatórios de ações'
-          icon='BoltUnfilled'
-          path='activist_actions'
-        />
+    <DownloadCSV
+      label='Doadores recorrentes'
+      icon='TicketRecurring'
+      path='download_subscriptions'
+    />
 
-        <DownloadCSV
-          label='Relatórios de ativistas'
-          icon='Network'
-          path='activists'
-        />
-      </Col>
-    </Row>
-    <Row style={{ marginTop: '10px' }}>
-      <Col xs={5}>
-        <Row>
-          <Col xs={6}>
-            <AnalyticsCard
-              label='Ativistas'
-              tooltip='Total de pessoas que já agiram em alguma página publicada pela sua comunidade.'
-            >
-              <Number query={TotalActivists} />
-            </AnalyticsCard>
-          </Col>
-          <Col xs={6} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              label='Ativistas recentes'
-              tooltip='Total de pessoas que agiram na sua comunidade nos últimos 90 dias.'
-            >
-              <Number query={LastActivists} />
-            </AnalyticsCard>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={6}>
-            <AnalyticsCard
-              label='Pressões recentes'
-              tooltip='Total de ações de pressão feitas em páginas da sua comunidade nos últimos 90 dias.'
-            >
-              <Number query={LastPressures} />
-            </AnalyticsCard>
-          </Col>
-          <Col xs={6} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              label='Inscrições recentes'
-              tooltip='Total de ações de formulários publicados pela sua comunidade nos últimos 90 dias.'
-            >
-              <Number query={LastFormEntries} />
-            </AnalyticsCard>
-          </Col>
-        </Row>
-      </Col>
-      <Col xs={7}>
-        <Row>
-          <Col xs={4} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              full
-              label='Doações únicas (R$)'
-              tooltip='Valor total das doações únicas confirmadas na comunidade nos últimos 30 dias.'
-            >
-              <Number query={SubscriptionDonationsLastMonth} format='money'>
-                <Text>Nos últimos 30 dias</Text>
-              </Number>
-            </AnalyticsCard>
-          </Col>
-          <Col xs={4} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              full
-              label='Doações recorrentes (R$)'
-              tooltip='Valor total das doações recorrentes confirmadas na comunidade nos últimos 30 dias.'
-            >
-              <Number query={UniqueDonationsLastMonth} format='money'>
-                <Text>Nos últimos 30 dias</Text>
-              </Number>
-            </AnalyticsCard>
-          </Col>
-          <Col xs={4} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              full
-              label='Total arrecadado (R$)'
-              tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
-            >
-              <Number query={TotalDonations} format='money'>
-                <Text>(Confirmadas / Aguardando pagamento)</Text>
-              </Number>
-            </AnalyticsCard>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+    <DownloadCSV
+      label='Relatórios de ações'
+      icon='BoltUnfilled'
+      path='activist_actions'
+    />
+
+    <DownloadCSV
+      label='Relatórios de ativistas'
+      icon='Network'
+      path='activists'
+    />
+
+    <Stack mt={4} direction={["column", "column", "column", "row"]} spacing={4}>
+      <Flex direction="column" justifyContent="space-between">
+        <AnalyticsCard
+          label='Ativistas'
+          tooltip='Total de pessoas que já agiram em alguma página publicada pela sua comunidade.'
+        >
+          <Number query={TotalActivists} />
+        </AnalyticsCard>
+
+        <AnalyticsCard
+          label='Ativistas recentes'
+          tooltip='Total de pessoas que agiram na sua comunidade nos últimos 90 dias.'
+        >
+          <Number query={LastActivists} />
+        </AnalyticsCard>
+      </Flex>
+      <Flex direction="column" justifyContent="space-between">
+        <AnalyticsCard
+          label='Pressões recentes'
+          tooltip='Total de ações de pressão feitas em páginas da sua comunidade nos últimos 90 dias.'
+        >
+          <Number query={LastPressures} />
+        </AnalyticsCard>
+
+        <AnalyticsCard
+          label='Inscrições recentes'
+          tooltip='Total de ações de formulários publicados pela sua comunidade nos últimos 90 dias.'
+        >
+          <Number query={LastFormEntries} />
+        </AnalyticsCard>
+      </Flex>
+
+      <AnalyticsCard
+        full
+        label='Doações únicas (R$)'
+        tooltip='Valor total das doações únicas confirmadas na comunidade nos últimos 30 dias.'
+      >
+        <Number query={SubscriptionDonationsLastMonth} format='money'>
+          <Text>Nos últimos 30 dias</Text>
+        </Number>
+      </AnalyticsCard>
+
+      <AnalyticsCard
+        full
+        label='Doações recorrentes (R$)'
+        tooltip='Valor total das doações recorrentes confirmadas na comunidade nos últimos 30 dias.'
+      >
+        <Number query={UniqueDonationsLastMonth} format='money'>
+          <Text>Nos últimos 30 dias</Text>
+        </Number>
+      </AnalyticsCard>
+
+      <AnalyticsCard
+        full
+        label='Total arrecadado (R$)'
+        tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
+      >
+        <Number query={TotalDonations} format='money'>
+          <Text>(Confirmadas / Aguardando pagamento)</Text>
+        </Number>
+      </AnalyticsCard>
+    </Stack>
   </Container>
 );
 

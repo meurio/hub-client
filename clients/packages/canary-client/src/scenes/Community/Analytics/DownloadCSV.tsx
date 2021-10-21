@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSession } from 'bonde-core-tools';
-import { Header, Icon, Loading, toast, Success } from 'bonde-components';
+import { Icon, Loading, toast, Success, Heading } from 'bonde-components';
 import downloadjs from 'downloadjs'
 import styled from 'styled-components';
 import Panel from '../../../components/Panel';
@@ -47,16 +47,16 @@ const ReportButton = styled.button<ReportButtonProps>`
 
     svg {
       ${props => props.loading
-        ? `
+    ? `
           width: calc(0.4*176px);
           height: calc(0.4*135px);
           margin-top: -19px;
           margin-bottom: -10px;
         `
-        : `
+    : `
           margin-right: 0;
         `
-      }
+  }
     }
   }
 `
@@ -76,7 +76,7 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
     donation_reports: 'Doação',
     download_subscriptions: 'Doação recorrente',
     activist_actions: 'Ações',
-    activists: 'Ativistas' 
+    activists: 'Ativistas'
   }
 
   const handleClick = async () => {
@@ -87,7 +87,7 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
       if (response.status === 200) {
         const filename = `[Relatório][${reportNames[path]}] ${community?.name}.csv`;
         downloadjs(new Blob([(await response.blob())]), filename, 'text/csv');
-        
+
         toast(<Success message={`O download de ${filename} foi feito com sucesso.`} />, { type: toast.TYPE.SUCCESS });
       }
       setLoading(false);
@@ -111,7 +111,15 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
           : (
             <>
               <Icon name={icon as any} />
-              <Header.H5 uppercase  style={{ fontWeight: 800, color: '#000' }}>{label}</Header.H5>
+              {/* style={{ fontWeight: 800, color: '#000' }} */}
+              <Heading
+                as="h3"
+                size="xs"
+                textTransform="uppercase"
+                color="black"
+                fontWeight="800">
+                {label}
+              </Heading>
             </>
           )
         }

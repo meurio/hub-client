@@ -278,7 +278,7 @@ importers:
     dependencies:
       '@apollo/client': 3.4.16_graphql@15.6.1+react@16.14.0
       axios: 0.21.4
-      bonde-components: 0.0.6_6e3bd82cf6c67f7d55d0fbd353cbe5db
+      bonde-components: link:../components
       cross-storage: 1.0.0
       faker: 4.1.0
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
@@ -7976,77 +7976,6 @@ packages:
       qs: 6.7.0
       raw-body: 2.4.0
       type-is: 1.6.18
-
-  /bonde-components/0.0.6_6e3bd82cf6c67f7d55d0fbd353cbe5db:
-    resolution: {integrity: sha512-GozczAlIxXK6Bj2ahlzcpgR9FjPn3I2nwC4wPg61hPhspssMCvsx3AhwXeWQIZP0+nss567qcEtWfdnu0EEypg==}
-    peerDependencies:
-      react: '>=16'
-    dependencies:
-      '@chakra-ui/accordion': 1.3.6_b528e315e06470028db18fe09527aee6
-      '@chakra-ui/alert': 1.2.7_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/avatar': 1.2.9_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/breadcrumb': 1.2.8_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/button': 1.4.2_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/checkbox': 1.5.6_b528e315e06470028db18fe09527aee6
-      '@chakra-ui/close-button': 1.1.11_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/control-box': 1.0.15_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/counter': 1.1.9_react@16.14.0
-      '@chakra-ui/css-reset': 1.0.0_c50d3035b84d781edbeac3f3a6282585
-      '@chakra-ui/editable': 1.2.9_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/form-control': 1.4.1_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/hooks': 1.6.0_react@16.14.0
-      '@chakra-ui/icon': 1.1.11_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/image': 1.0.19_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/input': 1.2.10_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/layout': 1.4.9_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/media-query': 1.1.2_bf4468a5fcce617d4305941d82a29840
-      '@chakra-ui/menu': 1.7.3_b528e315e06470028db18fe09527aee6
-      '@chakra-ui/modal': 1.8.11_ce211157cfea9e745b6ea7a7b38b7acf
-      '@chakra-ui/number-input': 1.2.10_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/pin-input': 1.6.5_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/popover': 1.8.3_b528e315e06470028db18fe09527aee6
-      '@chakra-ui/popper': 2.2.1_react@16.14.0
-      '@chakra-ui/portal': 1.2.9_react-dom@16.14.0+react@16.14.0
-      '@chakra-ui/progress': 1.1.13_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/radio': 1.3.10_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/react': 1.6.7_2f2f96581759f1152b36965d24b59cd7
-      '@chakra-ui/select': 1.1.14_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/skeleton': 1.1.18_ed88cf1b35c0c17238a827f4ef834b49
-      '@chakra-ui/slider': 1.2.9_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/spinner': 1.1.12_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/stat': 1.1.12_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/switch': 1.2.9_b528e315e06470028db18fe09527aee6
-      '@chakra-ui/system': 1.7.3_4d7126b233611f733cb5d2dfe946a2b2
-      '@chakra-ui/table': 1.2.6_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/tabs': 1.5.5_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/tag': 1.1.12_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/textarea': 1.1.14_028a66c6943feeac513e9f773a9f0096
-      '@chakra-ui/theme': 1.10.1_@chakra-ui+system@1.7.3
-      '@chakra-ui/theme-tools': 1.2.0_@chakra-ui+system@1.7.3
-      '@chakra-ui/toast': 1.2.11_572b17f3efb6e1839ae21b25e651d6a9
-      '@chakra-ui/tooltip': 1.3.10_572b17f3efb6e1839ae21b25e651d6a9
-      '@chakra-ui/transition': 1.3.4_2d100d4b6007d6f7ded6514ed309de9d
-      '@chakra-ui/visually-hidden': 1.0.14_028a66c6943feeac513e9f773a9f0096
-      '@emotion/react': 11.4.1_3b8eeef450a2fc92bb23ab0684d53147
-      '@emotion/styled': 11.3.0_4e7be573350ed018fe7c1f1bc64c0512
-      '@rjsf/core': 3.1.0_react@16.14.0
-      final-form: 4.20.2
-      framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
-      lodash-es: 4.17.21
-      react: 16.14.0
-      react-final-form: 6.5.3_final-form@4.20.2+react@16.14.0
-      react-google-font-loader: 1.1.0_react-dom@16.14.0+react@16.14.0
-      react-s3-uploader: 4.9.3
-      react-select: 3.2.0_react-dom@16.14.0+react@16.14.0
-      react-table: 7.7.0_react@16.14.0
-      react-toastify: 6.2.0_react-dom@16.14.0+react@16.14.0
-      styled-components: 5.3.1_react-dom@16.14.0+react@16.14.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@types/react'
-      - react-dom
-      - react-is
-    dev: false
 
   /bonde-styleguide/0.16.5-alpha.5_react-dom@16.14.0+react@16.14.0:
     resolution: {integrity: sha512-9RhVcjTdLPto+bcOhYaCOCWt9k40pbVertys+4fK5rWY9sjJow2hUCe1BUWmr/DpordxuNkqXcrIIfoR11OD+Q==}

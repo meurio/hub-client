@@ -1,11 +1,11 @@
 name: Workflow build and tests
 on: [push]
 jobs:
-  tests:
+  tests-build-and-deploy:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        node-version: [15]
+        node-version: [14]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -37,13 +37,13 @@ jobs:
           flags: unittests
           verbose: true
 
-  build:
-    needs: tests
-    runs-on: ubuntu-20.04
-    outputs:
-      tags: ${{ steps.meta.outputs.tags }}
-    steps:
-      - uses: actions/checkout@v2
+  # build:
+  #   needs: tests
+  #   runs-on: ubuntu-20.04
+  #   outputs:
+  #     tags: ${{ steps.meta.outputs.tags }}
+  #   steps:
+  #     - uses: actions/checkout@v2
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -65,15 +65,17 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-20.04
-    steps:
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
       - name: Rancher Deploy clients/canary-2
-        uses: yantadeu/rancher-deploy-action@v0.0.2
+        # uses: yantadeu/rancher-deploy-action@v0.0.2
+        uses: ./.github/actions/rancher-deploy-action-v2
         env:
           RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
           RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
           RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
           SERVICE_NAME: 'clients/canary-2'
-          DOCKER_IMAGE: ${{ needs.build.outputs.tags }}
+          DOCKER_IMAGE: ${{ steps.meta.outputs.tags }}

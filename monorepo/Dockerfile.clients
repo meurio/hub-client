@@ -1,4 +1,4 @@
-FROM node:15-alpine
+FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
@@ -22,4 +22,4 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
 # Install dependencies
 RUN pnpm m i
 
-RUN pnpm m run build
+RUN pnpm m run build --filter {clients}

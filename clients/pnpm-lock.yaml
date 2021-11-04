@@ -38,7 +38,6 @@ importers:
       react-dom: ^16.13.1
       react-grid-system: 7.0.3
       react-i18next: ^11.7.0
-      react-icons: ^4.3.1
       react-router-dom: ^5.2.0
       react-scripts: 3.4.1
       serve: ^11.3.2
@@ -71,7 +70,6 @@ importers:
       react-dom: 16.14.0_react@16.14.0
       react-grid-system: 7.0.3_react@16.14.0
       react-i18next: 11.12.0_i18next@19.9.2+react@16.14.0
-      react-icons: 4.3.1_react@16.14.0
       react-router-dom: 5.3.0_react@16.14.0
       react-scripts: 3.4.1_typescript@3.9.10
       serve: 11.3.2
@@ -319,7 +317,6 @@ importers:
       bonde-components: workspace:*
       bonde-core-tools: workspace:*
       framer-motion: ^4
-      react-icons: ^4.3.1
     dependencies:
       '@chakra-ui/react': 1.6.7_2f2f96581759f1152b36965d24b59cd7
       '@emotion/react': 11.4.1_3b8eeef450a2fc92bb23ab0684d53147
@@ -329,7 +326,6 @@ importers:
       bonde-components: link:../../libs/components
       bonde-core-tools: link:../../libs/core-tools
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
-      react-icons: 4.3.1_react@16.14.0
     devDependencies:
       '@types/prettier': 2.3.2
       '@types/scheduler': 0.16.2
@@ -455,7 +451,6 @@ importers:
       deep-object-diff: ^1.1.0
       framer-motion: ^4
       jest-environment-jsdom-sixteen: ^1.0.3
-      react-icons: ^4.3.1
       react-table: ^7.6.0
     dependencies:
       '@chakra-ui/react': 1.6.7_2f2f96581759f1152b36965d24b59cd7
@@ -472,7 +467,6 @@ importers:
       deep-object-diff: 1.1.0
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
       jest-environment-jsdom-sixteen: 1.0.3
-      react-icons: 4.3.1_react@16.14.0
       react-table: 7.7.0_react@16.14.0
     devDependencies:
       '@types/prettier': 2.3.2

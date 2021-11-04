@@ -48,9 +48,9 @@ const Card: React.FC<CardProps> = ({ label, helpText, value }) => (
       minW="175px"
     >
       <Text
-        fontSize="3xl"
         color="black"
         fontWeight="extrabold"
+        fontSize="4xl"
       >
         {value}
       </Text>

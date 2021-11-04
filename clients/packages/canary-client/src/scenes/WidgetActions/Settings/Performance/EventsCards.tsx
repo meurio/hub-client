@@ -10,7 +10,7 @@ type Props = {
 
 const PercentageLabel: React.FC<any> = ({ label, value, helpText }) => (
   <Stack spacing={0}>
-    <Text fontWeight="extrabold" color="black" fontSize="lg">{`${value}%`}</Text>
+    <Text fontWeight="extrabold" color="black" fontSize="2xl">{`${value}%`}</Text>
     <Stack direction="row" spacing={2} align="center">
       <Text>{label}</Text>
       {helpText && (

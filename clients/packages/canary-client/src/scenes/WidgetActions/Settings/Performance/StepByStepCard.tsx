@@ -1,6 +1,7 @@
 import React from "react";
-import { Stack, Box, Button, Heading, Text } from "bonde-components";
+import { Stack, Box, Button, Heading, Text, Icon, Flex } from "bonde-components";
 import { useLocation, Link } from "react-router-dom";
+import { FiCheck } from "react-icons/fi"
 
 interface Props {
   stepsValidation: boolean[]
@@ -36,43 +37,58 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
           <Text fontSize="18px">
             1 - Definir os <b>alvos</b> da sua campanha (quem você quer pressionar) e o conteúdo do e-mail que será enviado para eles;
           </Text>
-          <Button
-            as={Link}
-            variant="ghost"
-            colorScheme="pink"
-            px={0}
-            to={location.pathname + "/targets"}
-          >
-            Definir alvos
-          </Button>
+          <Flex>
+            <Button
+              as={Link}
+              variant="ghost"
+              colorScheme="pink"
+              px={0}
+              to={location.pathname + "/targets"}
+            >
+              Definir alvos
+            </Button>
+            {!stepsValidation[0] && (
+              <Icon as={FiCheck} />
+            )}
+          </Flex>
         </Box>
 
         <Box maxW={60}>
           <Text fontSize="18px">
             2 - Ajustar o <b>formulário</b> para deixá-lo do jeitinho da sua campanha;
           </Text>
-          <Button
-            as={Link}
-            variant="ghost"
-            px={0}
-            to={location.pathname + "/adjusts"}
-          >
-            Ajustar formulário
-          </Button>
+          <Flex>
+            <Button
+              as={Link}
+              variant="ghost"
+              px={0}
+              to={location.pathname + "/adjusts"}
+            >
+              Ajustar formulário
+            </Button>
+            {!stepsValidation[1] && (
+              <Icon as={FiCheck} />
+            )}
+          </Flex>
         </Box>
 
         <Box maxW={60}>
           <Text fontSize="18px">
             3 - Escrever o <b>e-mail de agradecimento</b> que vai ser enviado para quem agir na sua campanha.
           </Text>
-          <Button
-            as={Link}
-            variant="ghost"
-            px={0}
-            to={location.pathname + "/autofire"}
-          >
-            Escrever e-mail
-          </Button>
+          <Flex>
+            <Button
+              as={Link}
+              variant="ghost"
+              px={0}
+              to={location.pathname + "/autofire"}
+            >
+              Escrever e-mail
+            </Button>
+            {!stepsValidation[2] && (
+              <Icon as={FiCheck} />
+            )}
+          </Flex>
         </Box>
       </Stack>
     </Stack >

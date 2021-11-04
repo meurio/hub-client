@@ -10,7 +10,7 @@ type Props = {
 
 const PercentageLabel: React.FC<any> = ({ label, value, helpText }) => (
   <Stack spacing={0}>
-    <Text fontWeight="extrabold" fontSize="lg">{`${value}%`}</Text>
+    <Text fontWeight="extrabold" color="black" fontSize="lg">{`${value}%`}</Text>
     <Stack direction="row" spacing={2} align="center">
       <Text>{label}</Text>
       {helpText && (
@@ -53,7 +53,7 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
         p={6}
         justify="space-between"
       >
-        <Text fontWeight="extrabold" fontSize="4xl">{processed}</Text>
+        <Text color="black" fontWeight="extrabold" fontSize="4xl">{processed}</Text>
         <Stack direction="row" spacing={6}>
           <PercentageLabel
             label="Entregues"

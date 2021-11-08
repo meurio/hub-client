@@ -27,11 +27,13 @@ pipeline:
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
+      - export REACT_APP_HOTJAR_ID=$STAG_HOTJAR_ID
+      - export REACT_APP_HOTJAR_SV=$STAG_HOTJAR_SV
       - cd clients
       - pnpm i
       - pnpm m run build --filter {libs}
       - pnpm m run build --filter {packages}
-    secrets: [ aws_route_ip, stag_pagarme_key ]
+    secrets: [ aws_route_ip, stag_pagarme_key, stag_hotjar_id, stag_hotjar_sv ]
     group: build
     when:
       status: success
@@ -114,11 +116,13 @@ pipeline:
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
+      - export REACT_APP_HOTJAR_ID=$PROD_HOTJAR_ID
+      - export REACT_APP_HOTJAR_SV=$PROD_HOTJAR_SV
       - cd clients
       - pnpm i
       - pnpm m run build --filter {libs}
       - pnpm m run build --filter {packages}
-    secrets: [ aws_route_ip, prod_pagarme_key ]
+    secrets: [ aws_route_ip, prod_pagarme_key, prod_hotjar_id, prod_hotjar_sv ]
     group: build
     when:
       status: success

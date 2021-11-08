@@ -19,7 +19,7 @@ import {
   FontsLoader,
   CSSReset
 } from 'bonde-components';
-
+import { hotjar } from 'react-hotjar';
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
 // Scenes and Components to make your application
@@ -102,6 +102,10 @@ const ChangeLanguage = () => {
 
 const PageRouting = () => {
   const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    hotjar.stateChange(pathname);
+  }, [pathname])
 
   return (
     <ScreenClassProvider>

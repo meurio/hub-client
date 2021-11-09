@@ -47,8 +47,10 @@ curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js 
 
 
 ```
-pnpm i
-pnpm m run dev
+yarn
+yarn pnpm i
+yarn pnpm m run test
+yarn pnpm m run dev
 ```
 
 Finally, we will populate our enviroment configs to each client package. We recommend copy our example in each case.

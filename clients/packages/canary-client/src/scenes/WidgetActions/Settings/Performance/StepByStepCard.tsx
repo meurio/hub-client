@@ -1,7 +1,6 @@
 import React from "react";
-import { Stack, Box, Button, Heading, Text, Icon, Flex } from "bonde-components";
+import { Stack, Box, Button, Heading, Text, Flex } from "bonde-components";
 import { useLocation, Link } from "react-router-dom";
-import { FiCheck } from "react-icons/fi"
 
 interface Props {
   stepsValidation: boolean[]
@@ -48,7 +47,7 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
               Definir alvos
             </Button>
             {!stepsValidation[0] && (
-              <Icon as={FiCheck} />
+              <Text>Checked</Text>
             )}
           </Flex>
         </Box>
@@ -67,7 +66,7 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
               Ajustar formulário
             </Button>
             {!stepsValidation[1] && (
-              <Icon as={FiCheck} />
+              <Text>Checked</Text>
             )}
           </Flex>
         </Box>
@@ -86,7 +85,7 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
               Escrever e-mail
             </Button>
             {!stepsValidation[2] && (
-              <Icon as={FiCheck} />
+              <Text>Checked</Text>
             )}
           </Flex>
         </Box>

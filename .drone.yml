@@ -27,11 +27,7 @@ pipeline:
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
-      - cd clients
-      - pnpm i
-      - pnpm m run build --filter {libs}
-      - pnpm m run build --filter {packages}
-      - cd deprecated/admin
+      - cd clients/deprecated/admin
       - pnpm i
       - pnpm m run build --filter bonde-webpage
       - pnpm m run build --filter bonde-admin
@@ -66,11 +62,7 @@ pipeline:
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
-      - cd clients
-      - pnpm i
-      - pnpm m run build --filter {libs}
-      - pnpm m run build --filter {packages}
-      - cd deprecated/admin
+      - cd clients/deprecated/admin
       - pnpm i
       - pnpm m run build --filter bonde-webpage
       - pnpm m run build --filter bonde-admin
@@ -79,19 +71,6 @@ pipeline:
     when:
       status: success
       event: tag
-
-  publish-staging-build:
-    image: plugins/docker
-    repo: nossas/bonde
-    context: clients
-    dockerfile: clients/Dockerfile-old
-    secrets: [docker_username, docker_password]
-    group: publish
-    tags:
-      - ${DRONE_BRANCH/\//-}
-    when:
-      status: success
-      event: [push]
   
   publish-staging-deprecated-build:
     image: plugins/docker
@@ -120,33 +99,6 @@ pipeline:
       status: success
       event: tag
 
-  publish-production-build:
-    image: plugins/docker
-    repo: nossas/bonde
-    context: clients
-    dockerfile: clients/Dockerfile-old
-    secrets: [docker_username, docker_password]
-    group: publish
-    tags:
-      - ${DRONE_TAG##v}
-      - latest
-    when:
-      status: success
-      event: tag
-
-  accounts-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: clients/accounts
-    group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [rancher_access_key, rancher_secret_key]
-    when:
-      status: success
-      event: [push]
-
   admin-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
@@ -160,38 +112,12 @@ pipeline:
       status: success
       event: [push]
 
-  canary-staging-deploy:
+  admin-production-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
-    service: clients/canary
+    service: clients/admin
     group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [rancher_access_key, rancher_secret_key]
-    when:
-      status: success
-      event: [push]
-
-  redes-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: clients/redes
-    group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [rancher_access_key, rancher_secret_key]
-    when:
-      status: success
-      event: [push]
-
-  redes-production-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: clients/redes
-    group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde-deprecated:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets:

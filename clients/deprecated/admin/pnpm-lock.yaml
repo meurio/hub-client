@@ -29,7 +29,7 @@ importers:
       eslint-plugin-standard: ^4.1.0
       jest: ^26.6.3
       node-fetch: ^2.6.1
-      pnpm: ^6.2.2
+      pnpm: ^6.23.6
       source-map-support: ^0.5.19
       supertest: ^6.1.3
       ts-jest: ^26.5.5
@@ -40,7 +40,7 @@ importers:
     dependencies:
       dotenv: 8.2.0
       node-fetch: 2.6.1
-      pnpm: 6.2.3
+      pnpm: registry.npmjs.org/pnpm/6.23.6
       source-map-support: 0.5.19
       ws: 7.4.5
     devDependencies:
@@ -216,7 +216,7 @@ importers:
       react-router-config: 1.0.0-beta.4_react-router@4.3.1+react@16.14.0
       react-router-dom: 4.3.1_react@16.14.0
       react-s3-uploader: 4.8.0
-      react-scripts: 3.4.1_node-sass@4.14.1
+      react-scripts: 3.4.1_ed529a6a670e4075a2a6d0fc8f999ebc
       react-select-plus: 1.2.0_react-dom@16.7.0+react@16.14.0
       react-test-renderer: 16.7.0_react@16.14.0
       react-toastify: 5.3.2_react-dom@16.7.0+react@16.14.0
@@ -369,7 +369,7 @@ importers:
       react-countup: 4.3.3_react@17.0.2
       react-device-detect: 1.17.0_react-dom@17.0.2+react@17.0.2
       react-ga: 3.3.0_prop-types@15.7.2+react@17.0.2
-      react-intl: 5.17.1_react@17.0.2
+      react-intl: 5.17.1_react@17.0.2+typescript@4.2.4
       react-redux: 7.2.4_react-dom@17.0.2+react@17.0.2
       react-s3-uploader: 5.0.0
       redux: 4.1.0
@@ -391,7 +391,7 @@ importers:
       nyc: 15.1.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      react-scripts: 4.0.3_node-sass@4.14.1+react@17.0.2
+      react-scripts: 4.0.3_7fd1e0f4755d4f7d4aed364d0ac928cd
       redux-mock-store: 1.5.4
 
 packages:
@@ -513,8 +513,8 @@ packages:
       slash: 2.0.0
       source-map: 0.5.7
     optionalDependencies:
-      '@nicolo-ribaudo/chokidar-2': 2.1.8-no-fsevents
-      chokidar: 3.5.1
+      '@nicolo-ribaudo/chokidar-2': registry.npmjs.org/@nicolo-ribaudo/chokidar-2/2.1.8-no-fsevents
+      chokidar: registry.npmjs.org/chokidar/3.5.1
     dev: true
 
   /@babel/code-frame/7.10.4:
@@ -3944,7 +3944,7 @@ packages:
       tslib: 2.2.0
     dev: false
 
-  /@formatjs/intl/1.10.3:
+  /@formatjs/intl/1.10.3_typescript@4.2.4:
     resolution: {integrity: sha512-/2PC0PLHFsnJXqP/yDdIVQrsQXkQww06kgUHojO/tBG5/o0t9Mk54Yg0r7cvpu7RCLVg3la4nRN+v56geSKdeg==}
     peerDependencies:
       typescript: ^4.2
@@ -3959,6 +3959,7 @@ packages:
       '@formatjs/intl-listformat': 5.0.15
       intl-messageformat: 9.6.11
       tslib: 2.2.0
+      typescript: 4.2.4
     dev: false
 
   /@hapi/address/2.1.4:
@@ -4053,7 +4054,7 @@ packages:
       ansi-escapes: 3.2.0
       chalk: 2.4.2
       exit: 0.1.2
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       jest-changed-files: 24.9.0
       jest-config: 24.9.0
       jest-haste-map: 24.9.0
@@ -4192,7 +4193,7 @@ packages:
       jest-worker: 24.9.0
       node-notifier: 5.4.5
       slash: 2.0.0
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
       string-length: 2.0.0
     transitivePeerDependencies:
       - supports-color
@@ -4227,7 +4228,7 @@ packages:
       terminal-link: 2.1.1
       v8-to-istanbul: 7.1.1
     optionalDependencies:
-      node-notifier: 8.0.2
+      node-notifier: registry.npmjs.org/node-notifier/8.0.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4237,7 +4238,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       callsites: 3.1.0
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       source-map: 0.6.1
     dev: false
 
@@ -4372,23 +4373,6 @@ packages:
       call-me-maybe: 1.0.1
       glob-to-regexp: 0.3.0
     dev: false
-
-  /@nicolo-ribaudo/chokidar-2/2.1.8-no-fsevents:
-    resolution: {integrity: sha512-+nb9vWloHNNMFHjGofEam3wopE3m1yuambrrd/fnPc+lFOMB9ROTqQlche9ByFWNkdNqfSgR/kkQtQ8DzEWt2w==}
-    dependencies:
-      anymatch: 2.0.0
-      async-each: 1.0.3
-      braces: 2.3.2
-      glob-parent: 3.1.0
-      inherits: 2.0.4
-      is-binary-path: 1.0.1
-      is-glob: 4.0.1
-      normalize-path: 3.0.0
-      path-is-absolute: 1.0.1
-      readdirp: 2.2.1
-      upath: 1.2.0
-    dev: true
-    optional: true
 
   /@nodelib/fs.scandir/2.1.4:
     resolution: {integrity: sha512-33g3pMJk3bg5nXbL/+CY6I2eJDzZAni49PfJnL5fghPTggPvBd/pFNSgJsdAgWptuFu7qq/ERvOYFlhvsLTCKA==}
@@ -5066,11 +5050,6 @@ packages:
       '@types/node': 14.14.43
     dev: true
 
-  /@types/graphql/0.10.2:
-    resolution: {integrity: sha512-Ayw0w+kr8vYd8DToiMXjcHxXv1ljWbqX2mnLwXDxkBgog3vywGriC0JZ+npsuohKs3+E88M8OOtobo4g0X3SIA==}
-    dev: false
-    optional: true
-
   /@types/hoist-non-react-statics/3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
@@ -5256,7 +5235,7 @@ packages:
   /@types/uglify-js/3.13.0:
     resolution: {integrity: sha512-EGkrJD5Uy+Pg0NUR8uA4bJ5WMfljyad0G+784vLCNUkD+QwOJXUbBYExXfVGf7YtyzdQp3L/XMYcliB987kL5Q==}
     dependencies:
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     dev: true
 
   /@types/url-join/4.0.0:
@@ -5272,7 +5251,7 @@ packages:
     dependencies:
       '@types/node': 15.0.1
       '@types/source-list-map': 0.1.2
-      source-map: 0.7.3
+      source-map: registry.npmjs.org/source-map/0.7.3
     dev: true
 
   /@types/webpack/4.41.27:
@@ -5283,7 +5262,7 @@ packages:
       '@types/tapable': 1.0.7
       '@types/uglify-js': 3.13.0
       '@types/webpack-sources': 2.1.0
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     dev: true
 
   /@types/yargs-parser/20.2.0:
@@ -5309,7 +5288,7 @@ packages:
     resolution: {integrity: sha512-HrCIVMLjE1MOozVoD86622S7aunluLb2PJdPfb3nYiEtohm8mIB/vyv0Fd37AdeMFrTUQXEunw78YloMA3Qilg==}
     dev: false
 
-  /@typescript-eslint/eslint-plugin/2.34.0_984cbb313f9ea271f36cadd8f9814e06:
+  /@typescript-eslint/eslint-plugin/2.34.0_28deb19c9a1505f8eaba25f08813d781:
     resolution: {integrity: sha512-4zY3Z88rEE99+CNvTbXSyovv2z9PNOVffTWD2W8QF5s2prBQtwN2zadqERcrHpcR7O/+KMI3fcTAmUUhK/iQcQ==}
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
     peerDependencies:
@@ -5320,12 +5299,13 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/experimental-utils': 2.34.0_eslint@6.8.0
-      '@typescript-eslint/parser': 2.34.0_eslint@6.8.0
+      '@typescript-eslint/experimental-utils': 2.34.0_eslint@6.8.0+typescript@4.2.4
+      '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@4.2.4
       eslint: 6.8.0
       functional-red-black-tree: 1.0.1
       regexpp: 3.1.0
-      tsutils: 3.21.0
+      tsutils: 3.21.0_typescript@4.2.4
+      typescript: 4.2.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5356,39 +5336,14 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/eslint-plugin/4.22.0_f53b530e17fae12b9f48d6443ee1308c:
-    resolution: {integrity: sha512-U8SP9VOs275iDXaL08Ln1Fa/wLXfj5aTr/1c0t0j6CdbOnxh+TruXu1p4I0NAvdPBQgoPjHsgKn28mOi0FzfoA==}
-    engines: {node: ^10.12.0 || >=12.0.0}
-    peerDependencies:
-      '@typescript-eslint/parser': ^4.0.0
-      eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/experimental-utils': 4.22.0_eslint@7.25.0
-      '@typescript-eslint/parser': 4.22.0_eslint@7.25.0
-      '@typescript-eslint/scope-manager': 4.22.0
-      debug: 4.3.1
-      eslint: 7.25.0
-      functional-red-black-tree: 1.0.1
-      lodash: 4.17.21
-      regexpp: 3.1.0
-      semver: 7.3.5
-      tsutils: 3.21.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /@typescript-eslint/experimental-utils/2.34.0_eslint@6.8.0:
+  /@typescript-eslint/experimental-utils/2.34.0_eslint@6.8.0+typescript@4.2.4:
     resolution: {integrity: sha512-eS6FTkq+wuMJ+sgtuNTtcqavWXqsflWcfBnlYhg/nS4aZ1leewkXGbvBhaapn1q6qf4M71bsR1tez5JTRMuqwA==}
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
     peerDependencies:
       eslint: '*'
     dependencies:
       '@types/json-schema': 7.0.7
-      '@typescript-eslint/typescript-estree': 2.34.0
+      '@typescript-eslint/typescript-estree': 2.34.0_typescript@4.2.4
       eslint: 6.8.0
       eslint-scope: 5.1.1
       eslint-utils: 2.1.0
@@ -5397,7 +5352,7 @@ packages:
       - typescript
     dev: false
 
-  /@typescript-eslint/experimental-utils/3.10.1_eslint@7.25.0:
+  /@typescript-eslint/experimental-utils/3.10.1_eslint@7.25.0+typescript@4.2.4:
     resolution: {integrity: sha512-DewqIgscDzmAfd5nOGe4zm6Bl7PKtMG2Ad0KG8CUZAHlXfAKTF9Ol5PXhiMh39yRL2ChRH1cuuUGOcVyyrhQIw==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -5405,25 +5360,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.7
       '@typescript-eslint/types': 3.10.1
-      '@typescript-eslint/typescript-estree': 3.10.1
-      eslint: 7.25.0
-      eslint-scope: 5.1.1
-      eslint-utils: 2.1.0
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-    dev: true
-
-  /@typescript-eslint/experimental-utils/4.22.0_eslint@7.25.0:
-    resolution: {integrity: sha512-xJXHHl6TuAxB5AWiVrGhvbGL8/hbiCQ8FiWwObO3r0fnvBdrbWEDy1hlvGQOAWc6qsCWuWMKdVWlLAEMpxnddg==}
-    engines: {node: ^10.12.0 || >=12.0.0}
-    peerDependencies:
-      eslint: '*'
-    dependencies:
-      '@types/json-schema': 7.0.7
-      '@typescript-eslint/scope-manager': 4.22.0
-      '@typescript-eslint/types': 4.22.0
-      '@typescript-eslint/typescript-estree': 4.22.0
+      '@typescript-eslint/typescript-estree': 3.10.1_typescript@4.2.4
       eslint: 7.25.0
       eslint-scope: 5.1.1
       eslint-utils: 2.1.0
@@ -5450,7 +5387,7 @@ packages:
       - typescript
     dev: true
 
-  /@typescript-eslint/parser/2.34.0_eslint@6.8.0:
+  /@typescript-eslint/parser/2.34.0_eslint@6.8.0+typescript@4.2.4:
     resolution: {integrity: sha512-03ilO0ucSD0EPTw2X4PntSIRFtDPWjrVq7C3/Z3VQHRC7+13YB55rcJI3Jt+YgeHbjUdJPcPa7b23rXCBokuyA==}
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
     peerDependencies:
@@ -5461,32 +5398,14 @@ packages:
         optional: true
     dependencies:
       '@types/eslint-visitor-keys': 1.0.0
-      '@typescript-eslint/experimental-utils': 2.34.0_eslint@6.8.0
-      '@typescript-eslint/typescript-estree': 2.34.0
+      '@typescript-eslint/experimental-utils': 2.34.0_eslint@6.8.0+typescript@4.2.4
+      '@typescript-eslint/typescript-estree': 2.34.0_typescript@4.2.4
       eslint: 6.8.0
       eslint-visitor-keys: 1.3.0
+      typescript: 4.2.4
     transitivePeerDependencies:
       - supports-color
     dev: false
-
-  /@typescript-eslint/parser/4.22.0_eslint@7.25.0:
-    resolution: {integrity: sha512-z/bGdBJJZJN76nvAY9DkJANYgK3nlRstRRi74WHm3jjgf2I8AglrSY+6l7ogxOmn55YJ6oKZCLLy+6PW70z15Q==}
-    engines: {node: ^10.12.0 || >=12.0.0}
-    peerDependencies:
-      eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/scope-manager': 4.22.0
-      '@typescript-eslint/types': 4.22.0
-      '@typescript-eslint/typescript-estree': 4.22.0
-      debug: 4.3.1
-      eslint: 7.25.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /@typescript-eslint/parser/4.22.0_eslint@7.25.0+typescript@4.2.4:
     resolution: {integrity: sha512-z/bGdBJJZJN76nvAY9DkJANYgK3nlRstRRi74WHm3jjgf2I8AglrSY+6l7ogxOmn55YJ6oKZCLLy+6PW70z15Q==}
@@ -5526,7 +5445,7 @@ packages:
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
     dev: true
 
-  /@typescript-eslint/typescript-estree/2.34.0:
+  /@typescript-eslint/typescript-estree/2.34.0_typescript@4.2.4:
     resolution: {integrity: sha512-OMAr+nJWKdlVM9LOqCqh3pQQPwxHAN7Du8DR6dmwCrAmxtiXQnhHJ6tBNtf+cggqfo51SG/FCwnKhXCIM7hnVg==}
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
     peerDependencies:
@@ -5541,12 +5460,13 @@ packages:
       is-glob: 4.0.1
       lodash: 4.17.21
       semver: 7.3.5
-      tsutils: 3.21.0
+      tsutils: 3.21.0_typescript@4.2.4
+      typescript: 4.2.4
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@typescript-eslint/typescript-estree/3.10.1:
+  /@typescript-eslint/typescript-estree/3.10.1_typescript@4.2.4:
     resolution: {integrity: sha512-QbcXOuq6WYvnB3XPsZpIwztBoquEYLXh2MtwVU+kO8jgYCiv4G5xrSP/1wg4tkvrEE+esZVquIPX/dxPlePk1w==}
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
@@ -5562,27 +5482,8 @@ packages:
       is-glob: 4.0.1
       lodash: 4.17.21
       semver: 7.3.2
-      tsutils: 3.21.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /@typescript-eslint/typescript-estree/4.22.0:
-    resolution: {integrity: sha512-TkIFeu5JEeSs5ze/4NID+PIcVjgoU3cUQUIZnH3Sb1cEn1lBo7StSV5bwPuJQuoxKXlzAObjYTilOEKRuhR5yg==}
-    engines: {node: ^10.12.0 || >=12.0.0}
-    peerDependencies:
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@typescript-eslint/types': 4.22.0
-      '@typescript-eslint/visitor-keys': 4.22.0
-      debug: 4.3.1
-      globby: 11.0.3
-      is-glob: 4.0.1
-      semver: 7.3.5
-      tsutils: 3.21.0
+      tsutils: 3.21.0_typescript@4.2.4
+      typescript: 4.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6190,7 +6091,7 @@ packages:
       symbol-observable: 1.2.0
       whatwg-fetch: 2.0.4
     optionalDependencies:
-      '@types/graphql': 0.10.2
+      '@types/graphql': registry.npmjs.org/@types/graphql/0.10.2
     dev: false
 
   /apollo-client/2.6.10_graphql@15.5.0:
@@ -7243,12 +7144,6 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
 
-  /bindings/1.5.0:
-    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
-    dependencies:
-      file-uri-to-path: 1.0.0
-    optional: true
-
   /bl/4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
     dependencies:
@@ -7514,7 +7409,7 @@ packages:
       chownr: 1.1.4
       figgy-pudding: 3.5.2
       glob: 7.1.6
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       infer-owner: 1.0.4
       lru-cache: 5.1.1
       mississippi: 3.0.0
@@ -7534,7 +7429,7 @@ packages:
       figgy-pudding: 3.5.2
       fs-minipass: 2.1.0
       glob: 7.1.6
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       infer-owner: 1.0.4
       lru-cache: 5.1.1
       minipass: 3.1.3
@@ -7800,7 +7695,7 @@ packages:
       readdirp: 2.2.1
       upath: 1.2.0
     optionalDependencies:
-      fsevents: 1.2.13
+      fsevents: registry.npmjs.org/fsevents/1.2.13
 
   /chokidar/3.5.1:
     resolution: {integrity: sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==}
@@ -7814,7 +7709,8 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.5.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
+    dev: true
 
   /chownr/1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
@@ -7866,7 +7762,7 @@ packages:
     resolution: {integrity: sha512-VcMWDN54ZN/DS+g58HYL5/n4Zrqe8vHJpGA8KdgUXFU4fuP/aHNw8eld9SyEIyabIMJX/0RaY/fplOo5hYLSFA==}
     engines: {node: '>= 4.0'}
     dependencies:
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /clean-stack/2.2.0:
     resolution: {integrity: sha512-4diC9HaTE+KRAMWhDhrGOECgWZxoevMc5TlkObMqNSsVU62PYzXZ/SMTjzyGAFF1YusgxGcSWTEXBhp0CPwQ1A==}
@@ -8523,14 +8419,14 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       mdn-data: 2.0.4
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /css-tree/1.1.3:
     resolution: {integrity: sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q==}
     engines: {node: '>=8.0.0'}
     dependencies:
       mdn-data: 2.0.14
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /css-what/3.4.2:
     resolution: {integrity: sha512-ACUm3L0/jiZTqfzRM3Hi9Q8eZqd6IK37mMWPLz9PJxkLWllYeRf+EHUSHYEtFop2Eqytaq1FizFVh7XfBnXCDQ==}
@@ -8544,7 +8440,7 @@ packages:
     resolution: {integrity: sha512-oUnjmWpy0niI3x/mPL8dVEI1l7MnG3+HHyRPHf+YFSbK+svOhXpmSOcDURUh2aOCgl2grzrOPt1nHLuCVFULLw==}
     dependencies:
       inherits: 2.0.4
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
       source-map-resolve: 0.5.3
       urix: 0.1.0
 
@@ -9473,7 +9369,7 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     dev: false
 
   /escodegen/2.0.0:
@@ -9486,7 +9382,7 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     dev: true
 
   /eslint-config-react-app/5.2.1_f8f91f27f800428497667fb337aaf85d:
@@ -9502,8 +9398,8 @@ packages:
       eslint-plugin-react: 7.x
       eslint-plugin-react-hooks: 1.x || 2.x
     dependencies:
-      '@typescript-eslint/eslint-plugin': 2.34.0_984cbb313f9ea271f36cadd8f9814e06
-      '@typescript-eslint/parser': 2.34.0_eslint@6.8.0
+      '@typescript-eslint/eslint-plugin': 2.34.0_28deb19c9a1505f8eaba25f08813d781
+      '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@4.2.4
       babel-eslint: 10.1.0_eslint@6.8.0
       confusing-browser-globals: 1.0.10
       eslint: 6.8.0
@@ -9535,18 +9431,18 @@ packages:
       eslint-plugin-testing-library:
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': 4.22.0_f53b530e17fae12b9f48d6443ee1308c
-      '@typescript-eslint/parser': 4.22.0_eslint@7.25.0
+      '@typescript-eslint/eslint-plugin': 4.22.0_e3b52a83531895e7febd6ecd5ba813eb
+      '@typescript-eslint/parser': 4.22.0_eslint@7.25.0+typescript@4.2.4
       babel-eslint: 10.1.0_eslint@7.25.0
       confusing-browser-globals: 1.0.10
       eslint: 7.25.0
       eslint-plugin-flowtype: 5.7.2_eslint@7.25.0
       eslint-plugin-import: 2.22.1_eslint@7.25.0
-      eslint-plugin-jest: 24.3.6_8c4061970a2a2d2b447147743e4bc284
+      eslint-plugin-jest: 24.3.6_cb6e3cead60137cd93a972cb2b6bc2b3
       eslint-plugin-jsx-a11y: 6.4.1_eslint@7.25.0
       eslint-plugin-react: 7.23.2_eslint@7.25.0
       eslint-plugin-react-hooks: 4.2.0_eslint@7.25.0
-      eslint-plugin-testing-library: 3.10.2_eslint@7.25.0
+      eslint-plugin-testing-library: 3.10.2_eslint@7.25.0+typescript@4.2.4
     dev: true
 
   /eslint-config-standard/16.0.2_dbb66363a00e743187031beaaf2d298e:
@@ -9668,7 +9564,7 @@ packages:
       tsconfig-paths: 3.9.0
     dev: true
 
-  /eslint-plugin-jest/24.3.6_8c4061970a2a2d2b447147743e4bc284:
+  /eslint-plugin-jest/24.3.6_cb6e3cead60137cd93a972cb2b6bc2b3:
     resolution: {integrity: sha512-WOVH4TIaBLIeCX576rLcOgjNXqP+jNlCiEmRgFTfQtJ52DpwnIQKAVGlGPAN7CZ33bW6eNfHD6s8ZbEUTQubJg==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -9678,8 +9574,8 @@ packages:
       '@typescript-eslint/eslint-plugin':
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': 4.22.0_f53b530e17fae12b9f48d6443ee1308c
-      '@typescript-eslint/experimental-utils': 4.22.0_eslint@7.25.0
+      '@typescript-eslint/eslint-plugin': 4.22.0_e3b52a83531895e7febd6ecd5ba813eb
+      '@typescript-eslint/experimental-utils': 4.22.0_eslint@7.25.0+typescript@4.2.4
       eslint: 7.25.0
     transitivePeerDependencies:
       - supports-color
@@ -9816,13 +9712,13 @@ packages:
       eslint: 7.25.0
     dev: true
 
-  /eslint-plugin-testing-library/3.10.2_eslint@7.25.0:
+  /eslint-plugin-testing-library/3.10.2_eslint@7.25.0+typescript@4.2.4:
     resolution: {integrity: sha512-WAmOCt7EbF1XM8XfbCKAEzAPnShkNSwcIsAD2jHdsMUT9mZJPjLCG7pMzbcC8kK366NOuGip8HKLDC+Xk4yIdA==}
     engines: {node: ^10.12.0 || >=12.0.0, npm: '>=6'}
     peerDependencies:
       eslint: ^5 || ^6 || ^7
     dependencies:
-      '@typescript-eslint/experimental-utils': 3.10.1_eslint@7.25.0
+      '@typescript-eslint/experimental-utils': 3.10.1_eslint@7.25.0+typescript@4.2.4
       eslint: 7.25.0
     transitivePeerDependencies:
       - supports-color
@@ -10413,10 +10309,6 @@ packages:
       webpack: 4.44.2
     dev: true
 
-  /file-uri-to-path/1.0.0:
-    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
-    optional: true
-
   /filesize/6.0.1:
     resolution: {integrity: sha512-u4AYWPgbI5GBhs6id1KdImZWn5yfyFrrQ8OWZdN7ZMfA8Bf4HcO0BGo9bmUIEV8yrp8I1xVfJ/dn90GtFNNJcg==}
     engines: {node: '>= 0.4.0'}
@@ -10624,7 +10516,7 @@ packages:
     dependencies:
       babel-code-frame: 6.26.0
       chalk: 2.4.2
-      chokidar: 3.5.1
+      chokidar: registry.npmjs.org/chokidar/3.5.1
       micromatch: 3.1.10
       minimatch: 3.0.4
       semver: 5.7.1
@@ -10701,7 +10593,7 @@ packages:
   /fs-extra/4.0.3:
     resolution: {integrity: sha512-q6rbdDd1o2mAnQreO7YADIxf/Whx4AHBiRf6d+/cVT8h44ss+lHgxf1FemcqDnQt9X3ct4McHr+JMGlYSsK7Cg==}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       jsonfile: 4.0.0
       universalify: 0.1.2
     dev: false
@@ -10710,7 +10602,7 @@ packages:
     resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
     engines: {node: '>=6 <7 || >=8'}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       jsonfile: 4.0.0
       universalify: 0.1.2
 
@@ -10745,7 +10637,7 @@ packages:
   /fs-write-stream-atomic/1.0.10:
     resolution: {integrity: sha1-tH31NJPvkR33VzHnCp3tAYnbQMk=}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       iferr: 0.1.5
       imurmurhash: 0.1.4
       readable-stream: 2.3.7
@@ -10753,36 +10645,11 @@ packages:
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
 
-  /fsevents/1.2.13:
-    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
-    engines: {node: '>= 4.0'}
-    os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.14.2
-    optional: true
-
-  /fsevents/2.1.2:
-    resolution: {integrity: sha512-R4wDiBwZ0KzpgOWetKDug1FZcYhqYnUYKtfZYt4mD5SBz76q0KR4Q9o7GIPamsVPGmW3EYPPJ0dOOjvx32ldZA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    deprecated: '"Please update to latest v2.3 or v2.2"'
-    dev: false
-    optional: true
-
-  /fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    optional: true
-
   /fstream/1.0.12:
     resolution: {integrity: sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg==}
     engines: {node: '>=0.6'}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       inherits: 2.0.4
       mkdirp: 0.5.5
       rimraf: 2.7.1
@@ -12176,7 +12043,7 @@ packages:
       istanbul-lib-coverage: 2.0.5
       make-dir: 2.1.0
       rimraf: 2.7.1
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -12511,7 +12378,7 @@ packages:
       '@jest/types': 24.9.0
       anymatch: 2.0.0
       fb-watchman: 2.0.1
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       invariant: 2.2.4
       jest-serializer: 24.9.0
       jest-util: 24.9.0
@@ -12520,7 +12387,7 @@ packages:
       sane: 4.1.0
       walker: 1.0.7
     optionalDependencies:
-      fsevents: 1.2.13
+      fsevents: registry.npmjs.org/fsevents/1.2.13
     dev: false
 
   /jest-haste-map/26.6.2:
@@ -12541,7 +12408,7 @@ packages:
       sane: 4.1.0
       walker: 1.0.7
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     dev: true
 
   /jest-jasmine2/24.9.0:
@@ -12791,7 +12658,7 @@ packages:
       '@jest/types': 24.9.0
       chalk: 2.4.2
       exit: 0.1.2
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       jest-config: 24.9.0
       jest-docblock: 24.9.0
       jest-haste-map: 24.9.0
@@ -12854,7 +12721,7 @@ packages:
       chalk: 2.4.2
       exit: 0.1.2
       glob: 7.1.6
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       jest-config: 24.9.0
       jest-haste-map: 24.9.0
       jest-message-util: 24.9.0
@@ -12977,7 +12844,7 @@ packages:
       '@jest/types': 24.9.0
       callsites: 3.1.0
       chalk: 2.4.2
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       is-ci: 2.0.0
       mkdirp: 0.5.5
       slash: 2.0.0
@@ -13347,14 +13214,14 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
 
   /jsonfile/6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
     dev: true
 
   /jsonify/0.0.0:
@@ -13517,7 +13384,7 @@ packages:
     resolution: {integrity: sha1-lWkFcI1YtLq0wiYbBPWfMcmTdMA=}
     engines: {node: '>=0.10.0'}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       parse-json: 2.2.0
       pify: 2.3.0
       pinkie-promise: 2.0.1
@@ -13537,7 +13404,7 @@ packages:
     resolution: {integrity: sha1-L19Fq5HjMhYjT9U62rZo607AmTs=}
     engines: {node: '>=4'}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       parse-json: 4.0.0
       pify: 3.0.0
       strip-bom: 3.0.0
@@ -14201,6 +14068,7 @@ packages:
 
   /nan/2.14.2:
     resolution: {integrity: sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==}
+    dev: false
 
   /nanoid/3.1.20:
     resolution: {integrity: sha512-a1cQNyczgKbLX9jwbS/+d7W8fX/RfgYR7lVWwWOGIPNgK2m0MWvrGF6/m4kk6U3QcFMnZf3RIhL0v2Jgh/0Uxw==}
@@ -14369,18 +14237,6 @@ packages:
       shellwords: 0.1.1
       which: 1.3.1
     dev: false
-
-  /node-notifier/8.0.2:
-    resolution: {integrity: sha512-oJP/9NAdd9+x2Q+rfphB2RJCHjod70RcRLjosiPMMu5gjIfwVnOUGq2nbTjTUbmy0DJ/tFIVT30+Qe3nzl4TJg==}
-    dependencies:
-      growly: 1.3.0
-      is-wsl: 2.2.0
-      semver: 7.3.5
-      shellwords: 0.1.1
-      uuid: 8.3.2
-      which: 2.0.2
-    dev: true
-    optional: true
 
   /node-preload/0.2.1:
     resolution: {integrity: sha512-RM5oyBy45cLEoHqCeh+MNuFAxO0vTFBLskvQbOKnEE7YTTSN4tbN8QWDIPQ6L+WvKsB/qLEGpYe2ZZ9d4W9OIQ==}
@@ -15064,7 +14920,7 @@ packages:
     resolution: {integrity: sha1-WcRPfuSR2nBNpBXaWkBwuk+P5EE=}
     engines: {node: '>=0.10.0'}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       pify: 2.3.0
       pinkie-promise: 2.0.1
     dev: false
@@ -15191,19 +15047,13 @@ packages:
     resolution: {integrity: sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==}
     dev: false
 
-  /pnp-webpack-plugin/1.6.4:
+  /pnp-webpack-plugin/1.6.4_typescript@4.2.4:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.2.0
+      ts-pnp: 1.2.0_typescript@4.2.4
     transitivePeerDependencies:
       - typescript
-
-  /pnpm/6.2.3:
-    resolution: {integrity: sha512-qYRrxYyN14tqeMGu7E3P+INXDiYbGojn5mitVfUxidO9OsSnTGSqT85nkslfKW8YfChlzFVN0XdG+1Tj86tKhA==}
-    engines: {node: '>=12.17'}
-    hasBin: true
-    dev: false
 
   /portfinder/1.0.28:
     resolution: {integrity: sha512-Se+2isanIcEqf2XMHjyUKskczxbPH7dQnlMjXX6+dybayyHvAf/TCgyMRlzf/B6QDhAEFOGes0pzRo3by4AbMA==}
@@ -15795,7 +15645,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       chalk: 2.4.2
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
       supports-color: 6.1.0
 
   /postcss/7.0.35:
@@ -15803,7 +15653,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       chalk: 2.4.2
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
       supports-color: 6.1.0
 
   /postcss/8.2.13:
@@ -15812,7 +15662,7 @@ packages:
     dependencies:
       colorette: 1.2.2
       nanoid: 3.1.22
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     dev: true
 
   /prelude-ls/1.1.2:
@@ -16504,7 +16354,7 @@ packages:
       react: 16.14.0
     dev: false
 
-  /react-intl/5.17.1_react@17.0.2:
+  /react-intl/5.17.1_react@17.0.2+typescript@4.2.4:
     resolution: {integrity: sha512-ti7pcsxE3crNVD4S7wD9XiipvH+lSIkXA2DHWS6XA5WGGlGfi36U+5FYrouJp+av3d0fFwkvqw918blknNtFHA==}
     peerDependencies:
       react: ^16.3.0 || 17
@@ -16515,7 +16365,7 @@ packages:
     dependencies:
       '@formatjs/ecma402-abstract': 1.7.0
       '@formatjs/icu-messageformat-parser': 1.2.1
-      '@formatjs/intl': 1.10.3
+      '@formatjs/intl': 1.10.3_typescript@4.2.4
       '@formatjs/intl-displaynames': 4.0.14
       '@formatjs/intl-listformat': 5.0.15
       '@types/hoist-non-react-statics': 3.3.1
@@ -16523,6 +16373,7 @@ packages:
       intl-messageformat: 9.6.11
       react: 17.0.2
       tslib: 2.2.0
+      typescript: 4.2.4
     dev: false
 
   /react-is/16.13.1:
@@ -16671,10 +16522,10 @@ packages:
       prop-types: 15.7.2
       uuid: 3.4.0
     optionalDependencies:
-      aws-sdk: 2.895.0
+      aws-sdk: registry.npmjs.org/aws-sdk/2.895.0
     dev: false
 
-  /react-scripts/3.4.1_node-sass@4.14.1:
+  /react-scripts/3.4.1_ed529a6a670e4075a2a6d0fc8f999ebc:
     resolution: {integrity: sha512-JpTdi/0Sfd31mZA6Ukx+lq5j1JoKItX7qqEK4OiACjVQletM1P38g49d9/D0yTxp9FrSF+xpJFStkGgKEIRjlQ==}
     engines: {node: '>=8.10'}
     hasBin: true
@@ -16686,8 +16537,8 @@ packages:
     dependencies:
       '@babel/core': 7.9.0
       '@svgr/webpack': 4.3.3
-      '@typescript-eslint/eslint-plugin': 2.34.0_984cbb313f9ea271f36cadd8f9814e06
-      '@typescript-eslint/parser': 2.34.0_eslint@6.8.0
+      '@typescript-eslint/eslint-plugin': 2.34.0_28deb19c9a1505f8eaba25f08813d781
+      '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@4.2.4
       babel-eslint: 10.1.0_eslint@6.8.0
       babel-jest: 24.9.0_@babel+core@7.9.0
       babel-loader: 8.1.0_@babel+core@7.9.0+webpack@4.42.0
@@ -16716,7 +16567,7 @@ packages:
       jest-watch-typeahead: 0.4.2
       mini-css-extract-plugin: 0.9.0_webpack@4.42.0
       optimize-css-assets-webpack-plugin: 5.0.3_webpack@4.42.0
-      pnp-webpack-plugin: 1.6.4
+      pnp-webpack-plugin: 1.6.4_typescript@4.2.4
       postcss-flexbugs-fixes: 4.1.0
       postcss-loader: 3.0.0
       postcss-normalize: 8.0.1
@@ -16730,14 +16581,15 @@ packages:
       semver: 6.3.0
       style-loader: 0.23.1
       terser-webpack-plugin: 2.3.5_webpack@4.42.0
-      ts-pnp: 1.1.6
+      ts-pnp: 1.1.6_typescript@4.2.4
+      typescript: 4.2.4
       url-loader: 2.3.0_file-loader@4.3.0+webpack@4.42.0
       webpack: 4.42.0
       webpack-dev-server: 3.10.3_webpack@4.42.0
       webpack-manifest-plugin: 2.2.0_webpack@4.42.0
       workbox-webpack-plugin: 4.3.1_webpack@4.42.0
     optionalDependencies:
-      fsevents: 2.1.2
+      fsevents: registry.npmjs.org/fsevents/2.1.2
     transitivePeerDependencies:
       - fibers
       - node-sass
@@ -16746,7 +16598,7 @@ packages:
       - webpack-cli
     dev: false
 
-  /react-scripts/4.0.3_node-sass@4.14.1+react@17.0.2:
+  /react-scripts/4.0.3_7fd1e0f4755d4f7d4aed364d0ac928cd:
     resolution: {integrity: sha512-S5eO4vjUzUisvkIPB7jVsKtuH2HhWcASREYWHAQ1FP5HyCv3xgn+wpILAEWkmy+A+tTNbSZClhxjT3qz6g4L1A==}
     engines: {node: ^10.12.0 || >=12.0.0}
     hasBin: true
@@ -16760,8 +16612,8 @@ packages:
       '@babel/core': 7.12.3
       '@pmmmwh/react-refresh-webpack-plugin': 0.4.3_9f0995138d24e525eb86c097d82409c0
       '@svgr/webpack': 5.5.0
-      '@typescript-eslint/eslint-plugin': 4.22.0_f53b530e17fae12b9f48d6443ee1308c
-      '@typescript-eslint/parser': 4.22.0_eslint@7.25.0
+      '@typescript-eslint/eslint-plugin': 4.22.0_e3b52a83531895e7febd6ecd5ba813eb
+      '@typescript-eslint/parser': 4.22.0_eslint@7.25.0+typescript@4.2.4
       babel-eslint: 10.1.0_eslint@7.25.0
       babel-jest: 26.6.3_@babel+core@7.12.3
       babel-loader: 8.1.0_427212bc1158d185e577033f19ca0757
@@ -16777,11 +16629,11 @@ packages:
       eslint-config-react-app: 6.0.0_5d3c8c6278315432d8444ebef3eaf0f3
       eslint-plugin-flowtype: 5.7.2_eslint@7.25.0
       eslint-plugin-import: 2.22.1_eslint@7.25.0
-      eslint-plugin-jest: 24.3.6_8c4061970a2a2d2b447147743e4bc284
+      eslint-plugin-jest: 24.3.6_cb6e3cead60137cd93a972cb2b6bc2b3
       eslint-plugin-jsx-a11y: 6.4.1_eslint@7.25.0
       eslint-plugin-react: 7.23.2_eslint@7.25.0
       eslint-plugin-react-hooks: 4.2.0_eslint@7.25.0
-      eslint-plugin-testing-library: 3.10.2_eslint@7.25.0
+      eslint-plugin-testing-library: 3.10.2_eslint@7.25.0+typescript@4.2.4
       eslint-webpack-plugin: 2.5.4_eslint@7.25.0+webpack@4.44.2
       file-loader: 6.1.1_webpack@4.44.2
       fs-extra: 9.1.0
@@ -16793,7 +16645,7 @@ packages:
       jest-watch-typeahead: 0.6.1_jest@26.6.0
       mini-css-extract-plugin: 0.11.3_webpack@4.44.2
       optimize-css-assets-webpack-plugin: 5.0.4_webpack@4.44.2
-      pnp-webpack-plugin: 1.6.4
+      pnp-webpack-plugin: 1.6.4_typescript@4.2.4
       postcss-flexbugs-fixes: 4.2.1
       postcss-loader: 3.0.0
       postcss-normalize: 8.0.1
@@ -16810,14 +16662,15 @@ packages:
       semver: 7.3.2
       style-loader: 1.3.0_webpack@4.44.2
       terser-webpack-plugin: 4.2.3_webpack@4.44.2
-      ts-pnp: 1.2.0
+      ts-pnp: 1.2.0_typescript@4.2.4
+      typescript: 4.2.4
       url-loader: 4.1.1_file-loader@6.1.1+webpack@4.44.2
       webpack: 4.44.2
       webpack-dev-server: 3.11.1_webpack@4.44.2
       webpack-manifest-plugin: 2.2.0_webpack@4.44.2
       workbox-webpack-plugin: 5.1.4_webpack@4.44.2
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
     transitivePeerDependencies:
       - '@types/webpack'
       - bufferutil
@@ -17833,7 +17686,7 @@ packages:
     resolution: {integrity: sha1-jrBtualyMzOCTT9VMGQRSYR85dE=}
     dependencies:
       js-base64: 2.6.4
-      source-map: 0.4.4
+      source-map: registry.npmjs.org/source-map/0.4.4
     dev: false
 
   /select-hose/2.0.0:
@@ -18464,13 +18317,6 @@ packages:
 
   /source-map-url/0.4.1:
     resolution: {integrity: sha512-cPiFOTLUKvJFIg4SKVScy4ilPPW6rFgMgfuZJPNoDuMs3nC1HbMUycBoJw77xFIp6z1UJQJOfx6C9GMH80DiTw==}
-
-  /source-map/0.4.4:
-    resolution: {integrity: sha1-66T12pwNyZneaAMti092FzZSA2s=}
-    engines: {node: '>=0.8.0'}
-    dependencies:
-      amdefine: 1.0.1
-    dev: false
 
   /source-map/0.5.0:
     resolution: {integrity: sha1-D+llA6yGpa213mP05BKuSHLNvoY=}
@@ -19177,7 +19023,7 @@ packages:
     hasBin: true
     dependencies:
       commander: 2.20.3
-      source-map: 0.7.3
+      source-map: registry.npmjs.org/source-map/0.7.3
       source-map-support: 0.5.19
     dev: true
 
@@ -19380,7 +19226,7 @@ packages:
       yargs-parser: 20.2.7
     dev: true
 
-  /ts-pnp/1.1.6:
+  /ts-pnp/1.1.6_typescript@4.2.4:
     resolution: {integrity: sha512-CrG5GqAAzMT7144Cl+UIFP7mz/iIhiy+xQ6GGcnjTezhALT02uPMRw7tgDSESgB5MsfKt55+GPWw4ir1kVtMIQ==}
     engines: {node: '>=6'}
     peerDependencies:
@@ -19388,9 +19234,11 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+    dependencies:
+      typescript: 4.2.4
     dev: false
 
-  /ts-pnp/1.2.0:
+  /ts-pnp/1.2.0_typescript@4.2.4:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
     engines: {node: '>=6'}
     peerDependencies:
@@ -19398,6 +19246,8 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+    dependencies:
+      typescript: 4.2.4
 
   /tsc-watch/4.2.9_typescript@4.2.4:
     resolution: {integrity: sha512-DlTaoDs74+KUpyWr7dCGhuscAUKCz6CiFduBN7R9RbLJSSN1moWdwoCLASE7+zLgGvV5AwXfYDiEMAsPGaO+Vw==}
@@ -19429,14 +19279,6 @@ packages:
   /tslib/2.2.0:
     resolution: {integrity: sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==}
 
-  /tsutils/3.21.0:
-    resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
-    engines: {node: '>= 6'}
-    peerDependencies:
-      typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
-    dependencies:
-      tslib: 1.14.1
-
   /tsutils/3.21.0_typescript@4.2.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
@@ -19445,7 +19287,6 @@ packages:
     dependencies:
       tslib: 1.14.1
       typescript: 4.2.4
-    dev: true
 
   /tty-browserify/0.0.0:
     resolution: {integrity: sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=}
@@ -19870,20 +19711,14 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /watchpack-chokidar2/2.0.1:
-    resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==}
-    dependencies:
-      chokidar: 2.1.8
-    optional: true
-
   /watchpack/1.7.5:
     resolution: {integrity: sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==}
     dependencies:
       graceful-fs: 4.2.6
       neo-async: 2.6.2
     optionalDependencies:
-      chokidar: 3.5.1
-      watchpack-chokidar2: 2.0.1
+      chokidar: registry.npmjs.org/chokidar/3.5.1
+      watchpack-chokidar2: registry.npmjs.org/watchpack-chokidar2/2.0.1
 
   /wbuf/1.7.3:
     resolution: {integrity: sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==}
@@ -20011,7 +19846,7 @@ packages:
     dependencies:
       ansi-html: 0.0.7
       bonjour: 3.5.0
-      chokidar: 2.1.8
+      chokidar: registry.npmjs.org/chokidar/2.1.8
       compression: 1.7.4
       connect-history-api-fallback: 1.6.0
       debug: 4.3.1_supports-color@6.1.0
@@ -20380,7 +20215,7 @@ packages:
       rollup: 1.32.1
       rollup-plugin-babel: 4.4.0_874dc89e760dd89411bff7fe30d4d8f1
       rollup-plugin-terser: 5.3.1_rollup@1.32.1
-      source-map: 0.7.3
+      source-map: registry.npmjs.org/source-map/0.7.3
       source-map-url: 0.4.1
       stringify-object: 3.3.0
       strip-comments: 1.0.2
@@ -20631,7 +20466,7 @@ packages:
   /write-file-atomic/2.4.1:
     resolution: {integrity: sha512-TGHFeZEZMnv+gBFRfjAcxL5bPHrsGKtnb4qsFAws7/vlh+QfwAaySIw4AXP9ZskTTh5GWu3FLuJhsWVdiJPGvg==}
     dependencies:
-      graceful-fs: 4.2.6
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.6
       imurmurhash: 0.1.4
       signal-exit: 3.0.3
     dev: false
@@ -20851,3 +20686,201 @@ packages:
   /zen-observable/0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
     dev: false
+
+  registry.npmjs.org/@nicolo-ribaudo/chokidar-2/2.1.8-no-fsevents:
+    resolution: {integrity: sha512-+nb9vWloHNNMFHjGofEam3wopE3m1yuambrrd/fnPc+lFOMB9ROTqQlche9ByFWNkdNqfSgR/kkQtQ8DzEWt2w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.tgz}
+    name: '@nicolo-ribaudo/chokidar-2'
+    version: 2.1.8-no-fsevents
+    requiresBuild: true
+    dependencies:
+      anymatch: 2.0.0
+      async-each: 1.0.3
+      braces: 2.3.2
+      glob-parent: 3.1.0
+      inherits: 2.0.4
+      is-binary-path: 1.0.1
+      is-glob: 4.0.1
+      normalize-path: 3.0.0
+      path-is-absolute: 1.0.1
+      readdirp: 2.2.1
+      upath: 1.2.0
+    dev: true
+    optional: true
+
+  registry.npmjs.org/@types/graphql/0.10.2:
+    resolution: {integrity: sha512-Ayw0w+kr8vYd8DToiMXjcHxXv1ljWbqX2mnLwXDxkBgog3vywGriC0JZ+npsuohKs3+E88M8OOtobo4g0X3SIA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/graphql/-/graphql-0.10.2.tgz}
+    name: '@types/graphql'
+    version: 0.10.2
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/aws-sdk/2.895.0:
+    resolution: {integrity: sha512-f8lkEcItfGaYPhJkdbymLth8K0aZ6aMiuoSr/0r2GaFFLq9neg2WUL0dgqSmVUGf55ZMDbwjcBurhJPrcBbDbw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.895.0.tgz}
+    name: aws-sdk
+    version: 2.895.0
+    engines: {node: '>= 0.8.0'}
+    requiresBuild: true
+    dependencies:
+      buffer: 4.9.2
+      events: 1.1.1
+      ieee754: 1.1.13
+      jmespath: 0.15.0
+      querystring: 0.2.0
+      sax: 1.2.1
+      url: 0.10.3
+      uuid: 3.3.2
+      xml2js: 0.4.19
+    dev: false
+    optional: true
+
+  registry.npmjs.org/bindings/1.5.0:
+    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/bindings/-/bindings-1.5.0.tgz}
+    name: bindings
+    version: 1.5.0
+    requiresBuild: true
+    dependencies:
+      file-uri-to-path: registry.npmjs.org/file-uri-to-path/1.0.0
+    optional: true
+
+  registry.npmjs.org/chokidar/2.1.8:
+    resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/chokidar/-/chokidar-2.1.8.tgz}
+    name: chokidar
+    version: 2.1.8
+    deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+    dependencies:
+      anymatch: 2.0.0
+      async-each: 1.0.3
+      braces: 2.3.2
+      glob-parent: 3.1.0
+      inherits: 2.0.4
+      is-binary-path: 1.0.1
+      is-glob: 4.0.1
+      normalize-path: 3.0.0
+      path-is-absolute: 1.0.1
+      readdirp: 2.2.1
+      upath: 1.2.0
+    optionalDependencies:
+      fsevents: registry.npmjs.org/fsevents/1.2.13
+
+  registry.npmjs.org/chokidar/3.5.1:
+    resolution: {integrity: sha512-9+s+Od+W0VJJzawDma/gvBNQqkTiqYTWLuZoyAsivsI4AaWTCzHG06/TMjsf1cYe9Cb97UCEhjz7HvnPk2p/tw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/chokidar/-/chokidar-3.5.1.tgz}
+    name: chokidar
+    version: 3.5.1
+    engines: {node: '>= 8.10.0'}
+    dependencies:
+      anymatch: 3.1.2
+      braces: 3.0.2
+      glob-parent: 5.1.2
+      is-binary-path: 2.1.0
+      is-glob: 4.0.1
+      normalize-path: 3.0.0
+      readdirp: 3.5.0
+    optionalDependencies:
+      fsevents: registry.npmjs.org/fsevents/2.3.2
+
+  registry.npmjs.org/file-uri-to-path/1.0.0:
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz}
+    name: file-uri-to-path
+    version: 1.0.0
+    requiresBuild: true
+    optional: true
+
+  registry.npmjs.org/fsevents/1.2.13:
+    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-1.2.13.tgz}
+    name: fsevents
+    version: 1.2.13
+    engines: {node: '>= 4.0'}
+    os: [darwin]
+    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    requiresBuild: true
+    dependencies:
+      bindings: registry.npmjs.org/bindings/1.5.0
+      nan: registry.npmjs.org/nan/2.14.2
+    optional: true
+
+  registry.npmjs.org/fsevents/2.1.2:
+    resolution: {integrity: sha512-R4wDiBwZ0KzpgOWetKDug1FZcYhqYnUYKtfZYt4mD5SBz76q0KR4Q9o7GIPamsVPGmW3EYPPJ0dOOjvx32ldZA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-2.1.2.tgz}
+    name: fsevents
+    version: 2.1.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    deprecated: '"Please update to latest v2.3 or v2.2"'
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz}
+    name: fsevents
+    version: 2.3.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    optional: true
+
+  registry.npmjs.org/graceful-fs/4.2.6:
+    resolution: {integrity: sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.6.tgz}
+    name: graceful-fs
+    version: 4.2.6
+
+  registry.npmjs.org/nan/2.14.2:
+    resolution: {integrity: sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/nan/-/nan-2.14.2.tgz}
+    name: nan
+    version: 2.14.2
+    requiresBuild: true
+    optional: true
+
+  registry.npmjs.org/node-notifier/8.0.2:
+    resolution: {integrity: sha512-oJP/9NAdd9+x2Q+rfphB2RJCHjod70RcRLjosiPMMu5gjIfwVnOUGq2nbTjTUbmy0DJ/tFIVT30+Qe3nzl4TJg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/node-notifier/-/node-notifier-8.0.2.tgz}
+    name: node-notifier
+    version: 8.0.2
+    requiresBuild: true
+    dependencies:
+      growly: 1.3.0
+      is-wsl: 2.2.0
+      semver: 7.3.5
+      shellwords: 0.1.1
+      uuid: 8.3.2
+      which: 2.0.2
+    dev: true
+    optional: true
+
+  registry.npmjs.org/pnpm/6.23.6:
+    resolution: {integrity: sha512-H6PIzO4W2zg2Jqms13uS5U3fU8yBdWk8rXcpJLjs/in+nutgVA8GGlasEAI2eAiTpc9FYJUkCklbJ4a/M36N0w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/pnpm/-/pnpm-6.23.6.tgz}
+    name: pnpm
+    version: 6.23.6
+    engines: {node: '>=12.17'}
+    hasBin: true
+    dev: false
+
+  registry.npmjs.org/source-map/0.4.4:
+    resolution: {integrity: sha1-66T12pwNyZneaAMti092FzZSA2s=, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz}
+    name: source-map
+    version: 0.4.4
+    engines: {node: '>=0.8.0'}
+    dependencies:
+      amdefine: 1.0.1
+    dev: false
+
+  registry.npmjs.org/source-map/0.6.1:
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz}
+    name: source-map
+    version: 0.6.1
+    engines: {node: '>=0.10.0'}
+
+  registry.npmjs.org/source-map/0.7.3:
+    resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz}
+    name: source-map
+    version: 0.7.3
+    engines: {node: '>= 8'}
+    dev: true
+
+  registry.npmjs.org/watchpack-chokidar2/2.0.1:
+    resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz}
+    name: watchpack-chokidar2
+    version: 2.0.1
+    requiresBuild: true
+    dependencies:
+      chokidar: registry.npmjs.org/chokidar/2.1.8
+    optional: true

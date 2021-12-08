@@ -36,6 +36,9 @@ const Widget = ({ saving, mobilization, block, widget, update, editable, intl, h
             if (widget.kind === 'pressure') {
               const url = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, `/widgets/${widget.id}/settings`);
               window.open(url, '_self');
+            } else if (widget.kind === 'plip') {
+              const url = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, `/widgets/${widget.id}/settings`);
+              window.open(url, '_self');
             } else {
               history.push(redirect);
             }

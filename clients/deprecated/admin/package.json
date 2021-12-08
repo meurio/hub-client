@@ -38,7 +38,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
-    "pnpm": "^6.2.2",
+    "pnpm": "^6.23.6",
     "source-map-support": "^0.5.19",
     "ws": "^7.4.5"
   }

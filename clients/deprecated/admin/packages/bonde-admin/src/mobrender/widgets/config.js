@@ -1,3 +1,4 @@
+import React from "react";
 import { Draft } from './draft/components'
 import {
   Pressure,
@@ -116,5 +117,16 @@ export default (mobilization, widget, { intl }) => [
       })
     },
     redirect: Paths.donation(mobilization.id, widget.id)
+  },
+  {
+    component: () => (
+      <div style={{ height: '90vh' }}>
+        <h2>PLIP WIDGET</h2>
+      </div>
+    ),
+    kind: 'plip',
+    icon: 'doubt',
+    label: 'PLIP',
+    redirect: '/plip/edit'
   }
 ]

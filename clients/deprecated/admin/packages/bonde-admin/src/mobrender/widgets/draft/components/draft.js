@@ -11,7 +11,7 @@ const Draft = ({ mobilization, widget, update, intl, ...extraProps }) => {
 
   return (
     <div className='draft-widget widget center rounded lightgray clearfix'>
-      {widgetsConfig.map((wc, index) => {
+      {widgetsConfig.filter((wc) => wc.kind !== 'plip').map((wc, index) => {
         const props = Object.assign({}, wc)
         delete props.component
         return (

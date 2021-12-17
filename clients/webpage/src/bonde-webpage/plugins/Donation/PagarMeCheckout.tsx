@@ -108,11 +108,18 @@ const PagarMeCheckout = (props: Props | any) => {
   };
 
   return (
-    <Donation
-      {...props}
-      donationCustomerData={customerData}
-      asyncDonationCreate={handleTransactionCreate}
-    />
+    <>
+      <script
+        type="text/javascript"
+        src="https://assets.pagar.me/checkout/checkout.js"
+        async
+      />
+      <Donation
+        {...props}
+        donationCustomerData={customerData}
+        asyncDonationCreate={handleTransactionCreate}
+      />
+    </>
   );
 };
 

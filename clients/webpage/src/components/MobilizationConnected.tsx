@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { lazy } from 'react';
 
 import { useTranslation, Trans } from 'react-i18next';
 // import { connect } from 'react-redux';
@@ -15,12 +15,14 @@ import {
   // PressureTellAFriend,
 } from '../bonde-webpage';
 // import Utils from '../../Utils';
-import DonationPlugin from './DonationConnected';
 import Footer from './Footer';
-import FormPlugin from './FormConnected';
-import PressureEmailPlugin from './PressureEmailConnected';
-import PressurePhonePlugin from './PressurePhoneConnected';
-import PlipPlugin from './PlipConnected';
+const DonationPlugin = lazy(() => import('./DonationConnected'));
+const FormPlugin = lazy(() => import('./FormConnected'));
+const PressureEmailPlugin = lazy(() => import('./PressureEmailConnected'));
+const PressurePhonePlugin = lazy(() => import('./PressurePhoneConnected'));
+const PlipPlugin = lazy(() => import('./PlipConnected'));
+
+// import FormPlugin from './FormConnected';
 // import PressurePhonePlugin from './PressurePhoneConnected';
 
 // const mapStateToProps = (state: any, props: any) => {

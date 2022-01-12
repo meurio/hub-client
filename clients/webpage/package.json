@@ -13,7 +13,7 @@
     "lint": "next lint",
     "build-types": "tsc --noEmit --pretty",
     "test": "jest --passWithNoTests",
-    "test:coverage": "jest --passWithNoTests --coverage"
+    "coverage": "jest --passWithNoTests --coverage --testPathIgnorePatterns=cypress-tests"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",

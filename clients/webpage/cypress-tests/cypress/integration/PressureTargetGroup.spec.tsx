@@ -1,25 +1,21 @@
-describe('Make Pressure with select field', () => {
+describe('Make Pressure with target group', () => {
   beforeEach(() => {
     cy.visit('/')
   });
 
-  Cypress._.times(1, (i) => {
+  Cypress._.times(1, () => {
     it('Fill pressure form', () => {
-      cy.get('[class="Select__control css-yk16xz-control"]').eq(0)
-        .type('r{enter}')
+      cy.get('.css-tkm1e4 > .css-1818pao').eq(0)
+        .select('Recife');
       cy.get('[name ="email"]').eq(1)
         .should('be.visible').type('email@exemplo.com');
       cy.get('[name="name"]').eq(1)
         .should('be.visible').type('Nome');
       cy.get('[name ="lastname"]').eq(1)
         .should('be.visible').type('Sobrenome');
-      cy.get('[name ="state"]').eq(1)
-        .should('be.visible').select('BA');
-      cy.get('[name ="city"]').eq(1)
-        .should('be.visible').type('Cidade');
 
-      //send email button    
-      cy.get('.sc-fzqBZW').eq(1)
+      //send email button
+      cy.get('#widget-70818 > .css-1iyoj2o > .css-709yn1 > .css-khpahi > .css-1ki7tk3')
         .should('be.visible')
         .click();
 

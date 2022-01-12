@@ -24,7 +24,7 @@ jobs:
         run: cd clients/webpage && npm install
       
       - name: Run tests
-        run: cd clients/webpage && npm run test:coverage
+        run: cd clients/webpage && npm run coverage
       
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2

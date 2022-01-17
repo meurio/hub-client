@@ -2,122 +2,6 @@ workspace:
   base: /code
 
 pipeline:
-  admin-build:
-    image: node:14-alpine
-    environment:
-      - SKIP_PREFLIGHT_CHECK=true
-      - REACT_APP_ENVIRONMENT=staging
-      - REACT_APP_DOMAIN_ADMIN=https://app.staging.bonde.org
-      - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
-      - REACT_APP_DOMAIN_PUBLIC=staging.bonde.org
-      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.staging.bonde.org
-      - REACT_APP_DOMAIN_API_REST=https://api-rest.staging.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.staging.bonde.org/v1/graphql
-      - REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
-      - REACT_APP_DOMAIN_BETA=https://beta.staging.bonde.org
-      - REACT_APP_AWS_BUCKET=bonde-assets-staging
-      - REACT_APP_LOGIN_URL=http://accounts.staging.bonde.org/login
-      - REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
-    commands:
-      - cd clients/deprecated/admin
-      - apk --update add curl
-      - curl -L https://unpkg.com/@pnpm/self-installer | node
-      - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
-      - pnpm i
-      - pnpm m run build
-      - pnpm m run coverage --filter bonde-admin
-    secrets: [ stag_pagarme_key ]
-    group: build
-    when:
-      status: success
-      event: [push]
-
-  admin-staging-publish:
-    image: plugins/docker
-    repo: nossas/bonde-admin
-    secrets: [ docker_username, docker_password ]
-    dockerfile: clients/deprecated/admin/packages/bonde-admin/Dockerfile
-    context: clients/deprecated/admin/packages/bonde-admin/
-    group: publish
-    tags:
-      - ${DRONE_BRANCH/\//-}
-    when:
-      status: success
-      event: [push]
-
-  admin-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: clients/admin
-    docker_image: nossas/bonde-admin:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    group: deploy
-    secrets: [ rancher_access_key, rancher_secret_key ]
-    when:
-      status: success
-      event: [push]
-
-  admin-production-build:
-    image: node:14-alpine
-    environment:
-      - SKIP_PREFLIGHT_CHECK=true
-      - REACT_APP_ENVIRONMENT=production
-      - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
-      - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
-      - REACT_APP_DOMAIN_PUBLIC=bonde.org
-      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
-      - REACT_APP_DOMAIN_API_REST=https://api-rest.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
-      - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
-      - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
-      - REACT_APP_AWS_BUCKET=bonde-assets
-      - REACT_APP_LOGIN_URL=http://accounts.bonde.org/login
-      - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
-    commands:
-      - cd clients/deprecated/admin
-      - apk --update add curl
-      - curl -L https://unpkg.com/@pnpm/self-installer | node
-      - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
-      - pnpm m i
-      - pnpm m run build
-    secrets: [ prod_pagarme_key ]
-    group: build
-    when:
-      status: success
-      event: tag
-
-  admin-production-publish:
-    image: plugins/docker
-    repo: nossas/bonde-admin
-    secrets: [ docker_username, docker_password ]
-    dockerfile: clients/deprecated/admin/packages/bonde-admin/Dockerfile
-    context: clients/deprecated/admin/packages/bonde-admin/
-    group: publish
-    tags:
-      - ${DRONE_TAG##v}
-      - latest
-    when:
-      status: success
-      event: tag
-
-  admin-production-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: clients/admin
-    docker_image: "nossas/bonde-admin:${DRONE_TAG##v}"
-    timeout: 360
-    group: deploy
-    confirm: true
-    secrets:
-      - source: rancher_access_key_prod
-        target: rancher_access_key
-      - source: rancher_secret_key_prod
-        target: rancher_secret_key
-    when:
-      status: success
-      event: tag
-
   staging-build:
     image: node:14-alpine
     environment:
@@ -167,11 +51,24 @@ pipeline:
     when:
       status: success
       event: [push]
-  
+
   accounts-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: clients/accounts
+    group: deploying
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [rancher_access_key, rancher_secret_key]
+    when:
+      status: success
+      event: [push]
+  
+  admin-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/admin
     group: deploying
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360

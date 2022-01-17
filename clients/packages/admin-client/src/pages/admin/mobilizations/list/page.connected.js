@@ -8,8 +8,8 @@ import Page from './page';
 import { useEffect } from 'react';
 
 const FETCH_MOBILIZATIONS = gql`
-  query ($community_id: Int!) {
-    mobilizations(where: { community_id: { _eq: $community_id } }) {
+  query ($community_id: Int! $status: status_mobilization!) {
+    mobilizations(where: { community_id: { _eq: $community_id }, status: { _eq: $status } }) {
       id
       name
       goal
@@ -28,6 +28,19 @@ const FETCH_MOBILIZATIONS = gql`
   }
 `;
 
+const getVariables = ({ location, community }) => {
+  const variables = {
+    community_id: community.id,
+    status: 'active'
+  };
+  const query = qs.parse(location.search);
+  if (query.status) {
+    variables.status = query.status
+  }
+
+  return { variables };
+}
+
 const MobilizationList = ({
   location,
   history,
@@ -37,8 +50,9 @@ const MobilizationList = ({
   changeStatus,
   menuActiveIndex
 }) => {
+  
   const { community } = useContext(SessionContext);
-  const { data, loading, error } = useQuery(FETCH_MOBILIZATIONS, { variables: { community_id: community.id } });
+  const { data, loading, error } = useQuery(FETCH_MOBILIZATIONS, getVariables({ location, community }));
 
   useEffect(() => {
     if (data) fetchMobilizations(data.mobilizations);
@@ -46,16 +60,15 @@ const MobilizationList = ({
 
   if (error) return <p>Failed fetch mobilizations</p>;
 
-  const query = qs.parse(location.search);
 
   return loading
-    ? <p>'Carregando mobilizações...'</p>
+    ? <p>Carregando mobilizações...</p>
     : (
     <Page
       history={history}
       mobilizations={data.mobilizations}
       menuActiveIndex={menuActiveIndex}
-      location={{ ...location, query }}
+      location={{ ...location, query: qs.parse(location.search) }}
       select={select}
       toggleMenu={toggleMenu}
       changeStatus={changeStatus}

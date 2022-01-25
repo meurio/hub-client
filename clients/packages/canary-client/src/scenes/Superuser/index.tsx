@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import { Header, Navigation, Tab } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container } from 'react-grid-system';
 // import { useSession } from 'bonde-core-tools'
 import CommunityForm from './CommunityForm';
 // import Mobilizers from './Mobilizers'
@@ -90,15 +90,11 @@ const SuperuserPage: React.FC<Props> = ({ match }) => {
             </MenuItem>
           </Col>
         </Row> */}
-        <Row>
-          <Col>
-            <Switch>
-              <Route exact path={`${match.path}/add`}>
-                <CommunityForm />
-              </Route>
-            </Switch>
-          </Col>
-        </Row>
+        <Switch>
+          <Route exact path={`${match.path}/add`}>
+            <CommunityForm />
+          </Route>
+        </Switch>
       </Container>
     </PageWrap>
   );

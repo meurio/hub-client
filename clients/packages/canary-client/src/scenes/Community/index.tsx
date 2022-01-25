@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { Empty, Header, Navigation, Tab, Row, Col } from 'bonde-components';
+import { Empty, Header, Navigation, Tab } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import Content from '../../components/Content';
@@ -67,34 +67,30 @@ const CommunityPage = ({ match, location }: Props) => {
       </SubHeader>
       <Styles>
         <Content>
-          <Row>
-            <Col>
-              <Switch>
-                <Route exact path={`${match.path}`}>
-                  {/* Redirect /community to index tab */}
-                  <Redirect to={`${match.path}/analytics`} />
-                </Route>
-                <Route exact path={`${match.path}/analytics`}>
-                  <Analytics />
-                </Route>
-                <Route exact path={`${match.path}/settings`}>
-                  <Settings />
-                </Route>
-                <Route exact path={`${match.path}/mobilizers`}>
-                  <Mobilizers />
-                </Route>
-                <Route exact path={`${match.path}/recipient`}>
-                  <Recipient />
-                </Route>
-                <Route exact path={`${match.path}/integrations/:name`}>
-                  <Integrations />
-                </Route>
-                <Route path={`${match.path}/domains`}>
-                  <Domains />
-                </Route>
-              </Switch>
-            </Col>
-          </Row>
+          <Switch>
+            <Route exact path={`${match.path}`}>
+              {/* Redirect /community to index tab */}
+              <Redirect to={`${match.path}/analytics`} />
+            </Route>
+            <Route exact path={`${match.path}/analytics`}>
+              <Analytics />
+            </Route>
+            <Route exact path={`${match.path}/settings`}>
+              <Settings />
+            </Route>
+            <Route exact path={`${match.path}/mobilizers`}>
+              <Mobilizers />
+            </Route>
+            <Route exact path={`${match.path}/recipient`}>
+              <Recipient />
+            </Route>
+            <Route exact path={`${match.path}/integrations/:name`}>
+              <Integrations />
+            </Route>
+            <Route path={`${match.path}/domains`}>
+              <Domains />
+            </Route>
+          </Switch>
         </Content>
       </Styles>
     </PageWrap>

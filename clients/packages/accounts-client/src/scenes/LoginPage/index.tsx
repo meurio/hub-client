@@ -15,12 +15,7 @@ const LoginMutation = gql`
   }
 `
 
-interface LoginPageProps {
-  // Default url redirect when not exists next query params
-  to: string;
-}
-
-const LoginPage: React.FC<LoginPageProps> = () => {
+const LoginPage: React.FC = (to: any) => {
   const { login } = useSession();
   const { search } = useLocation();
   const [authenticate] = useMutation(LoginMutation);
@@ -50,7 +45,7 @@ const LoginPage: React.FC<LoginPageProps> = () => {
         }}
       />
     </>
-  );
-}
+  )
+};
 
 export default LoginPage;

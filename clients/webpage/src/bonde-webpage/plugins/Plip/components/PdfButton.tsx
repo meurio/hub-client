@@ -10,7 +10,7 @@ const PdfButton = (props: PdfButtonProps) => {
 
   return (
     <a
-      href={`data:application/pdf;base64,${props.dataPdf}`}
+      href={`data:application/octet-stream;attachment;base64,${props.dataPdf}`}
       download={`Ficha de Assinatura de ${props.fileName}`}
     >
       <EyeIcon />

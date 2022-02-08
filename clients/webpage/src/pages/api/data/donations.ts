@@ -3,8 +3,11 @@ import gql from 'graphql-tag';
 import { client } from '../../../graphql-app';
 
 const query = gql`
-  query fetchDonationGoalStats($widgetId: Int!) {
-    stats: getWidgetDonationStats(widgetId: $widgetId)
+  query ($widget_id: Int!) {
+    get_widget_donation_stats(args: { widget_id: $widget_id }) {
+      widget_id
+      stats
+    }
   }
 `;
 
@@ -13,9 +16,9 @@ const DataDonation = async (req: any, res: any) => {
     const { data } = await client.query({
       fetchPolicy: 'network-only',
       query,
-      variables: { widgetId: req.body.widget_id },
+      variables: { widget_id: req.body.widget_id },
     });
-    return res.status(200).json({ data });
+    return res.status(200).json({ data: data.get_widget_donation_stats[0] });
   }
   return res.status(400);
 };

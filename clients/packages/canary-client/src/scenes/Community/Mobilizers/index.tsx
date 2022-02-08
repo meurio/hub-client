@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Loading, Heading, Box, Stack, Button } from 'bonde-components';
-import { useQuery, useSession, gql } from 'bonde-core-tools';
+import { Context as SessionContext, useQuery, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import UsersTable from './UsersTable';
 import InvitationsTable from './InvitationsTable';
@@ -54,12 +54,12 @@ enum Menu {
   mobilizers
 }
 
-const FetchInvitations = () => {
+const FetchInvitations: React.FC = () => {
   // Menu options: invitations and mobilizers
   const [menu, setMenu] = useState(Menu.mobilizers);
   const { t } = useTranslation('community');
   // Session
-  const { user, community } = useSession();
+  const { currentUser: user, community } = useContext(SessionContext);
   // Query
   const variables = { communityId: community?.id };
   const { data, loading, error, refetch } = useQuery(InvitationsQuery, { variables });

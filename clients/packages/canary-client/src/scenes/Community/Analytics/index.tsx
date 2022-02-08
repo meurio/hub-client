@@ -1,18 +1,14 @@
-import React from 'react';
-import { useSession } from 'bonde-core-tools';
+import React, { useContext } from 'react';
+import { Context as SessionContext } from 'bonde-core-tools';
 import {
   Header,
-  Icon,
   Text,
-  Tooltip,
-  InfoIcon,
-  Stack,
   Message,
-  Hint
+  Stack,
+  Grid,
+  GridItem
 } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
-import NumberFormat from 'react-number-format';
 import TotalActivists from './TotalActivists';
 import LastActivists from './LastActivists';
 import LastPressures from './LastPressures';
@@ -20,27 +16,7 @@ import LastFormEntries from './LastFormEntries';
 import SubscriptionDonationsLastMonth from './SubscriptionDonationsLastMonth';
 import UniqueDonationsLastMonth from './UniqueDonationsLastMonth';
 import TotalDonations from './TotalDonations';
-import Panel from '../../../components/Panel';
-import DownloadCSV from './DownloadCSV';
-
-type StylesProps = {
-  full?: boolean
-}
-
-const Styles = styled.div<StylesProps>`
-  ${Panel} {
-    min-height: ${props => props.full ? '254px' : '97px'};
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 25px 30px;
-  }
-
-  ${Hint} {
-    word-break: break-word;
-  }
-`
+import AnalyticsCard, { Download, Number } from './AnalyticsCard';
 
 type PositionProps = {
   direction?: 'right' | 'left'
@@ -55,176 +31,129 @@ Position.defaultProps = {
   direction: 'left'
 }
 
-const AnalyticsCard = ({ label, tooltip, children, full }: any) => {
-  const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px', whiteSpace: 'nowrap' }} uppercase>{label}</Header.H5>;
+const Analytics: React.FC = () => {
+  const { community } = useContext(SessionContext);
+  
   return (
-    <Styles full={full}>
-      <Stack direction="row" spacing={2} mt={4} align="center">
-        {Label}
-        {tooltip && (
-          <Tooltip label={label}>
-            <InfoIcon color="gray.200" boxSize={3} />
-          </Tooltip>
-        )}
-      </Stack>
-      <Panel>
-        {children}
-      </Panel>
-    </Styles>
-  );
-}
-
-type NumberProps = {
-  query: any
-  children?: any
-  format: 'default' | 'money'
-}
-
-const Number = ({ query: Query, children, format }: NumberProps) => {
-  const { community } = useSession();
-  const numberProps: any = {
-    displayType: 'text',
-    thousandSeparator: '.',
-    decimalSeparator: ','
-  }
-  if (format === 'money') {
-    numberProps.decimalScale = 2
-    numberProps.fixedDecimalScale = true
-  }
-
-  return (
-    <Query communityId={community?.id || 0}>
-      {({ total, waiting }: any) => (
-        <>
-          <Header.H2>
-            <NumberFormat {...numberProps} value={total} />
-          </Header.H2>
-          {waiting && (
-            <Text style={{ color: '#a4a4a4' }}>
-              <Icon color='#c7c7c7' name='Sync' size='small' />
-              <NumberFormat {...numberProps} value={waiting} />
-            </Text>
-          )}
-          {children}
-        </>
-      )}
-    </Query>
-  );
-}
-
-Number.defaultProps = {
-  format: 'default'
-}
-const Analytics = ():JSX.Element => (
-  <Container fluid style={{ width: "100%", padding: "0" }}>
-    <Row>
-      <Col xs={12}>
-        <Header.H5 style={{ fontWeight: 800, marginBottom: '12px', marginTop: '7px' }} uppercase>Baixar relatórios</Header.H5>
-      </Col>
-
-      <Col xs={12} style={{ display: 'flex', alignItems: 'center'}}>
-          <DownloadCSV
+    <Stack direction="column" spacing={8}>
+      <Stack spacing={4}>
+        <Header.H5 style={{ fontWeight: 800 }} uppercase>Baixar relatórios</Header.H5>
+        {/* Download CSV */}
+        <Stack direction="row" spacing={4}>
+          <Download
             label='Relatórios de doações'
             icon='Ticket'
             path='donation_reports'
           />
-        <DownloadCSV
-          label='Doadores recorrentes'
-          icon='TicketRecurring'
-          path='download_subscriptions'
-        />
+          <Download
+            label='Doadores recorrentes'
+            icon='TicketRecurring'
+            path='download_subscriptions'
+            />
+          <Download
+            label='Relatórios de ações'
+            icon='BoltUnfilled'
+            path='activist_actions'
+            />
+          <Download
+            label='Relatórios de ativistas'
+            icon='Network'
+            path='activists'
+          />
+        </Stack>
+      </Stack>
+      <Grid
+        templateColumns={[null, null, "repeat(2, 1fr)", "repeat(5, 1fr)"]}
+        templateRows={[null, null, "repeat(5, auto)", "repeat(3, auto)"]}
+        gap={4}
+      >
+        {/* Analytics */}
+        <GridItem colStart={1} rowStart={[null, null, 2, 1]}>
+          <AnalyticsCard
+            label='Ativistas'
+            tooltip='Total de pessoas que já agiram em alguma página publicada pela sua comunidade.'
+          >
+            <TotalActivists communityId={community.id}>
+              {({ total }: any) => <Number total={total} />}
+            </TotalActivists>
+          </AnalyticsCard>
+        </GridItem>
+        <GridItem colStart={2} rowStart={[null, null, 2, 1]}>
+          <AnalyticsCard
+            label='Ativistas recentes'
+            tooltip='Total de pessoas que agiram na sua comunidade nos últimos 90 dias.'
+          >
+            <LastActivists communityId={community.id}>
+              {({ total }: any) => <Number total={total} />}
+            </LastActivists>
+          </AnalyticsCard>
+        </GridItem>
+        <GridItem colStart={1} rowStart={[null, null, 3, 2]}>
+          <AnalyticsCard
+            label='Pressões recentes'
+            tooltip='Total de ações de pressão feitas em páginas da sua comunidade nos últimos 90 dias.'
+          >
+            <LastPressures communityId={community.id}>
+              {({ total }: any) => <Number total={total} />}
+            </LastPressures>
+          </AnalyticsCard>
+        </GridItem>
+        <GridItem colStart={2} rowStart={[null, null, 3, 2]}>
+          <AnalyticsCard
+            label='Inscrições recentes'
+            tooltip='Total de ações de formulários publicados pela sua comunidade nos últimos 90 dias.'
+          >
+            <LastFormEntries communityId={community.id}>
+              {({ total }: any) => <Number total={total} />}
+            </LastFormEntries>
+          </AnalyticsCard>
+        </GridItem>
 
-        <DownloadCSV
-          label='Relatórios de ações'
-          icon='BoltUnfilled'
-          path='activist_actions'
-        />
-
-        <DownloadCSV
-          label='Relatórios de ativistas'
-          icon='Network'
-          path='activists'
-        />
-      </Col>
-    </Row>
-    <Row style={{ marginTop: '10px' }}>
-      <Col xs={5}>
-        <Row>
-          <Col xs={6}>
-            <AnalyticsCard
-              label='Ativistas'
-              tooltip='Total de pessoas que já agiram em alguma página publicada pela sua comunidade.'
-            >
-              <Number query={TotalActivists} />
-            </AnalyticsCard>
-          </Col>
-          <Col xs={6} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              label='Ativistas recentes'
-              tooltip='Total de pessoas que agiram na sua comunidade nos últimos 90 dias.'
-            >
-              <Number query={LastActivists} />
-            </AnalyticsCard>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={6}>
-            <AnalyticsCard
-              label='Pressões recentes'
-              tooltip='Total de ações de pressão feitas em páginas da sua comunidade nos últimos 90 dias.'
-            >
-              <Number query={LastPressures} />
-            </AnalyticsCard>
-          </Col>
-          <Col xs={6} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              label='Inscrições recentes'
-              tooltip='Total de ações de formulários publicados pela sua comunidade nos últimos 90 dias.'
-            >
-              <Number query={LastFormEntries} />
-            </AnalyticsCard>
-          </Col>
-        </Row>
-      </Col>
-      <Col xs={7}>
-        <Row>
-          <Col xs={4} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              full
-              label='Doações únicas (R$)'
-              tooltip='Valor total das doações únicas confirmadas na comunidade nos últimos 30 dias.'
-            >
-              <Number query={SubscriptionDonationsLastMonth} format='money'>
-                <Text>Nos últimos 30 dias</Text>
-              </Number>
-            </AnalyticsCard>
-          </Col>
-          <Col xs={4} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              full
-              label='Doações recorrentes (R$)'
-              tooltip='Valor total das doações recorrentes confirmadas na comunidade nos últimos 30 dias.'
-            >
-              <Number query={UniqueDonationsLastMonth} format='money'>
-                <Text>Nos últimos 30 dias</Text>
-              </Number>
-            </AnalyticsCard>
-          </Col>
-          <Col xs={4} style={{ paddingLeft: '4px' }}>
-            <AnalyticsCard
-              full
-              label='Total arrecadado (R$)'
-              tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
-            >
-              <Number query={TotalDonations} format='money'>
-                <Text>(Confirmadas / Aguardando pagamento)</Text>
-              </Number>
-            </AnalyticsCard>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
-  </Container>
-);
+        <GridItem colStart={[null, null, 1, 3]} rowSpan={2} rowStart={[null, null, 4, 1]}>
+          <AnalyticsCard
+            label='Doações únicas (R$)'
+            tooltip='Valor total das doações únicas confirmadas na comunidade nos últimos 30 dias.'
+          >
+            <SubscriptionDonationsLastMonth communityId={community.id}>
+              {({ total }: any) => (
+                <Number total={total} format='money'>
+                  <Text>Nos últimos 30 dias</Text>
+                </Number>
+              )}
+            </SubscriptionDonationsLastMonth>
+          </AnalyticsCard>
+        </GridItem>
+        <GridItem colStart={[null, null, 2, 4]} rowSpan={2} rowStart={[null, null, 4, 1]}>
+          <AnalyticsCard
+            label='Doações recorrentes (R$)'
+            tooltip='Valor total das doações recorrentes confirmadas na comunidade nos últimos 30 dias.'
+          >
+            <UniqueDonationsLastMonth communityId={community.id}>
+              {({ total }: any) => (
+                <Number total={total} format='money'>
+                  <Text>Nos últimos 30 dias</Text>
+                </Number>
+              )}
+            </UniqueDonationsLastMonth>
+          </AnalyticsCard>
+        </GridItem>
+        <GridItem colStart={[null, null, 1, 5]} rowSpan={2} rowStart={[null, null, 5, 1]}>
+          <AnalyticsCard
+            label='Total arrecadado (R$)'
+            tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
+          >
+            <TotalDonations communityId={community.id}>
+              {({ total, waiting }: any) => (
+                <Number total={total} waiting={waiting} format='money'>
+                  <Text>(Confirmadas / Aguardando pagamento)</Text>
+                </Number>
+              )}
+            </TotalDonations>
+          </AnalyticsCard>
+        </GridItem>
+      </Grid>
+    </Stack>
+  );
+}
 
 export default Analytics;

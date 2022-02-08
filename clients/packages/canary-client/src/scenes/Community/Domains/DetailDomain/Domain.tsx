@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Text,
   Icon,
@@ -10,7 +10,7 @@ import {
   Box,
   Button
 } from 'bonde-components';
-import { useMutation, gql } from 'bonde-core-tools';
+import { useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
 import { useHistory } from 'react-router-dom';
 import { Status, MainTitle } from '../Styles';
 import { DNSHostedZone } from '../types';
@@ -108,7 +108,8 @@ const updateDomainGQL = gql`
   }
 `
 
-const Domain = (props: Omit<Props, 'action'>) => {
+const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
+  const { currentUser: user } = useContext(SessionContext);
   const [deleteDomain] = useMutation(deleteDomainGQL);
   const [updateDomain] = useMutation(updateDomainGQL);
   const { push } = useHistory();
@@ -149,6 +150,7 @@ const Domain = (props: Omit<Props, 'action'>) => {
                 Verificar DNS
               </Button>
               <Button
+                disabled={!user.hasAdminPermission()}
                 variant="tableLink"
                 colorScheme="gray"
                 onClick={handleDelete({ ...props, action: deleteDomain, push })}

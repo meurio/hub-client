@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { useSession } from "bonde-core-tools";
+import { Context as SessionContext } from "bonde-core-tools";
 import { Empty } from "bonde-components";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import { Groups } from "../types";
@@ -27,7 +27,7 @@ export default function CheckCommunity({
 }: {
   Component: (props: ComponentProps) => React.ReactElement;
 }): React.ReactElement {
-  const { community } = useSession();
+  const { community }: any = useContext(SessionContext);
   const { groups } = useCommunityExtra();
   const today = new Date();
   // get last week and format

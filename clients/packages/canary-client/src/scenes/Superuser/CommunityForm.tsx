@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useMutation, useSession, gql } from 'bonde-core-tools';
+import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import {
   Button,
   ConnectedForm,
@@ -55,7 +55,7 @@ const ButtonStyled = styled(Button)`
 
 const CommunityForm: React.FC = () => {
   const [insertCommunity] = useMutation(InsertCommunityMutation);
-  const { user } = useSession();
+  const { currentUser: user } = useContext(SessionContext);
   const { t } = useTranslation('community');
 
   const initialValues = {

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useMutation, gql, useSession } from 'bonde-core-tools';
+import React, { useState, useContext } from 'react';
+import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import { Button, Modal, ModalOverlay } from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import DomainForm from './DomainForm';
@@ -29,7 +29,7 @@ const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
   const [open, setOpen] = useState(false);
   const [dnsHostedZone, setDnsHostedZone] = useState<DNSHostedZone>();
   const [createDomain] = useMutation(createDomainGQL);
-  const { community, user } = useSession();
+  const { community, currentUser: user } = useContext(SessionContext);
 
   const onSubmit = async ({ value }: any) => {
     try {
@@ -57,7 +57,7 @@ const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>{btnText}</Button>
+      <Button disabled={!user.hasAdminPermission()} onClick={() => setOpen(true)}>{btnText}</Button>
       <Modal size={!dnsHostedZone ? 'lg' : '4xl'} isOpen={open} onClose={onClose}>
         <ModalOverlay />
         {!dnsHostedZone

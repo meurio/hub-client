@@ -39,7 +39,7 @@ const isDomain = (value: any) => /[\w][^A-Zç!'(?=*[}{,^?~=+\_\/*+\|]+\.[^A-Z][\
 const DomainForm: React.FC<Props> = ({ onSubmit, onClose }) => {
   return (
     <ConnectedForm onSubmit={onSubmit}>
-      {({ submiting, dirty, submitError, valid }: any) => (
+      {({ submiting, dirty, submitError }: any) => (
         <ModalContent>
           <ModalHeader>Adicionar domínio</ModalHeader>
           <ModalBody>
@@ -70,7 +70,7 @@ const DomainForm: React.FC<Props> = ({ onSubmit, onClose }) => {
           </ModalBody>
           <ModalFooter justifyContent="space-between">
             <Link style={{ cursor: 'pointer' }} onClick={onClose}>Cancelar</Link>
-            <Button disabled={!valid || submiting || !dirty} type='submit'>Continuar</Button>
+            <Button disabled={submiting || !dirty} type='submit'>Continuar</Button>
           </ModalFooter>
         </ModalContent>
       )}

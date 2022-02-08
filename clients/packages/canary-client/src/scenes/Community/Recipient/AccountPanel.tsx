@@ -48,7 +48,7 @@ const AccountPanel: React.FC = () => {
               name='agencia'
               label={t('recipient.form.fields.bank_account.agencia.label')}
               placeholder={t('recipient.form.fields.bank_account.agencia.placeholder')}
-              parse={normalize.max(5)}
+              parse={normalize.max(4)}
               component={InputField}
               validate={required(t('recipient.form.fields.bank_account.agencia.errors.required'))}
             />

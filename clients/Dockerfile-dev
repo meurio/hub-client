@@ -1,0 +1,6 @@
+FROM node:14-alpine
+
+WORKDIR /code
+
+RUN apk --update add curl
+RUN curl -L https://unpkg.com/@pnpm/self-installer | node

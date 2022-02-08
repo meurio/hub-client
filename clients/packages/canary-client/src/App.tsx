@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -7,9 +7,8 @@ import {
   useLocation
 } from 'react-router-dom';
 import {
-  BondeSessionProvider as Session,
-  BondeSessionUI as SessionUI,
-  useSession
+  Provider as Session,
+  Context as SessionContext
 } from 'bonde-core-tools';
 import {
   Loading,
@@ -17,11 +16,13 @@ import {
   ChakraProvider,
   chakraTheme,
   FontsLoader,
+  SessionUI,
   CSSReset
 } from 'bonde-components';
 import { hotjar } from 'react-hotjar';
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
+import { isMobile } from 'react-device-detect';
 // Scenes and Components to make your application
 import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
@@ -30,33 +31,13 @@ import WidgetsActionsPage from './scenes/WidgetActions';
 import NotFound from './components/NotFound';
 import LanguageTool from './LanguageTool';
 import * as Flag from './Flag';
-// import policies from './policies';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as types from "styled-components/cssprop";
 
 import 'react-toastify/dist/ReactToastify.css'
 
-type AppLoadingProps = {
-  fetching: 'session' | 'user' | 'communities' | 'redirect' | 'module'
-};
-
-const AppLoading = ({ fetching }: AppLoadingProps) => {
-  const { t } = useTranslation('loading');
-
-  const messages = {
-    session: t('session'),
-    user: t('user'),
-    communities: t('communities'),
-    // TODO: change this implementation
-    redirect: t('redirect'),
-    module: t('module')
-  };
-
-  return <Loading fullsize message={messages[fetching]} />;
-};
-
 const RouteIsAdmin = (props: any) => {
-  const { user } = useSession();
+  const { currentUser: user } = useContext(SessionContext);
 
   if (user.isAdmin) return <Route {...props} />;
 
@@ -102,9 +83,14 @@ const ChangeLanguage = () => {
 
 const PageRouting = () => {
   const { pathname } = useLocation();
+  const session = useContext(SessionContext);
 
   React.useEffect(() => {
-    hotjar.stateChange(pathname);
+    try {
+      hotjar.stateChange(pathname);
+    } catch(err) {
+      console.log("hotjar", err);
+    }
   }, [pathname])
 
   return (
@@ -113,6 +99,8 @@ const PageRouting = () => {
         indexRoute='/'
         disableNavigation={pathname === '/'}
         languageTool={ChangeLanguage}
+        session={session}
+        isMobile={isMobile}
       >
         <Switch>
           <Route
@@ -139,12 +127,8 @@ const App: React.FC = () => {
     (process.env.REACT_APP_ENVIRONMENT || 'development') as Environment;
 
   console.info('Build environment:', envConfig);
-  // Extra config
-  const config: any = {
-    // Setup local cross-storage and staging api
-    crossStorage: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://bonde.devel:5003',
-    apiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql'
-  };
+  // App Urls
+  const apiGraphqlUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql';
 
   return (
     <React.Suspense fallback={Loading}>
@@ -158,10 +142,11 @@ const App: React.FC = () => {
           />
           <Session
             fetchData
+            uri={apiGraphqlUrl}
             environment={envConfig}
-            loading={AppLoading}
-            extraConfig={config}
-            // policies={policies}
+            loadingComponent={
+              <Loading fullsize message="Carregando sessão..." />
+            }
           >
             <Router>
               <PageRouting />

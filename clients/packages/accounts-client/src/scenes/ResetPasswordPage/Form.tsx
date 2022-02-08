@@ -5,7 +5,7 @@ import {
   Header,
   InputField,
   Link as LinkStyled,
-  Stack,
+  Flex,
   Text,
   Validators,
 } from "bonde-components";
@@ -57,7 +57,7 @@ const ResetPasswordForm = ({ token }: any) => {
               )}
             />
 
-            <Stack direction="row" alignItems="center" spacing={4}>
+            <Flex direction="row" alignItems="center" justify="space-between">
               <LinkStyled component={Link} to="/login">
                 {t("resetPassword.form.cancel")}
               </LinkStyled>
@@ -65,7 +65,7 @@ const ResetPasswordForm = ({ token }: any) => {
               <Button type="submit" disabled={submitting}>
                 {t("resetPassword.form.submit")}
               </Button>
-            </Stack>
+            </Flex>
 
           </>
         )}

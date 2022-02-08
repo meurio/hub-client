@@ -1,5 +1,5 @@
-import React from "react";
-import { useSession, useQuery, gql } from "bonde-core-tools";
+import React, { useContext } from "react";
+import { Context as SessionContext, useQuery, gql } from "bonde-core-tools";
 import { GeneralStatsData, RedesGeneralStatsVars } from "../../types";
 
 const WEEKLY_DATA = gql`
@@ -88,7 +88,7 @@ const FetchGeneralStats = ({ children, community }: Props) => {
 };
 
 export default function CheckCommunity(props: any = {}): React.ReactElement {
-  const { community } = useSession();
+  const { community }: any = useContext(SessionContext);
   return <FetchGeneralStats community={community} {...props} />;
 }
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { useSession, useQuery, gql } from "bonde-core-tools";
+import React, { useContext } from "react";
+import { Context as SessionContext, useQuery, gql } from "bonde-core-tools";
 import {
   CommunityExtraData,
   CommunityExtraVars,
@@ -58,7 +58,8 @@ const CommunityExtraProvider = ({
 }: {
   children: any;
 }): React.ReactElement => {
-  const { community } = useSession();
+  const { community }: any = useContext(SessionContext);
+
   const variables = {
     context: { _eq: (community && community.id) || 0 },
   };

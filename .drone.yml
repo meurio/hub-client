@@ -30,8 +30,9 @@ pipeline:
       - export REACT_APP_HOTJAR_ID=$STAG_HOTJAR_ID
       - export REACT_APP_HOTJAR_SV=$STAG_HOTJAR_SV
       - cd clients
-      - pnpm i
+      - pnpm i --no-frozen-lockfile
       - pnpm m run build --filter {libs}
+      - pnpm m run prepare --filter {libs}
       - pnpm m run build --filter {packages}
     secrets: [ aws_route_ip, stag_pagarme_key, stag_hotjar_id, stag_hotjar_sv ]
     group: build
@@ -51,11 +52,24 @@ pipeline:
     when:
       status: success
       event: [push]
-  
+
   accounts-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: clients/accounts
+    group: deploying
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [rancher_access_key, rancher_secret_key]
+    when:
+      status: success
+      event: [push]
+  
+  admin-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/admin
     group: deploying
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
@@ -121,6 +135,7 @@ pipeline:
       - cd clients
       - pnpm i
       - pnpm m run build --filter {libs}
+      - pnpm m run prepare --filter {libs}
       - pnpm m run build --filter {packages}
     secrets: [ aws_route_ip, prod_pagarme_key, prod_hotjar_id, prod_hotjar_sv ]
     group: build

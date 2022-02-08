@@ -12,12 +12,11 @@ type Props = {
   community: {
     id: number
   }
-  storage: any
   widgets: Widget[]
   loading: boolean
 }
 
-const Home = ({ community, storage, widgets, loading }: Props): React.ReactElement => {
+const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
   return (
@@ -35,7 +34,7 @@ const Home = ({ community, storage, widgets, loading }: Props): React.ReactEleme
         {!isMobile ? 
           <section style={{ marginBottom: '15px' }}>
             <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
-            <Shortcuts community={community} storage={storage} />
+            <Shortcuts community={community} />
           </section> : null}
         <SearchList
           header={<Header.H5 uppercase>{t('home.actions')}</Header.H5>}

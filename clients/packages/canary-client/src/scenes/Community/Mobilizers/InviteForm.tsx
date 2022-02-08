@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Button,
   ConnectedForm,
@@ -14,7 +14,7 @@ import {
   toast
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
-import { useMutation, useSession, gql } from 'bonde-core-tools';
+import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 
 export const InviteMutation = gql`
   mutation SendInvitation ($input: InvitationInput) {
@@ -43,9 +43,9 @@ type Props = {
   isCommunityAdmin: boolean
 }
 
-const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
+const InviteForm: React.FC<Props> = ({ onSuccess, isCommunityAdmin }) => {
   const [invite] = useMutation(InviteMutation);
-  const { user, community } = useSession();
+  const { currentUser: user, community } = useContext(SessionContext);
   const { t } = useTranslation('community');
   const { composeValidators, required, isEmail } = Validators;
 
@@ -69,10 +69,10 @@ const InviteForm = ({ onSuccess, isCommunityAdmin }: Props) => {
                 toast(t('mobilizers.form.success'), { type: toast.TYPE.SUCCESS });
               })
           } catch ({ graphQLErrors, ...errors }) {
-            if (graphQLErrors.filter((err: any) => err.extensions.code === 'permission-error').length > 0) {
+            if ((graphQLErrors as any).filter((err: any) => err.extensions.code === 'permission-error').length > 0) {
               toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
             } else {
-              console.error({ graphQLErrors, ...errors })
+              console.error({ graphQLErrors, ...(errors as any) })
             }
           }
         }}

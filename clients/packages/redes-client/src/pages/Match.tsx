@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Button, Header, Text, Empty, Stack, Flex } from "bonde-components";
-import { useMutation, useSession } from "bonde-core-tools";
+import { useMutation, Context as SessionContext } from "bonde-core-tools";
 import { useLocation, useHistory } from "react-router-dom";
 
 import { Table, Popup } from "../components";
@@ -35,7 +35,7 @@ export default function Match({
   groups,
 }: Props): React.ReactElement {
   const [createRelationship, { loading }] = useMutation(CreateRelationship);
-  const { user, community } = useSession()
+  const { currentUser: user, community }: any = useContext(SessionContext)
   const [isOpen, setModal] = useState<boolean>(false);
   const [selectedGroup, isVolunteerSelected] = useSelectedGroup();
   const [state, dispatch] = useFilter();

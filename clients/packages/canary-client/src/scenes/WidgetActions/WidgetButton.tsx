@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Header, Text, Icon, Box, Flex, Image, Stack } from 'bonde-components';
-import { useSession } from 'bonde-core-tools';
+import { Context as SessionContext } from 'bonde-core-tools';
 import { Link } from 'react-router-dom';
 import { Widget } from './FetchWidgets';
 import Labels from './Labels';
@@ -9,8 +9,8 @@ type Props = {
   widget: Widget
 }
 
-const WidgetButton = ({ widget }: Props) => {
-  const { storage, community } = useSession();
+const WidgetButton: React.FC<Props> = ({ widget }) => {
+  const { community, updateSession } = useContext(SessionContext);
   const {
     id,
     kind,
@@ -32,7 +32,7 @@ const WidgetButton = ({ widget }: Props) => {
   let linkProps: any = {
     onClick: () => {
       if (process.env.REACT_APP_DOMAIN_ADMIN) {
-        storage.setAsyncItem("community", community).then(() => {
+        updateSession("community", community).then(() => {
           window.location.href = new URL(
             `/mobilizations/${mobilization_id}/widgets/${id}/${kind.replace('-phone', '')}`,
             process.env.REACT_APP_DOMAIN_ADMIN
@@ -49,7 +49,7 @@ const WidgetButton = ({ widget }: Props) => {
   const mobilizationLinkProps: any = {
     onClick: () => {
       if (process.env.REACT_APP_DOMAIN_ADMIN) {
-        storage.setAsyncItem("community", community).then(() => {
+        updateSession("community", community).then(() => {
           window.location.href = new URL(
             `/mobilizations/${mobilization_id}/edit`,
             process.env.REACT_APP_DOMAIN_ADMIN

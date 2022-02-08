@@ -12,9 +12,9 @@ Devido a criação de diferentes aplicações web e a necessidade de compartilha
 
 ## Antes de começar
 
-Tenha certeza que ao fazer o clone do repositório, inclui ```--recursive``` para que os submodules também sejam baixados, como em:
+Tenha certeza que ao fazer o clone do repositório, inclui `--recursive` para que os submodules também sejam baixados, como em:
 
-``` bash
+```bash
 git clone --recursive git@github.com:nossas/bonde.git
 ```
 
@@ -25,23 +25,16 @@ git submodule init
 git submodule update
 ```
 
-* [Ajuda Oficial do Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-
+- [Ajuda Oficial do Git Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 
 Para utilizar as configurações padrões de compartilhamento de sessão, são necessários alguns mapeamentos de urls.
 
-No ambiente de desenvolvimento, vamos adotar o endereço de url ```bonde.devel```
+No ambiente de desenvolvimento, vamos adotar o endereço de url `bonde.devel`
 
-Recomendamos adicionar os seguintes alias de url e ip no seu ```/etc/hosts```:
+Recomendamos adicionar os seguintes alias de url e ip no seu `/etc/hosts`:
 
 ```bash
-127.0.0.1 bonde.devel
-
-127.0.0.1 traefik.bonde.devel s3.bonde.devel smtp.bonde.devel pgadmin.bonde.devel kibana.bonde.devel
-
-127.0.0.1 api-rest.bonde.devel api-graphql-deprecated.bonde.devel api-graphql.bonde.devel api-payments.bonde.devel api-domains.bonde.devel api-activists.bonde.devel api-redes.bonde.devel api-accounts.bonde.devel api-notifications.bonde.devel
-
-127.0.0.1 3-vamos-limpar-o-tiete.bonde.devel 2-save-the-whales.bonde.devel 1-vamos-limpar-o-tiete.bonde.devel
+`127.0.0.1 admin-canary.bonde.devel app.bonde.devel redes.bonde.devel accounts.bonde.devel traefik.bonde.devel s3.bonde.devel smtp.bonde.devel pgadmin.bonde.devel kibana.bonde.devel api-rest.bonde.devel api-graphql-deprecated.bonde.devel api-graphql.bonde.devel api-payments.bonde.devel api-domains.bonde.devel api-activists.bonde.devel api-redes.bonde.devel api-accounts.bonde.devel api-notifications.bonde.devel teste-de-widgets.bonde.devel api-v2.bonde.devel`
 ```
 
 ## Começando
@@ -50,7 +43,7 @@ São duas as frentes de configuração: Infraestrutura e Clients.
 
 A infraestrutura é configurada ao rodar os comandos a seguir.
 
-``` bash
+```bash
 cd infra
 make begin
 ```
@@ -59,11 +52,11 @@ Muitos gigabytes serão baixados, e alguns exijirão um elevado consumo de proce
 
 Após a execução do comando com sucesso, chegou a vez dos clients. Será necessário instalar as dependências dos clients antes de iniciar:
 
- ```bash
+```bash
 cd ../clients
 pnpm i
 pnpm m run dev
- ```
+```
 
 A continução com o passo-a-passo para criação do primeiro usuário, [encontra-se nesse link](infra/README.md). E outros detalhes sobre todos os clients já desenvolvidos, [encontra-se nesse link](clients/README.md).
 
@@ -71,7 +64,7 @@ A continução com o passo-a-passo para criação do primeiro usuário, [encontr
 
 Em modo de desenvolvimento, as aplicações são acessadas em 3 camadas de rede. O nível mais alto é através das requisições http que trafegam pelo traefik utilizando imagens pré-fabricadas. O segundo nível, é através das portas locais de desenvolvimento, alterações são refletidas em tempo de execução. E no terceiro nível, através das bibliotecas, reconstruídas em tempo de execução.
 
-Abaixo uma descrição de cada repositório relacionado no ```git submodule```:
+Abaixo uma descrição de cada repositório relacionado no `git submodule`:
 
 **O apis/api-graphql,** é responsável pelas customizações da api graphql, a lógica está agrupada por domínio. Em geral é servidores web expressjs, criados a partir de um boilerplate mínimo, com algumas funcionalidades pré-configuradas como log, monitor e gerenciamento de processos. Utilizamos o Hasura para prover a api graphql padrão.
 
@@ -179,7 +172,6 @@ Todos os repositórios possuem uma configuração(skaffold.yaml) na raiz, respon
 
 Além disso, existe uma configuração(.drone.yml) para automatizar a execução de testes(ci) e de deploy(cd) descritos na configuração do skaffold, também dividido por repositório.
 
-
 ## Clientes
 
 Você irá encontrar o accounts, admin, admin-canary, redes e cross-storage.
@@ -219,4 +211,3 @@ E ainda: migrations, payments, phone, redirect, webpage.
 Serviços com algoritmos de análise constante e customizadas.
 
 [Veja mais clicando aqui.](dados/README.md)
-

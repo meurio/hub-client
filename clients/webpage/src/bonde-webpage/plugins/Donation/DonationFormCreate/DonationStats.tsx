@@ -83,10 +83,10 @@ const Progress = styled.div<ProgressProps>`
 type Props = {
   mainColor: string;
   currencyLabel?: string;
-  donationsLabel?: (total: number) => string;
-  daysLabel?: (total: number) => string;
+  donationsLabel?: any;
+  daysLabel?: any;
   goalLabel?: string;
-  data?: string;
+  data?: any;
   goalDateLimit?: string;
 };
 
@@ -96,7 +96,7 @@ const currencyInt = (value: number): string => {
 
 type GoalDateRemainingProps = {
   dateLimit: string;
-  daysLabel: (total: number) => string;
+  daysLabel: any;
 };
 
 const GoalDateRemaining = ({
@@ -112,7 +112,7 @@ const GoalDateRemaining = ({
 };
 
 const DonationStats: React.FC<Props> = ({
-  data,
+  data: stats,
   mainColor,
   currencyLabel,
   donationsLabel,
@@ -120,8 +120,6 @@ const DonationStats: React.FC<Props> = ({
   goalDateLimit,
   daysLabel,
 }) => {
-  const stats = JSON.parse(data || '{}');
-
   if (stats.goal && parseInt(stats.goal) === 1) {
     return (<DonationStatsStyles mainColor={mainColor}>
       <Currency mainColor={mainColor}>

@@ -4,15 +4,6 @@
 [submodule "clients/libs/core-tools"]
 	path = clients/libs/core-tools
 	url = https://github.com/nossas/bonde-core-tools
-[submodule "clients/libs/editor"]
-	path = clients/libs/editor
-	url = https://github.com/nossas/slate-editor
-[submodule "clients/libs/diagram"]
-	path = clients/libs/diagram
-	url = https://github.com/nossas/bonde-diagram
-[submodule "clients/packages/storage"]
-	path = clients/packages/storage
-	url = https://github.com/nossas/bonde-cross-storage
 [submodule "apis/api-graphql"]
 	path = apis/api-graphql
 	url = https://github.com/nossas/bonde-apis
@@ -37,9 +28,6 @@
 [submodule "webhooks/mapa-do-acolhimento"]
 	path = webhooks/mapa-do-acolhimento
 	url = https://github.com/nossas/mapa-do-acolhimento
-[submodule "webhooks/accounts"]
-	path = webhooks/accounts
-	url = https://github.com/nossas/bonde-auth.git
 [submodule "infra"]
 	path = infra
 	url = https://github.com/nossas/bonde-install

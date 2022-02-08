@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom';
 import {
   Empty,
@@ -10,11 +10,11 @@ import {
   List,
   ListItem,
   Stack,
-  Image
+  Image,
+  CommunityMenu
 } from "bonde-components";
 import {
-  CommunityMenu,
-  useSession
+  Context as SessionContext
 } from "bonde-core-tools";
 import { isMobile } from "react-device-detect";
 
@@ -24,7 +24,7 @@ type Props = {
 
 const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
   const { push } = useHistory();
-  const { onChangeAsync } = useSession();
+  const session: any = useContext(SessionContext);
   const isMobileWidth = window.innerWidth <= 768;
   const itemProps: any = {};
   if (isMobileWidth) {
@@ -80,7 +80,8 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                   colorScheme="black"
                   textTransform="normal"
                   onClick={() => {
-                    onChangeAsync({ community: c })
+                    session
+                      .updateSession('community', c)
                       .then(() => {
                         push('/widgets');
                       });
@@ -88,7 +89,7 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                 >
                   <Heading as="h5" fontWeight="extrabold" size="sm">{c.name}</Heading>
                 </Button>
-                {!isMobile ? <CommunityMenu community={c} /> : null}
+                {!isMobile ? <CommunityMenu session={session} community={c} /> : null}
               </Stack>
             </ListItem>
           ))}

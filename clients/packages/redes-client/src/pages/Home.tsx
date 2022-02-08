@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Header, Shortcut, Icon, Empty } from "bonde-components";
-import { useSession } from "bonde-core-tools";
+import { Context as SessionContext } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { WeeklyStats } from "../components";
@@ -66,7 +66,7 @@ export default function Home({
 }: Props): React.ReactElement {
   const dispatch = useFilterDispatch();
   const { groups } = useCommunityExtra();
-  const { user } = useSession();
+  const { currentUser: user }: any = useContext(SessionContext);
   const volunteerGroup = groups?.find((group) => !!group.isVolunteer);
   const individualGroup = groups?.find((group) => !group.isVolunteer);
   // TODO: Fazer um map dos grupos e criar botoes em cima dos grupos da comunidade

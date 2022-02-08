@@ -1,6 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { BondeSessionProvider as Session } from "bonde-core-tools";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import {
+  Provider as Session
+} from "bonde-core-tools";
 import {
   Loading,
   ChakraProvider,
@@ -8,38 +10,16 @@ import {
   FontsLoader,
   CSSReset
 } from 'bonde-components';
-import { useTranslation } from "react-i18next";
 // Scenes and Components to make your application
 import BaseLayout from './components/BaseLayout';
-import SessionRedirect from './components/SessionRedirect';
-import TextLoading from './components/TextLoading';
 import LoginPage from './scenes/LoginPage';
 import RegisterPage from './scenes/RegisterPage';
 import ForgetPasswordPage from './scenes/ForgetPasswordPage';
 import ResetPasswordPage from './scenes/ResetPasswordPage';
 
-type AppLoadingProps = {
-  fetching: "session" | "user" | "communities" | "redirect" | "module"
-};
-
-const AppLoading = ({ fetching }: AppLoadingProps) => {
-  const { t } = useTranslation("loading");
-
-  const messages = {
-    session: t("session"),
-    user: t("user"),
-    communities: t("communities"),
-    // TODO: change this implementation
-    redirect: t("redirect"),
-    module: t("module"),
-  };
-
-  return <Loading fullsize message={messages[fetching]} />;
-};
-
 type Environment = "development" | "staging" | "production";
 
-function App() {
+const App: React.FC = () => {
   // Environment to use for configure bonde-core-tools
   const envConfig: Environment =
     (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
@@ -47,15 +27,7 @@ function App() {
   console.info('Build environment:', envConfig);
   // App URL
   const appUrl = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://bonde.devel:5001';
-  // Extra config
-  const config: any = {
-    // Stop redirect recursive accounts to accounts
-    // TODO: complex logic
-    accounts: "",
-    // Setup local cross-storage and staging api
-    crossStorage: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://bonde.devel:5003',
-    apiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql'
-  };
+  const apiGraphqlUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql';
 
   return (
     <React.Suspense fallback={Loading}>
@@ -63,9 +35,9 @@ function App() {
         <FontsLoader />
         <ChakraProvider theme={chakraTheme}>
           <CSSReset />
-          <Session environment={envConfig} loading={AppLoading} extraConfig={config}>
+          <Session uri={apiGraphqlUrl} environment={envConfig}>
             <Router>
-              <SessionRedirect loading={TextLoading} paths={['/auth/login']} to={appUrl}>
+              <Switch>
                 <BaseLayout>
                   <Route exact path='/'>
                     <Redirect to='/login' />
@@ -83,7 +55,7 @@ function App() {
                     <ResetPasswordPage />
                   </Route>
                 </BaseLayout>
-              </SessionRedirect>
+              </Switch>
             </Router>
           </Session>
         </ChakraProvider>

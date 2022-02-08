@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSession } from "bonde-core-tools";
+import React, { useState, useContext } from "react";
+import { Context as SessionContext } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
@@ -9,8 +9,8 @@ import GadgetHeader from "../GadgetHeader";
 
 const CommunitiesGadget = (): React.ReactElement => {
   const { t } = useTranslation("home");
-  const { communities } = useSession();
-  const [data, setData] = useState(communities);
+  const session: any = useContext(SessionContext);
+  const [data, setData] = useState(session.communities);
 
   return (
     <>
@@ -20,7 +20,7 @@ const CommunitiesGadget = (): React.ReactElement => {
           <SearchInput
             placeholder={t("gadgets.communities.search")}
             field="name"
-            data={communities}
+            data={session.communities}
             onChange={setData}
           />
         )}

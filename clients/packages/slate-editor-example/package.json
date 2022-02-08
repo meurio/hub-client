@@ -1,0 +1,58 @@
+{
+  "name": "slate-editor-example",
+  "version": "5.1.2",
+  "description": "A complete rich text editor based on SlateJS framework",
+  "private": true,
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nossas/slate-editor.git"
+  },
+  "homepage": "https://github.com/nossas/slate-editor",
+  "author": "Nossas <tech@nossas.org> (http://github.com/nossas)",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/react-scripts start",
+    "test": "./node_modules/.bin/react-scripts test"
+  },
+  "dependencies": {
+    "@slate-editor/alignment-plugin": "workspace:*",
+    "@slate-editor/bold-plugin": "workspace:*",
+    "@slate-editor/color-plugin": "workspace:*",
+    "@slate-editor/embed-plugin": "workspace:*",
+    "@slate-editor/font-family-plugin": "workspace:*",
+    "@slate-editor/font-size-plugin": "workspace:*",
+    "@slate-editor/grid-plugin": "workspace:*",
+    "@slate-editor/image-plugin": "workspace:*",
+    "@slate-editor/italic-plugin": "workspace:*",
+    "@slate-editor/link-plugin": "workspace:*",
+    "@slate-editor/list-plugin": "workspace:*",
+    "@slate-editor/state-logger": "workspace:*",
+    "@slate-editor/strikethrough-plugin": "workspace:*",
+    "@slate-editor/toggle-readonly": "workspace:*",
+    "@slate-editor/underline-plugin": "workspace:*",
+    "history": "^4.7.2",
+    "react": "^17",
+    "react-dom": "^17",
+    "react-router": "^4.2.0",
+    "react-scripts": "^1.1.4",
+    "slate-editor": "workspace:*"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "slate",
+    "rich-text",
+    "editor",
+    "react",
+    "slate-plugins"
+  ],
+  "bugs": {
+    "url": "https://github.com/nossas/slate-editor/issues"
+  }
+}

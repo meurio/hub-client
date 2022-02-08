@@ -13,7 +13,7 @@
     "lint": "next lint",
     "build-types": "tsc --noEmit --pretty",
     "test": "jest --passWithNoTests",
-    "test:coverage": "jest --passWithNoTests --coverage"
+    "coverage": "jest --passWithNoTests --coverage --testPathIgnorePatterns=cypress-tests"
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
@@ -23,6 +23,7 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.24.0",
+    "classnames": "^2.3.1",
     "clipboard-copy": "^3.1.0",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
@@ -30,6 +31,7 @@
     "elliptic": "^6.5.4",
     "emotion": "^11.0.0",
     "exenv": "^1.2.2",
+    "file-saver": "^2.0.5",
     "final-form": "^4.20.4",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "bonde-components";
-import { useSession } from "bonde-core-tools";
+import { Context as SessionContext } from "bonde-core-tools";
 
 import {
   MAPA_DO_ACOLHIMENTO_COMMUNITY,
@@ -17,7 +17,7 @@ const BtnSearchMatch = ({
     "email" | "userStatus" | "availability" | "organizationId"
   >;
 }): React.ReactElement => {
-  const { community } = useSession();
+  const { community }: any = useContext(SessionContext);
   const isDisabled =
     community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
       ? original.organizationId === zendeskOrganizations["individual"]

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import { Flex, Empty, Heading, DarkMode, Tab, Container, Stack } from 'bonde-components';
-import { useSession } from 'bonde-core-tools';
+import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 // Subroutes
 import Analytics from './Analytics';
@@ -18,7 +18,7 @@ type Props = {
 
 const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement => {
   const history = useHistory();
-  const { community } = useSession();
+  const { community } = useContext(SessionContext);
   const { t } = useTranslation('community');
 
   // Utils

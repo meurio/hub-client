@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Shortcut, Icon } from "bonde-components";
+import { Context as SessionContext } from 'bonde-core-tools';
 import styled from "styled-components";
 import { useTranslation } from 'react-i18next';
 
@@ -20,11 +21,11 @@ const Grid = styled.div`
 `;
 
 type Props = {
-  community: any, 
-  storage: any
+  community: any
 }
 
-const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
+const Shortcuts = ({ community }: Props): React.ReactElement => {
+  const { updateSession } = useContext(SessionContext);
   const { t } = useTranslation('widgetActions');
 
   return (
@@ -33,7 +34,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
         type="button"
         onClick={() => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
-            storage.setAsyncItem("community", community).then(() => {
+            updateSession("community", community).then(() => {
               window.location.href = new URL(
                 `/mobilizations/new`,
                 process.env.REACT_APP_DOMAIN_ADMIN
@@ -51,7 +52,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
         type="button"
         onClick={() => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
-            storage.setAsyncItem("community", community).then(() => {
+            updateSession("community", community).then(() => {
               window.location.href = new URL(
                 `/mobilizations`,
                 process.env.REACT_APP_DOMAIN_ADMIN

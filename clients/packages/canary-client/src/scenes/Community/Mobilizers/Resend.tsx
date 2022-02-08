@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, toast } from 'bonde-components';
-import { useMutation, useSession, gql } from 'bonde-core-tools';
+import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { InviteMutation } from './InviteForm';
@@ -33,10 +33,10 @@ type Props = {
   refetch: any
 }
 
-const Resend = ({ data: { id, email, role }, refetch }: Props) => {
+const Resend: React.FC<Props> = ({ data: { id, email, role }, refetch }) => {
   const [deleteInvite] = useMutation(DeleteInviteMutation)
   const [createInvite] = useMutation(InviteMutation)
-  const { user, community } = useSession()
+  const { currentUser: user, community } = useContext(SessionContext);
   const { t } = useTranslation('community');
 
   const onClick = async () => {
@@ -68,10 +68,10 @@ const Resend = ({ data: { id, email, role }, refetch }: Props) => {
         console.log('Community Not Found!');
       }
     } catch ({ graphQLErrors, ...errors }) {
-      if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
+      if (graphQLErrors && (graphQLErrors as any[]).filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
         toast('mobilizers.form.permission-denied', { type: toast.TYPE.ERROR });
       } else {
-        console.error({ graphQLErrors, ...errors });
+        console.error({ graphQLErrors, ...(errors as any) });
       }
     }
   }

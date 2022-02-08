@@ -1,10 +1,10 @@
 packages:
   # all packages in subdirs of packages/ and components/
   - '.'
-  - './libs/components'
-  - './libs/core-tools'
+  - '!./libs/editor'
+  - '!./libs/diagram'
+  - './libs/*'
   - '!./packages/example-client'
   - './packages/*'
-  # - '!packages/example-client'
   # exclude packages that are inside test/ directories
   - '!**/test/**'

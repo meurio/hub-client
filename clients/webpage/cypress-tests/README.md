@@ -6,7 +6,7 @@ Cypress: https://docs.cypress.io
 
 ### Configuração 
 
-- Os arquivos dos testes estão em cypress-tests/cypress/integration
+- Os arquivos dos testes estão em cypress-tests/cypress/integration, por isso, os comandos listados em 'Get Started' devem ser executados dentro dessa pasta
 - Em cypress.json se tem a url base para rodar os testes
 - Nas pastas screenshots e videos são adicionados automaticamente os registros visuais dos testes
 

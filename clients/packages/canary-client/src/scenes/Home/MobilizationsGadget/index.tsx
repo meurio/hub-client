@@ -1,5 +1,8 @@
-import React from "react";
-import { useQuery, useSession } from "bonde-core-tools";
+import React, { useContext } from "react";
+import {
+  useQuery,
+  Context as SessionContext
+} from "bonde-core-tools";
 import { SimpleGrid } from "bonde-components";
 import { useTranslation } from "react-i18next";
 import MobilizationBox, { MobilizationProps } from "./MobilizationCard";
@@ -9,7 +12,8 @@ import GadgetHeader from "../GadgetHeader";
 
 const MobilizationsGadget = (): React.ReactElement => {
   const { t } = useTranslation("home");
-  const { user, storage, communities } = useSession();
+  const { currentUser: user, communities } = useContext(SessionContext);
+
   const { data, loading } = useQuery(mobilizationsLastUpdated, {
     variables: { userId: user.id },
   });
@@ -41,12 +45,13 @@ const MobilizationsGadget = (): React.ReactElement => {
                 const community = communities.filter(
                   (c: any) => c.id === mobilization.community.id
                 )[0];
-                storage.setAsyncItem("community", community).then(() => {
-                  window.location.href = new URL(
-                    `/${mobilization.id}/edit`,
-                    process.env.REACT_APP_DOMAIN_ADMIN
-                  ).href;
-                });
+                console.log('community', { community });
+                // storage.setAsyncItem("community", community).then(() => {
+                //   window.location.href = new URL(
+                //     `/${mobilization.id}/edit`,
+                //     process.env.REACT_APP_DOMAIN_ADMIN
+                //   ).href;
+                // });
               }
             }}
           />

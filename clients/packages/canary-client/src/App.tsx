@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -7,13 +7,22 @@ import {
   useLocation
 } from 'react-router-dom';
 import {
-  BondeSessionProvider as Session,
-  BondeSessionUI as SessionUI,
-  useSession
+  Provider as Session,
+  Context as SessionContext
 } from 'bonde-core-tools';
-import { Loading, ToastContainer } from 'bonde-components';
+import {
+  Loading,
+  ToastContainer,
+  ChakraProvider,
+  chakraTheme,
+  FontsLoader,
+  SessionUI,
+  CSSReset
+} from 'bonde-components';
+import { hotjar } from 'react-hotjar';
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
+import { isMobile } from 'react-device-detect';
 // Scenes and Components to make your application
 import CommunityPage from './scenes/Community';
 import HomePage from './scenes/Home';
@@ -27,27 +36,8 @@ import * as types from "styled-components/cssprop";
 
 import 'react-toastify/dist/ReactToastify.css'
 
-type AppLoadingProps = {
-  fetching: 'session' | 'user' | 'communities' | 'redirect' | 'module'
-};
-
-const AppLoading = ({ fetching }: AppLoadingProps) => {
-  const { t } = useTranslation('loading');
-
-  const messages = {
-    session: t('session'),
-    user: t('user'),
-    communities: t('communities'),
-    // TODO: change this implementation
-    redirect: t('redirect'),
-    module: t('module')
-  };
-
-  return <Loading fullsize message={messages[fetching]} />;
-};
-
 const RouteIsAdmin = (props: any) => {
-  const { user } = useSession();
+  const { currentUser: user } = useContext(SessionContext);
 
   if (user.isAdmin) return <Route {...props} />;
 
@@ -93,6 +83,15 @@ const ChangeLanguage = () => {
 
 const PageRouting = () => {
   const { pathname } = useLocation();
+  const session = useContext(SessionContext);
+
+  React.useEffect(() => {
+    try {
+      hotjar.stateChange(pathname);
+    } catch(err) {
+      console.log("hotjar", err);
+    }
+  }, [pathname])
 
   return (
     <ScreenClassProvider>
@@ -100,9 +99,15 @@ const PageRouting = () => {
         indexRoute='/'
         disableNavigation={pathname === '/'}
         languageTool={ChangeLanguage}
+        session={session}
+        isMobile={isMobile}
       >
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          <Route
+            exact
+            path='/'
+            component={HomePage}
+          />
           <Route path='/community' component={CommunityPage} />
           <RouteIsAdmin path='/superuser' component={SuperuserPage} />
           <Route path='/widgets' component={WidgetsActionsPage} />
@@ -122,24 +127,33 @@ const App: React.FC = () => {
     (process.env.REACT_APP_ENVIRONMENT || 'development') as Environment;
 
   console.info('Build environment:', envConfig);
-  // Extra config
-  const config: any = {
-    // Setup local cross-storage and staging api
-    crossStorage: process.env.REACT_APP_DOMAIN_CROSS_STORAGE || 'http://bonde.devel:5003',
-    apiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql'
-  };
+  // App Urls
+  const apiGraphqlUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql';
 
   return (
     <React.Suspense fallback={Loading}>
-      <ToastContainer
-        className='BondeToastify'
-        hideProgressBar={true}
-      />
-      <Session fetchData environment={envConfig} loading={AppLoading} extraConfig={config}>
-        <Router>
-          <PageRouting />
-        </Router>
-      </Session>
+      <>
+        <FontsLoader />
+        <ChakraProvider theme={chakraTheme}>
+          <CSSReset />
+          <ToastContainer
+            className='BondeToastify'
+            hideProgressBar={true}
+          />
+          <Session
+            fetchData
+            uri={apiGraphqlUrl}
+            environment={envConfig}
+            loadingComponent={
+              <Loading fullsize message="Carregando sessão..." />
+            }
+          >
+            <Router>
+              <PageRouting />
+            </Router>
+          </Session>
+        </ChakraProvider>
+      </>
     </React.Suspense>
   );
 }

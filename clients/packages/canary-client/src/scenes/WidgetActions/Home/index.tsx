@@ -1,6 +1,7 @@
 import React from 'react';
-import { Header, Tab } from "bonde-components"
+import { Box, Header, Tab, Stack, Grid, GridItem } from "bonde-components"
 import { useTranslation } from 'react-i18next';
+import { isMobile } from 'react-device-detect';
 import SearchList from '../SearchList';
 import WidgetButton from '../WidgetButton';
 import { Widget, WidgetLoading } from '../FetchWidgets';
@@ -11,12 +12,11 @@ type Props = {
   community: {
     id: number
   }
-  storage: any
   widgets: Widget[]
   loading: boolean
 }
 
-const Home = ({ community, storage, widgets, loading }: Props): React.ReactElement => {
+const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
   return (
@@ -30,11 +30,12 @@ const Home = ({ community, storage, widgets, loading }: Props): React.ReactEleme
         </>
       )}
     >
-      <>
-        <section style={{ marginBottom: '15px' }}>
-          <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
-          <Shortcuts community={community} storage={storage} />
-        </section>
+      <Stack direction="column" spacing={4}>
+        {!isMobile ? 
+          <section style={{ marginBottom: '15px' }}>
+            <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
+            <Shortcuts community={community} />
+          </section> : null}
         <SearchList
           header={<Header.H5 uppercase>{t('home.actions')}</Header.H5>}
           data={widgets}
@@ -42,9 +43,22 @@ const Home = ({ community, storage, widgets, loading }: Props): React.ReactEleme
           loading={loading}
           renderLoading={<WidgetLoading />}
         >
-          {({ result }: any) => result.map((w: Widget) => (<WidgetButton key={w.id} widget={w} />))}
+          {({ result }: any) => (
+            <Box
+              maxHeight={["500px", "none"]}
+              overflowY="auto"
+            >
+              <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", null, "repeat(4, 1fr)", null, "repeat(6, 1fr)"]} gap={4} rowGap={4}>
+              {result.map((w: Widget, index: number) => (
+                <GridItem key={`widget-button-${index}`}>
+                  <WidgetButton key={w.id} widget={w} />
+                </GridItem>
+              ))}
+              </Grid>
+            </Box>
+          )}
         </SearchList>
-      </>
+      </Stack>
     </Container>
   );
 };

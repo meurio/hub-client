@@ -7,8 +7,10 @@ import {
   InputField,
   Validators,
   Link as LinkStyled,
+  Stack,
+  Flex
 } from "bonde-components";
-import { Container, Row, Col } from "react-grid-system";
+// import { Container } from "react-grid-system";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMutation, gql } from "bonde-core-tools";
@@ -35,7 +37,7 @@ const Success = () => {
   const { t } = useTranslation("auth");
 
   return (
-    <div>
+    <Stack spacing={4}>
       <Header.H2>{t("forgetPassword.successfully.title")}</Header.H2>
       <Text>{t("forgetPassword.successfully.checkEmail")}</Text>
       <Text>{t("forgetPassword.successfully.checkSpam")}</Text>
@@ -43,7 +45,7 @@ const Success = () => {
       <LinkStyled to="/login" component={Link}>
         {t("forgetPassword.goback")}
       </LinkStyled>
-    </div>
+    </Stack>
   );
 };
 
@@ -66,7 +68,7 @@ const ForgetPasswordForm = () => {
   return submitted ? (
     <Success />
   ) : (
-    <Container fluid style={{ width: "100%", padding: "0" }}>
+    <Stack spacing={4}>
       <Header.H2>{t("forgetPassword.title")}</Header.H2>
       <Text>{t("forgetPassword.description")}</Text>
       <ConnectedForm
@@ -84,26 +86,23 @@ const ForgetPasswordForm = () => {
               placeholder={t("forgetPassword.email.placeholder")}
               validate={isEmail(t("forgetPassword.email.isEmail"))}
             />
-            <Row align="center">
-              <Col sm={6}>
-                <LinkStyled
-                  component={Link}
-                  to="/login"
-                  title={t("forgetPassword.goback")}
-                >
-                  {t("forgetPassword.goback")}
-                </LinkStyled>
-              </Col>
-              <Col sm={6}>
-                <Button type="submit" disabled={submitting}>
-                  {t("forgetPassword.submit")}
-                </Button>
-              </Col>
-            </Row>
+
+            <Flex direction="row" alignItems="center" justify="space-between">
+              <LinkStyled
+                component={Link}
+                to="/login"
+                title={t("forgetPassword.goback")}
+              >
+                {t("forgetPassword.goback")}
+              </LinkStyled>
+              <Button type="submit" disabled={submitting}>
+                {t("forgetPassword.submit")}
+              </Button>
+            </Flex>
           </>
         )}
       </ConnectedForm>
-    </Container>
+    </Stack>
   );
 };
 

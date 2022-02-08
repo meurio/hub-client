@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, useLocation, Redirect } from "react-router-dom";
-import { useSession } from "bonde-core-tools";
+import { Context as SessionContext } from "bonde-core-tools";
 
 import Data from "../data";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
@@ -34,7 +34,7 @@ const SelectMapaOrRedes = ({
   component: ComponentToRender,
   ...rest
 }: Props): React.ReactElement => {
-  const { community } = useSession();
+  const { community }: any = useContext(SessionContext);
   const { groups } = useCommunityExtra();
   const { state } = useLocation();
 

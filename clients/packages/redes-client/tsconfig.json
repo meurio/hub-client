@@ -1,5 +1,6 @@
 {
   "extends": "../../tsconfig.json",
+  "types": ["@emotion/react/types/css-prop"],
   "include": [
     "src"
   ]

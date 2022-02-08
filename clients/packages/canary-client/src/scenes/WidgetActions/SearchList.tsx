@@ -1,19 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { Stack, Flex } from "bonde-components";
 import SearchInput from '../../components/SearchInput';
-
-const Flex = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  margin: -15px -9px;
-`;
-
-const HeaderInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 18px;
-`;
 
 type RenderProps = {
   result: any[]
@@ -37,8 +24,8 @@ const SearchList = ({ header, children, data, empty, loading, renderLoading }: P
   }, [data]);
 
   return (
-    <>
-      <HeaderInfo>
+    <Stack direction="column" spacing={4}>
+      <Flex direction={["column", "row"]} justify="space-between">
         {header}
         <SearchInput
           data={data}
@@ -46,13 +33,12 @@ const SearchList = ({ header, children, data, empty, loading, renderLoading }: P
           placeholder='Buscar mobilização'
           onChange={(result: any[]) => setDatalist(result)}
         />
-      </HeaderInfo>
-      {isLoading ? renderLoading : datalist.length > 0 ? (
-        <Flex>
-          {children({ result: datalist })}
-        </Flex>
-      ) : empty}
-    </>
+      </Flex>
+      {isLoading ? renderLoading : datalist.length > 0
+        ? children({ result: datalist })
+        : empty
+      }
+    </Stack>
   );
 }
 

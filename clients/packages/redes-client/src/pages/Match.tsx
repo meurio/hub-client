@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { css } from "styled-components/macro";
-import { Button, Header, Text, Empty } from "bonde-components";
-import { useMutation, useSession } from "bonde-core-tools";
+import React, { useContext, useState, useEffect } from "react";
+import { Button, Header, Text, Empty, Stack, Flex } from "bonde-components";
+import { useMutation, Context as SessionContext } from "bonde-core-tools";
 import { useLocation, useHistory } from "react-router-dom";
 
 import { Table, Popup } from "../components";
@@ -36,7 +35,7 @@ export default function Match({
   groups,
 }: Props): React.ReactElement {
   const [createRelationship, { loading }] = useMutation(CreateRelationship);
-  const { user, community } = useSession()
+  const { currentUser: user, community }: any = useContext(SessionContext)
   const [isOpen, setModal] = useState<boolean>(false);
   const [selectedGroup, isVolunteerSelected] = useSelectedGroup();
   const [state, dispatch] = useFilter();
@@ -63,44 +62,22 @@ export default function Match({
   }, [dispatch, isVolunteerSelected, linkState, selectedGroup]);
 
   return (
-    <>
-      <div
-        css={css`
-          & > button {
-            padding: 0;
-          }
-        `}
-      >
-        <Button secondary align="left" onClick={goBack}>
+    <Stack direction="column" spacing={4}>
+      <Flex direction="row" align="flex-start">
+        <Button variant="link" colorScheme="gray" onClick={goBack}>
           {"< voltar"}
         </Button>
-      </div>
+      </Flex>
       <FetchIndividualsForMatch {...selectedIndividual}>
         {({ data, count }) => {
           return count < 1 ? (
-            <div
-              css={css`
-                height: 100%;
-                & > div {
-                  height: 100%;
-                }
-              `}
-            >
+            <Stack>
               <Empty
                 message={`Ops! Não encontramos nenhum resultado para essa busca. Confira na lista de ${matchGroup} se há pessoas disponíveis para fazer o match.`}
               />
-            </div>
+            </Stack>
           ) : (
-            <div
-              css={css`
-                & > ${Header.H4} {
-                  margin: 15px 0 10px;
-                }
-                & > ${Text} {
-                  margin-top: 0;
-                }
-              `}
-            >
+            <Stack>
               <Header.H4>Match Realizado!</Header.H4>
               <Text>
                 {count} {matchGroup} próximas de {selectedIndividual.firstName}
@@ -111,7 +88,7 @@ export default function Match({
                 sticky="end"
                 totalResults={count}
               />
-            </div>
+            </Stack>
           );
         }}
       </FetchIndividualsForMatch>
@@ -124,6 +101,6 @@ export default function Match({
         community={community}
         loading={loading}
       />
-    </>
+    </Stack>
   );
 }

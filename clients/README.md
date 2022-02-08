@@ -24,41 +24,6 @@
 
 ## Requirements
 
-* NodeJS
-* Docker (optional)
-
-## Before Start
-
-We start to use two strategies to handle with different problems. The first one, how to unify our codebase to newcomers have an easier path? Our answer is: git submodules. And the second, how to share sessions between different clients? Our answer is: share localstorage across multiple windows.
-
-### Git Modules
-
-After clone this repo, if you want edit any other part of BONDE besides clients app, you should run the following commands:
-
-```
-git submodule init
-git submodule update
-```
-
-* [Official help page](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
-
-
-### Cross Storage
-
-To have access to localstorage in different apps we must configure a common url to these apps. In local development, we use ```bonde.devel```
-
-We recommend add the following alias to your ```/etc/hosts```:
-
-```
-127.0.0.1 api-rest.bonde.devel api-graphql.bonde.devel api-v2.bonde.devel graphql-auth.bonde.devel
-
-127.0.0.1 bonde.devel app.bonde.devel admin-canary.bonde.devel cross-storage.bonde.devel chatbot.bonde.devel
-
-127.0.0.1 3-vamos-limpar-o-tiete.bonde.devel 2-save-the-whales.bonde.devel 1-vamos-limpar-o-tiete.bonde.devel
-```
-
-## Get started
-
 Before start installing, change ```.bashrc``` to add nvm and arkade to user's path.
 
 ```

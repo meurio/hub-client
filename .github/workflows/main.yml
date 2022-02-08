@@ -1,0 +1,95 @@
+name: Workflow build and tests canary
+on:
+  push:
+    paths:
+      - 'monorepo/clients/canary/**'
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [14]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache .pnpm-store
+        uses: actions/cache@v1
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      
+      - name: Install pnpm
+        run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+      
+      - name: Install dependencies
+        run: cd monorepo && pnpm m i --filter @bonde/canary
+      
+      - name: Run tests
+        run: cd monorepo && pnpm m run test:coverage  --filter @bonde/canary
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          files: ./monorepo/clients/canary/coverage/clover.xml,./monorepo/libs/components/coverage/clover.xml
+          flags: unittests
+          verbose: true
+
+  build:
+    needs: tests
+    runs-on: ubuntu-20.04
+    outputs:
+      tags: ${{ steps.meta.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: nossas/bonde-clients
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./monorepo
+          file: ./monorepo/Dockerfile.clients
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Rancher Deploy clients/canary-2
+        uses: ./.github/actions/rancher-deploy
+        env:
+          RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
+          RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
+          RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
+          RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
+          SERVICE_NAME: 'clients/canary-2'
+          DOCKER_IMAGE: ${{ needs.build.outputs.tags }}
+
+      # - name: Rancher Deploy clients/canary
+      #   uses: ./.github/actions/rancher-deploy
+      #   env:
+      #     RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
+      #     RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
+      #     RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
+      #     RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
+      #     SERVICE_NAME: 'clients/canary-2'
+      #     DOCKER_IMAGE: ${{ steps.meta.outputs.tags }}

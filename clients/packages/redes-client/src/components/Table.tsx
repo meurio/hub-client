@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React, { useEffect, useState } from "react";
-import { Table as TableContent } from "bonde-components"
+import { BTable as TableContent } from "bonde-components"
 import { useFilter } from "../services/FilterProvider"
 import { Columns } from "../types";
 

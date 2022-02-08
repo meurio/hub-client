@@ -1,22 +1,22 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
-import Content from '../../components/Content';
+import { Container, SimpleGrid, Box } from "bonde-components";
+import { isMobile } from "react-device-detect";
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';
 
-const HomePage = () => (
-  <Content>
-    <Container fluid style={{ width: '100%', padding: '0' }}>
-      <Row>
-        <Col sm={12} md={6}>
-          <CommunitiesGadget />
-        </Col>
-        <Col sm={12} md={6}>
+const HomePage = (): React.ReactElement => (
+  <Container>
+    <SimpleGrid columns={[1, null, null, 2]} spacing={8}>
+      <Box>
+        <CommunitiesGadget />
+      </Box>
+      {!isMobile ?
+        <Box>
           <MobilizationsGadget />
-        </Col>
-      </Row>
-    </Container>
-  </Content>
+        </Box>
+        : null}
+    </SimpleGrid>
+  </Container>
 );
 
 export default HomePage;

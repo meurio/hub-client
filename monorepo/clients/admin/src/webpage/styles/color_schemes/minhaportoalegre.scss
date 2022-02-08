@@ -1,0 +1,33 @@
+.minhaportoalegre-scheme .widget {
+  color: #444;
+}
+
+.minhaportoalegre-scheme .widget .button {
+  color: white;
+}
+
+.minhaportoalegre-scheme .bg-1 {
+  background-color: #F68B1F;
+}
+
+.minhaportoalegre-scheme .bg-2 {
+  background-color: #F15622;
+}
+
+.minhaportoalegre-scheme .bg-3 {
+  background-color: #1A9CAC;
+}
+
+.minhaportoalegre-scheme .bg-1,
+.minhaportoalegre-scheme .bg-2,
+.minhaportoalegre-scheme .bg-3,
+.minhaportoalegre-scheme .bg-4,
+.minhaportoalegre-scheme .bg-5,
+.minhaportoalegre-scheme .bg-6,
+.minhaportoalegre-scheme .bg-7,
+.minhaportoalegre-scheme .bg-8 {
+  .widget {
+    color: white;
+    h1, h2, h3, h4, h5, h6 { color: white }
+  }
+}

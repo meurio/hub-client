@@ -4,7 +4,7 @@ import FetchDNSHostedZones from './FetchDNSHostedZones';
 import DetailDomain from './DetailDomain';
 import ListDomain from './ListDomain';
 
-const Domains = () => {
+const Domains: React.FC = () => {
   const { path } = useRouteMatch();
   return (
     <FetchDNSHostedZones>

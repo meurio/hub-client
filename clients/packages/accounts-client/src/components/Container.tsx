@@ -4,7 +4,7 @@ import { Link as LinkStyled } from 'bonde-components';
 interface ContainerProps {
   reverse?: boolean;
   column?: boolean;
-};
+}
 
 const Container = styled.div<ContainerProps>`
   display: flex;

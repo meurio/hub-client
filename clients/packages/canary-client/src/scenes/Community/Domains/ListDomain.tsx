@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Header, Text, Icon } from 'bonde-components';
 import {
-  DNS as DTRow,
-  Col as DTCol,
-  List as DTList,
-  Status,
-  Fluid
-} from './Styles';
+  Text,
+  Icon,
+  Grid,
+  GridItem,
+  Box,
+  Flex,
+  Stack,
+  Heading
+} from 'bonde-components';
+import { Status } from './Styles';
 import CreateDomainModal from './CreateDomainModal';
 
 type Certificate = {
@@ -23,66 +26,59 @@ type DNSHostedZone = {
   status: 'created' | 'propagating' | 'propagated' | 'certifying' | 'certified'
 }
 
-type Props = {
-  dnsHostedZone: DNSHostedZone
-}
-
-const Domain = ({ dnsHostedZone }: Props) => {
-  return (
-    <Link to={`/community/domains/${dnsHostedZone.id}`}>
-      <DTRow>
-        <DTCol>
-          <Text bold>{dnsHostedZone.domain_name}</Text>
-        </DTCol>
-        <DTCol>
-          <Status
-            activeStatus='propagated'
-            inactiveStatus='created'
-            value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'propagated' : dnsHostedZone.status}
-            labels={{
-              created: 'Aguardando configurar DNS',
-              propagating: 'Propagando',
-              propagated: 'Propagado'
-            }}
-          />
-        </DTCol>
-        <DTCol>
-          <Icon size='small' name='ArrowRight' />
-        </DTCol>
-      </DTRow>
-    </Link>
-  );
-}
-
 type DomainsProps = {
   refetch: any
   dnsHostedZones: DNSHostedZone[]
 }
 
-const Domains = ({ dnsHostedZones, refetch }: DomainsProps) => (
-  <>
-    <Fluid>
-      <div>
-        <Header.H3>Domínios</Header.H3>
+const Domains: React.FC<DomainsProps> = ({ dnsHostedZones, refetch }) => (
+  <Stack spacing={4}>
+    <Flex direction="row" justify="space-between" pb={4}>
+      <Stack spacing={2}>
+        <Heading as="h4" size="md">Domínios</Heading>
         <Text>Aqui você gerencia os Domínios (URLs customizadas) das páginas da sua comunidade.</Text>
-      </div>
+      </Stack>
       <CreateDomainModal btnText='Adicionar domínio' refetch={refetch} />
-    </Fluid>
-    <DTList columnSize='500px auto 70px'>
-      <DTRow header>
-        <DTCol>
+    </Flex>
+    <Box display={["none", "flex"]}>
+      <Grid templateColumns='500px auto 70px' gap={4}>
+        <GridItem>
           <Text>Domínio</Text>
-        </DTCol>
-        <DTCol>
+        </GridItem>
+        <GridItem colSpan={2}>
           <Text>Status</Text>
-        </DTCol>
-        <DTCol />
-      </DTRow>
+        </GridItem>
+      </Grid>
+    </Box>
+    <Box>
       {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
-        <Domain key={index} dnsHostedZone={dnsHostedZone} />
+        <Link key={`dns-hosted-zone-${index}`} to={`/community/domains/${dnsHostedZone.id}`}>
+          <Box bg="white" p={4} borderBottomWidth={1} borderColor="gray.100">
+            <Grid key={`domain-item-${index}`} templateColumns={["auto", "500px auto 70px"]} gap={4}>
+              <GridItem>
+                <Text bold>{dnsHostedZone.domain_name}</Text>
+              </GridItem>
+              <GridItem>
+                <Status
+                  activeStatus='propagated'
+                  inactiveStatus='created'
+                  value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'propagated' : dnsHostedZone.status}
+                  labels={{
+                    created: 'Aguardando configurar DNS',
+                    propagating: 'Propagando',
+                    propagated: 'Propagado'
+                  }}
+                />
+              </GridItem>
+              <GridItem>
+                <Icon size='small' name='ArrowRight' />
+              </GridItem>
+            </Grid>
+          </Box>
+        </Link>
       ))}
-    </DTList>
-  </>
+    </Box>
+  </Stack>
 );
 
 export default Domains;

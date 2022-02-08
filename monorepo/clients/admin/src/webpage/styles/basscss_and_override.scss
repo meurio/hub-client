@@ -1,0 +1,191 @@
+@import './color-variables';
+
+$font-family: 'Proxima Nova', sans-serif;
+$form-field-height: 3rem;
+$link-color: $aqua;
+$space-5: 8rem !default;
+
+@import 'node_modules/basscss-sass/scss/btn';
+@import 'node_modules/basscss-sass/scss/btn-outline';
+@import 'node_modules/basscss-sass/scss/btn-primary';
+@import 'node_modules/basscss-sass/scss/forms';
+@import 'node_modules/basscss-sass/scss/align';
+@import 'node_modules/basscss-sass/scss/all';
+@import 'node_modules/basscss-sass/scss/border';
+@import 'node_modules/basscss-sass/scss/grid';
+@import 'node_modules/basscss-sass/scss/hide';
+@import 'node_modules/basscss-sass/scss/highlight-dark';
+@import 'node_modules/basscss-sass/scss/highlight';
+@import 'node_modules/basscss-sass/scss/input-range';
+@import 'node_modules/basscss-sass/scss/layout';
+@import 'node_modules/basscss-sass/scss/lighten';
+@import 'node_modules/basscss-sass/scss/margin';
+@import 'node_modules/basscss-sass/scss/media-object';
+@import 'node_modules/basscss-sass/scss/padding';
+@import 'node_modules/basscss-sass/scss/position';
+@import 'node_modules/basscss-sass/scss/progress';
+@import 'node_modules/basscss-sass/scss/responsive-margin';
+@import 'node_modules/basscss-sass/scss/responsive-padding';
+@import 'node_modules/basscss-sass/scss/type-scale';
+@import 'node_modules/basscss-sass/scss/typography';
+@import 'node_modules/basscss-sass/scss/background-colors';
+@import 'node_modules/basscss-sass/scss/background-images';
+@import 'node_modules/basscss-sass/scss/border-colors';
+@import 'node_modules/basscss-sass/scss/colors';
+@import 'node_modules/basscss-sass/scss/darken';
+@import 'node_modules/basscss-sass/scss/flexbox';
+
+.caps { letter-spacing: 0; }
+form .button { height: 3rem; }
+
+.field-light:invalid:focus { border-color: $blue; }
+.field-light.has-error { border-color: $red !important; }
+.button.is-disabled, .button:disabled { opacity: .25; }
+
+.hover { opacity: 0.8; }
+.hover:hover { opacity: 1; }
+
+// ESTILO DOS BOTÕES DE MENU
+.button-menu {
+  font-weight: lighter;
+  display: block;
+  padding: 0px;
+  padding: .5em 2em;
+  border-left: 3px solid rgba(0,0,0,0);
+  box-sizing: border-box;
+}
+
+.button-menu:hover {
+  text-decoration: none;
+  border-left: 3px solid #20BDE9;
+}
+.button.col.is-active { background-color:#CAEFF2; }
+
+// DÁ EFEITO EM BOTÕES COM IMAGEM
+
+.widget a img { transition: .1s ease-in-out; }
+.widget a img:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 0px 15px rgba(0,0,0,.4)
+}
+
+// Additional Colors
+.lightgray          { color: $lightGray; }
+.darkblue           { color: $darkblue; }
+.lightestgray       { color: $lightestGray; }
+.gray20             { color: $gray20; }
+.eclipse            { color: $eclipse; }
+.gray94             { color: $gray94; }
+.gainsboro          { color: $gainsboro; }
+.whisper            { color: $whisper; }
+.gray95             { color: $gray95; }
+.darkengray         { color: $darkenGray; }
+.pagenta            { color: $pagenta; }
+.lavender-pink      { color: $lavenderPink; }
+.darken-medium-blue { color: $darkenMediumBlue; }
+.atomic             { color: $atomic; }
+.blacker            { color: $blacker; }
+.yellow-green       { color: $yellowGreen; }
+
+// Additional Background Colors
+.bg-lightgray          { background-color: $lightGray; }
+.bg-darkblue           { background-color: $darkblue; }
+.bg-lightestgray       { background-color: $lightestGray; }
+.bg-gray20             { background-color: $gray20; }
+.bg-eclipse            { background-color: $eclipse; }
+.bg-gray94             { background-color: $gray94; }
+.bg-gainsboro          { background-color: $gainsboro; }
+.bg-whisper            { background-color: $whisper; }
+.bg-gray95             { background-color: $gray95; }
+.bg-darkengray         { background-color: $darkenGray; }
+.bg-pagenta            { background-color: $blacker; }
+.bg-lavender-pink      { background-color: $lavenderPink; }
+.bg-darken-medium-blue { background-color: $darkenMediumBlue; }
+.bg-atomic             { background-color: $atomic; }
+.bg-blacker            { background-color: $blacker; }
+.bg-yellow-green       { background-color: $yellowGreen; }
+
+// Additional Border Colors
+.border-lightgray          { border-color: $lightGray; }
+.border-darkblue           { border-color: $darkblue; }
+.border-lightestgray       { border-color: $lightestGray; }
+.border-gray20             { border-color: $gray20; }
+.border-eclipse            { border-color: $eclipse; }
+.border-gray94             { border-color: $gray94; }
+.border-gainsboro          { border-color: $gainsboro; }
+.border-whisper            { border-color: $whisper; }
+.border-gray95             { border-color: $gray95; }
+.border-darkengray         { border-color: $darkenGray; }
+.border-pagenta            { border-color: $blacker; }
+.border-lavender-pink      { border-color: $lavenderPink; }
+.border-darken-medium-blue { border-color: $darkenMediumBlue; }
+.border-atomic             { border-color: $atomic; }
+.border-blacker            { border-color: $blacker; }
+.border-yellow-green       { border-color: $yellowGreen; }
+
+.border-transparent { border-color: transparent; }
+.border-darken-1    { border-color: $darken-1; }
+.border-darken-2    { border-color: $darken-2; }
+.border-darken-3    { border-color: $darken-3; }
+.border-darken-4    { border-color: $darken-4; }
+
+// Additional Border Options
+.border-only-bottom {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+// Headers
+.h1 {
+  font-weight: 300;
+  font-size: 2.15rem;
+  color: $darkenGray;
+}
+.h6 {
+  color: $darkenGray;
+  font-size: .75rem;
+  font-weight: 600;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  color: $darkenGray;
+}
+
+// Sizes
+.full-height { height: 100%; }
+
+// Additional Layouts
+.content-box { box-sizing: content-box; }
+
+// Z-Index
+.z0 { z-index: 0 }
+.z5 { z-index: 5 }
+.z6 { z-index: 6 }
+.z7 { z-index: 7 }
+.z8 { z-index: 8 }
+.z9 { z-index: 9 }
+
+// Padding
+.p5  { padding        : $space-5; padding-right : $space-5; }
+.px5 { padding-left   : $space-5; padding-right : $space-5; }
+.pl5 { padding-left   : $space-5; }
+.pr5 { padding-right  : $space-5; }
+.pt5 { padding-top    : $space-5; }
+.pb5 { padding-bottom : $space-5; }
+
+// Image
+img { max-width: 100% }
+
+// Form
+.select {
+  background-color: $white;
+  appearance: none;
+}
+
+.input, .textarea, .select {
+  box-sizing: border-box;
+  height: auto;
+}

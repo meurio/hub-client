@@ -1,32 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Header, Tab, Navigation } from 'bonde-components';
-import { Container as GridContainer } from 'react-grid-system';
-import Content from "../../components/Content";
+import { Heading, Stack, Flex, DarkMode, Container as Content } from 'bonde-components';
+import { isMobile } from 'react-device-detect';
 import TabRoute from './TabRoute';
-
-
-const SubHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  padding: 0 60px;
-
-  h3 {
-    color: #fff;
-    margin: 10px 0 30px;
-  }
-
-  ${Tab} {
-    outline: none;
-  }
-`;
-
-const PageWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
 
 type Props = {
   title: string
@@ -39,23 +14,23 @@ export type NavigationArgs = {
   is: (regex: any) => boolean
 }
 
-const Container = ({ children, title, navigation }: Props) => {
+const Container: React.FC<Props> = ({ children, title, navigation }): React.ReactElement => {
   return (
     <TabRoute>
       {({ push, is }) => (
-        <PageWrap>
-          <SubHeader>
-            <Header.H3>{title}</Header.H3>
-            <Navigation>
-              {navigation({ push, is })}
-            </Navigation>
-          </SubHeader>
-          <Content>
-            <GridContainer fluid style={{ width: "100%", padding: "0" }}>
-              {children}
-            </GridContainer>
+        <Flex direction="column" flex={1}>
+          {!isMobile ? <Stack spacing={4} bg="black" px={[6, null, null, 12]}>
+            <Heading as="h2" size="2xl" color="white" fontWeight="extrabold">{title}</Heading>
+            <DarkMode>
+              <Flex direction="row">
+                {navigation({ push, is })}
+              </Flex>
+            </DarkMode>
+          </Stack> : null}
+          <Content display="flex" flex={1} flexDirection="column" height={["100%", null, null, "auto"]}>
+            {children}
           </Content>
-        </PageWrap>
+        </Flex>
       )}
     </TabRoute>
   );

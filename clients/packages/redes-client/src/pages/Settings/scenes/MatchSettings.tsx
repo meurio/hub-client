@@ -1,7 +1,6 @@
 import React from "react";
-import styled, { css } from "styled-components/macro";
+import { css } from "styled-components/macro";
 import { useMutation } from "bonde-core-tools";
-import { Success, toast } from "bonde-components";
 import {
   Button,
   ConnectedForm,
@@ -11,23 +10,17 @@ import {
   Validators,
   Card,
   Hint,
+  Success,
+  toast,
+  Stack,
+  Flex,
+  Grid,
+  GridItem
 } from "bonde-components";
 
 import UPDATE_GROUPS from "../../../graphql/UpdateGroups";
-import { Tip, WhatsappCards } from ".";
+import { Tip } from ".";
 import { Groups } from "../../../types";
-
-const WrapButton = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  bottom: 0;
-  z-index: 1;
-  & > button {
-    width: 220px;
-  }
-`;
 
 const MatchSettings = ({
   groups,
@@ -48,10 +41,6 @@ const MatchSettings = ({
       ),
     },
   };
-
-  // const [saveGroup] = useMutation(UPDATE_GROUPS, {
-  //   variables:
-  // });
 
   const onSubmit = async (values: {
     input: { whatsapp: Record<string, string> };
@@ -88,57 +77,59 @@ const MatchSettings = ({
   return (
     <ConnectedForm initialValues={initialValues} onSubmit={onSubmit}>
       {({ submitting }) => (
-        <>
-          <WrapButton>
+        <Stack direction="column" spacing={4}>
+          <Flex direction="row" justify="space-between">
+            <Stack direction="column" spacing={2}>
+              <Header.H3 style={{ margin: 0 }}>Comunicação</Header.H3>
+              <Text>
+                Abaixo você define a mensagem que será enviada à pessoa quando um
+                match for realizado.
+              </Text>
+            </Stack>
             <Button type="submit" disabled={submitting}>
               Salvar alterações
             </Button>
-          </WrapButton>
-          <div style={{ position: "relative", bottom: "40px" }}>
-            <Header.H3 style={{ margin: 0 }}>Comunicação</Header.H3>
-            <Text>
-              Abaixo você define a mensagem que será enviada à pessoa quando um
-              match for realizado.
-            </Text>
-            <WhatsappCards>
-              <div>
-                {groups.map((group, i) => {
-                  return (
-                    <Card
-                      rounded={"5px"}
-                      padding={{ x: 30, y: 30 }}
-                      margin={{ bottom: 30 }}
-                      key={`whatsapp-card-${i}`}
+          </Flex>
+          <Grid templateColumns="auto 30%" gap={4}>
+            <GridItem>
+              {groups.map((group, i) => {
+                return (
+                  <Card
+                    rounded={"5px"}
+                    padding={{ x: 30, y: 30 }}
+                    margin={{ bottom: 30 }}
+                    key={`whatsapp-card-${i}`}
+                  >
+                    <Header.H4 style={{ margin: 0, marginBottom: '15px' }}> 
+                      {group.name}
+                    </Header.H4>
+                    {error && <Hint color="error">{error.message}</Hint>}
+                    <div
+                      css={css`
+                        & textarea {
+                          height: 100px;
+                          margin-bottom: 30px;
+                        }
+                      `}
                     >
-                      <Header.H4 style={{ margin: 0, marginBottom: '15px' }}> 
-                        {group.name}
-                      </Header.H4>
-                      {error && <Hint color="error">{error.message}</Hint>}
-                      <div
-                        css={css`
-                          & textarea {
-                            height: 100px;
-                            margin-bottom: 30px;
-                          }
-                        `}
-                      >
-                        <TextareaField
-                          name={`input.whatsapp.${group.name
-                            .toLowerCase()
-                            .split(" ")
-                            .join("_")}`}
-                          label="Mensagem de whatsapp"
-                          validate={required("Valor não pode ser vazio")}
-                        />
-                      </div>
-                    </Card>
-                  );
-                })}
-              </div>
+                      <TextareaField
+                        name={`input.whatsapp.${group.name
+                          .toLowerCase()
+                          .split(" ")
+                          .join("_")}`}
+                        label="Mensagem de whatsapp"
+                        validate={required("Valor não pode ser vazio")}
+                      />
+                    </div>
+                  </Card>
+                );
+              })}
+            </GridItem>
+            <GridItem>
               <Tip groups={groups} />
-            </WhatsappCards>
-          </div>
-        </>
+            </GridItem>
+          </Grid>
+        </Stack>
       )}
     </ConnectedForm>
   );

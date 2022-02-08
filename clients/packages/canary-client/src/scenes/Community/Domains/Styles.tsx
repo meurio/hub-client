@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Header, Icon } from 'bonde-components';
+import { Text, Header, Icon, Flex } from 'bonde-components';
 
 export type ColProps = {
   align?: string
@@ -65,6 +65,7 @@ type StatusStyledProps = {
 
 // Status propagando: #444444
 export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
+  cursor: pointer;
   font-size: 13px !important;
   color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#FF2B4E' : '#444444'} !important;
 
@@ -84,20 +85,20 @@ export const Status = ({ value, labels, activeStatus, inactiveStatus, isActived 
   return (
     <StatusStyled active={isActive} disabled={isDisabled}>
       {isActive ? (
-        <>
+        <Flex direction="row">
           <Icon size='small' name='Check' />
           <span>{labels[value || 'active']}</span>
-        </>
+        </Flex>
       ) : inactiveStatus ? (
-        <>
+        <Flex direction="row">
           <Icon size='small' name='Warning' />
           <span>{labels[value || 'inactive']}</span>
-        </>
+        </Flex>
       ) : (
-        <>
+        <Flex direction="row">
           <Icon size='small' name='Sync' />
           <span>{labels[value || '']}</span>
-        </>
+        </Flex>
       )}
     </StatusStyled>
   );
@@ -106,34 +107,6 @@ export const Status = ({ value, labels, activeStatus, inactiveStatus, isActived 
 Status.defaultProps = {
   activeStatus: 'active'
 }
-
-type ListProps = {
-  columnSize?: string
-  rowSize?: string
-  padding?: string
-}
-
-export const List = styled.div<ListProps>`
-  padding: 18px 0 30px;
-
-  a {
-    text-decoration: none;
-  }
-
-  ${DNS} {
-    grid-template-columns: ${props => !props.columnSize ? '500px auto 150px' : props.columnSize};
-
-    ${props => props.rowSize && `
-      grid-template-rows: ${props.rowSize};
-    `};
-
-    ${props => props.padding && `
-      ${Col} {
-        padding: ${props.padding};
-      }
-    `};
-  }
-`
 
 export const MainTitle = styled(Text).attrs({ uppercase: true })`
   display: flex;
@@ -154,67 +127,3 @@ export const SmallText = styled(Text)`
     }
   }
 `;
-
-export const Button = styled.button.attrs({ type: 'button' })`
-  font-family: Nunito Sans;
-  font-size: 13px;
-  border: none;
-  outline: none;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bold;
-
-  &:hover {
-    color: #c7c7c7;
-
-    svg {
-      path {
-        fill: #c7c7c7;
-      }
-    }
-  }
-
-  svg {
-    margin: 0 5px 3px 0;
-  }
-`;
-
-export const Fluid = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: middle;
-
-  button {
-    max-height: 35px;
-    max-width: 250px;
-    padding: 8px 24px;
-  }
-
-  h3 {
-    font-size: 21px;
-    line-height: 28.6px;
-    margin-bottom: 6px !important;
-  }
-
-  p {
-    line-height: 27px;
-  }
-
-  a {
-    text-decoration: none;
-
-    &:hover {
-
-      svg {
-        path {
-          fill: #c7c7c7;
-        }
-      }
-
-      h5 {
-        color: #c7c7c7;
-      }
-    }
-  }
-`

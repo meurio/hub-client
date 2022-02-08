@@ -1,0 +1,44 @@
+.PlipDetails {
+  background-color: #ffffff;
+  padding: 2em;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.PlipDetails ol {
+  text-align: left;
+}
+
+.PlipDetails ol li{
+  margin: 1em 0;
+}
+
+.PlipDetails h3 {
+   font-family: Nunito Sans;
+   font-weight: 900;
+   text-align: center;
+}
+
+.PlipDetails button,
+.PlipDetails a {
+  display: inline-flex;
+  text-transform: uppercase;
+  font-size: small;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.5em;
+  background-color: #EE0090;
+  color: #FFF;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  padding: 1.3em;
+  max-width: 13.5rem;
+  margin: 20px;
+  font-family: Arial;
+  border: none;
+}
+
+.PlipDetails a > svg {
+  margin-right: 0.5rem;
+}

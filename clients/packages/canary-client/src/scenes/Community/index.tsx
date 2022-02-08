@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
 import { Empty, Header, Navigation, Tab } from 'bonde-components';
-import { useSession } from 'bonde-core-tools';
+import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
-import Content from '../../components/Content';
 // Subroutes
 import Analytics from './Analytics';
 import Domains from './Domains';
@@ -12,38 +10,15 @@ import Integrations from './Integrations';
 import Mobilizers from './Mobilizers';
 import Recipient from './Recipient';
 import Settings from './Settings';
-import Styles from './Styles';
-
-const SubHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  padding: 0 60px;
-
-  h3 {
-    color: #fff;
-    margin: 10px 0 30px;
-  }
-
-  ${Tab} {
-    outline: none;
-  }
-`;
-
-const PageWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
 
 type Props = {
   match: any
   location: any
 }
 
-const CommunityPage = ({ match, location }: Props) => {
+const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement => {
   const history = useHistory();
-  const { community } = useSession();
+  const { community } = useContext(SessionContext);
   const { t } = useTranslation('community');
 
   // Utils

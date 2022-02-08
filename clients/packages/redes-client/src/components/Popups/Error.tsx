@@ -1,5 +1,14 @@
 import React from "react";
-import { Header, Text, Button } from "bonde-components";
+import {
+  Stack,
+  Box,
+  Text,
+  Button,
+  ModalContent,
+  ModalBody,
+  ModalHeader,
+  ModalFooter
+} from "bonde-components";
 import { Individual } from "../../types";
 
 export default function Error({
@@ -15,25 +24,26 @@ export default function Error({
   errorMsg: string;
 }): React.ReactElement {
   return (
-    <div>
-      <Header.H2 style={{ margin: 0 }}>Ops!</Header.H2>
-      <Text style={{ margin: '15px 0 25px 0' }}>
-        Encontramos um erro e {match.recipient.firstName} não pôde ser
-        encaminhada para {match.volunteer.firstName}
-      </Text>
-      <div
-        style={{
-          backgroundColor: "#EEEEEE",
-          padding: "15px 20px",
-        }}
-      >
-        <Text>{errorMsg}</Text>
-      </div>
-      <Text style={{ margin: '25px 0' }}>
-        Clique abaixo para tentar outra vez. Se o erro persistir, comunique a
-        equipe de tecnologia.
-      </Text>
-      <Button onClick={onSubmit}>tentar novamente</Button>
-    </div>
+    <ModalContent>
+      <ModalHeader>Ops!</ModalHeader>
+      <ModalBody>
+        <Stack spacing={4}>
+          <Text>
+            Encontramos um erro e {match.recipient.firstName} não pôde ser
+            encaminhada para {match.volunteer.firstName}
+          </Text>
+          <Box bg="gray.50" p={4}>
+            <Text>{errorMsg}</Text>
+          </Box>
+          <Text>
+            Clique abaixo para tentar outra vez. Se o erro persistir, comunique a
+            equipe de tecnologia.
+          </Text>
+        </Stack>
+      </ModalBody>
+      <ModalFooter>
+        <Button onClick={onSubmit}>tentar novamente</Button>
+      </ModalFooter>
+    </ModalContent>
   );
 }

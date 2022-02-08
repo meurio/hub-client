@@ -1,29 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Header, Text } from 'bonde-components';
-import Image from './Image';
+import { Box, Text, Image, Heading } from 'bonde-components';
+import FallbackImage from "./FallbackImage";
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
-  overflow: hidden;
-  width: 100%;
-  cursor: pointer;
-
-  &:hover {
-    img, svg {
-      filter: contrast(100%);
-    }
-  }
-`;
-
-const CardContent = styled.div`
-  padding: 18px;
-`;
-
-export type Mobilization = {
+export type MobilizationProps = {
   id: number
   name: string
   goal?: string
@@ -33,31 +12,40 @@ export type Mobilization = {
   community: any
 }
 
-type Props = {
-  className?: string
-  mobilization: Mobilization
+export type MobilizationBoxProps = {
+  mobilization: MobilizationProps
   onClick?: any
 }
 
-const MobilizationCard = styled(({ className, mobilization, onClick }: Props) => {
-  return (
-    <div className={className} onClick={onClick}>
-      <Card>
-        <Image src={mobilization.facebookShareImage} title={mobilization.name} />
-        <CardContent>
-          <Header.H4>{mobilization.name}</Header.H4>
-          <Text>Por {mobilization.community.name}</Text>
-        </CardContent>
-      </Card>
-    </div>
-  )
-})`
-  display: flex;
-  flex-basis: 50%;
+export const MobilizationBox: React.FC<MobilizationBoxProps> = ({
+  mobilization: {
+    facebookShareImage: imageUrl,
+    name,
+    community
+  },
+  onClick
+}) => (
+  <Box
+    w="auto"
+    boxShadow="sm"
+    overflow="hidden"
+    bg="white"
+    cursor={!!onClick ? "pointer" : "normal"}
+    onClick={onClick}
+  >
+    <Image
+      src={imageUrl}
+      alt={name}
+      objectFit="cover"
+      fallback={<FallbackImage />}
+      w="100%"
+      h="188px"
+    />
+    <Box p={4}>
+      <Heading as="h4" fontWeight="extrabold" size="md">{name}</Heading>
+      <Text>Por {community.name}</Text>
+    </Box>
+  </Box>
+);
 
-  @media only screen and (max-width: 768px) {
-    flex-basis: 100%;
-  }
-`;
-
-export default MobilizationCard;
+export default MobilizationBox;

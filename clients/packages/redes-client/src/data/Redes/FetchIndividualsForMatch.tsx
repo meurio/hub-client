@@ -29,8 +29,6 @@ const INDIVIDUALS_FOR_MATCH = gql`
         group: { is_volunteer: $isVolunteer, community_id: $context }
         email: { _is_null: false }
         first_name: { _is_null: false }
-        state: { _neq: "ZERO_RESULTS" }
-        city: { _neq: "ZERO_RESULTS" }
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
       }
       order_by: { created_at: asc }

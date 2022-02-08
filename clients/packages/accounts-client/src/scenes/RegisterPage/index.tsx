@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Form from './Form';
 import RegisterVerify from './RegisterVerify';
 
-export default (props: any) => {
+const RegisterPage = (props: any) => {
   // Reduce unnecessary loading for subpages
   const { t } = useTranslation('auth');
 
@@ -13,3 +13,5 @@ export default (props: any) => {
     </RegisterVerify>
   );
 };
+
+export default RegisterPage;

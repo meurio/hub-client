@@ -12,6 +12,8 @@ import {
   valueString,
   valueAndRow,
   Individual,
+  Agent,
+  Relation
 } from "../../../types";
 
 const columns = (
@@ -76,7 +78,7 @@ const columns = (
       Cell: ({
         row,
       }: {
-        row: { original: { volunteer: Individual; recipient: Individual } };
+        row: { original: Relation<Individual, Agent> };
       }): ReactElement => (
         <BtnWhatsapp original={row.original} />
       ),

@@ -23,6 +23,7 @@ export const MAPA_INDIVIDUAL = gql`
     organizationId: organization_id
     updatedAt: updated_at
     registrationNumber: registration_number
+    occupationArea: occupation_area
   }
 `;
 

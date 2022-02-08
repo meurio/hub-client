@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ConnectedForm, toast } from 'bonde-components';
-import { useSession, useMutation, gql } from 'bonde-core-tools';
+import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
 
@@ -23,6 +23,7 @@ const UpdateCommunityGQL = gql`
         facebook_app_id
         email_template_from
         modules
+        signature
         recipient {
           id
           pagarme_recipient_id
@@ -71,8 +72,8 @@ type Props = {
   success: string | any
 }
 
-const BaseForm = ({ children, formName, success }: Props) => {
-  const { community, onChangeAsync, user } = useSession();
+const BaseForm: React.FC<Props> = ({ children, formName, success }) => {
+  const { community, currentUser: user, updateSession } = useContext(SessionContext);
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
   const [updateCommunity] = useMutation(UpdateCommunityGQL);
@@ -133,7 +134,7 @@ const BaseForm = ({ children, formName, success }: Props) => {
       toast(success, { type: toast.TYPE.SUCCESS });
 
       // Update Session
-      await onChangeAsync({ community: returning[0] });
+      await updateSession('community', returning[0]);
     } catch (e) {
       // invalid_permission
       if (e.message === 'invalid_permission') {

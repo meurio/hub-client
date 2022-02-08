@@ -46,6 +46,13 @@ const columns = (
       ),
     },
     {
+      accessor: "occupationArea",
+      Header: "Área de ocupação",
+      Cell: ({ value }: valueString): ReactElement => (
+        <span>{value || "-"}</span>
+      ),
+    },
+    {
       accessor: "distance",
       Header: "Distância",
       Cell: ({ value }: valueString): ReactElement => (

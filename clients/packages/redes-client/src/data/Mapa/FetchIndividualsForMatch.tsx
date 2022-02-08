@@ -44,7 +44,6 @@ const VOLUNTEERS_FOR_MATCH = gql`
         _or: [{ phone: { _is_null: false } }, { whatsapp: { _is_null: false } }]
         _and: [
           {city: { _neq: "Internacional" }}
-          {city: { _neq: "ZERO_RESULTS" }}
           { organization_id: $volunteerOrganizationId }
           { organization_id: { _is_null: false } }
           { longitude: { _is_null: false } }
@@ -93,7 +92,6 @@ const RECIPIENTS_FOR_MATCH = gql`
           { individual: { longitude: {_is_null: false} } }
           { individual: { latitude: {_neq: "ZERO_RESULTS"} } }
           { individual: { longitude: {_neq: "ZERO_RESULTS"} } }
-          { individual: { city: {_neq: "ZERO_RESULTS"} } }
           { individual: { city: {_neq: "Internacional"} } }
         ]
       }

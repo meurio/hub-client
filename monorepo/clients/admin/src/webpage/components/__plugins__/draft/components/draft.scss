@@ -1,0 +1,11 @@
+@import '../../../../styles/color-variables';
+
+.draft-widget {
+  background-color: rgba(0,0,0,.89);
+  padding: 2.8rem;
+
+  .title {
+    color: $lightGray;
+    margin-bottom: 1.5rem;
+  }
+}

@@ -3,10 +3,12 @@ import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import {
   RoundSelectField,
   RoundInputField,
-  CleanButton,
+  IconButton,
   Icon,
   ConnectedForm,
   Form,
+  Stack,
+  Box
 } from "bonde-components";
 import styled from "styled-components";
 import { AutoSaveFilters } from "./";
@@ -31,17 +33,6 @@ const WrapInput = styled.div`
   position: relative;
   & > div {
     padding: 0;
-  }
-
-  & .icons {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    display: flex;
-    & button {
-      border: none;
-      padding: 0;
-    }
   }
 `;
 
@@ -94,23 +85,31 @@ const Filters = ({
                     }
                     name="query"
                   />
-                  <div className="icons">
-                    {initialValues.query && (
-                      <CleanButton
-                        onClick={() => form.change("query", undefined)}
-                        style={{ paddingRight: "5px" }}
-                      >
-                        <Icon name="Close" size="xs" color="#ee0099" />
-                      </CleanButton>
-                    )}
-                    <CleanButton>
-                      <Icon
-                        name="Search"
-                        size="small"
-                        color={initialValues.query ? "#ee0099" : "#aaa"}
+                  <Box position="absolute" right="15px" top="30%">
+                    <Stack direction="row" spacing={2}>
+                      {initialValues.query && (
+                        <IconButton
+                          aria-label="close"
+                          variant="link"
+                          colorScheme="gray"
+                          onClick={() => form.change("query", undefined)}
+                          icon={<Icon name="Close" size="xs" color="#ee0099" />}
+                        />
+                      )}
+                      <IconButton
+                        aria-label="search"
+                        variant="link"
+                        colorScheme="gray"
+                        icon={(
+                          <Icon
+                            name="Search"
+                            size="small"
+                            color={initialValues.query ? "#ee0099" : "#aaa"}
+                          />
+                        )}
                       />
-                    </CleanButton>
-                  </div>
+                    </Stack>
+                  </Box>
                 </WrapInput>
               )}
               {props.groups && (

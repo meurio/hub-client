@@ -5,10 +5,10 @@ import {
   Header,
   InputField,
   Link as LinkStyled,
+  Flex,
   Text,
   Validators,
 } from "bonde-components";
-import { Container, Row, Col } from "react-grid-system";
 import { useMutation, gql } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -40,9 +40,9 @@ const ResetPasswordForm = ({ token }: any) => {
   };
 
   return (
-    <Container fluid style={{ width: "100%", padding: "0" }}>
+    <>
       <Header.H2>{t("resetPassword.form.title")}</Header.H2>
-      <Text>{t("resetPassword.form.subtitle")}</Text>
+      <Text marginBottom={1}>{t("resetPassword.form.subtitle")}</Text>
       <ConnectedForm initialValues={{ token }} onSubmit={submit}>
         {({ submitting }: any) => (
           <>
@@ -56,22 +56,21 @@ const ResetPasswordForm = ({ token }: any) => {
                 min(6, t("resetPassword.fields.password.min6"))
               )}
             />
-            <Row align="center">
-              <Col sm={6}>
-                <LinkStyled component={Link} to="/login">
-                  {t("resetPassword.form.cancel")}
-                </LinkStyled>
-              </Col>
-              <Col sm={6}>
-                <Button type="submit" disabled={submitting}>
-                  {t("resetPassword.form.submit")}
-                </Button>
-              </Col>
-            </Row>
+
+            <Flex direction="row" alignItems="center" justify="space-between">
+              <LinkStyled component={Link} to="/login">
+                {t("resetPassword.form.cancel")}
+              </LinkStyled>
+
+              <Button type="submit" disabled={submitting}>
+                {t("resetPassword.form.submit")}
+              </Button>
+            </Flex>
+
           </>
         )}
       </ConnectedForm>
-    </Container>
+    </>
   );
 };
 

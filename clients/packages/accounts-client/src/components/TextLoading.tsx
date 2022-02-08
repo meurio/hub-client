@@ -3,7 +3,7 @@ import { Loading } from 'bonde-components';
 
 interface TextLoadingProps {
   fetching: 'session' | 'redirect'
-};
+}
 
 const TextLoading = ({ fetching }: TextLoadingProps) => {
   const messages = {

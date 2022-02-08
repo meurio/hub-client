@@ -1,50 +1,32 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Header } from "bonde-components";
-import { useSession } from "bonde-core-tools";
+import React, { useState, useContext } from "react";
+import { Context as SessionContext } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
+import { isMobile } from "react-device-detect";
 
 import SearchInput from "../../../components/SearchInput";
 import CommunitiesScrollBox from "./CommunitiesScrollBox";
+import GadgetHeader from "../GadgetHeader";
 
-const Styles = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 15px;
-
-    ${Header.H5} {
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-  }
-`;
-
-const CommunitiesGadget = () => {
+const CommunitiesGadget = (): React.ReactElement => {
   const { t } = useTranslation("home");
-  const { communities } = useSession();
-  const [data, setData] = useState(communities);
+  const session: any = useContext(SessionContext);
+  const [data, setData] = useState(session.communities);
 
   return (
-    <Styles>
-      <div className="header">
-        {/** TODO: i18n */}
-        <Header.H5>{t("gadgets.communities.title")}</Header.H5>
-        <SearchInput
-          placeholder={t("gadgets.communities.search")}
-          field="name"
-          data={communities}
-          onChange={setData}
-        />
-      </div>
+    <>
+      <GadgetHeader
+        title={!isMobile ? t("gadgets.communities.title") : undefined}
+        actionRightElement={(
+          <SearchInput
+            placeholder={t("gadgets.communities.search")}
+            field="name"
+            data={session.communities}
+            onChange={setData}
+          />
+        )}
+      />
       <CommunitiesScrollBox communities={data} />
-    </Styles>
+    </>
   );
 };
 

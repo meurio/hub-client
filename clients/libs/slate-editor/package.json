@@ -1,0 +1,70 @@
+{
+  "name": "slate-editor",
+  "version": "5.1.2",
+  "description": "A complete rich text editor based on SlateJS framework",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nossas/slate-editor.git"
+  },
+  "homepage": "https://github.com/nossas/slate-editor",
+  "author": "Nossas <tech@nossas.org> (http://github.com/nossas)",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "babel src --out-dir dist --copy-files"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0"
+  },
+  "dependencies": {
+    "@slate-editor/alignment-plugin": "workspace:*",
+    "@slate-editor/bold-plugin": "workspace:*",
+    "@slate-editor/color-plugin": "workspace:*",
+    "@slate-editor/components": "workspace:*",
+    "@slate-editor/embed-plugin": "workspace:*",
+    "@slate-editor/font-family-plugin": "workspace:*",
+    "@slate-editor/font-size-plugin": "workspace:*",
+    "@slate-editor/grid-plugin": "workspace:*",
+    "@slate-editor/image-plugin": "workspace:*",
+    "@slate-editor/italic-plugin": "workspace:*",
+    "@slate-editor/link-plugin": "workspace:*",
+    "@slate-editor/list-plugin": "workspace:*",
+    "@slate-editor/state-logger": "workspace:*",
+    "@slate-editor/strikethrough-plugin": "workspace:*",
+    "@slate-editor/toggle-readonly": "workspace:*",
+    "@slate-editor/underline-plugin": "workspace:*",
+    "@slate-editor/utils": "workspace:*",
+    "classnames": "^2.2.5",
+    "immutable": "^3.8.2",
+    "prop-types": "^15.6.0",
+    "react": "^17",
+    "react-dom": "^17",
+    "slate": "0.41.3",
+    "slate-react": "0.18.11"
+  },
+  "peerDependencies": {
+    "slate": "0.41.3",
+    "slate-react": "0.18.11"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "keywords": [
+    "slate",
+    "rich-text",
+    "editor",
+    "react",
+    "slate-plugins"
+  ],
+  "bugs": {
+    "url": "https://github.com/nossas/slate-editor/issues"
+  }
+}

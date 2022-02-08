@@ -10,7 +10,7 @@ type Props = {
   children: (props: RenderProps) => any
 }
 
-const TabRoute = ({ children }: Props) => {
+const TabRoute: React.FC<Props> = ({ children }) => {
   const history = useHistory();
   const location = useLocation();
   const { path: root, params }: any = useRouteMatch();

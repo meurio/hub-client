@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Bonde, Header, Text } from 'bonde-components';
+import { Bonde, Header } from 'bonde-components';
 import BackgroundImage from './bg@2x.png';
 import * as Flag from './Flag';
 
@@ -48,7 +48,7 @@ interface WrapperStyledProps {
   background?: string;
   hide?: 'mobile' | 'desktop';
   inverted?: boolean;
-};
+}
 
 const WrapperStyled = styled.div<WrapperStyledProps>`
   position: relative;
@@ -68,14 +68,6 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
       color: #fff;
     }
   `}
-
-  ${Text} {
-    a {
-      color: #dc82bf;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
 
   @media only screen and (min-width: 768px) {
     width: 50%;
@@ -121,7 +113,7 @@ const BaseLayout = ({ children }: any) => {
       <WrapperStyled>
         {children}
         <LanguageTool>
-          {languages.map(({ flag: Flag, locale }, index) => (
+          {languages.map(({ flag: Flag, locale }) => (
             <button
               key={`language-button-${locale}`}
               className={locale === i18n.language ? 'active' : undefined}

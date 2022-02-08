@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Shortcut, Icon } from "bonde-components";
+import { Context as SessionContext } from 'bonde-core-tools';
 import styled from "styled-components";
 import { useTranslation } from 'react-i18next';
 
@@ -20,19 +21,20 @@ const Grid = styled.div`
 `;
 
 type Props = {
-  community: any, 
-  storage: any
+  community: any
 }
 
-const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
+const Shortcuts = ({ community }: Props): React.ReactElement => {
+  const { updateSession } = useContext(SessionContext);
   const { t } = useTranslation('widgetActions');
 
   return (
     <Grid>
-      <Shortcut
+      <button
+        type="button"
         onClick={() => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
-            storage.setAsyncItem("community", community).then(() => {
+            updateSession("community", community).then(() => {
               window.location.href = new URL(
                 `/mobilizations/new`,
                 process.env.REACT_APP_DOMAIN_ADMIN
@@ -40,13 +42,17 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
             });
           }
         }}
-        text={t('home.shortcuts.buttons.newMobilization')}
-        icon={<Icon name="Window" size="default" />}
-      />
-      <Shortcut
+      >
+        <Shortcut
+          text={t('home.shortcuts.buttons.newMobilization')}
+          icon={<Icon name="New" size="large" />}
+        />
+      </button>
+      <button
+        type="button"
         onClick={() => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
-            storage.setAsyncItem("community", community).then(() => {
+            updateSession("community", community).then(() => {
               window.location.href = new URL(
                 `/mobilizations`,
                 process.env.REACT_APP_DOMAIN_ADMIN
@@ -54,9 +60,12 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
             });
           }
         }}
-        text={t('home.shortcuts.buttons.mobilizations')}
-        icon={<Icon name="Bolt" size="default" />}
-      />
+      >
+        <Shortcut
+          text={t('home.shortcuts.buttons.mobilizations')}
+          icon={<Icon name="Window" size="default" />}
+        />
+      </button>
       <Link to="/community/analytics">
         <Shortcut
           text={t('home.shortcuts.buttons.reports')}
@@ -66,7 +75,7 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
       <Link to="/community/domains">
         <Shortcut
           text={t('home.shortcuts.buttons.domains')}
-          icon={<Icon name="Network" size="default" />}
+          icon={<Icon name="Cloud" size="large" />}
         />
       </Link>
     </Grid>

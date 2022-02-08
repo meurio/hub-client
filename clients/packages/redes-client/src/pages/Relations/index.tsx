@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Header, Empty } from "bonde-components";
+import { Header, Empty, Stack } from "bonde-components";
 
 import { useFilter } from "../../services/FilterProvider";
 import { Table, Filters } from "../../components";
@@ -52,7 +52,7 @@ export default function Relations({
   };
 
   return (
-    <>
+    <Stack direction="column" spacing={4} mb={4}>
       <Filters
         save={save}
         options={FilterOptions}
@@ -79,9 +79,12 @@ export default function Relations({
               <Empty message="Não existem grupos suficientes nessa comunidade." />
             </WrapEmpty>
           ) : (
-            <>
+            <Stack spacing={2}>
               <Header.H4>Total ({count})</Header.H4>
               <Table
+                // A query que carrega os matches do Mapa do Acolhimento
+                // não considera o preenchimento de um agent como objeto
+                // e sim como um valor número que é definido como o agent_id
                 data={
                   community?.id === MAPA_DO_ACOLHIMENTO_COMMUNITY
                     ? deconstructAgent(relationships)
@@ -91,11 +94,11 @@ export default function Relations({
                 sticky="end"
                 totalResults={count}
               />
-            </>
+            </Stack>
           );
         }}
       </FetchMatches>
-    </>
+    </Stack>
   );
 }
 

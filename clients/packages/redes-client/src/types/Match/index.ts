@@ -1,4 +1,19 @@
-export type Relationships = Array<{
+export type Agent = {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
+
+export type IndividualPart = {
+  firstName: string;
+  organizationId: number;
+  id: number;
+  state: string;
+  phone: string | null;
+  whatsapp: string | null;
+}
+
+export interface Relation <T = IndividualPart, S = number> {
   individualsTicketId: number;
   volunteersTicketId: number;
   status: string;
@@ -6,24 +21,12 @@ export type Relationships = Array<{
   recipientTicket: {
     agentId: number;
   };
-  volunteer: {
-    firstName: string;
-    organizationId: number;
-    id: number;
-    state: string;
-    phone: string | null;
-    whatsapp: string | null;
-  };
-  recipient: {
-    firstName: string;
-    organizationId: number;
-    id: number;
-    state: string;
-    phone: string | null;
-    whatsapp: string | null;
-  };
-  agent?: number;
-}>;
+  volunteer: T;
+  recipient: T;
+  agent?: S;
+}
+
+export type Relationships = Array<Relation>;
 
 export type MatchesData = {
   relationships: Relationships;

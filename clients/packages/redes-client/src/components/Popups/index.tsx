@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { css } from "styled-components/macro";
 
-import { Modal, Button, Loading, Icon } from "bonde-components";
+import { Modal, ModalOverlay, Flex, Stack, Button, Loading, Icon } from "bonde-components";
 
 import { Default, Error } from ".";
 import { useFilterDispatch } from "../../services/FilterProvider";
@@ -99,8 +98,8 @@ export default function Popups({
   const [error, setError] = useState<string | undefined>();
   const [data, setData] = useState();
   const [customLink, setCustomLink] = useState({
-    volunteer: "",
-    recipient: "",
+    volunteerUrl: "",
+    recipientUrl: "",
   });
 
   const handleClick = async () => {
@@ -118,82 +117,55 @@ export default function Popups({
   };
 
   return (
-    <Modal width="375px" isOpen={isOpen} onClose={() => setModal(false)}>
+    <Modal isCentered isOpen={isOpen} onClose={() => setModal(false)}>
+      <ModalOverlay />
       {isOpen && !error && !data && !loading && (
         <Default
           title="Confirma?"
           text={`${match.recipient.firstName} será encaminhada para ${match.volunteer.firstName}.`}
           MainBtn={<Button onClick={handleClick}>Confirmar</Button>}
           SecondaryBtn={
-            <div
-              css={css`
-                & button {
-                  padding-left: 0;
-                }
-              `}
-            >
-              <Button align="left" onClick={() => setModal(false)} secondary>
-                Voltar
-              </Button>
-            </div>
+            <Button variant="link" colorScheme="gray" onClick={() => setModal(false)}>
+              Voltar
+            </Button>
           }
         />
       )}
       {isOpen && loading && (
-        <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 300px;
-          `}
-        >
+        <Flex w="100%" h="300px" justify="center" align="center">
           <Loading />
-        </div>
+        </Flex>
       )}
       {isOpen && data && (
         <Default
           title="Eba!"
           text={`Uma relação foi criada entre ${match.recipient.firstName} e ${match.volunteer.firstName}.`}
-          direction="column"
           MainBtn={
-            <div css={css`
-              & button {
-                padding: 20px 0 0;
-              }
-            `}>
-              <Link
-                to={"/matches"}
-                onClick={() =>
-                  dispatch({
-                    type: "relationships",
-                    value: {
-                      query: `${match.recipient.email}`,
-                      agent: {
-                        label: `${user.firstName} ${user.lastName || ""}`,
-                        value: user.id,
-                      },
+            <Link
+              to={"/matches"}
+              onClick={() =>
+                dispatch({
+                  type: "relationships",
+                  value: {
+                    query: `${match.recipient.email}`,
+                    agent: {
+                      label: `${user.firstName} ${user.lastName || ""}`,
+                      value: user.id,
                     },
-                  })
-                }
-                style={{ textDecoration: "none" }}
-              >
-                <Button secondary>Ver relação</Button>
-              </Link>
-            </div>
+                  },
+                })
+              }
+              style={{ textDecoration: "none" }}
+            >
+              <Button variant="link">Ver relação</Button>
+            </Link>
           }
           SecondaryBtn={
-            <div
-              css={css`
-                display: grid;
-                grid-gap: 15px;
-              `}
-            >
+            <Stack spacing={4}>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href={customLink.volunteer}
+                href={customLink.volunteerUrl}
                 style={{ textDecoration: "none" }}
               >
                 <Button>
@@ -204,7 +176,7 @@ export default function Popups({
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href={customLink.recipient}
+                href={customLink.recipientUrl}
                 style={{ textDecoration: "none" }}
               >
                 <Button>
@@ -212,7 +184,7 @@ export default function Popups({
                   {match.recipient.firstName}
                 </Button>
               </a>
-            </div>
+            </Stack>
           }
         />
       )}

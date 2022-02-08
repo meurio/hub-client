@@ -1,14 +1,17 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
 import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-import { Header, Text, Link as LinkStyled } from 'bonde-components';
+import {
+  Heading,
+  Text,
+  Box,
+  Link as LinkStyled,
+  Stack
+} from 'bonde-components';
 import Mailchimp from './Mailchimp';
 import Twilio from './Twilio';
 
 const MenuStyled = styled.div`
-  padding: 20px 0 24px;
-
   ${LinkStyled} {
     margin-right: 15px;
     text-transform: uppercase;
@@ -23,38 +26,34 @@ const MenuStyled = styled.div`
 `;
 
 const SettingsPage = () => {
-  const { name } = useParams();
+  const { name }: any = useParams();
   const { path } = useRouteMatch();
 
   return (
-    <Container fluid style={{ width: '100%', padding: '0' }}>
-      <Row>
-        <Col xl={12}>
-          <Header.H3>Integrações</Header.H3>
-          <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
-        </Col>
-        <Col xl={12}>
-          <MenuStyled>
-            <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
-            <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
-          </MenuStyled>
-        </Col>
-      </Row>
-      <Row>
+    <>
+      <Stack spacing={2} mb={4}>
+        <Heading as="h3" size="md">Integrações</Heading>
+        <Text>Conecte sua conta no BONDE a outras ferramentas para expandir seu impacto.</Text>
+      </Stack>
+      <Stack mb={4}>
+        <MenuStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
+        </MenuStyled>
+      </Stack>
+
+      <Box bg="white" boxShadow="sm" p={10}>
+
         <Switch>
           <Route exact path={path.replace(':name', 'mailchimp')}>
-            <Col sm={12}>
-              <Mailchimp />
-            </Col>
+            <Mailchimp />
           </Route>
           <Route exact path={path.replace(':name', 'twilio')}>
-            <Col sm={12}>
-              <Twilio />
-            </Col>
+            <Twilio />
           </Route>
         </Switch>
-      </Row>
-    </Container>
+      </Box>
+    </>
   );
 }
 

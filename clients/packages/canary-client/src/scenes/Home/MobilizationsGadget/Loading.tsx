@@ -1,22 +1,21 @@
 import React from 'react';
-import { Cell, Panel } from 'bonde-styleguide';
+import { Panel } from 'bonde-styleguide';
+import { SimpleGrid } from "bonde-components";
 
 type Props = {
-  cells: number
+  cells?: number
 }
 
-const TrendingMobilizationsCellsLoading = ({ cells }: Props) => (
-  <>
+const Loading: React.FC<Props> = ({ cells }): React.ReactElement => (
+  <SimpleGrid columns={cells && cells / 2} spacing={4}>
     {Array(cells).fill('').map(() => (
-      <Cell key={Math.random()} size={[6, 6, 6]}>
-        <Panel loading image='' title='' author='' onClick={() => {}} />
-      </Cell>
+      <Panel key={Math.random()} loading image='' title='' author='' onClick={() => ({})} />
     ))}
-  </>
+  </SimpleGrid>
 );
 
-TrendingMobilizationsCellsLoading.defaultProps = {
+Loading.defaultProps = {
   cells: 4
 };
 
-export default TrendingMobilizationsCellsLoading;
+export default Loading;

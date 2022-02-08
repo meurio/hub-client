@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
-import { useSession, useMutation, gql } from 'bonde-core-tools';
+import { useMutation, gql } from 'bonde-core-tools';
 import { Button, ConnectedForm, InputField, Header, Link as LinkStyled, Hint, Validators } from 'bonde-components';
 import Container from '../../components/Container';
 
@@ -24,9 +24,8 @@ const Styles = styled.div`
   }
 `
 
-const RegisterForm = ({ to, t }: any) => {
+const RegisterForm: React.FC<{ to: string, t: any }> = ({ to, t }) => {
   const { search } = useLocation();
-  const { login } = useSession();
   const [error, setError] = useState(undefined);
   const [registerUser] = useMutation(registerUserMutation);
 
@@ -41,13 +40,10 @@ const RegisterForm = ({ to, t }: any) => {
         initialValues={{ input: { email, code } }}
         onSubmit={async (values: any) => {
           try {
-            const { data } = await registerUser({ variables: values })
-            login(data.register)
-              .then(() => {
-                window.location.href = to;
-              })
+            await registerUser({ variables: values })
+            window.location.href = to;
           } catch (err) {
-            if (err && err.message && err.message.indexOf('invalid_invitation_code') !== -1) {
+            if (err && (err as any).message && (err as any).message.indexOf('invalid_invitation_code') !== -1) {
               setError(t('form.register.token.invalid'))
               console.log('err', err)
             }

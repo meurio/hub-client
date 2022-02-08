@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
 import { useParams, Redirect } from 'react-router-dom';
+import { Stack } from "bonde-components";
 import NameServers from '../NameServers';
 import { DNSHostedZone } from '../types';
 // Scene components
@@ -14,8 +14,8 @@ type Props = {
   dnsHostedZones: DNSHostedZone[]
 }
 
-const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
-  const { hostedZoneId } = useParams();
+const DetailDomain: React.FC<Props> = ({ dnsHostedZones, refetch }) => {
+  const { hostedZoneId }: any = useParams();
   const dnsHostedZone = dnsHostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
 
   if (!dnsHostedZone) return <Redirect to='/community/domains' />
@@ -26,32 +26,22 @@ const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
   );
 
   return (
-    <Container fluid style={{ width: '100%', padding: '0' }}>
+    <Stack direction="column" spacing={8}>
       <Navigation dnsHostedZone={dnsHostedZone} refetch={refetch} />
-      <Row>
-        <Col xs={12}>
-          <Domain
-            refetch={refetch}
-            dnsHostedZone={dnsHostedZone}
-            dnsIsActivated={dnsIsActivated}
-          />
-        </Col>
-        <Col xs={12}>
-          <Explain
-            dnsHostedZone={dnsHostedZone}
-            dnsIsActivated={dnsIsActivated}
-          />
-        </Col>
-        {(dnsIsActivated) && (
-          <Col xs={12}>
-            <Records dnsHostedZone={dnsHostedZone} refetch={refetch} />
-          </Col>
-        )}
-        <Col xs={12}>
-          <NameServers dnsHostedZone={dnsHostedZone} />
-        </Col>
-      </Row>
-    </Container>
+      <Domain
+        refetch={refetch}
+        dnsHostedZone={dnsHostedZone}
+        dnsIsActivated={dnsIsActivated}
+      />
+      <Explain
+        dnsHostedZone={dnsHostedZone}
+        dnsIsActivated={dnsIsActivated}
+      />
+      {(dnsIsActivated) && (
+        <Records dnsHostedZone={dnsHostedZone} refetch={refetch} />
+      )}
+      <NameServers dnsHostedZone={dnsHostedZone} />
+    </Stack>
   )
 }
 

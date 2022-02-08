@@ -1,0 +1,25 @@
+FROM node:14-alpine
+
+WORKDIR /usr/src/app
+
+# We only copy the dependencies we need
+COPY libs/components libs/components
+
+COPY clients/canary clients/canary
+
+# The global package.json only contains build dependencies
+COPY package*.json ./
+
+COPY pnpm*.yaml ./
+
+COPY tsconfig.json tsconfig.json
+
+# Install PNPM
+RUN apk --update add curl
+
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+
+# Install dependencies
+RUN pnpm m i --unsafe-perm
+
+RUN pnpm m run build --filter {clients}

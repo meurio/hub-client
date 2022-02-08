@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
-import { Text, Label, Link, useField, Hint } from 'bonde-components';
+import { Text, FormLabel, Link, useField, Hint } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from './Image';
@@ -19,7 +19,7 @@ const UploadField = styled.div<UploadFieldProps>`
 
   button {
     margin-right: calc(30px * ${props => props.scale});
-    
+
     &:focus {
       outline: none;
       border: none;
@@ -83,7 +83,7 @@ const Upload: React.FC<Props> = ({ label, name, imageScale, validate, disabled }
         }
       </button>
       <div className='detail'>
-        {label && <Label>{label}</Label>}
+        {label && <FormLabel>{label}</FormLabel>}
         <Text>{t('upload.information')}</Text>
         {meta.touched && meta.error && <Hint color='error'>{meta.error}</Hint>}
         <ReactS3Uploader

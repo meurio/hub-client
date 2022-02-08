@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Header, Shortcut, Icon, Empty } from "bonde-components";
-import { useSession } from "bonde-core-tools";
+import { Context as SessionContext } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { WeeklyStats } from "../components";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import { useFilterDispatch } from "../services/FilterProvider";
 import { WeeklyStatsData } from "../types";
+import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../services/utils";
 
 const Grid = styled.div`
   display: grid;
@@ -65,7 +66,7 @@ export default function Home({
 }: Props): React.ReactElement {
   const dispatch = useFilterDispatch();
   const { groups } = useCommunityExtra();
-  const { user } = useSession();
+  const { currentUser: user }: any = useContext(SessionContext);
   const volunteerGroup = groups?.find((group) => !!group.isVolunteer);
   const individualGroup = groups?.find((group) => !group.isVolunteer);
   // TODO: Fazer um map dos grupos e criar botoes em cima dos grupos da comunidade
@@ -78,15 +79,28 @@ export default function Home({
             <Link
               style={{ textDecoration: "none" }}
               to="/pessoas"
-              onClick={() =>
+              onClick={() => {
                 dispatch({
                   type: "group",
                   value: {
                     label: group.name || "",
                     value: group.id || 0,
                   },
-                })
+                });
+
+                if(group.communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY){
+                  dispatch({
+                    type: "individuals",
+                    value:{
+                      relationshipStatus:  {
+                        label: "Solicitação Recebida",
+                        value: "solicitação_recebida",
+                      }
+                    }
+                  });
+                }
               }
+            }
             >
               <Shortcut
                 text={`Fazer match de ${group.name}`}

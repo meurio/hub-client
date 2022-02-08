@@ -1,4 +1,3 @@
-export { default as WhatsappCards } from "./WhatsappCards";
 export { default as HeaderWrap } from "./HeaderWrap";
 export { default as Navigation } from "./Navigation";
 export { default as MatchSettings } from "./MatchSettings";

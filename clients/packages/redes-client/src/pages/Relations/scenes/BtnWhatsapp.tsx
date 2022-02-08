@@ -1,9 +1,10 @@
 import React from "react";
 
 import { Icon, Theme as theme } from "bonde-components";
-import { whatsappLink } from "../../../services/utils";
+import { createCustomWhatsappLink } from "../../../services/utils";
 import styled from "styled-components";
-import { Individual } from "../../../types";
+import { css } from "styled-components/macro";
+import { Relation, Individual, Agent } from "../../../types";
 
 const Grid = styled.div`
   width: 100%;
@@ -22,9 +23,18 @@ const MarginSVG = styled.div`
 const BtnWhatsapp = ({
   original,
 }: {
-  original: { volunteer: Individual; recipient: Individual };
+  original: Relation<Individual, Agent>;
 }): React.ReactElement => {
-  const matchGroups = [original.volunteer.group, original.recipient.group]
+  const matchGroups = [original.volunteer.group, original.recipient.group];
+
+  const whatsappLink: any = createCustomWhatsappLink(
+    {
+      volunteer: original.volunteer,
+      recipient: original.recipient
+    },
+    // Verificar obrigatoriedade do agentName
+    original.agent?.firstName || "AGENT NOT FOUND"
+  );
   return (
     <Grid>
       {matchGroups.map((group, i) => {
@@ -33,12 +43,7 @@ const BtnWhatsapp = ({
           <MarginSVG key={`match-groups-${i}`}>
             <Icon name="Whatsapp" size="small" color={theme.brand.main} />
             <a
-              href={whatsappLink(
-                original[individual]?.whatsapp ||
-                  original[individual]?.phone ||
-                  "",
-                ""
-              )}
+              href={whatsappLink[`${individual}Url`]}
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}

@@ -1,145 +1,105 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom';
-import { Empty, Header, Link } from "bonde-components";
-import { CommunityMenu, useSession } from "bonde-core-tools";
-
-type StylesProps = {
-  height?: string;
-};
-
-const Styles = styled.div<StylesProps>`
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  height: ${(props) => props.height};
-  min-height: ${(props) => props.height};
-  overflow-y: auto;
-
-  ${Link} {
-    cursor: pointer;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-
-    li {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    li.mobile {
-      cursor: pointer;
-
-      &:hover {
-        background-color: #c7c7c7;
-      }
-    }
-  }
-
-  &::-webkit-scrollbar {
-    width: 33px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-clip: padding-box;
-    background-color: rgba(74, 74, 74, 0.75);
-    border-width: 20px 15px;
-    border-style: solid;
-    border-color: transparent;
-    border-image: initial;
-  }
-`;
-
-Styles.defaultProps = {
-  height: "535px",
-};
-
-type ColumnProps = {
-  grow?: number | string;
-  mobile?: string;
-};
-
-const Colunm = styled.div<ColumnProps>`
-  ${(props) => props.grow && `flex-grow: ${props.grow};`}
-  padding: 13px 15px 14px;
-
-  ${Header.H4}, ${Header.H5} {
-    margin: 0;
-  }
-
-  @media only screen and (max-width: 768px) {
-    ${(props) =>
-      props.mobile === "hide" &&
-      `
-      display: none;
-    `};
-  } ;
-`;
-
-const Image = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-`;
+import {
+  Empty,
+  // Chakra UI
+  Button,
+  Flex,
+  Box,
+  Heading,
+  List,
+  ListItem,
+  Stack,
+  Image,
+  CommunityMenu
+} from "bonde-components";
+import {
+  Context as SessionContext
+} from "bonde-core-tools";
+import { isMobile } from "react-device-detect";
 
 type Props = {
   communities: any[];
 };
 
-const CommunitiesScrollBox = ({ communities }: Props) => {
+const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
   const { push } = useHistory();
-  const { onChangeAsync } = useSession();
-  const isMobile = window.innerWidth <= 768;
+  const session: any = useContext(SessionContext);
+  const isMobileWidth = window.innerWidth <= 768;
   const itemProps: any = {};
-  if (isMobile) {
+  if (isMobileWidth) {
     itemProps.className = "mobile";
-    // itemProps.onClick = () => { console.log('click item') }
   }
 
   return (
-    <Styles>
+    <Box
+      bg="white"
+      overflowY="auto"
+      overflowX="hidden"
+      h="535px"
+      css={{
+        "::-webkit-scrollbar": {
+          width: "33px"
+        },
+        "::-webkit-scrollbar-thumb": {
+          backgroundClip: "padding-box",
+          backgroundColor: "rgba(74, 74, 74, 0.75)",
+          borderWidth: "20px 15px",
+          borderStyle: "solid",
+          borderColor: "transparent",
+          borderImage: "initial"
+        }
+      }}
+    >
       {communities.length > 0 ? (
-        <ul>
+        <List>
           {communities.map((c, index) => (
-            <li key={index} {...itemProps}>
-              <Colunm>
-                <Image
-                  src={
-                    c.image ||
-                    `https://via.placeholder.com/100?text=${c.name.substring(
-                      0,
-                      1
-                    )}`
-                  }
-                  alt={c.name}
-                />
-              </Colunm>
-              <Colunm grow={1}>
-                <Link onClick={() => {
-                  onChangeAsync({ community: c })
-                    .then(() => {
-                      push('/widgets');
-                    });
-                }}>
-                  <Header.H4>{c.name}</Header.H4>
-                  <Header.H6>{c.description || c.city}</Header.H6>
-                </Link>
-              </Colunm>
-              <Colunm mobile="hide">
-                <CommunityMenu community={c} />
-              </Colunm>
-            </li>
+            <ListItem key={`communities-list-${index}`} display="flex" flexDirection="row" p={4}>
+              <Image
+                boxSize="40px"
+                objectFit="cover"
+                borderRadius="30px"
+                alt={c.name}
+                src={
+                  c.image ||
+                  `https://via.placeholder.com/100?text=${c.name.substring(
+                    0,
+                    1
+                  )}`
+                }
+              />
+              <Stack
+                direction="row"
+                flex={1}
+                ml={4}
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Button
+                  variant="link"
+                  colorScheme="black"
+                  textTransform="normal"
+                  onClick={() => {
+                    session
+                      .updateSession('community', c)
+                      .then(() => {
+                        push('/widgets');
+                      });
+                  }}
+                >
+                  <Heading as="h5" fontWeight="extrabold" size="sm">{c.name}</Heading>
+                </Button>
+                {!isMobile ? <CommunityMenu session={session} community={c} /> : null}
+              </Stack>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       ) : (
-        <Empty message="Nenhuma comunidade encontrada" />
+        <Flex h="100%">
+          <Empty message="Nenhuma comunidade encontrada" />
+        </Flex>
       )}
-    </Styles>
+    </Box>
   );
 };
 

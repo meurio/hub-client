@@ -1,0 +1,33 @@
+.minhaouropreto-scheme .widget {
+  color: #444;
+}
+
+.minhaouropreto-scheme .widget .button {
+  color: white;
+}
+
+.minhaouropreto-scheme .bg-1 {
+  background-color: #FDC93B;
+}
+
+.minhaouropreto-scheme .bg-2 {
+  background-color: #47928D;
+}
+
+.minhaouropreto-scheme .bg-3 {
+  background-color: #45494D;
+}
+
+.minhaouropreto-scheme .bg-1,
+.minhaouropreto-scheme .bg-2,
+.minhaouropreto-scheme .bg-3,
+.minhaouropreto-scheme .bg-4,
+.minhaouropreto-scheme .bg-5,
+.minhaouropreto-scheme .bg-6,
+.minhaouropreto-scheme .bg-7,
+.minhaouropreto-scheme .bg-8 {
+  .widget {
+    color: white;
+    h1, h2, h3, h4, h5, h6 { color: white }
+  }
+}

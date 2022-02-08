@@ -2,9 +2,10 @@ workspace:
   base: /code
 
 pipeline:
-  build:
+  staging-build:
     image: node:14-alpine
     environment:
+      - SKIP_PREFLIGHT_CHECK=true
       - REACT_APP_ENVIRONMENT=staging
       - REACT_APP_DOMAIN_ACCOUNTS=https://accounts.staging.bonde.org
       - REACT_APP_DOMAIN_ADMIN=https://app.staging.bonde.org
@@ -25,56 +26,19 @@ pipeline:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
+      - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
+      - export REACT_APP_HOTJAR_ID=$STAG_HOTJAR_ID
+      - export REACT_APP_HOTJAR_SV=$STAG_HOTJAR_SV
       - cd clients
-      - pnpm i
-      - pnpm m run build --filter bonde-core-tools --filter bonde-components
-      - pnpm m run build --filter accounts-client --filter canary-client
-      - cd deprecated/admin
-      - pnpm i
-      - pnpm m run build --filter bonde-webpage
-      - pnpm m run build --filter bonde-admin
-    secrets: [ aws_route_ip ]
+      - pnpm i --no-frozen-lockfile
+      - pnpm m run build --filter {libs}
+      - pnpm m run prepare --filter {libs}
+      - pnpm m run build --filter {packages}
+    secrets: [ aws_route_ip, stag_pagarme_key, stag_hotjar_id, stag_hotjar_sv ]
     group: build
     when:
       status: success
       event: [push]
-
-  production-build:
-    image: node:14-alpine
-    environment:
-      - REACT_APP_ENVIRONMENT=production
-      - REACT_APP_DOMAIN_ACCOUNTS=https://accounts.bonde.org
-      - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
-      - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
-      - REACT_APP_DOMAIN_PUBLIC=bonde.org
-      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
-      - REACT_APP_DOMAIN_API_REST=https://api-rest.bonde.org
-      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
-      - REACT_APP_HASURA_API_URL=https://api-graphql.bonde.org/v1/graphql
-      - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
-      - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
-      - REACT_APP_AWS_BUCKET=bonde-assets
-      - REACT_APP_LOGIN_URL=https://accounts.bonde.org/login
-      - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
-      - REACT_APP_UPLOADS_URL=https://api-rest.bonde.org/uploads
-      - REACT_APP_ZENDESK_ORGANIZATIONS={"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}
-    commands:
-      - apk --update add curl
-      - curl -L https://unpkg.com/@pnpm/self-installer | node
-      - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
-      - cd clients
-      - pnpm i
-      - pnpm m run build --filter bonde-core-tools --filter bonde-components
-      - pnpm m run build --filter accounts-client --filter canary-client
-      - cd deprecated/admin
-      - pnpm i
-      - pnpm m run build --filter bonde-webpage
-      - pnpm m run build --filter bonde-admin
-    secrets: [ aws_route_ip ]
-    group: build
-    when:
-      status: success
-      event: tag
 
   publish-staging-build:
     image: plugins/docker
@@ -88,47 +52,6 @@ pipeline:
     when:
       status: success
       event: [push]
-  
-  publish-staging-deprecated-build:
-    image: plugins/docker
-    repo: nossas/bonde-deprecated
-    context: clients/deprecated/admin/packages/bonde-admin
-    dockerfile: clients/deprecated/admin/packages/bonde-admin/Dockerfile
-    secrets: [docker_username, docker_password]
-    group: publish
-    tags:
-      - ${DRONE_BRANCH/\//-}
-    when:
-      status: success
-      event: [push]
-
-  publish-production-deprecated-build:
-    image: plugins/docker
-    repo: nossas/bonde-deprecated
-    context: clients/deprecated/admin/packages/bonde-admin
-    dockerfile: clients/deprecated/admin/packages/bonde-admin/Dockerfile
-    secrets: [docker_username, docker_password]
-    group: publish
-    tags:
-      - ${DRONE_TAG##v}
-      - latest
-    when:
-      status: success
-      event: tag
-
-  publish-production-build:
-    image: plugins/docker
-    repo: nossas/bonde
-    context: clients
-    dockerfile: clients/Dockerfile-old
-    secrets: [docker_username, docker_password]
-    group: publish
-    tags:
-      - ${DRONE_TAG##v}
-      - latest
-    when:
-      status: success
-      event: tag
 
   accounts-staging-deploy:
     image: peloton/drone-rancher
@@ -142,13 +65,13 @@ pipeline:
     when:
       status: success
       event: [push]
-
+  
   admin-staging-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: clients/admin
     group: deploying
-    docker_image: nossas/bonde-deprecated:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360
     confirm: true
     secrets: [rancher_access_key, rancher_secret_key]
@@ -182,12 +105,64 @@ pipeline:
       status: success
       event: [push]
 
-  redes-production-deploy:
+  production-build:
+    image: node:14-alpine
+    environment:
+      - SKIP_PREFLIGHT_CHECK=true
+      - REACT_APP_ENVIRONMENT=production
+      - REACT_APP_DOMAIN_ACCOUNTS=https://accounts.bonde.org
+      - REACT_APP_DOMAIN_ADMIN=https://app.bonde.org
+      - REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.bonde.org
+      - REACT_APP_DOMAIN_PUBLIC=bonde.org
+      - REACT_APP_DOMAIN_CROSS_STORAGE=https://cross-storage.bonde.org
+      - REACT_APP_DOMAIN_API_REST=https://api-rest.bonde.org
+      - REACT_APP_DOMAIN_API_GRAPHQL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_HASURA_API_URL=https://api-graphql.bonde.org/v1/graphql
+      - REACT_APP_DOMAIN_BOT=https://chatbot.bonde.org
+      - REACT_APP_DOMAIN_BETA=https://beta.bonde.org
+      - REACT_APP_AWS_BUCKET=bonde-assets
+      - REACT_APP_LOGIN_URL=https://accounts.bonde.org/login
+      - REACT_APP_DOMAIN_REDES=https://redes.bonde.org
+      - REACT_APP_UPLOADS_URL=https://api-rest.bonde.org/uploads
+      - REACT_APP_ZENDESK_ORGANIZATIONS={"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}
+    commands:
+      - apk --update add curl
+      - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
+      - export REACT_APP_PAGARME_KEY=$PROD_PAGARME_KEY
+      - export REACT_APP_HOTJAR_ID=$PROD_HOTJAR_ID
+      - export REACT_APP_HOTJAR_SV=$PROD_HOTJAR_SV
+      - cd clients
+      - pnpm i
+      - pnpm m run build --filter {libs}
+      - pnpm m run prepare --filter {libs}
+      - pnpm m run build --filter {packages}
+    secrets: [ aws_route_ip, prod_pagarme_key, prod_hotjar_id, prod_hotjar_sv ]
+    group: build
+    when:
+      status: success
+      event: [tag]
+
+  publish-production-build:
+    image: plugins/docker
+    repo: nossas/bonde
+    context: clients
+    dockerfile: clients/Dockerfile-old
+    secrets: [docker_username, docker_password]
+    group: publish
+    tags:
+      - ${DRONE_TAG##v}
+      - latest
+    when:
+      status: success
+      event: [tag]
+
+  accounts-production-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
-    service: clients/redes
+    service: clients/accounts
     group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    docker_image: "nossas/bonde:${DRONE_TAG##v}"
     timeout: 360
     confirm: true
     secrets:
@@ -197,4 +172,38 @@ pipeline:
         target: rancher_secret_key
     when:
       status: success
-      event: tag
+      event: [tag]
+
+  canary-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/canary
+    group: deploying
+    docker_image: "nossas/bonde:${DRONE_TAG##v}"
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: [tag]
+
+  redes-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/redes
+    group: deploying
+    docker_image: "nossas/bonde:${DRONE_TAG##v}"
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: [tag]

@@ -1,15 +1,20 @@
 import { useField } from 'bonde-components';
 
+type ChildrenArgs = {
+  value: any
+  meta: any
+}
+
 type SpyFieldProps = {
   // Field name used to spy
   field: string
-  children: (value: any) => any
+  children: (args: ChildrenArgs) => any
 }
 
 const SpyField = ({ children, field }: SpyFieldProps) => {
-  const { input } = useField(field)
+  const { input, meta } = useField(field)
 
-  return children({ value: input.value });
+  return children({ value: input.value, meta });
 }
 
 export default SpyField;

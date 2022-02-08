@@ -24,6 +24,7 @@ const widgetsByCommunityGQL = gql`
       id
       kind
       settings
+      created_at
       block {
         mobilization {
           image: facebook_share_image
@@ -52,7 +53,7 @@ const widgetsByCommunityGQL = gql`
 
 export type Widget = {
   id: number
-  kind: 'pressure' | 'form' | 'donation'
+  kind: 'pressure' | 'form' | 'donation' | 'plip'
   block: {
     mobilization: {
       image?: string
@@ -74,6 +75,7 @@ export type Widget = {
       count: number
     }
   }
+  created_at: string
   settings: Record<string, any>
 }
 
@@ -90,7 +92,7 @@ const WidgetLoadingStyled = styled.div`
   justify-content: center;
 `
 
-export const WidgetLoading = () => (
+export const WidgetLoading: React.FC = () => (
   <WidgetLoadingStyled>
     <Loading message='Carregando ações...' />
   </WidgetLoadingStyled>
@@ -102,8 +104,8 @@ type Props = {
   children: ({ widgets }: RenderProps) => any
 }
 
-const FetchWidgets = ({ children, communityId }: Props) => {
-  const { data, loading, error, refetch } = useQuery<RenderProps>(widgetsByCommunityGQL, { variables: { communityId } });
+const FetchWidgets: React.FC<Props> = ({ children, communityId }) => {
+  const { data, loading, error, refetch } = useQuery(widgetsByCommunityGQL, { variables: { communityId } });
 
   if (error) return <Hint color="error">{JSON.stringify(error)}</Hint>;
 

@@ -1,0 +1,6 @@
+site_name: BONDE Docs
+site_url: https://docs.bonde.org/
+nav:
+    - Bem vindo: index.md
+    - Sistema de Páginas: clients/webpage.md
+theme: readthedocs

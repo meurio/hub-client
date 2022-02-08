@@ -1,0 +1,60 @@
+{
+  "name": "@bonde/components",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest --watchAll false",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "rimraf dist",
+    "build": "yarn run clean && rollup -c",
+    "prepare": "yarn build"
+  },
+  "keywords": [],
+  "author": "Nossas",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@emotion/is-prop-valid": "^1.1.0",
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-typescript": "^8.2.5",
+    "@types/enzyme": "^3.10.9",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/react-color": "^3.0.5",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.56.2",
+    "rollup-plugin-dts": "^3.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^26.4.2",
+    "tslib": "^2.3.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "@chakra-ui/anatomy": "^1.0.1",
+    "@chakra-ui/react": "^1.6.9",
+    "@chakra-ui/theme-tools": "^1.2.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "final-form": "^4.20.4",
+    "framer-motion": "^4",
+    "react-color": "^2.19.3",
+    "react-final-form": "^6.5.7",
+    "react-google-font-loader": "^1.1.0",
+    "react-s3-uploader": "^5.0.0",
+    "react-select": "^5.1.0"
+  }
+}

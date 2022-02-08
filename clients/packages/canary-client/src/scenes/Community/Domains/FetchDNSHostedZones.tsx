@@ -1,4 +1,5 @@
-import { useQuery, gql, useSession } from 'bonde-core-tools';
+import React, { useContext } from 'react';
+import { useQuery, gql, Context as SessionContext } from 'bonde-core-tools';
 import { DNSHostedZone } from './types';
 
 const fetchGraphqlQuery = gql`
@@ -34,8 +35,8 @@ const fetchGraphqlQuery = gql`
   }
 `
 
-const FetchDNSHostedZones = ({ children }: any) => {
-  const { community } = useSession();
+const FetchDNSHostedZones: React.FC = ({ children }) => {
+  const { community } = useContext(SessionContext);
   const { data, loading, error, refetch } = useQuery(
     fetchGraphqlQuery,
     { variables: { communityId: community?.id } }
@@ -44,7 +45,7 @@ const FetchDNSHostedZones = ({ children }: any) => {
   if (loading) return 'Carregando DNS Hosted Zones';
   else if (error) return `Failed ${error}`;
 
-  return children({
+  return (children as any)({
     refetch,
     dnsHostedZones: (data.dns_hosted_zones.map((dns: any) => ({
       ...dns,

@@ -90,23 +90,28 @@ export const whatsappLink = (number: string, text: string): string =>
     text
   )}`;
 
+type MathArgs = {
+  volunteer: Omit<Individual, "userStatus" | "ticketId" | "externalId">;
+  recipient: Individual
+}
+
+type Result = {
+  volunteerUrl: string;
+  recipientUrl: string
+}
+
 export const createCustomWhatsappLink = (
-  {
-    volunteer,
-    recipient,
-  }: {
-    volunteer: Omit<Individual, "userStatus" | "ticketId" | "externalId">;
-    recipient: Individual;
-  },
-  agent: string
-): {
-  volunteer: string;
-  recipient: string;
-} => {
+  { volunteer, recipient }: MathArgs,
+  agentName: string
+): Result => {
   if (volunteer && recipient) {
     const messageDicio = {
-      ...dicio("v", { ...volunteer, agent }),
-      ...dicio("i", { ...recipient, agent }),
+      ...dicio("v", {
+        ...volunteer,
+        registeroccupation: volunteer.extras?.register_occupation,
+        agent: agentName
+      }),
+      ...dicio("i", { ...recipient, agent: agentName }),
     };
 
     const volunteerText = customText(
@@ -119,17 +124,17 @@ export const createCustomWhatsappLink = (
     );
 
     return {
-      volunteer: whatsappLink(
+      volunteerUrl: whatsappLink(
         volunteer.whatsapp || volunteer.phone || "0",
         volunteerText
       ),
-      recipient: whatsappLink(
+      recipientUrl: whatsappLink(
         recipient.whatsapp || recipient.phone || "0",
         recipientText
       ),
     };
   }
-  return { volunteer: "", recipient: "" };
+  return { volunteerUrl: "", recipientUrl: "" };
 };
 
 type TicketsWithUsers = Array<{

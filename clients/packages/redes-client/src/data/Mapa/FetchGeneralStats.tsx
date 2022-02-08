@@ -1,5 +1,5 @@
-import React from "react";
-import { useSession, useQuery, gql } from "bonde-core-tools";
+import React, { useContext } from "react";
+import { Context as SessionContext, useQuery, gql } from "bonde-core-tools";
 import { zendeskOrganizations } from "../../services/utils";
 import { GeneralStatsData, MapaGeneralStatsVars } from "../../types";
 
@@ -104,7 +104,7 @@ const FetchGeneralStats = ({ children }: any) => {
 };
 
 export default function CheckCommunity(props: any = {}): React.ReactElement {
-  const { community } = useSession();
+  const { community }: any = useContext(SessionContext);
   return <FetchGeneralStats community={community} {...props} />;
 }
 

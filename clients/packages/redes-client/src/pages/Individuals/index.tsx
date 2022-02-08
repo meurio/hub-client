@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Header, Empty } from "bonde-components";
+import { Header, Empty, Stack } from "bonde-components";
 
 import { Table, Filters } from "../../components";
 import BtnSearchMatch from "./scenes/BtnSearchMatch";
@@ -85,7 +85,7 @@ export default function Individuals({
   };
 
   return (
-    <>
+    <Stack direction="column" spacing={4} mb={4}>
       <Filters
         save={save}
         onGroupChange={(e) => dispatch({ type: "group", value: e })}
@@ -188,7 +188,7 @@ export default function Individuals({
           );
         }}
       </FetchIndividuals>
-    </>
+    </Stack>
   );
 }
 

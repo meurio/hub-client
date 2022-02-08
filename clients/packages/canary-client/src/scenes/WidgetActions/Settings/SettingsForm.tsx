@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ConnectedForm, toast, Success } from 'bonde-components';
+import { ConnectedForm, toast, Success } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,10 @@ const UpdateWidgetGQL = gql`
       _append: { settings: $settings }
     ) {
       affected_rows
+      returning {
+        id
+        settings
+      }
     }
   }
 `;
@@ -44,14 +48,24 @@ const Box = styled.div`
   }
 `
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connectedFormProps }: Props) => {
   const [save] = useMutation(UpdateWidgetGQL);
   const { t } = useTranslation('widgetActions');
 
   const onSubmit = async ({ primaryKey, settings, ...values }: SubmitProps) => {
+    const newSettings: any = {}
+    Object.keys(initialValues.settings).forEach((key: string) => {
+      if (Object.keys(settings).filter((key2) => key2 === key).length === 0) {
+        newSettings[key] = ""
+      }
+    });
+    const mergeSettings = {
+      ...settings,
+      ...newSettings
+    }
+    const result = await save({ variables: { primaryKey, settings: mergeSettings } });
     try {
-      const result = await save({ variables: { primaryKey, settings } });
-
       if (!(result.data.update_widgets.affected_rows === 1)) {
         throw new Error(t('settings.defaultForm.error'));
       }
@@ -60,7 +74,7 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
         type: toast.TYPE.SUCCESS,
       });
 
-      if (afterSubmit) await afterSubmit({ primaryKey, settings, ...values }, result);
+      if (afterSubmit) await afterSubmit({ primaryKey, settings: mergeSettings, ...values }, result);
 
     } catch (e) {
       console.log(e);
@@ -76,12 +90,9 @@ const SettingsForm = ({ children, widget, initialValues, afterSubmit, ...connect
       initialValues={{ primaryKey: widget.id, ...initialValues }}
       {...connectedFormProps}
     >
-      {({ submitting, pristine, ...formProps }: any) => (
+      {({ submitting, dirty, ...formProps }: any) => (
         <Box>
-          <div className='floating'>
-            <Button type='submit' disabled={submitting || pristine}>{t('settings.defaultForm.submit')}</Button>
-          </div>
-          {children({ submitting, pristine, ...formProps })}
+          {children({ submitting, dirty, ...formProps })}
         </Box>
       )}
     </ConnectedForm>

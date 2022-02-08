@@ -3,6 +3,7 @@ const labels: Record<string, { title: string; count: string }> = {
   form: { title: "Formulário", count: "envios" },
   donation: { title: "Doação", count: "doações" },
   "pressure-phone": { title: "Telefone", count: "pressões" },
+  plip: { title: "PLIP", count: "formulários" }
 };
 
 type Label = {

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Loading, Header } from 'bonde-components';
-import { useQuery, useSession, gql } from 'bonde-core-tools';
+import React, { useState, useContext } from 'react';
+import { Loading, Heading, Box, Stack, Button } from 'bonde-components';
+import { Context as SessionContext, useQuery, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import UsersTable from './UsersTable';
 import InvitationsTable from './InvitationsTable';
@@ -50,28 +49,17 @@ const InvitationsQuery = gql`
   }
 `;
 
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
+enum Menu {
+  invitations,
+  mobilizers
+}
 
-  ${Header.H5} {
-    margin: 0 20px 15px 0;
-    padding: 0 0 1px 0;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  ${Header.H5}.active {
-    color: #ee0099;
-  }
-`;
-
-const FetchInvitations = () => {
-  const [menu, setMenu] = useState(1);
+const FetchInvitations: React.FC = () => {
+  // Menu options: invitations and mobilizers
+  const [menu, setMenu] = useState(Menu.mobilizers);
   const { t } = useTranslation('community');
   // Session
-  const { user, community } = useSession();
+  const { currentUser: user, community } = useContext(SessionContext);
   // Query
   const variables = { communityId: community?.id };
   const { data, loading, error, refetch } = useQuery(InvitationsQuery, { variables });
@@ -107,21 +95,33 @@ const FetchInvitations = () => {
     isCommunityAdmin
   };
 
+  const customTheme = (index: Menu) => ({
+    variant: "link",
+    colorScheme: "gray",
+    isActive: menu === index,
+    onClick: () => setMenu(index),
+    _active: {
+      color: "pink.200"
+    }
+  })
+
   return (
-    <>
-      <Header.H4>{t('mobilizers.form.title')}</Header.H4>
-      <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
-      <Flex>
-        <Header.H5 className={menu === 1 ? 'active' : ''} onClick={() => setMenu(1)}>
-          {t('mobilizers.filters.invitations', { count: invitationsCount })}
-        </Header.H5>
-        <Header.H5 className={menu === 2 ? 'active' : ''} onClick={() => setMenu(2)}>
+    <Stack spacing={4}>
+      <Heading as="h4" size="md">{t('mobilizers.form.title')}</Heading>
+      <Box bg="white" boxShadow="sm" p={6}>
+        <InviteForm onSuccess={onRefetch} isCommunityAdmin={isCommunityAdmin} />
+      </Box>
+      <Stack direction="row" spacing={4}>
+        <Button {...customTheme(Menu.mobilizers)}>
           {t('mobilizers.filters.mobilizers', { count: communityUsersCount })}
-        </Header.H5>
-      </Flex>
-      {menu === 1 && <InvitationsTable data={invitations} {...tableProps} />}
-      {menu === 2 && <UsersTable data={communityUsers} {...tableProps} />}
-    </>
+        </Button>
+        <Button {...customTheme(Menu.invitations)}>
+          {t('mobilizers.filters.invitations', { count: invitationsCount })}
+        </Button>
+      </Stack>
+      {menu === Menu.invitations && <InvitationsTable data={invitations} {...tableProps} />}
+      {menu === Menu.mobilizers && <UsersTable data={communityUsers} {...tableProps} />}
+    </Stack>
   );
 };
 

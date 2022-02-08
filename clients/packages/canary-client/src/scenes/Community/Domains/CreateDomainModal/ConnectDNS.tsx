@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Link, Button, toast, Success } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
+import {
+  Button,
+  toast,
+  Success,
+  Stack,
+  ModalHeader,
+  ModalContent,
+  ModalBody,
+  ModalFooter
+} from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import NameServersForm from './NameServersForm';
 import IPConnectForm from './IPConnectForm';
@@ -25,7 +33,7 @@ type Props = {
   dnsHostedZone: DNSHostedZone
 }
 
-const ConnectDNS = ({ dnsHostedZone, onClose }: Props) => {
+const ConnectDNS: React.FC<Props> = ({ dnsHostedZone, onClose }) => {
   const [status, setStatus] = useState();
   const [isNameServers, setIsNameServers] = useState(true);
   const [setPropagating] = useMutation(propagatingDNSGQL);
@@ -35,29 +43,30 @@ const ConnectDNS = ({ dnsHostedZone, onClose }: Props) => {
 
   const done = async () => {
     await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id } });
-    // const { data, errors } = await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id } });
-    // console.log('data, errors', { data, errors });
     toast(<Success message='Dominio salvo com sucesso!' />, { type: toast.TYPE.SUCCESS });
     onClose()
   }
 
   return (
-    <Container fluid style={{ width: '100%', padding: '0' }}>
+    <ModalContent>
       {isNameServers
-        ? <NameServersForm status={status} changeStatus={changeStatus} connectByIP={connectByIP} dnsHostedZone={dnsHostedZone} />
-        : <IPConnectForm status={status} changeStatus={changeStatus} />
+        ? <ModalHeader maxW="50%">Agora, precisamos da sua ajuda para conectá-lo ao BONDE</ModalHeader>
+        : <ModalHeader>Conectar por IP</ModalHeader>
       }
-      <Row>
-        <Col xs={6}>
-          <Link onClick={onClose}>Voltar</Link>
-        </Col>
-        <Col xs={6} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={done} disabled={status !== 'registered'} type='button'>
-            Pronto!
-        </Button>
-        </Col>
-      </Row>
-    </Container>
+      <ModalBody>
+        {isNameServers
+          ? <NameServersForm status={status} changeStatus={changeStatus} connectByIP={connectByIP} dnsHostedZone={dnsHostedZone} />
+          : <IPConnectForm status={status} changeStatus={changeStatus} />
+        }
+      </ModalBody>
+      <ModalFooter justifyContent="space-between" alignItems="center">
+        <Button variant="link" colorScheme="black" onClick={onClose}>Voltar</Button>
+        <Stack direction="row" spacing={4}>
+          <Button variant="link" colorScheme="black" onClick={done}>Deixar para depois</Button>
+          <Button onClick={done} disabled={status !== 'registered'} type='button'>Pronto!</Button>
+        </Stack>
+      </ModalFooter>
+    </ModalContent>
   )
 }
 

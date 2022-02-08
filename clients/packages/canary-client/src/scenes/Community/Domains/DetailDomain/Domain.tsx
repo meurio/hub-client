@@ -1,15 +1,18 @@
-import React from 'react';
-import { Text, Icon, toast, Success } from 'bonde-components';
-import { useMutation, gql } from 'bonde-core-tools';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
 import {
-  DNS as DTRow,
-  Col as DTCol,
-  Status,
-  List as DTList,
-  MainTitle,
+  Text,
+  Icon,
+  toast,
+  Success,
+  Grid,
+  GridItem,
+  Stack,
+  Box,
   Button
-} from '../Styles';
+} from 'bonde-components';
+import { useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
+import { useHistory } from 'react-router-dom';
+import { Status, MainTitle } from '../Styles';
 import { DNSHostedZone } from '../types';
 
 // Types
@@ -105,44 +108,62 @@ const updateDomainGQL = gql`
   }
 `
 
-const Domain = (props: Omit<Props, 'action'>) => {
+const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
+  const { currentUser: user } = useContext(SessionContext);
   const [deleteDomain] = useMutation(deleteDomainGQL);
   const [updateDomain] = useMutation(updateDomainGQL);
   const { push } = useHistory();
 
   return (
-    <DTList columnSize='500px auto 280px'>
-      <DTRow header>
-        <DTCol>
+    <Stack direction="column" spacing={2}>
+      <Grid templateColumns='500px auto 280px'>
+        <GridItem>
           <MainTitle>Domínio</MainTitle>
-        </DTCol>
-        <DTCol>
+        </GridItem>
+        <GridItem>
           <MainTitle>Status</MainTitle>
-        </DTCol>
-        <DTCol>
+        </GridItem>
+        <GridItem>
           <MainTitle>Ações</MainTitle>
-        </DTCol>
-      </DTRow>
-      <DTRow>
-        <DTCol>
-          <Text bold>{props.dnsHostedZone?.domain_name}</Text>
-        </DTCol>
-        <DTCol>
-          <Status
-            value={props.dnsIsActivated ? 'active' : 'inactive'}
-            labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
-          />
-        </DTCol>
-        <DTCol style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Button onClick={handleCheckDNS({ ...props, action: updateDomain })} style={{ fontSize: '13px' }}>
-            <Icon size='small' name='Sync' /> Verificar DNS
-          </Button>
-          <Button onClick={handleDelete({ ...props, action: deleteDomain, push })} style={{ fontSize: '13px' }}>
-            <Icon size='small' name='Trash' /> Excluir
-          </Button>
-        </DTCol>
-      </DTRow>
-    </DTList>
+        </GridItem>
+      </Grid>
+      <Box bg="white" boxShadow="sm">
+        <Grid templateColumns='500px auto 280px' p={4}>
+          <GridItem>
+            <Text bold>{props.dnsHostedZone?.domain_name}</Text>
+          </GridItem>
+          <GridItem>
+            <Status
+              value={props.dnsIsActivated ? 'active' : 'inactive'}
+              labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
+            />
+          </GridItem>
+          <GridItem>
+            <Stack direction="row" spacing={6}>
+              <Button
+                variant="tableLink"
+                colorScheme="gray"
+                onClick={handleCheckDNS({ ...props, action: updateDomain })}
+                style={{ fontSize: '13px' }}
+              >
+                <Icon size='small' name='Sync' />
+                Verificar DNS
+              </Button>
+              <Button
+                disabled={!user.hasAdminPermission()}
+                variant="tableLink"
+                colorScheme="gray"
+                onClick={handleDelete({ ...props, action: deleteDomain, push })}
+                style={{ fontSize: '13px' }}
+              >
+                <Icon size='small' name='Trash' />
+                Excluir
+              </Button>
+            </Stack>
+          </GridItem>
+        </Grid>
+      </Box>
+    </Stack>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectField from '../../../components/SelectField';
+import { SelectField } from "bonde-components";
 
 const banks = [
   { code: "332", name: "Acesso Soluções de Pagamento S.A." },

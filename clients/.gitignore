@@ -12,6 +12,8 @@ coverage
 # production
 build
 packages/**/build
+dist
+libs/**/dist
 
 # misc
 .DS_Store
@@ -22,7 +24,9 @@ packages/**/build
 .env.production.local
 packages/**/.env
 
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 **.db**
+.pnpmi*

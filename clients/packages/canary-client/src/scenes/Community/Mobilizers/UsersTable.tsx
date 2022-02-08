@@ -1,6 +1,5 @@
 import React from 'react';
-import { Header, Link, Icon, toast } from 'bonde-components';
-import styled from 'styled-components';
+import { Header, Button, Icon, toast } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import Table, { Styles } from './Table';
@@ -20,12 +19,6 @@ const DeleteCommunityUsersMutation = gql`
   }
 `;
 
-const MenuStyles = styled.div`
-  a {
-    font-weight: bold;
-  }
-`;
-
 type Row = {
   original: any
 }
@@ -40,31 +33,31 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
   const { t } = useTranslation('community');
 
   return (
-    <MenuStyles>
-      <Link
-        href="#"
-        onClick={async () => {
-          try {
-            const { data } = await deleteCommunityUsers({ variables: { id } })
-            if (data.delete_community_users.returning.length > 0) {
-              toast(t('mobilizers.table.actions.delete.success', { name: user.first_name }), { type: toast.TYPE.SUCCESS })
-              return await refetch()
-            }
-            throw DeleteException({
-              graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
-            })
-          } catch ({ graphQLErrors, ...errors }) {
-            if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
-              toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
-            } else {
-              console.error({ graphQLErrors, ...errors })
-            }
+    <Button
+      leftIcon={<Icon name='Trash' size='small' />}
+      variant="tableLink"
+      colorScheme="gray"
+      onClick={async () => {
+        try {
+          const { data } = await deleteCommunityUsers({ variables: { id } })
+          if (data.delete_community_users.returning.length > 0) {
+            toast(t('mobilizers.table.actions.delete.success', { name: user.first_name }), { type: toast.TYPE.SUCCESS })
+            return await refetch()
           }
-        }}
-      >
-        <Icon name='Trash' size='small' /> Excluir
-      </Link>
-    </MenuStyles>
+          throw DeleteException({
+            graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
+          })
+        } catch ({ graphQLErrors, ...errors }) {
+          if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
+            toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
+          } else {
+            console.error({ graphQLErrors, ...errors })
+          }
+        }
+      }}
+    >
+      Excluir
+    </Button>
   );
 };
 

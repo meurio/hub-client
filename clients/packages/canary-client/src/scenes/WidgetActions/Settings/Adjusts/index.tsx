@@ -1,52 +1,91 @@
 import React from 'react';
-import { InputField, Tooltip } from 'bonde-components';
+import {
+  Button,
+  Box,
+  ColorField,
+  InputField,
+  Flex,
+  RadioField,
+  Radio,
+  Heading,
+  Grid,
+  GridItem
+} from 'bonde-components';
 import { useTranslation } from 'react-i18next';
-import Panel from '../../../../components/Panel';
-import ColorField from '../../../../components/ColorField';
 import SettingsForm from '../SettingsForm';
 
-const AdjustsFields = ({ widget }: any) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const AdjustsFields = ({ widget, updateCache }: any) => {
   const { t } = useTranslation('widgetActions');
 
   return (
     <SettingsForm
       widget={widget}
+      afterSubmit={async (values:any, result:any) => {
+        updateCache(result.data.update_widgets.returning[0])
+      }}
       initialValues={{
-        settings: widget.settings
+        settings: {
+          show_city: "city-false",
+          show_state: "n",
+          ...widget.settings
+        }
       }}
     >
-      {() => (
-        <Panel>
-          <InputField
-            name='settings.call_to_action'
-            label={t('settings.adjusts.fields.call_to_action.label')}
-            placeholder={t('settings.adjusts.fields.call_to_action.placeholder')}
-          />
-          <InputField
-            name='settings.button_text'
-            label={t('settings.adjusts.fields.button_text.label')}
-            placeholder={t('settings.adjusts.fields.button_text.placeholder')}
-          />
-          <InputField
-            name='settings.count_text'
-            label={
-              <Tooltip
+      {({ submitting, dirty }: any) => (
+        <Grid templateColumns="repeat(12, 1fr)" gap={16}>
+          <GridItem colSpan={[12, 12, 6]}>
+            <Box bg="white" p={6} boxShadow="sm">
+              <Heading as="h3" size="xl" mb={4}>{t("settings.adjusts.title")}</Heading>
+              <InputField
+                name='settings.call_to_action'
+                label={t('settings.adjusts.fields.call_to_action.label')}
+                placeholder={t('settings.adjusts.fields.call_to_action.placeholder')}
+              />
+              <InputField
+                name='settings.button_text'
+                label={t('settings.adjusts.fields.button_text.label')}
+                placeholder={t('settings.adjusts.fields.button_text.placeholder')}
+              />
+              <InputField
+                name='settings.count_text'
                 label={t('settings.adjusts.fields.count_text.label')}
-                info={t('settings.adjusts.fields.count_text.tooltip')}
+                helpText={t('settings.adjusts.fields.count_text.tooltip')}
+                placeholder={t('settings.adjusts.fields.count_text.placeholder')}
               />
-            }
-            placeholder={t('settings.adjusts.fields.count_text.placeholder')}
-          />
-          <ColorField
-            name='settings.main_color'
-            label={
-              <Tooltip
+
+              {widget.kind === "pressure" && (
+                <>
+                  <RadioField
+                    name='settings.show_state'
+                    label={t('settings.adjusts.fields.state.title')}
+                    columns="auto auto 1fr"
+                  >
+                    <Radio value='s'>{t('settings.adjusts.fields.state.radio.yes')}</Radio>
+                    <Radio value='n'>{t('settings.adjusts.fields.state.radio.no')}</Radio>
+                  </RadioField>
+
+                  <RadioField
+                    name='settings.show_city'
+                    label={t('settings.adjusts.fields.city.title')}
+                    columns="auto auto 1fr"
+                  >
+                    <Radio value='city-true'>{t('settings.adjusts.fields.city.radio.yes')}</Radio>
+                    <Radio value='city-false'>{t('settings.adjusts.fields.city.radio.no')}</Radio>
+                  </RadioField>
+                </>
+              )}
+              <ColorField
+                name='settings.main_color'
                 label={t('settings.adjusts.fields.main_color.label')}
-                info={t('settings.adjusts.fields.main_color.tooltip')}
+                helpText={t('settings.adjusts.fields.main_color.tooltip')}
               />
-            }
-          />
-        </Panel>
+              <Flex justify='end'>
+                <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
+              </Flex>
+            </Box>
+          </GridItem>
+        </Grid>
       )}
     </SettingsForm>
   );

@@ -1,4 +1,4 @@
-
+import * as React from 'react';
 import { Header } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { useLocation } from 'react-router-dom';

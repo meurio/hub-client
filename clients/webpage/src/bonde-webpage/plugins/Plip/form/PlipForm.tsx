@@ -130,7 +130,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                 {({ input, meta }) => (
                   <div>
                     <label>Whatsapp </label>
-                    <input {...input} type="text" placeholder="Seu Whatsapp" />
+                    <input {...input} type="text" placeholder="não se esqueça do DDD!" />
                     {meta.error && meta.touched && <span>{meta.error}</span>}
                   </div>
                 )}
@@ -140,7 +140,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                   <div>
                     <label>Quantidade de Assinaturas* </label>
                     <select {...input}>
-                      <option>Selecione a quantidade de assinaturas</option>
+                      <option>selecione a quantidade de assinaturas</option>
                       <option value="10">10</option>
                       <option value="20">20</option>
                       <option value="30">30</option>

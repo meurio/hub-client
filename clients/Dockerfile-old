@@ -2,6 +2,6 @@ FROM node:14-alpine
 
 WORKDIR /code
 
-RUN yarn add pnpm serve
+RUN yarn add pnpm serve next@^12
 
 COPY . .

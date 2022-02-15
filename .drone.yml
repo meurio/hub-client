@@ -22,9 +22,12 @@ pipeline:
       - REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
       - REACT_APP_UPLOADS_URL=https://api-rest.staging.bonde.org/uploads
       - REACT_APP_ZENDESK_ORGANIZATIONS={"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}
+      - REACT_APP_DOMAIN_API_ACTIVISTS=https://api-graphql.staging.bonde.org/v1/graphql
     commands:
       - apk --update add curl
       - curl -L https://unpkg.com/@pnpm/self-installer | node
+      - export ACTION_SECRET_KEY=$STAG_ACTION_SECRET_KEY
+      - export REACT_APP_API_GRAPHQL_SECRET=$STAG_API_GRAPHQL_SECRET
       - export REACT_APP_AWS_ROUTE_IP=$AWS_ROUTE_IP
       - export REACT_APP_PAGARME_KEY=$STAG_PAGARME_KEY
       - export REACT_APP_HOTJAR_ID=$STAG_HOTJAR_ID
@@ -96,6 +99,19 @@ pipeline:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: clients/redes
+    group: deploying
+    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    timeout: 360
+    confirm: true
+    secrets: [rancher_access_key, rancher_secret_key]
+    when:
+      status: success
+      event: [push]
+  
+  public-staging-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/public
     group: deploying
     docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
     timeout: 360

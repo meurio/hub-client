@@ -15,6 +15,7 @@ export const QUERY = gql`
       expected_signatures
       confirmed_signatures
       created_at
+      status
     }
   }
 `;

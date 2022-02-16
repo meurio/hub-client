@@ -15,6 +15,7 @@ export const QUERY = gql`
       expected_signatures
       confirmed_signatures
       created_at
+      status
     }
 
     plips_aggregate(where: $where) {
@@ -94,6 +95,7 @@ export interface PlipForm {
   expected_signatures: number;
   confirmed_signatures?: number;
   created_at: string;
+  status: 'CONCLUIDO' | 'INSCRITO' | 'PENDENTE'
 }
 
 const dummyf = () => {
@@ -153,35 +155,11 @@ export const createVariables = ({
 
   // Status filter
   if (status === 'pendentes') {
-    where['confirmed_signatures'] = { _is_null: true };
-    where['_and'].push({
-      '_or': [10, 20, 30, 40, 50, 100].map((value, index) => {
-        const date = new Date();
-        date.setDate(date.getDate() - (30 * (index + 1)));
-        return {
-          _and: [
-            { created_at: { _lte: date.toDateString() } },
-            { expected_signatures: { _eq: value } }
-          ]
-        }
-      })
-    })
+    where['status'] = { _eq: 'PENDENTE' };
   } else if (status === 'inscritos') {
-    where['confirmed_signatures'] = { _is_null: true };
-    where['_and'].push({
-      '_or': [10, 20, 30, 40, 50, 100].map((value, index) => {
-        const date = new Date();
-        date.setDate(date.getDate() - (30 * (index + 1)));
-        return {
-          _and: [
-            { created_at: { _gte: date.toDateString() } },
-            { expected_signatures: { _eq: value } }
-          ]
-        }
-      })
-    })
+    where['status'] = { _eq: 'INSCRITO' };
   } else if (status === 'concluidos') {
-    where['confirmed_signatures'] = { _is_null: false };
+    where['status'] = { _eq: 'CONCLUIDO' };
   }
 
   // States filter

@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button, Box, FinalForm } from 'bonde-components';
+import { Button, FinalForm } from 'bonde-components';
 import styled from "@emotion/styled";
+import MenuActions from './MenuActions';
 
 const Form = styled.form`
   display: flex;
@@ -10,6 +11,7 @@ const Form = styled.form`
 
 export interface Properties {
   initialValues?: any;
+  buttonText?: string;
   onSubmit: any
 }
 
@@ -66,7 +68,7 @@ export default class Wizard extends React.Component<Properties, State> {
   }
 
   render() {
-    const { children } = this.props
+    const { children, buttonText } = this.props
     const { page, values } = this.state
     const activePage = React.Children.toArray(children)[page]
     const isLastPage = page === React.Children.count(children) - 1
@@ -79,14 +81,14 @@ export default class Wizard extends React.Component<Properties, State> {
         {({ handleSubmit, submitting }: any) => (
           <Form onSubmit={handleSubmit}>
             {activePage}
-            <Box py={4} borderTop="1px solid" borderColor="gray.100">
-              {!isLastPage && <Button minH="42px" type="submit" w="100%">Confirma</Button>}
+            <MenuActions>
+              {!isLastPage && <Button minH="42px" type="submit" w="100%">{buttonText || 'Confirmar'}</Button>}
               {isLastPage && (
                 <Button minH="42px" type="submit" disabled={submitting} w="100%">
                   Concluir
                 </Button>
               )}
-            </Box>
+            </MenuActions>
           </Form>
         )}
       </FinalForm>

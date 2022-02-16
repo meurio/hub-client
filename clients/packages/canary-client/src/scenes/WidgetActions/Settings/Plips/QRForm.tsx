@@ -14,15 +14,27 @@ import type { Widget } from "../../FetchWidgets";
 import Wizard from "./components/Wizard";
 import useQueryParams from "./useQueryParams";
 
-const GET_PLIP_FORM = gql`
+const GET_PLIP_SIGNATURES = gql`
   query ($code: String!) {
-    plips(where: { unique_identifier: { _eq: $code }, confirmed_signatures: { _is_null: true } }) {
+    plips(where: { unique_identifier: { _eq: $code } }, order_by: { created_at: desc }, limit: 1) {
       id
-      unique_identifier
-      created_at
-      form_data
-      state
       expected_signatures
+      state: form_data(path: "state")
+      name: form_data(path: "name")
+      created_at
+    }
+
+    plip_signatures_aggregate(where: {
+      unique_identifier: {
+        _eq: $code
+      }
+    }) {
+      aggregate {
+        count
+        sum {
+          confirmed_signatures
+        }
+      }
     }
   }
 `;
@@ -37,12 +49,6 @@ const INSERT_PLIP_SIGNATURE_FORM = gql`
   }
 `;
 
-interface FormData {
-  name: string;
-  state: string;
-  signature_quantity: number;
-}
-
 interface Properties {
   widget: Widget
 }
@@ -53,7 +59,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
   const { code }: any = useParams();
   const urlParams = useQueryParams();
   const [insertPlipSignature] = useMutation(INSERT_PLIP_SIGNATURE_FORM);
-  const { loading, error, data } = useQuery(GET_PLIP_FORM, { variables: { code } });
+  const { loading, error, data } = useQuery(GET_PLIP_SIGNATURES, { variables: { code } });
 
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>
@@ -78,22 +84,15 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
       })
   }
 
-  const plipForm = data?.plips[0];
-  if (!plipForm) {
-    return (
-      <Flex direction="column" flex={1}>
-        <Flex flex={1} py={8}>
-          <Heading fontSize="2xl">Ops! Essa ficha já foi registrada.</Heading>
-        </Flex>
-        <Stack py={4} borderTop="1px solid" borderColor="gray.100" spacing={2}>
-          <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
-          <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Voltar ao início</Button>
-        </Stack>
-      </Flex>  
-    );
-  }
-
-  const formData: FormData = plipForm.form_data;
+  const plipSignaturesAgg: {
+    aggregate: {
+      count: number
+      sum: {
+        confirmed_signatures: number
+      }
+    }
+  } = data?.plip_signatures_aggregate;
+  const plipForm = (data?.plips || [])[0]
 
   return formValues ? (
     <Flex direction="column" flex={1}>
@@ -107,6 +106,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
     </Flex>
   ) : (
     <Wizard
+      buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirmar'}
       onSubmit={handleSubmit}
       initialValues={{
         unique_identifier: code,
@@ -120,7 +120,13 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
             name="unique_identifier"
             label="Código da ficha"
           />
-          <Text>Ficha de <strong>{plipForm.state}</strong> gerada por <strong>{formData.name}</strong>.</Text>
+          <Text>
+            Ficha de <strong>{plipForm.state}</strong> gerada por <strong>{plipForm.name}</strong>
+            {plipSignaturesAgg.aggregate.count > 0
+              ? `, que já enviou ${plipSignaturesAgg.aggregate.sum.confirmed_signatures} assinaturas anteriormente.`
+              : `.`
+            }
+          </Text>
         </Stack>
       </Wizard.Page>
       <Wizard.Page>

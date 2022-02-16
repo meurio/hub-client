@@ -157,7 +157,6 @@ class LinkDataModal extends Component {
                   text="Salvar"
                   onClick={() => {
                     const { imageAttributes } = this.state;
-                    debugger;
                     if (!imageAttributes.href) {
                       onChange(unlink(value.change()));
                     } else {

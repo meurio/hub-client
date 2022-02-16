@@ -11,7 +11,7 @@ const PLIP_PERFORMANCE_QUERY = gql`
         count
       }
     }
-    
+
     pending_subscribers: plips_aggregate(
       where: {
         widget_id: { _eq: $widget_id },
@@ -23,7 +23,7 @@ const PLIP_PERFORMANCE_QUERY = gql`
         count
       }
     }
-    
+
     pending_signatures: plips_aggregate(
       where: {
         widget_id: { _eq: $widget_id },
@@ -36,7 +36,7 @@ const PLIP_PERFORMANCE_QUERY = gql`
         }
       }
     }
-    
+
     confirmed_signatures: plips_aggregate(
       where: {
         widget_id: { _eq: $widget_id },
@@ -45,12 +45,21 @@ const PLIP_PERFORMANCE_QUERY = gql`
     ) {
       aggregate {
         confirmed_subscribers: count
+      }
+    }
+    
+    confirmed_signatures_sum: plip_signatures_aggregate(
+      where: {
+        widget_id: { _eq: $widget_id },
+      }
+    ) {
+      aggregate {
         sum {
           confirmed_signatures
         }
       }
     }
-    
+
     states_signatures: plips_by_state(
       where: {
         widget_id: { _eq: $widget_id }
@@ -134,11 +143,15 @@ interface ResultData {
   confirmed_signatures: {
     aggregate: {
       confirmed_subscribers: number;
+    }
+  };
+  confirmed_signatures_sum: {
+    aggregate: {
       sum: {
         confirmed_signatures: number;
       }
     }
-  };
+  }
   states_signatures: StateSignature[];
   subscribers_range: SubscribersRange[];
   plips: PlipsForm[]
@@ -201,7 +214,7 @@ export const usePerformanceQuery = (widget_id: number): ResultQuery<PerformanceD
         pending_subscribers: data.pending_subscribers.aggregate.count,
         confirmed_subscribers: data.confirmed_signatures.aggregate.confirmed_subscribers,
         pending_signatures: data.pending_signatures.aggregate.sum.expected_signatures,
-        confirmed_signatures: data.confirmed_signatures.aggregate.sum.confirmed_signatures,
+        confirmed_signatures: data.confirmed_signatures_sum.aggregate.sum.confirmed_signatures,
         states_signatures: data.states_signatures,
         subscribers_range: subscribers_range,
         subscribers_range_start: before,

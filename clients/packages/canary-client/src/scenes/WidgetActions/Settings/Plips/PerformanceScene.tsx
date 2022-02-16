@@ -129,7 +129,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
                     })
                     .splice(0, isMobile ? 5 : 7)
                     // eslint-disable-next-line react/display-name
-                    .map((ss) => <Row data={ss} />)}
+                    .map((ss, index) => <Row key={index} data={ss} />)}
                   </Tbody>
                 </Table>
               </Box>

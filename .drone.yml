@@ -108,18 +108,18 @@ pipeline:
       status: success
       event: [push]
   
-  public-staging-deploy:
-    image: peloton/drone-rancher
-    url: http://cluster.bonde.org
-    service: clients/public
-    group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
-    timeout: 360
-    confirm: true
-    secrets: [rancher_access_key, rancher_secret_key]
-    when:
-      status: success
-      event: [push]
+ #  public-staging-deploy:
+ #   image: peloton/drone-rancher
+ #   url: http://cluster.bonde.org
+ #   service: clients/public
+ #   group: deploying
+ #   docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+ #   timeout: 360
+ #   confirm: true
+ #   secrets: [rancher_access_key, rancher_secret_key]
+ #   when:
+ #     status: success
+ #     event: [push]
 
   production-build:
     image: node:14-alpine

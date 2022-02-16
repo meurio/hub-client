@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Button,
@@ -8,14 +8,14 @@ import {
   Text,
   Stack
 } from "bonde-components";
-import { useMutation, useQuery, gql } from "bonde-core-tools";
+import { useMutation, useQuery, gql, Context as SessionContext } from "bonde-core-tools";
 
 import type { Widget } from "../../FetchWidgets";
 import Wizard from "./components/Wizard";
 import useQueryParams from "./useQueryParams";
 
 const GET_PLIP_FORM = gql`
-  query ($code: uuid!) {
+  query ($code: String!) {
     plips(where: { unique_identifier: { _eq: $code }, confirmed_signatures: { _is_null: true } }) {
       id
       unique_identifier
@@ -27,11 +27,11 @@ const GET_PLIP_FORM = gql`
   }
 `;
 
-const UPDATE_PLIP_FORM = gql`
-  mutation ($id: Int!, $confirmed_signatures: Int!) {
-    update_plips_by_pk(pk_columns: {id: $id}, _set: { confirmed_signatures: $confirmed_signatures }) {
+const INSERT_PLIP_SIGNATURE_FORM = gql`
+  mutation ($input: plip_signatures_insert_input!) {
+    insert_plip_signatures_one(object: $input) {
       id
-      unique_identifier
+      created_at
       confirmed_signatures
     }
   }
@@ -48,19 +48,30 @@ interface Properties {
 }
 
 const QRForm: React.FC<Properties> = ({ widget }) => {
+  const { currentUser: user } = useContext(SessionContext);
   const [formValues, setFormValues] = useState();
   const { code }: any = useParams();
   const urlParams = useQueryParams();
-  const [updatePlipForm] = useMutation(UPDATE_PLIP_FORM);
+  const [insertPlipSignature] = useMutation(INSERT_PLIP_SIGNATURE_FORM);
   const { loading, error, data } = useQuery(GET_PLIP_FORM, { variables: { code } });
 
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>
 
-  const handleSubmit = ({ id, confirmed_signatures }: any) => {
-    updatePlipForm({ variables: { id, confirmed_signatures } })
+  const handleSubmit = ({ unique_identifier, confirmed_signatures }: any) => {
+    const input: any = {
+      unique_identifier,
+      confirmed_signatures,
+      widget_id: widget.id
+    }
+
+    if (user.isAdmin) {
+      input.user_id = user.id;
+    }
+
+    insertPlipSignature({ variables: { input }})
       .then((resp: any) => {
-        setFormValues(resp.data.update_plips_by_pk)
+        setFormValues(resp.data.insert_plip_signatures_one)
       })
       .catch((err: any) => {
         console.log("error", err);
@@ -98,8 +109,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
     <Wizard
       onSubmit={handleSubmit}
       initialValues={{
-        id: plipForm.id,
-        unique_identify: code,
+        unique_identifier: code,
         confirmed_signatures: plipForm.expected_signatures
       }}
     >
@@ -107,7 +117,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
         <Stack spacing={4} flex={1} py={8}>
           <Heading fontSize="2xl">Confere aí:</Heading>
           <InputField
-            name="unique_identify"
+            name="unique_identifier"
             label="Código da ficha"
           />
           <Text>Ficha de <strong>{plipForm.state}</strong> gerada por <strong>{formData.name}</strong>.</Text>

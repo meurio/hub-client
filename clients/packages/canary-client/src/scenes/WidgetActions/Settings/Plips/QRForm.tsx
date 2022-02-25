@@ -15,8 +15,8 @@ import Wizard from "./components/Wizard";
 import useQueryParams from "./useQueryParams";
 
 const GET_PLIP_SIGNATURES = gql`
-  query ($code: String!) {
-    plips(where: { unique_identifier: { _eq: $code } }, order_by: { created_at: desc }, limit: 1) {
+  query ($code: String!, $widget_id: Int!) {
+    plips(where: { unique_identifier: { _eq: $code }, widget_id: { _eq: $widget_id } }, order_by: { created_at: desc }, limit: 1) {
       id
       expected_signatures
       state: form_data(path: "state")
@@ -27,7 +27,7 @@ const GET_PLIP_SIGNATURES = gql`
     plip_signatures_aggregate(where: {
       unique_identifier: {
         _eq: $code
-      }
+      },widget_id: { _eq: $widget_id }
     }) {
       aggregate {
         count
@@ -59,7 +59,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
   const { code }: any = useParams();
   const urlParams = useQueryParams();
   const [insertPlipSignature] = useMutation(INSERT_PLIP_SIGNATURE_FORM);
-  const { loading, error, data } = useQuery(GET_PLIP_SIGNATURES, { variables: { code } });
+  const { loading, error, data } = useQuery(GET_PLIP_SIGNATURES, { variables: { code, widget_id: widget.id } });
 
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>

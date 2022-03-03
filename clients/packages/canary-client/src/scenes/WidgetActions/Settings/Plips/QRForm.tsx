@@ -100,7 +100,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
         <Heading fontSize="2xl">Tudo certo! Dados atualizados, agora temos {Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures} assinaturas pela Amazônia <span role="img" aria-label="Emoji">🎉</span></Heading>
       </Flex>
       <Stack py={4} borderTop="1px solid" borderColor="gray.100" spacing={2}>
-        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
+        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow?count=${Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures}`}>Atualizar outra ficha</Button>
         <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
       </Stack>
     </Flex>

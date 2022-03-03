@@ -67,7 +67,7 @@ const QRScene: React.FC<Properties> = ({ widget }) => {
           />
           <Stack bg="white" px={8} py={4} align="center" spacing={4}>
             <QRCodeIcon />
-            <Text textAlign="center">Aproxime sua câmera do QR CODE na ficha para atualizar os dados ou <strong>digite manualmente</strong>.</Text>
+            <Text textAlign="center">Aproxime sua câmera do QR CODE na ficha para atualizar os dados.</Text>
           </Stack>
         </>
       </Route>

@@ -23,7 +23,6 @@ const GET_PLIP_SIGNATURES = gql`
       name: form_data(path: "name")
       created_at
     }
-
     plip_signatures_aggregate(where: {
       unique_identifier: {
         _eq: $code
@@ -59,7 +58,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
   const { code }: any = useParams();
   const urlParams = useQueryParams();
   const [insertPlipSignature] = useMutation(INSERT_PLIP_SIGNATURE_FORM);
-  const { loading, error, data, refetch } = useQuery(GET_PLIP_SIGNATURES, { variables: { code, widget_id: widget.id } });
+  const { loading, error, data } = useQuery(GET_PLIP_SIGNATURES, { variables: { code, widget_id: widget.id } });
 
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>
@@ -100,7 +99,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
         <Heading fontSize="2xl">Tudo certo! Dados atualizados, agora temos {Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures} assinaturas pela Amazônia <span role="img" aria-label="Emoji">🎉</span></Heading>
       </Flex>
       <Stack py={4} borderTop="1px solid" borderColor="gray.100" spacing={2}>
-        <Button minH="42px" onClick={() => refetch()} as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
+        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow?count=${Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures}`}>Atualizar outra ficha</Button>
         <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
       </Stack>
     </Flex>

@@ -1,0 +1,1 @@
+export { ChakraProvider as UIProvider } from '@chakra-ui/react';

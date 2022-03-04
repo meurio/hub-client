@@ -40,6 +40,6 @@ COPY . .
 
 RUN pnpm i --no-frozen-lockfile
 
-RUN pnpm m run prepare --filter {libs}
+RUN pnpm m run build --filter {libs}
 
 RUN pnpm m run build --filter {packages}

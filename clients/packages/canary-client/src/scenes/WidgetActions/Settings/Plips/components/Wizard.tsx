@@ -2,6 +2,8 @@ import React from 'react'
 import { Button, FinalForm } from 'bonde-components';
 import styled from "@emotion/styled";
 import MenuActions from './MenuActions';
+import QRForm from "../QRForm"
+
 
 const Form = styled.form`
   display: flex;
@@ -12,7 +14,7 @@ const Form = styled.form`
 export interface Properties {
   initialValues?: any;
   buttonText?: string;
-  onSubmit: any
+  onSubmit: any;
 }
 
 export interface State {
@@ -31,7 +33,7 @@ export default class Wizard extends React.Component<Properties, State> {
       values: props.initialValues || {}
     }
   }
-  
+
   next = (values: any) =>
     this.setState(state => ({
       page: Math.min(state.page + 1, (this.props.children as any[]).length - 1),
@@ -72,6 +74,7 @@ export default class Wizard extends React.Component<Properties, State> {
     const { page, values } = this.state
     const activePage = React.Children.toArray(children)[page]
     const isLastPage = page === React.Children.count(children) - 1
+
     return (
       <FinalForm
         initialValues={values}
@@ -82,7 +85,7 @@ export default class Wizard extends React.Component<Properties, State> {
           <Form onSubmit={handleSubmit}>
             {activePage}
             <MenuActions>
-              {!isLastPage && <Button minH="42px" type="submit" w="100%">{buttonText || 'Confirmar'}</Button>}
+              {!isLastPage && !QRForm?.name && <Button minH="42px" type="submit" w="100%">{buttonText || 'Confirmar'}</Button>}
               {isLastPage && (
                 <Button minH="42px" type="submit" disabled={submitting} w="100%">
                   Concluir

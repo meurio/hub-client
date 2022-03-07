@@ -1,7 +1,16 @@
 import { useEffect } from 'react';
 import { Form, Field } from 'react-final-form'
 import InputMask from 'react-input-mask';
-import { Button, Box, Stack, Text, FormControl, FormLabel, Input } from 'bonde-ui/src/base';
+import {
+  Button,
+  Box,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Stack,
+  Text,
+} from 'bonde-ui/src/base';
 
 interface RecurringFormProps {
   id: number;
@@ -16,7 +25,7 @@ const RecurringForm: React.FC<RecurringFormProps> = () => {
   useEffect(() => {
     const script = document.createElement('script');
 
-    script.src = "https://assets.pagar.me/checkout/checkout.js";
+    script.src = "https://assets.pagar.me/js/pagarme.js";
     script.async = true;
 
     document.body.appendChild(script);
@@ -32,18 +41,16 @@ const RecurringForm: React.FC<RecurringFormProps> = () => {
 
   return (
     <Stack>
-      <Box bg="gray.50">
+      <Box bg="gray.50" p={2} boxShadow="xs">
         <Text>
-        {`Preencha os campos abaixo para alterar a data em que a cobrança da sua
-        doação é efetuada. Sua doação continuará a mesma mas, a partir do
-        momento em que salvar os dados abaixo, o valor será cobrado neste novo
-        cartão ; )`}
+          {`Preencha abaixo a data em que gostaria que a sua doação seja efetuada. O valor da doação continuará o mesmo mas, a partir do momento em que salvar os dados abaixo, a cobrança passará a ser realizada nessa nova data. `}
+          <span role="img" aria-label="winky">😉</span>
         </Text>
       </Box>
       <Form onSubmit={handleSubmit}>
         {(renderProps) => (
           <form onSubmit={renderProps.handleSubmit}>
-            <Stack>
+            <Stack mt={4}>
               <Field name="process_at" validate={required}>
                 {({ input, meta }) => (
                   <FormControl>
@@ -51,7 +58,7 @@ const RecurringForm: React.FC<RecurringFormProps> = () => {
                     <InputMask mask="99/99/9999" {...input}>
                       {(inputProps) => <Input {...inputProps} type='text' placeholder='Ex: DD/MM/AAAA' />}
                     </InputMask>
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>

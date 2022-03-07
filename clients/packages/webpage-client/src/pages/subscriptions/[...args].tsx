@@ -60,7 +60,7 @@ const SubscriptionPage: React.FC<SubscriptionPageProps> = ({ subscription }) => 
   );
 }
 
-export const getServerSideProps = async ({ params }: any) => {
+export const getServerSideProps = async ({ params }: any): Promise<any | undefined> => {
   if (params.args) {
     // Alterar para variavel de ambiente
     const apiDomain = 'https://api-rest.staging.bonde.org';

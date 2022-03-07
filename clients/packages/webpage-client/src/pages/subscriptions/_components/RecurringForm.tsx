@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Form, Field } from 'react-final-form'
+import InputMask from 'react-input-mask';
 import { Button, Box, Stack, Text, FormControl, FormLabel, Input } from 'bonde-ui/src/base';
 
 interface RecurringFormProps {
@@ -47,7 +48,9 @@ const RecurringForm: React.FC<RecurringFormProps> = () => {
                 {({ input, meta }) => (
                   <FormControl>
                     <FormLabel>Nova data de cobrança*</FormLabel>
-                    <Input {...input} type='text' placeholder='Ex: DD/MM/AAAA' />
+                    <InputMask mask="99/99/9999" {...input}>
+                      {(inputProps) => <Input {...inputProps} type='text' placeholder='Ex: DD/MM/AAAA' />}
+                    </InputMask>
                     {meta.error && meta.touched && <span>{meta.error}</span>}
                   </FormControl>
                 )}

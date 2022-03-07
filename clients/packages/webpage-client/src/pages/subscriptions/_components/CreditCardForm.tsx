@@ -1,6 +1,16 @@
 import { useEffect } from 'react';
 import { Form, Field } from 'react-final-form'
-import { Button, Box, Stack, Text, FormControl, FormLabel, Input } from 'bonde-ui/src/base';
+import InputMask from 'react-input-mask';
+import {
+  Button,
+  Box,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Stack,
+  Text
+} from 'bonde-ui/src/base';
 
 interface CreditCardFormProps {
   id: number;
@@ -8,9 +18,23 @@ interface CreditCardFormProps {
   card?: any;
 }
 
+const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), undefined)
+
 const required = (field: any) => {
   return field ? undefined : "não pode ficar em branco"
 };
+
+const expirationDate = (field: any) => {
+  if (field) {
+    const now = new Date();
+    const expiration = new Date(field.split('/').join('/01/'));
+    if (now > expiration) {
+      return 'data de validade do cartão inválida'
+    }
+  }
+  return undefined;
+}
 
 const CreditCardForm: React.FC<CreditCardFormProps> = ({
   card
@@ -28,6 +52,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
     }
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (values: any) => {
     console.log("values", values);
   }
@@ -62,12 +87,18 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
         {(renderProps) => (
           <form onSubmit={renderProps.handleSubmit}>
             <Stack>
-              <Field name="creditcard" validate={required}>
+              <Field
+                name="creditcard"
+                validate={required}
+                parse={(value) => value.replaceAll(" ", "")}
+              >
                 {({ input, meta }) => (
                   <FormControl>
                     <FormLabel>Número*</FormLabel>
-                    <Input {...input} type='text' placeholder='0000 0000 0000 0000' />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    <InputMask mask="9999 9999 9999 9999" {...input}>
+                      {(inputProps) => <Input {...inputProps} type='text' placeholder='0000 0000 0000 0000' />}
+                    </InputMask>
+                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
@@ -76,16 +107,18 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                   <FormControl>
                     <FormLabel>Nome *</FormLabel>
                     <Input {...input} type='text' placeholder='(igual ao que aparece no cartão)' />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
-              <Field name="expiration" validate={required}>
+              <Field name="expiration" validate={composeValidators(required, expirationDate)}>
                 {({ input, meta }) => (
                   <FormControl>
                     <FormLabel>Validade *</FormLabel>
-                    <Input {...input} type='text' placeholder='00/00' />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    <InputMask mask="99/99" {...input}>
+                      {(inputProps) => <Input {...inputProps} type='text' placeholder='00/00' />}
+                    </InputMask>
+                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
@@ -93,8 +126,10 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                 {({ input, meta }) => (
                   <FormControl>
                     <FormLabel>CVV</FormLabel>
-                    <Input {...input} type='text' placeholder='Ex: 000' />
-                    {meta.error && meta.touched && <span>{meta.error}</span>}
+                    <InputMask mask="999" {...input}>
+                      {(inputProps) => <Input {...inputProps} type='text' placeholder='Ex: 000' />}
+                    </InputMask>
+                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>

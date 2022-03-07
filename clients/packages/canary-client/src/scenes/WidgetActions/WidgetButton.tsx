@@ -48,7 +48,7 @@ const WidgetButton: React.FC<Props> = ({ widget }) => {
 
   const mobilizationLinkProps: any = {
     onClick: () => {
-      if (kind == 'pressure' || kind == 'plip') {
+      if (kind === 'pressure' || kind === 'plip') {
         updateSession("community", community).then(() => {
           window.location.href = `/widgets/${id}/settings`;
         });

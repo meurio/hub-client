@@ -10,7 +10,9 @@ import {
   Input,
   Stack,
   Text,
+  useToast
 } from 'bonde-ui/src/base';
+import recharge from '../_async-actions/recharge';
 
 interface RecurringFormProps {
   id: number;
@@ -21,7 +23,9 @@ const required = (field: any) => {
   return field ? undefined : "não pode ficar em branco"
 };
 
-const RecurringForm: React.FC<RecurringFormProps> = () => {
+const RecurringForm: React.FC<RecurringFormProps> = ({ id, token }) => {
+  const toast = useToast();
+
   useEffect(() => {
     const script = document.createElement('script');
 
@@ -35,8 +39,21 @@ const RecurringForm: React.FC<RecurringFormProps> = () => {
     }
   }, []);
 
-  const handleSubmit = (values: any) => {
-    console.log("values", values);
+  const handleSubmit = async (values: any) => {
+    try {
+      await recharge({ ...values, id, token });
+      toast({
+        title: "Data da cobrança atualizada",
+        description: "Qualquer dúvida entre em contato com suporte@bonde.org",
+        status: 'success',
+        duration: 9000,
+        position: 'top',
+        isClosable: true
+      })
+    } catch (err) {
+      console.log('err', err);
+      return err;
+    }
   }
 
   return (
@@ -58,11 +75,11 @@ const RecurringForm: React.FC<RecurringFormProps> = () => {
                     <InputMask mask="99/99/9999" {...input}>
                       {(inputProps) => <Input {...inputProps} type='text' placeholder='Ex: DD/MM/AAAA' />}
                     </InputMask>
-                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
+                    {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
-              <Button type="submit">Salvar</Button>
+              <Button disabled={renderProps.invalid && !renderProps.dirtySinceLastSubmit} type="submit">Salvar</Button>
             </Stack>
           </form>
         )}

@@ -10,8 +10,10 @@ import {
   FormLabel,
   Input,
   Stack,
-  Text
+  Text,
+  useToast
 } from 'bonde-ui/src/base';
+import recharge from '../_async-actions/recharge';
 
 interface CreditCardFormProps {
   id: number;
@@ -39,23 +41,56 @@ const expirationDate = (field: any) => {
   return undefined;
 }
 
-interface RechargeArgs {
-  id: number;
-  token: string;
-  card_hash: string
-}
+const submit = (values: any) => {
+  //
+  // The `PagarMe` object is injected into the global scope by the <Pagarme /> component
+  // located in `client/components/external-services/pagarme.js`. By default, the
+  // `<CreditCardForm />` component renders that component, so, we can use it here.
+  //
+  // It needs to use some other approach instead of inject the .min file of the library
+  // directly into the DOM. I tried to use the official CJS module package provided by the
+  // Pagarme team https://github.com/pagarme/pagarme-js but, it's bundle size is too big.
+  // It have an issue that may will enhance the bundle size a litte, see:
+  // https://github.com/pagarme/pagarme-js/issues/35
+  //
+  const promise = new Promise((resolve, reject) => {
+    // eslint-disable-next-line
+    (window as any).PagarMe.encryption_key = publicRuntimeConfig.pagarmeKey;
 
-const recharge = async ({ id, token, card_hash }: RechargeArgs): Promise<any> => {
-  const apiDomain = publicRuntimeConfig.domainApiRest || 'http://api-rest.bonde.devel';
-  const uri = new URL(`/subscriptions/${id}/recharge`, apiDomain);
+    // eslint-disable-next-line
+    const card = new (window as any).PagarMe.creditCard();
 
-  const resp = await fetch(uri.href, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ id, token, card_hash })
+    // Mount card with Pagarme lib to check validation
+    const expiration = values.expiration.match(/(\d{2})\/(\d{2})/);
+    card.cardHolderName = values.name;
+    card.cardExpirationMonth = expiration[1];
+    card.cardExpirationYear = expiration[2];
+    card.cardNumber = values.creditcard;
+    card.cardCVV = values.cvv;
+
+    const errors = card.fieldErrors();
+
+    /* eslint-disable prefer-promise-reject-errors */
+    Object.keys(errors).length > 0
+      ? reject({
+          cvv: errors.card_cvv,
+          expiration: errors.card_expiration_month,
+          name: errors.card_holder_name,
+          creditcard: errors.card_number,
+        })
+      : card.generateHash((cardHash: string) => {
+          resolve(
+            recharge({
+              id: values.id,
+              token: values.token,
+              card_hash: cardHash,
+            })
+          );
+        });
+    /* eslint-disable prefer-promise-reject-errors */
   });
 
-  return await resp.json();
+  return Promise.resolve(promise).then((action) => action);
 }
 
 const CreditCardForm: React.FC<CreditCardFormProps> = ({
@@ -63,6 +98,8 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
   token,
   card
 }) => {
+  const toast = useToast();
+
   useEffect(() => {
     const script = document.createElement('script');
 
@@ -77,56 +114,21 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = (values: any) => {
-    //
-    // The `PagarMe` object is injected into the global scope by the <Pagarme /> component
-    // located in `client/components/external-services/pagarme.js`. By default, the
-    // `<CreditCardForm />` component renders that component, so, we can use it here.
-    //
-    // It needs to use some other approach instead of inject the .min file of the library
-    // directly into the DOM. I tried to use the official CJS module package provided by the
-    // Pagarme team https://github.com/pagarme/pagarme-js but, it's bundle size is too big.
-    // It have an issue that may will enhance the bundle size a litte, see:
-    // https://github.com/pagarme/pagarme-js/issues/35
-    //
-    const promise = new Promise((resolve, reject) => {
-      // eslint-disable-next-line
-      (window as any).PagarMe.encryption_key = publicRuntimeConfig.pagarmeKey;
-
-      // eslint-disable-next-line
-      const card = new (window as any).PagarMe.creditCard();
-
-      // Mount card with Pagarme lib to check validation
-      const expiration = values.expiration.match(/(\d{2})\/(\d{2})/);
-      card.cardHolderName = values.name;
-      card.cardExpirationMonth = expiration[1];
-      card.cardExpirationYear = expiration[2];
-      card.cardNumber = values.creditcard;
-      card.cardCVV = values.cvv;
-
-      const errors = card.fieldErrors();
-
-      /* eslint-disable prefer-promise-reject-errors */
-      Object.keys(errors).length > 0
-        ? reject({
-            cvv: errors.card_cvv,
-            expiration: errors.card_expiration_month,
-            name: errors.card_holder_name,
-            creditcard: errors.card_number,
-          })
-        : card.generateHash((cardHash: string) => {
-            resolve(
-              recharge({
-                id: id,
-                token: token,
-                card_hash: cardHash,
-              })
-            );
-          });
-      /* eslint-disable prefer-promise-reject-errors */
-    });
-
-    return Promise.resolve(promise).then((action) => action);
+  const handleSubmit = async (values: any) => {
+    try {
+      await submit({ ...values, id, token });
+      toast({
+        title: "Dados do cartão atualizado",
+        description: "Qualquer dúvida entre em contato com suporte@bonde.org",
+        status: 'success',
+        duration: 9000,
+        position: 'top',
+        isClosable: true
+      })
+    } catch (err) {
+      console.log("err", err);
+      return err;
+    }
   }
 
   return (
@@ -173,7 +175,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                     <InputMask mask="9999 9999 9999 9999" {...input}>
                       {(inputProps) => <Input {...inputProps} type='text' placeholder='0000 0000 0000 0000' />}
                     </InputMask>
-                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
+                    {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
@@ -182,7 +184,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                   <FormControl>
                     <FormLabel>Nome *</FormLabel>
                     <Input {...input} type='text' placeholder='(igual ao que aparece no cartão)' />
-                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
+                    {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
@@ -193,7 +195,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                     <InputMask mask="99/99" {...input}>
                       {(inputProps) => <Input {...inputProps} type='text' placeholder='00/00' />}
                     </InputMask>
-                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
+                    {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
@@ -201,14 +203,14 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                 {({ input, meta }) => (
                   <FormControl>
                     <FormLabel>CVV</FormLabel>
-                    <InputMask mask="999" {...input}>
+                    <InputMask mask="999" maskPlaceholder="" {...input}>
                       {(inputProps) => <Input {...inputProps} type='text' placeholder='Ex: 000' />}
                     </InputMask>
-                    {meta.error && meta.touched && <FormHelperText color="red.200">{meta.error}</FormHelperText>}
+                    {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}
                   </FormControl>
                 )}
               </Field>
-              <Button type="submit">Salvar</Button>
+              <Button disabled={renderProps.invalid && !renderProps.dirtySinceLastSubmit} type="submit">Salvar</Button>
             </Stack>
           </form>
         )}

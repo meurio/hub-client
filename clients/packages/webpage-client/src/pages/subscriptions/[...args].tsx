@@ -1,8 +1,10 @@
-import { useState } from 'react';
 import {
   Box,
-  Button,
-  Container,
+  Tab,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
   Heading,
   Stack,
   Text
@@ -29,33 +31,41 @@ interface SubscriptionPageProps {
 }
 
 const SubscriptionPage: React.FC<SubscriptionPageProps> = ({ subscription }) => {
-  const [typeForm, setTypeForm] = useState<'creditcard' | 'recurring'>();
   const card = subscription.last_donation?.gateway_data?.card;
 
   return (
-    <Stack h="100vh" bg="gray.50" paddingX={60} paddingY={10} spacing={10}>
+    <Stack h="100vh" bg="gray.50" paddingX={60} paddingY={10} spacing={8}>
       <BondeIcon />
       <Box p={8} rounded={4} shadow="sm" bg="white">
-        <Stack spacing={4}>
+        <Stack spacing={4} mb={4}>
           <Heading as="h1">Dados da doação</Heading>
           <Text>Selecione abaixo quais informações da sua doação quer alterar:</Text>
-          <Stack direction="row" mt={2} spacing={4}>
-            <Button disabled={typeForm === 'creditcard'} onClick={() => setTypeForm('creditcard')}>Cartão de crédito</Button>
-            <Button disabled={typeForm === 'recurring'}  onClick={() => setTypeForm('recurring')}>Data da doação</Button>
-          </Stack>
-          {typeForm === 'creditcard' ? (
-            <CreditCardForm
-              id={subscription.id}
-              token={subscription.token}
-              card={card}
-            />
-          ) : typeForm === 'recurring' ? (
-            <RecurringForm
-              id={subscription.id}
-              token={subscription.token}
-            />
-          ) : null}
         </Stack>
+        <Tabs colorScheme="pink">
+          <TabList>
+            <Tab>
+              Cartão de crédito
+            </Tab>
+            <Tab>
+              Data da doação
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <CreditCardForm
+                id={subscription.id}
+                token={subscription.token}
+                card={card}
+              />
+            </TabPanel>
+            <TabPanel>
+              <RecurringForm
+                id={subscription.id}
+                token={subscription.token}
+              />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Box>
     </Stack>
   );

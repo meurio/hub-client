@@ -48,13 +48,19 @@ const WidgetButton: React.FC<Props> = ({ widget }) => {
 
   const mobilizationLinkProps: any = {
     onClick: () => {
-      if (process.env.REACT_APP_DOMAIN_ADMIN) {
+      if (kind == 'pressure' || kind == 'plip') {
         updateSession("community", community).then(() => {
-          window.location.href = new URL(
-            `/mobilizations/${mobilization_id}/edit`,
-            process.env.REACT_APP_DOMAIN_ADMIN
-          ).href;
+          window.location.href = `/widgets/${id}/settings`;
         });
+      } else {
+        if (process.env.REACT_APP_DOMAIN_ADMIN) {
+          updateSession("community", community).then(() => {
+            window.location.href = new URL(
+              `/mobilizations/${mobilization_id}/edit`,
+              process.env.REACT_APP_DOMAIN_ADMIN
+            ).href;
+          });
+        }
       }
     }
   }

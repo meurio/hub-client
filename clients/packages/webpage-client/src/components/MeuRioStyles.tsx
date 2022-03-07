@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const ThemeStyles = styled.div`
   // MEU RIO

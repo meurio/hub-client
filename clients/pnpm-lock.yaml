@@ -1640,7 +1640,6 @@ importers:
       '@types/react-color': ^3.0.6
       '@types/react-intl': ^3.0.0
       '@types/redux-promise': ^0.5.29
-      '@types/styled-components': ^5.1.15
       '@typescript-eslint/eslint-plugin': ^4.1.1
       '@typescript-eslint/parser': ^4.1.1
       autoprefixer: ^10.4.0
@@ -1713,7 +1712,6 @@ importers:
       slate: ^0.41.3
       slate-editor: workspace:^5.1.2
       slate-react: ^0.18.11
-      styled-components: ^5.3.3
       styled-jsx-plugin-postcss: ^4.0.1
       subscriptions-transport-ws: ^0.9.16
       ts-jest: ^27.0.7
@@ -1785,7 +1783,6 @@ importers:
       slate: 0.41.3_immutable@4.0.0+react@17.0.2
       slate-editor: link:../../libs/slate-editor
       slate-react: 0.18.11_3a2ed7b45c5688ca027f9d23ad815e32
-      styled-components: 5.3.3_react-dom@17.0.2+react@17.0.2
       styled-jsx-plugin-postcss: 4.0.1_postcss@8.4.5
       subscriptions-transport-ws: 0.9.19_graphql@15.7.2
     devDependencies:
@@ -1802,7 +1799,6 @@ importers:
       '@types/react-color': 3.0.6
       '@types/react-intl': 3.0.0_react@17.0.2+typescript@4.1.6
       '@types/redux-promise': 0.5.29
-      '@types/styled-components': 5.1.15
       '@typescript-eslint/eslint-plugin': 4.33.0_71afb85bb164332407341bb7212732ec
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.1.6
       autoprefixer: 10.4.2_postcss@8.4.5

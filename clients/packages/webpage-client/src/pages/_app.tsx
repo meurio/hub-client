@@ -1,7 +1,7 @@
 // import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import {
   UIProvider,
-  theme
+  theme,
 } from 'bonde-ui';
 import { CSSReset } from 'bonde-ui/src/base';
 
@@ -21,6 +21,7 @@ import './_app.css';
 //   },
 // }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function App({ Component, pageProps }) {
   return (
     <>
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </ThemeProvider> */}
       <UIProvider theme={theme}>
+        {/* Google Fonts Loader in _app.css */}
         <CSSReset />
         {/* <ToastContainer
           className='BondeToastify'

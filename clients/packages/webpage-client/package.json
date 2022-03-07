@@ -37,6 +37,7 @@
     "@slate-editor/strikethrough-plugin": "workspace:^5.1.2",
     "@slate-editor/underline-plugin": "workspace:^5.1.2",
     "axios": "^0.24.0",
+    "bonde-ui": "workspace:*",
     "classnames": "^2.3.1",
     "clipboard-copy": "^3.1.0",
     "colors": "^1.4.0",
@@ -82,10 +83,8 @@
     "slate": "^0.41.3",
     "slate-editor": "workspace:^5.1.2",
     "slate-react": "^0.18.11",
-    "styled-components": "^5.3.3",
     "styled-jsx-plugin-postcss": "^4.0.1",
-    "subscriptions-transport-ws": "^0.9.16",
-    "bonde-ui": "workspace:*"
+    "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.0.2",
@@ -101,7 +100,6 @@
     "@types/react-color": "^3.0.6",
     "@types/react-intl": "^3.0.0",
     "@types/redux-promise": "^0.5.29",
-    "@types/styled-components": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
     "autoprefixer": "^10.4.0",

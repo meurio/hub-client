@@ -1,8 +1,9 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { ApolloClient, ApolloProvider, InMemoryCache, gql } from '@apollo/client';
+import { ApolloProvider, gql } from '@apollo/client';
 import Cookies from 'js-cookie';
 import nextURI from './nextURI';
 import type { User } from './types';
+import createGraphQLClient from './createGraphQLClient';
 
 const FETCH_SESSION_QUERY = gql`
   query Session {
@@ -52,30 +53,16 @@ const FETCH_SESSION_QUERY = gql`
   }
 `;
 
-const createGraphQLClient = (uri: string) => {
-  const headers: any = {
-    'client-name': 'bonde-core-tools [web]',
-    'client-version': '1.0.0'
-  };
 
-  const token = Cookies.get('session');
-  if (token) {
-    headers['authorization'] = `Bearer ${token}`;
-  }
-
-  return new ApolloClient({
-    uri,
-    cache: new InMemoryCache(),
-    credentials: 'include',
-    headers
-  });
-}
 
 export const Context = createContext({});
 
-interface ProviderProperties {
-  uri: string;
-  environment: 'development' | 'staging' | 'production';
+export interface ProviderProperties {
+  // Default is 'http'
+  protocol?: string;
+  // Ex.: bonde.devel
+  appDomain: string;
+  apiGraphQLUrl?: string;
   fetchData?: boolean;
   loadingComponent?: JSX.Element
 }
@@ -89,9 +76,11 @@ const getObjectCookie = (key: string): any | undefined => {
 }
 
 const Provider: React.FC<ProviderProperties> = ({
-  uri,
   fetchData,
-  environment,
+  protocol = 'http',
+  appDomain,
+  apiGraphQLUrl,
+  // environment,
   children,
   loadingComponent
 }) => {
@@ -100,17 +89,13 @@ const Provider: React.FC<ProviderProperties> = ({
   const [communities, setCommunities] = useState([]);
   const [community, setCommunity] = useState(getObjectCookie('community'));
   // ApolloClient
-  const client = createGraphQLClient(uri);
-  // AppDomain
-  const appDomain: string = environment === 'production' || environment === 'staging' ? 'bonde.org' : 'bonde.devel';
-  const protocol: string = environment === 'production' || environment === 'staging' ? 'https' : 'http';
-  const redirectDomain: string = environment === 'staging' ? `staging.${appDomain}` : appDomain;
+  const client = createGraphQLClient(
+    apiGraphQLUrl ? apiGraphQLUrl : `${protocol}://api-graphql.${appDomain}/v1/graphql`);
 
   const logout = () => {
-    console.log('logout -->>', { currentUser, community, communities });
     Cookies.remove('session', { path: '/', domain: `.${appDomain}` });
     Cookies.remove('community', { path: '/', domain: `.${appDomain}` });
-    const uri = `${protocol}://accounts.${redirectDomain}/login`
+    const uri = `${protocol}://accounts.${appDomain}/login`
     if (uri !== window.location.href) {
       window.location.href = nextURI(uri);
     }
@@ -160,15 +145,15 @@ const Provider: React.FC<ProviderProperties> = ({
     }),
     logout,
     apps: {
-      'settings': `${protocol}://admin-canary.${redirectDomain}/community/settings`,
-      'redes': `${protocol}://redes.${redirectDomain}`,
-      'chatbot': `${protocol}://chatbot.${redirectDomain}`,
-      'mobilization': `${protocol}://app.${redirectDomain}`
+      'settings': `${protocol}://admin-canary.${appDomain}/community/settings`,
+      'redes': `${protocol}://redes.${appDomain}`,
+      'chatbot': `${protocol}://chatbot.${appDomain}`,
+      'mobilization': `${protocol}://app.${appDomain}`
     }
   }
 
   let loading: JSX.Element = 'Carregando sessão' as any;
-  if (!!loadingComponent) {
+  if (loadingComponent) {
     loading = loadingComponent
   }
 

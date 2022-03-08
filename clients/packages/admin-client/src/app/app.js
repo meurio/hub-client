@@ -20,16 +20,13 @@ const Portal = ({ dispatch }) => {
 
   useEffect(() => {
     if (!community) {
-      const appDomain =
-        process.env.REACT_APP_ENVIRONMENT === 'production'
-          ? 'bonde.org'
-          : process.env.REACT_APP_ENVIRONMENT === 'staging'
-          ? 'staging.bonde.org'
-          : 'bonde.devel';
-      const protocol =
-        process.env.REACT_APP_ENVIRONMENT !== 'development' ? 'https' : 'http';
+      const envConfig = process.env.REACT_APP_ENVIRONMENT || 'development';
+      console.info('Build environment:', envConfig);
+    
+      const protocol = envConfig === 'development' ? 'http' : 'https';
+      const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel';
 
-      window.location.href = `${protocol}://admin-canary.${appDomain}`;
+      window.location.href = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || `${protocol}://admin-canary.${appDomain}`;
     }
   }, [community]);
 
@@ -43,16 +40,21 @@ const ConnectedPortal = connect(undefined, (dispatch) => ({
 const App = ({ messages, locale, store }) => {
   // Environment to use for configure bonde-core-tools
   const envConfig = process.env.REACT_APP_ENVIRONMENT || 'development';
-
   console.info('Build environment:', envConfig);
+
+  const protocol = envConfig === 'development' ? 'http' : 'https';
+  const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel';
+
+  const apiGraphQLUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || `${protocol}://api-graphql.${appDomain}/v1/graphql`;
 
   return (
     <IntlProvider messages={messages} locale={locale}>
       <Provider store={store}>
         <Session
-          uri={process.env.REACT_APP_DOMAIN_API_GRAPHQL}
-          environment={envConfig}
           fetchData
+          protocol={protocol}
+          apiGraphQLUrl={apiGraphQLUrl}
+          appDomain={appDomain}
         >
           <ConnectedPortal />
         </Session>

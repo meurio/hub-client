@@ -124,11 +124,14 @@ type Environment = 'development' | 'staging' | 'production';
 const App: React.FC = () => {
   // Environment to use for configure bonde-core-tools
   const envConfig: Environment =
-    (process.env.REACT_APP_ENVIRONMENT || 'development') as Environment;
+    (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
 
   console.info('Build environment:', envConfig);
-  // App Urls
-  const apiGraphqlUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql';
+  // App URL
+  const protocol = envConfig === 'development' ? 'http' : 'https';
+  const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel';
+
+  const apiGraphQLUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || `${protocol}://api-graphql.${appDomain}/v1/graphql`;
 
   return (
     <React.Suspense fallback={Loading}>
@@ -142,8 +145,8 @@ const App: React.FC = () => {
           />
           <Session
             fetchData
-            uri={apiGraphqlUrl}
-            environment={envConfig}
+            apiGraphQLUrl={apiGraphQLUrl}
+            appDomain={appDomain}
             loadingComponent={
               <Loading fullsize message="Carregando sessão..." />
             }

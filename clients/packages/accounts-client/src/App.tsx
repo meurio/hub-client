@@ -26,8 +26,11 @@ const App: React.FC = () => {
 
   console.info('Build environment:', envConfig);
   // App URL
-  const appUrl = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || 'http://bonde.devel:5001';
-  const apiGraphqlUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql';
+  const protocol = envConfig === 'development' ? 'http' : 'https';
+  const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel';
+
+  const apiGraphQLUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || `${protocol}://api-graphql.${appDomain}/v1/graphql`;
+  const appUrl = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || `${protocol}://admin-canary.${appDomain}`;
 
   return (
     <React.Suspense fallback={Loading}>
@@ -35,7 +38,7 @@ const App: React.FC = () => {
         <FontsLoader />
         <ChakraProvider theme={chakraTheme}>
           <CSSReset />
-          <Session uri={apiGraphqlUrl} environment={envConfig}>
+          <Session apiGraphQLUrl={apiGraphQLUrl} appDomain={appDomain}>
             <Router>
               <Switch>
                 <BaseLayout>

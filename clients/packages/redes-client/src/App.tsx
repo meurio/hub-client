@@ -23,10 +23,8 @@ import { CommunityExtraProvider } from "./services/CommunityExtraProvider";
 
 type Environment = "development" | "staging" | "production";
 
-const AppRouter = () => {
+const AppRouter = ({ adminUrl }) => {
   const session: any = useContext(SessionContext);
-  const adminUrl =
-    process.env.REACT_APP_DOMAIN_ADMIN_CANARY || "https://admin-canary.staging.bonde.org";
 
   return (
     <Router>
@@ -59,12 +57,17 @@ const AppRouter = () => {
 }
 
 const App = (): React.ReactElement => {
-  const environment: string =
-    process.env.REACT_APP_ENVIRONMENT || "development";
+  // Environment to use for configure bonde-core-tools
+  const envConfig: Environment =
+    (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
 
-  console.info('Build environment:', environment);
+  console.info('Build environment:', envConfig);
+  // App URL
+  const protocol = envConfig === 'development' ? 'http' : 'https';
+  const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel';
 
-  const apiGraphqlUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || 'http://api-graphql.bonde.devel/v1/graphql';
+  const apiGraphQLUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || `${protocol}://api-graphql.${appDomain}/v1/graphql`;
+  const appUrl = process.env.REACT_APP_DOMAIN_ADMIN_CANARY || `${protocol}://admin-canary.${appDomain}`;
 
   return (
     <ChakraProvider theme={chakraTheme}>
@@ -72,12 +75,12 @@ const App = (): React.ReactElement => {
       <FontsLoader />
       <Session
         fetchData
-        uri={apiGraphqlUrl}
-        environment={environment as Environment}
+        apiGraphQLUrl={apiGraphQLUrl}
+        appDomain={appDomain}
       >
         <FilterProvider>
           <CommunityExtraProvider>
-            <AppRouter />
+            <AppRouter adminUrl={appUrl} />
           </CommunityExtraProvider>
         </FilterProvider>
       </Session>

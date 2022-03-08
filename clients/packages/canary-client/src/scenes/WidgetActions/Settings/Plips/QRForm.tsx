@@ -6,7 +6,11 @@ import {
   InputField,
   Heading,
   Text,
-  Stack
+  Stack,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "bonde-components";
 import { useMutation, useQuery, gql, Context as SessionContext } from "bonde-core-tools";
 
@@ -15,8 +19,8 @@ import Wizard from "./components/Wizard";
 import useQueryParams from "./useQueryParams";
 
 const GET_PLIP_SIGNATURES = gql`
-  query ($code: String!) {
-    plips(where: { unique_identifier: { _eq: $code } }, order_by: { created_at: desc }, limit: 1) {
+  query ($code: String!, $widget_id: Int!) {
+    plips(where: { unique_identifier: { _eq: $code }, widget_id: { _eq: $widget_id } }, order_by: { created_at: desc }, limit: 1) {
       id
       expected_signatures
       state: form_data(path: "state")
@@ -27,7 +31,7 @@ const GET_PLIP_SIGNATURES = gql`
     plip_signatures_aggregate(where: {
       unique_identifier: {
         _eq: $code
-      }
+      },widget_id: { _eq: $widget_id }
     }) {
       aggregate {
         count
@@ -53,13 +57,13 @@ interface Properties {
   widget: Widget
 }
 
-const QRForm: React.FC<Properties> = ({ widget }) => {
+export const QRForm: React.FC<Properties> = ({ widget }) => {
   const { currentUser: user } = useContext(SessionContext);
   const [formValues, setFormValues] = useState();
   const { code }: any = useParams();
   const urlParams = useQueryParams();
   const [insertPlipSignature] = useMutation(INSERT_PLIP_SIGNATURE_FORM);
-  const { loading, error, data } = useQuery(GET_PLIP_SIGNATURES, { variables: { code } });
+  const { loading, error, data } = useQuery(GET_PLIP_SIGNATURES, { variables: { code, widget_id: widget.id } });
 
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>
@@ -75,7 +79,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
       input.user_id = user.id;
     }
 
-    insertPlipSignature({ variables: { input }})
+    insertPlipSignature({ variables: { input } })
       .then((resp: any) => {
         setFormValues(resp.data.insert_plip_signatures_one)
       })
@@ -100,45 +104,65 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
         <Heading fontSize="2xl">Tudo certo! Dados atualizados, agora temos {Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures} assinaturas pela Amazônia <span role="img" aria-label="Emoji">🎉</span></Heading>
       </Flex>
       <Stack py={4} borderTop="1px solid" borderColor="gray.100" spacing={2}>
-        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
+        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow?count=${Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures}`}>Atualizar outra ficha</Button>
         <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
       </Stack>
     </Flex>
   ) : (
     <Wizard
-      buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirmar'}
+      buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirma'}
       onSubmit={handleSubmit}
       initialValues={{
         unique_identifier: code,
-        confirmed_signatures: plipForm.expected_signatures
+        confirmed_signatures: plipForm?.expected_signatures
       }}
     >
-      <Wizard.Page>
-        <Stack spacing={4} flex={1} py={8}>
-          <Heading fontSize="2xl">Confere aí:</Heading>
-          <InputField
-            name="unique_identifier"
-            label="Código da ficha"
-          />
-          <Text>
-            Ficha de <strong>{plipForm.state}</strong> gerada por <strong>{plipForm.name}</strong>
-            {plipSignaturesAgg.aggregate.count > 0
-              ? `, que já enviou ${plipSignaturesAgg.aggregate.sum.confirmed_signatures} assinaturas anteriormente.`
-              : `.`
-            }
-          </Text>
-        </Stack>
-      </Wizard.Page>
-      <Wizard.Page>
-        <Stack spacing={4} flex={1} py={8}>
-          <Heading fontSize="2xl">Quantas assinaturas foram coletadas?</Heading>
-          <InputField
-            type="number"
-            name="confirmed_signatures"
-            label="Total de assinaturas"
-          />
-        </Stack>
-      </Wizard.Page>
+      {plipForm?.name &&
+        <>
+          <Wizard.Page>
+            <Stack spacing={4} flex={1} py={8}>
+              <Heading fontSize="3xl">Confere aí:</Heading>
+              <InputField
+                name="unique_identifier"
+                label="Código da ficha"
+              />
+              <Text>
+                Ficha de <strong>{plipForm?.state}</strong> gerada por <strong>{plipForm?.name}</strong>
+                {plipSignaturesAgg.aggregate.count > 0
+                  ? `, que já enviou ${plipSignaturesAgg.aggregate.sum.confirmed_signatures} assinaturas anteriormente.`
+                  : `.`
+                }
+              </Text>
+            </Stack>
+          </Wizard.Page>
+          <Wizard.Page>
+            <Stack spacing={4} flex={1} py={8}>
+              <Heading fontSize="2xl">Quantas assinaturas foram coletadas?</Heading>
+              <InputField
+                type="number"
+                name="confirmed_signatures"
+                label="Total de assinaturas"
+              />
+            </Stack>
+          </Wizard.Page>
+        </>
+      }
+      {
+        !plipForm?.name &&
+        <Alert
+          status='error'
+          variant='subtle'
+          flexDirection='column'
+          alignItems='center'
+          justifyContent='center'
+          textAlign='center'
+          height='200px'
+        >
+          <AlertIcon />
+          <AlertTitle mr={2}>Oops! QR Code inválido!</AlertTitle>
+          <AlertDescription>Volte à tela anterior e escaneie o QR Code da ficha que você deseja cadastrar.</AlertDescription>
+        </Alert>
+      }
     </Wizard>
   );
 }

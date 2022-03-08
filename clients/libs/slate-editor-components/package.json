@@ -25,7 +25,8 @@
     "url": "https://github.com/nossas/slate-editor/issues"
   },
   "scripts": {
-    "prepare": "babel src --out-dir dist --copy-files"
+    "prepare": "babel src --out-dir dist --copy-files",
+    "build": "babel src --out-dir dist --copy-files"
   },
   "dependencies": {
     "@slate-editor/utils": "^5.1.2",

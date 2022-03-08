@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { client } from '../../../graphql-app';
+import { client } from '../../../apis/graphql';
 
 const query = gql`
   query ($widget_id: Int!) {

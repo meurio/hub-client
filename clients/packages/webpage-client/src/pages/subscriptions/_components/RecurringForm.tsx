@@ -12,7 +12,7 @@ import {
   Text,
   useToast
 } from 'bonde-ui/src/base';
-import recharge from '../_async-actions/recharge';
+import recharge from '../../../apis/rest/recharge';
 
 interface RecurringFormProps {
   id: number;

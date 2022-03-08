@@ -12,7 +12,7 @@ import {
   // asyncFillWidget,
   // selectors as MobSelectors,
 } from '../bonde-webpage';
-import { client } from '../graphql-app';
+import { client } from '../apis/graphql';
 
 export const addTwilioCall = gql`
   mutation addTwilioCall(

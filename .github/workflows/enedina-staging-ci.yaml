@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   build:
-    name: Build clients app
+    name: Build clients app to enedina.bonde.org
     uses: ./.github/workflows/build-clients.yml
     with:
       environment: staging
@@ -21,7 +21,7 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       REACT_APP_ENVIRONMENT: staging
       REACT_APP_DOMAIN_ACCOUNTS: https://accounts.enedina.bonde.org
-      REACT_APP_DOMAIN_ADMIN: https://app.staging.bonde.org
+      REACT_APP_DOMAIN_ADMIN: https://app.enedina.bonde.org
       REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.enedina.bonde.org
       REACT_APP_DOMAIN_BOT: https://chatbot.enedina.bonde.org
       REACT_APP_DOMAIN_BETA: https://beta.enedina.bonde.org

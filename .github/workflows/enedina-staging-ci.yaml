@@ -20,23 +20,23 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       REACT_APP_ENVIRONMENT: staging
-      REACT_APP_DOMAIN_ACCOUNTS: https://accounts.staging.bonde.org
+      REACT_APP_DOMAIN_ACCOUNTS: https://accounts.enedina.bonde.org
       REACT_APP_DOMAIN_ADMIN: https://app.staging.bonde.org
-      REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.staging.bonde.org
-      REACT_APP_DOMAIN_BOT: https://chatbot.staging.bonde.org
-      REACT_APP_DOMAIN_BETA: https://beta.staging.bonde.org
+      REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.enedina.bonde.org
+      REACT_APP_DOMAIN_BOT: https://chatbot.enedina.bonde.org
+      REACT_APP_DOMAIN_BETA: https://beta.enedina.bonde.org
       REACT_APP_AWS_BUCKET: bonde-assets-staging
-      REACT_APP_LOGIN_URL: https://accounts.staging.bonde.org/login
-      REACT_APP_DOMAIN_REDES: https://redes.staging.bonde.org
-      REACT_APP_UPLOADS_URL: https://api-rest.staging.bonde.org/uploads
+      REACT_APP_LOGIN_URL: https://accounts.enedina.bonde.org/login
+      REACT_APP_DOMAIN_REDES: https://redes.enedina.bonde.org
+      REACT_APP_UPLOADS_URL: https://api-rest.enedina.bonde.org/uploads
       REACT_APP_ZENDESK_ORGANIZATIONS_LAWYER: '360269610652'
       REACT_APP_ZENDESK_ORGANIZATIONS_INDIVIDUAL: '360273031591'
       REACT_APP_ZENDESK_ORGANIZATIONS_THERAPIST: '360282119532'
-      REACT_APP_DOMAIN_PUBLIC: staging.bonde.org
+      REACT_APP_DOMAIN_PUBLIC: enedina.bonde.org
       REACT_APP_API_GRAPHQL_SECRET: ${{ secrets.HASURA_SECRET }}
-      REACT_APP_DOMAIN_API_ACTIVISTS: https://api-graphql.staging.bonde.org/v1/graphql
-      REACT_APP_DOMAIN_API_GRAPHQL: https://api-graphql.staging.bonde.org/v1/graphql
-      REACT_APP_DOMAIN_API_REST: https://api-rest.staging.bonde.org
+      REACT_APP_DOMAIN_API_ACTIVISTS: https://api-graphql.enedina.bonde.org/v1/graphql
+      REACT_APP_DOMAIN_API_GRAPHQL: https://api-graphql.enedina.bonde.org/v1/graphql
+      REACT_APP_DOMAIN_API_REST: https://api-rest.enedina.bonde.org
       REACT_APP_PAGARME_KEY: ${{ secrets.PAGARME_KEY }}
       ACTION_SECRET_KEY: ${{ secrets.ACTION_SECRET_KEY }}
       AWS_ROUTE_IP: '127.0.0.1'

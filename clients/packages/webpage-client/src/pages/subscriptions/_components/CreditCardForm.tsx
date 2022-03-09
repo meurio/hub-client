@@ -137,8 +137,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
         <Text>
         {`Altere os dados do seu cartão de crédito preenchendo os campos abaixo.
           Sua doação continuará a mesma mas, a partir do momento em que salvar os
-          dados abaixo, o valor será cobrado neste novo cartão. `}
-          <span role="img" aria-label="winky">😉</span>
+          dados abaixo, o valor será cobrado neste novo cartão.`}
         </Text>
       </Box>
       {card && (
@@ -193,7 +192,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                   <FormControl>
                     <FormLabel>Validade *</FormLabel>
                     <InputMask mask="99/99" {...input}>
-                      {(inputProps) => <Input {...inputProps} type='text' placeholder='00/00' />}
+                      {(inputProps) => <Input {...inputProps} type='text' placeholder='MM/AA' />}
                     </InputMask>
                     {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}
                   </FormControl>

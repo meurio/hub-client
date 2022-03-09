@@ -60,8 +60,7 @@ const RecurringForm: React.FC<RecurringFormProps> = ({ id, token }) => {
     <Stack>
       <Box bg="gray.50" p={2} boxShadow="xs">
         <Text>
-          {`Preencha abaixo a data em que gostaria que a sua doação seja efetuada. O valor da doação continuará o mesmo mas, a partir do momento em que salvar os dados abaixo, a cobrança passará a ser realizada nessa nova data. `}
-          <span role="img" aria-label="winky">😉</span>
+          {`Preencha abaixo a data em que gostaria que a sua próxima doação seja efetuada. O valor da doação continuará o mesmo mas, a partir do momento em que salvar os dados abaixo, a cobrança passará a ser realizada nessa nova data.`}
         </Text>
       </Box>
       <Form onSubmit={handleSubmit}>

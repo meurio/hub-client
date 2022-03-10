@@ -2,8 +2,6 @@ import React from 'react'
 import { Button, FinalForm } from 'bonde-components';
 import styled from "@emotion/styled";
 import MenuActions from './MenuActions';
-import QRForm from "../QRForm"
-
 
 const Form = styled.form`
   display: flex;
@@ -85,7 +83,7 @@ export default class Wizard extends React.Component<Properties, State> {
           <Form onSubmit={handleSubmit}>
             {activePage}
             <MenuActions>
-              {!isLastPage && !QRForm?.name && <Button minH="42px" type="submit" w="100%">{buttonText || 'Confirmar'}</Button>}
+              {!isLastPage && <Button minH="42px" type="submit" w="100%">{buttonText || 'Confirmar'}</Button>}
               {isLastPage && (
                 <Button minH="42px" type="submit" disabled={submitting} w="100%">
                   Concluir

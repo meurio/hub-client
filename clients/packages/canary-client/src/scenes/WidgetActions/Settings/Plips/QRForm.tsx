@@ -103,6 +103,18 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
         <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
       </Stack>
     </Flex>
+  ) : !plipForm ? (
+    <>
+      <Flex mt={7} mb="20%">
+        <Heading
+          as="h5"
+          size="5xl">
+          Ops! QR Code inválido, tente escanear novamente.
+        </Heading>
+      </Flex>
+      <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
+    </>
+
   ) : (
     <Wizard
       buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirma'}
@@ -112,18 +124,6 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
         confirmed_signatures: plipForm?.expected_signatures
       }}
     >
-      {!plipForm?.name &&
-        <>
-          <Flex mt={7} mb="20%">
-            <Heading
-              as="h5"
-              size="5xl">
-              Ops! QR Code inválido, tente escanear novamente.
-            </Heading>
-          </Flex>
-          <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
-        </>
-      }
       <Wizard.Page>
 
         <Stack spacing={4} flex={1} py={8}>

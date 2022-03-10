@@ -37,6 +37,7 @@
     "bonde-components": "workspace:*",
     "bonde-core-tools": "workspace:*",
     "bonde-styleguide": "^0.16.5-alpha.5",
+    "bonde-ui": "workspace:*",
     "clipboard-copy": "^3.1.0",
     "downloadjs": "^1.4.7",
     "final-form-arrays": "^3.0.2",
@@ -50,13 +51,13 @@
     "react-number-format": "^4.4.1",
     "react-qr-reader": "^2.2.1",
     "react-s3-uploader": "^4.9.3",
+    "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-table": "^7.5.0",
     "react-toastify": "6.0.8",
     "recharts": "^2.1.5",
     "slate-editor": "workspace:*",
     "slate-plain-serializer": "^0.7.13",
-    "react-scripts": "3.4.1",
     "slugify": "^1.4.6"
   },
   "devDependencies": {

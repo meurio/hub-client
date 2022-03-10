@@ -1,6 +1,8 @@
 import React from "react";
 import QrReader from "react-qr-reader";
-import { Flex, Text, ArrowLeftIcon, IconButton, Stack } from "bonde-components";
+// import { Flex, Text, ArrowLeftIcon, IconButton, Stack } from "bonde-components";
+import { Flex, Text, IconButton, Stack } from 'bonde-ui/src/base';
+import { ArrowLeftIcon } from 'bonde-ui/src/icons';
 import styled from "@emotion/styled";
 
 import QRCodeIcon from "./QRCodeIcon";
@@ -23,8 +25,29 @@ interface Properties {
   widget: Widget
 }
 
+export const SubHeader = ({ goBack }) => {
+  return (
+    <Flex align="center">
+      <IconButton
+        aria-label="Go Back"
+        icon={<ArrowLeftIcon />}
+        variant="ghost"
+        colorScheme="gray"
+        onClick={goBack}
+      />
+      <Text
+        fontWeight="900"
+        color="black"
+        textTransform="uppercase"
+        style={{ fontSize: "13px" }}>
+        voltar
+      </Text>
+    </Flex>
+  );
+}
+
 const QRScene: React.FC<Properties> = ({ widget }) => {
-  const location = useLocation()
+  const location = useLocation();
   const history = useHistory();
   const match = useRouteMatch();
   const urlParams = useQueryParams();
@@ -40,21 +63,7 @@ const QRScene: React.FC<Properties> = ({ widget }) => {
   return (
     <Styles>
       <Flex align="center" justify="space-between" mb={4}>
-        <Flex align="center">
-          <IconButton
-            icon={<ArrowLeftIcon />}
-            variant="ghost"
-            colorScheme="gray"
-            onClick={history.goBack}
-          />
-          <Text
-            fontWeight="900"
-            color="black"
-            textTransform="uppercase"
-            style={{ fontSize: "13px" }}>
-            voltar
-          </Text>
-        </Flex>
+        <SubHeader goBack={history.goBack} />
       </Flex>
       <Route exact path={match.path}>
         <>

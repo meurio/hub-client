@@ -58,7 +58,7 @@ interface Properties {
 }
 
 export const QRForm: React.FC<Properties> = ({ widget }) => {
-  const { currentUser: user } = useContext(SessionContext);
+  const { currentUser: user }: any = useContext(SessionContext);
   const [formValues, setFormValues] = useState();
   const { code }: any = useParams();
   const urlParams = useQueryParams();

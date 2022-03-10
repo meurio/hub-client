@@ -202,7 +202,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({
                 {({ input, meta }) => (
                   <FormControl>
                     <FormLabel>CVV</FormLabel>
-                    <InputMask mask="999" maskPlaceholder="" {...input}>
+                    <InputMask mask="999" {...input}>
                       {(inputProps) => <Input {...inputProps} type='text' placeholder='Ex: 000' />}
                     </InputMask>
                     {(meta.error || (meta.submitError && !meta.dirtySinceLastSubmit)) && meta.touched && <FormHelperText color="red.200">{meta.error || meta.submitError}</FormHelperText>}

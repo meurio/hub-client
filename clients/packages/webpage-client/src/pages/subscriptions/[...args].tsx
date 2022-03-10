@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  Flex,
   Tab,
   Tabs,
   TabList,
@@ -7,11 +9,13 @@ import {
   TabPanel,
   Heading,
   Stack,
-  Text
+  Text,
+  useToast
 } from 'bonde-ui/src/base';
 import CreditCardForm from './_components/CreditCardForm';
 import RecurringForm from './_components/RecurringForm';
 import BondeIcon from './_components/BondeIcon';
+import cancelDonate from '../../apis/rest/cancel-donate';
 
 interface Subscription {
   activist: any;
@@ -31,6 +35,7 @@ interface SubscriptionPageProps {
 }
 
 const SubscriptionPage: React.FC<SubscriptionPageProps> = ({ subscription }) => {
+  const toast = useToast();
   const card = subscription.last_donation?.gateway_data?.card;
 
   return (
@@ -43,11 +48,26 @@ const SubscriptionPage: React.FC<SubscriptionPageProps> = ({ subscription }) => 
         </Stack>
         <Tabs colorScheme="pink">
           <TabList>
-            <Tab>
+            <Tab
+              _focus={{
+                boxShadow: 'none'
+              }}
+            >
               Cartão de crédito
             </Tab>
-            <Tab>
+            <Tab
+              _focus={{
+                boxShadow: 'none'
+              }}
+            >
               Data da doação
+            </Tab>
+            <Tab
+              _focus={{
+                boxShadow: 'none'
+              }}
+            >
+              Cancelar doação
             </Tab>
           </TabList>
           <TabPanels>
@@ -63,6 +83,46 @@ const SubscriptionPage: React.FC<SubscriptionPageProps> = ({ subscription }) => 
                 id={subscription.id}
                 token={subscription.token}
               />
+            </TabPanel>
+            <TabPanel>
+              <Stack spacing={4}>
+                <Box bg="gray.50" p={2} boxShadow="xs">
+                  <Text>Ao clicar em cancelar doação, sua doação será cancelada imediatamente e você deixará de contribuir com o projeto. Se quiser prosseguir com o cancelamento, clique abaixo:</Text>
+                </Box>
+                <Flex justifyContent="center">
+                  <Button
+                    colorScheme="red"
+                    onClick={() => {
+                      if (window.confirm("Você está prestes a cancelar seu apoio. Tem certeza que quer continuar?")) {
+                        cancelDonate({ id: subscription.id, token: subscription.token })
+                          .then(() => {
+                            toast({
+                              title: "Doação cancelada com sucesso",
+                              description: "Qualquer dúvida entre em contato com suporte@bonde.org",
+                              status: 'success',
+                              duration: 9000,
+                              position: 'top',
+                              isClosable: true
+                            })
+                          })
+                          .catch((err) => {
+                            console.log('err', err);
+                            toast({
+                              title: "Houve um problema ao tentar cancelar doação",
+                              description: "Qualquer dúvida entre em contato com suporte@bonde.org",
+                              status: 'error',
+                              duration: 9000,
+                              position: 'top',
+                              isClosable: true
+                            })
+                          })
+                      }
+                    }}
+                  >
+                    Quero cancelar a minha doação
+                  </Button>
+                </Flex>
+              </Stack>
             </TabPanel>
           </TabPanels>
         </Tabs>

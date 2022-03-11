@@ -108,6 +108,17 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
         <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
       </Stack>
     </Flex>
+  ) : !plipForm ? (
+    <>
+      <Flex mt={7} mb="20%">
+        <Heading
+          as="h5"
+          size="5xl">
+          Ops! QR Code inválido, tente escanear novamente.
+        </Heading>
+      </Flex>
+      <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
+    </>
   ) : (
     <Wizard
       buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirma'}
@@ -117,52 +128,33 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
         confirmed_signatures: plipForm?.expected_signatures
       }}
     >
-      {plipForm?.name &&
-        <>
-          <Wizard.Page>
-            <Stack spacing={4} flex={1} py={8}>
-              <Heading fontSize="3xl">Confere aí:</Heading>
-              <InputField
-                name="unique_identifier"
-                label="Código da ficha"
-              />
-              <Text>
-                Ficha de <strong>{plipForm?.state}</strong> gerada por <strong>{plipForm?.name}</strong>
-                {plipSignaturesAgg.aggregate.count > 0
-                  ? `, que já enviou ${plipSignaturesAgg.aggregate.sum.confirmed_signatures} assinaturas anteriormente.`
-                  : `.`
-                }
-              </Text>
-            </Stack>
-          </Wizard.Page>
-          <Wizard.Page>
-            <Stack spacing={4} flex={1} py={8}>
-              <Heading fontSize="2xl">Quantas assinaturas foram coletadas?</Heading>
-              <InputField
-                type="number"
-                name="confirmed_signatures"
-                label="Total de assinaturas"
-              />
-            </Stack>
-          </Wizard.Page>
-        </>
-      }
-      {
-        !plipForm?.name &&
-        <Alert
-          status='error'
-          variant='subtle'
-          flexDirection='column'
-          alignItems='center'
-          justifyContent='center'
-          textAlign='center'
-          height='200px'
-        >
-          <AlertIcon />
-          <AlertTitle mr={2}>Oops! QR Code inválido!</AlertTitle>
-          <AlertDescription>Volte à tela anterior e escaneie o QR Code da ficha que você deseja cadastrar.</AlertDescription>
-        </Alert>
-      }
+      <Wizard.Page>
+        <Stack spacing={4} flex={1} py={8}>
+          <Heading fontSize="3xl">Confere aí:</Heading>
+          <InputField
+            name="unique_identifier"
+            label="Código da ficha"
+          />
+          <Text>
+            Ficha de <strong>{plipForm?.state}</strong> gerada por <strong>{plipForm?.name}</strong>
+            {plipSignaturesAgg.aggregate.count > 0
+              ? `, que já enviou ${plipSignaturesAgg.aggregate.sum.confirmed_signatures} assinaturas anteriormente.`
+              : `.`
+            }
+          </Text>
+        </Stack>
+      </Wizard.Page>
+      <Wizard.Page>
+        <Stack spacing={4} flex={1} py={8}>
+          <Heading fontSize="2xl">Quantas assinaturas foram coletadas?</Heading>
+          <InputField
+            type="number"
+            name="confirmed_signatures"
+            label="Total de assinaturas"
+          />
+        </Stack>
+      </Wizard.Page>
+
     </Wizard>
   );
 }

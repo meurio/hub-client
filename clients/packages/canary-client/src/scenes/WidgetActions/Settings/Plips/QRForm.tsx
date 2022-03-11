@@ -117,7 +117,17 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
           Ops! QR Code inválido, tente escanear novamente.
         </Heading>
       </Flex>
-      <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
+      <Stack>
+        <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
+        <Button
+          colorScheme="gray"
+          minH="42px"
+          variant="outline"
+          onClick={() => window.location.href = `/widgets/${widget.id}/settings`}
+        >
+          Cancelar
+        </Button>
+      </Stack>
     </>
   ) : (
     <Wizard
@@ -154,7 +164,6 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
           />
         </Stack>
       </Wizard.Page>
-
     </Wizard>
   );
 }

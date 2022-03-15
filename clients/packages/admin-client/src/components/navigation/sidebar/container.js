@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Context as SessionContext } from 'bonde-core-tools';
 
-import Sidebar from './sidebar'
+import Sidebar from './Sidebar'
 
 const UserContainer = () => {
   const { currentUser: user, community } = useContext(SessionContext);

@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
-const Loading = ({ localized, backgroundColor, loaderColor, className }) => (
+const Loading: React.FC<any> = ({ localized, backgroundColor, loaderColor, className }) => (
   <div
     className={classnames(
       { absolute: localized, fixed: !localized },

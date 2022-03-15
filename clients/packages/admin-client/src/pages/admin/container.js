@@ -3,8 +3,7 @@ import { Switch } from 'react-router-dom'
 
 // Routes
 import BetaBotPage from './bot'
-import CommunityCreatePage from './communities/create'
-import SidebarContainer from './sidebar'
+import Sidebar from './sidebar'
 import PrivateRoute from './private-route'
 
 const Logged = () => {
@@ -16,13 +15,8 @@ const Logged = () => {
         component={BetaBotPage}
       />
       <PrivateRoute
-        exact
-        path='/communities/new'
-        component={CommunityCreatePage}
-      />
-      <PrivateRoute
         path='/'
-        component={SidebarContainer}
+        component={Sidebar}
       />
     </Switch>
   );

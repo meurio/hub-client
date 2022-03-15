@@ -1,34 +1,21 @@
-import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Context as SessionContext } from 'bonde-core-tools';
 
-import * as paths from './../../../paths';
+import * as paths from '../../../paths';
 import * as mobilizationUtils from '../../../mobilizations/utils';
-import { Loading } from '../../../components/await';
 import {
   Sidenav,
   SidenavList,
   SidenavListItem,
-} from '../../../components/navigation/sidenav';
+} from '../sidenav';
+import { SidebarContext } from '../../../pages/admin/sidebar/Provider';
 
-const WrappedSidebar = (props) => {
-  const { logout } = useContext(SessionContext);
-
-  return <Sidebar {...props} logout={logout} />;
-};
-
-const Sidebar = ({
-  children,
-  loading,
-  mobilization,
-  user,
-  community,
-  logout,
-}) =>
-  loading ? (
-    <Loading />
-  ) : (
+const Sidebar: React.FC = ({ children }) => {
+  const { currentUser: user, logout, community }: any = useContext(SessionContext);
+  const { mobilization } = useContext(SidebarContext);
+  
+  return (
     <div className="top-0 right-0 bottom-0 left-0 flex flex-column absolute">
       <Sidenav community={community}>
         {!mobilization ? (
@@ -156,7 +143,7 @@ const Sidebar = ({
             icon="user"
             href={paths.editAccount()}
           >
-            <div className="white h6">{user.email}</div>
+            <div className="h6" style={{ color: "white" }}>{user.email}</div>
           </SidenavListItem>
           <SidenavListItem
             text={
@@ -181,11 +168,6 @@ const Sidebar = ({
       </div>
     </div>
   );
+}
 
-WrappedSidebar.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
-  mobilization: PropTypes.object,
-};
-
-export default WrappedSidebar;
+export default Sidebar;

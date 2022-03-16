@@ -14,7 +14,6 @@ import Sidebar from '../../../components/navigation/sidebar/Sidebar';
 
 // SubRoutes
 import MobilizationsScene from '../mobilizations';
-// import AccountPage from '../account/edit';
 import SidebarProvider from './Provider';
 
 const SidebarView: React.FC = ({ children }) => {
@@ -22,7 +21,6 @@ const SidebarView: React.FC = ({ children }) => {
     <SidebarProvider>
       <Sidebar>
         <Route path="/" component={MobilizationsScene} />
-        {/* <Route exact path="/account/edit" component={AccountPage} /> */}
         {children}
       </Sidebar>
     </SidebarProvider>

@@ -1,6 +1,6 @@
 import React from 'react';
 // import { connect } from 'react-redux';
-// import { Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // import { Context as SessionContext } from 'bonde-core-tools';
 // import { Loading } from '../../../components/await';
 import Sidebar from '../../../components/navigation/sidebar/Sidebar';
@@ -13,7 +13,7 @@ import Sidebar from '../../../components/navigation/sidebar/Sidebar';
 // import * as DNSControlActions from '../../../community/action-creators/dns-control';
 
 // SubRoutes
-// import MobilizationsContainer from '../mobilizations';
+import MobilizationsScene from '../mobilizations';
 // import AccountPage from '../account/edit';
 import SidebarProvider from './Provider';
 
@@ -21,7 +21,7 @@ const SidebarView: React.FC = ({ children }) => {
   return (
     <SidebarProvider>
       <Sidebar>
-        {/* <Route path="/mobilizations" component={MobilizationsContainer} /> */}
+        <Route path="/" component={MobilizationsScene} />
         {/* <Route exact path="/account/edit" component={AccountPage} /> */}
         {children}
       </Sidebar>

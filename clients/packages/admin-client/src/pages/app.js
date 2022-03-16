@@ -3,13 +3,11 @@ import { ToastContainer } from 'react-toastify';
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Switch
 } from 'react-router-dom';
 import { TechnicalIssues } from '../components/error/index';
 import { ZendeskWidget } from '../components/external-services';
 import { GoogleFontsLoader } from '../components/fonts';
-import SubscriptionEditPage from './public/subscription-edit';
 import LoggedRoute from './admin';
 
 import '../styles/main.scss';
@@ -19,12 +17,6 @@ const AuthExample = () => (
   <div>
     <Router>
       <Switch>
-        <Redirect from="/register" to="/" />
-        <Route
-          exact
-          path="/subscriptions/:id/edit"
-          component={SubscriptionEditPage}
-        />
         <Route path="/" component={LoggedRoute} />
         <Route component={TechnicalIssues} />
       </Switch>

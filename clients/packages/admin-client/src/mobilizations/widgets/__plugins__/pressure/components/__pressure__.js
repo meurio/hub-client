@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 // import * as graphqlQueries from 'graphql/queries'
 import * as pressureHelper from '../../../../../mobilizations/widgets/utils/pressure-helper';
 import * as paths from '../../../../../paths';

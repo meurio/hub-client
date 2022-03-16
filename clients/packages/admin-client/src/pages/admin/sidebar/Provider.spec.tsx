@@ -57,7 +57,7 @@ describe('SidebarProvider tests', () => {
     shallow(<SidebarProvider />);
 
     expect(result).toEqual({
-      variables: { community_id: communityId }
+      variables: { community_id: communityId, status: "active" }
     })
   });
 

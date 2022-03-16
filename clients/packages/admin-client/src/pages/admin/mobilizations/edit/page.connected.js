@@ -1,32 +1,23 @@
-//
-// @route /mobilizations/:mobilization_id/edit
-//
-import { connect } from 'react-redux';
-
-import {
-  selectMobilization,
-  asyncFetchBlocks,
-  asyncFetchWidgets,
-} from '../../../../mobrender/redux/action-creators';
-import MobSelectors from '../../../../mobrender/redux/selectors';
-
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { SidebarContext } from '../../sidebar/Provider';
+import { MobilizationDetailContext } from '../MobilizationDetailProvider';
 import Page from './page';
 
-const mapStateToProps = (state, props) => {
-  const selectors = MobSelectors(state, props);
-  return {
-    mobilization: selectors.getMobilization(),
-    blocks: selectors.getBlocks(),
-    blocksIsLoaded: selectors.blocksIsLoaded(),
-    renderIsLoading: selectors.renderIsLoading(),
-    mobilizationIsNeedReload: selectors.mobilizationIsNeedReload(),
-  };
-};
+const MobilizationEditConnected = (props) => {
+  const { mobilization } = useContext(SidebarContext);
+  const { blocks, widgets } = useContext(MobilizationDetailContext);
+  const history = useHistory();
 
-const mapDispatchToProps = {
-  selectMobilization,
-  asyncFetchBlocks,
-  asyncFetchWidgets,
-};
+  const pageProps = {
+    ...props,
+    history,
+    mobilization,
+    blocks,
+    widgets
+  }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Page);
+  return <Page {...pageProps} />;
+}
+
+export default MobilizationEditConnected;

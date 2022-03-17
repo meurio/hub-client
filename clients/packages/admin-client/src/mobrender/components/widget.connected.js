@@ -4,7 +4,7 @@ import { injectIntl } from 'react-intl'
 // import { asyncUpdateWidget as update } from '../redux/action-creators'
 import React, { useContext } from 'react'
 import Widget from './widget'
-import { SidebarContext } from '../../pages/admin/sidebar/Provider'
+import { SidebarContext } from '../../pages/sidebar/Provider'
 
 // const mapStateToProps = (state, props) => {
 //   const selectors = MobSelectors(state, props)

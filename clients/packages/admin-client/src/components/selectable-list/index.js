@@ -3,13 +3,13 @@ import React from 'react';
 import classnames from 'classnames';
 
 // Parent module dependencies
-import List from '../../mobilizations/components/list';
+import List from '../list';
 import {
   Item,
   Avatar,
   Name,
   CreatedAt,
-} from '../../mobilizations/components/list/items';
+} from '../list/items';
 
 // Current module dependencies
 if (require('exenv').canUseDOM) require('./index.scss');

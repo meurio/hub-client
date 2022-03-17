@@ -2,7 +2,7 @@ export const mobilizationTemplatesCreate = mobilization =>
   `/mobilizations/${mobilization.id}/templates/create`
 
 export const mobilizationTemplatesList = () =>
-  '/mobilizations/templates/list'
+  '/templates'
 
 export const mobilizationTemplatesUpdate = templateId =>
   `/mobilizations/templates/${templateId}/update`

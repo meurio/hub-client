@@ -9,7 +9,7 @@ import {
   SidenavList,
   SidenavListItem,
 } from '../sidenav';
-import { SidebarContext } from '../../../pages/admin/sidebar/Provider';
+import { SidebarContext } from '../../../pages/sidebar/Provider';
 
 const Sidebar: React.FC = ({ children }) => {
   const { currentUser: user, logout, community }: any = useContext(SessionContext);

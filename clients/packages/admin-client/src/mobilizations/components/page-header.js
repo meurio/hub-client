@@ -2,28 +2,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import * as paths from '../../paths';
 import { Tabs, Tab } from '../../components/navigation/tabs';
 import { DivFloat, Button } from '../../ux/components';
 
 const PageHeader = ({ location }) => {
-  const activePath = `${paths.mobilizations()}`;
-  const activePathWithBar = `${activePath}/`;
-  const archivedPath = `${activePath}?status=archived`;
-  const templatesPath = paths.mobilizationTemplatesList();
-
-  const getPathnameWithQuery = () => {
-    const { pathname, query } = location;
-    if (query && query.status) return `${pathname}?status=${query.status}`;
-    else return pathname;
-  };
-
-  const pathnameWithQuery = getPathnameWithQuery();
+  const mobilizationsPath = '/';
+  const archivedPath = '/archived';
+  const templatesPath = '/templates';
 
   return (
     <div>
       <DivFloat>
-        <Button to={paths.newMobilization()}>
+        <Button to='/new'>
           <i className="fa fa-plus mr2" style={{ fontSize: '.75rem' }} />
           <FormattedMessage
             id="mobilizations.components--page-header.button.text"
@@ -39,11 +29,8 @@ const PageHeader = ({ location }) => {
               defaultMessage="Ativas"
             />
           }
-          path={activePath}
-          isActive={
-            activePath === pathnameWithQuery ||
-            activePathWithBar === pathnameWithQuery
-          }
+          path={mobilizationsPath}
+          isActive={mobilizationsPath === location.pathname}
         />
         <Tab
           text={
@@ -52,8 +39,8 @@ const PageHeader = ({ location }) => {
               defaultMessage="Arquivadas"
             />
           }
-          path={{ to: activePath, search: '?status=archived' }}
-          isActive={archivedPath === pathnameWithQuery}
+          path={archivedPath}
+          isActive={archivedPath === location.pathname}
         />
         <Tab
           text={

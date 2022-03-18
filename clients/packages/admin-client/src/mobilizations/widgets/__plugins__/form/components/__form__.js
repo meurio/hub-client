@@ -29,7 +29,12 @@ class Form extends Component {
 
   fields() {
     const { settings } = this.props.widget;
-    return settings && settings.fields ? settings.fields : [];
+
+    if (typeof settings?.fields === 'string') {
+      return JSON.parse(settings.fields);
+    }
+
+    return settings?.fields ? settings.fields : [];
   }
 
   submit() {

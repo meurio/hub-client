@@ -6,7 +6,7 @@ import {
   Context as SessionContext,
 } from 'bonde-core-tools';
 
-import AppRouting from '../pages/app';
+import AppRouting from '../pages/App';
 
 import * as t from '../community/action-types';
 

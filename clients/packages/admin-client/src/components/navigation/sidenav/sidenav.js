@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import urljoin from 'url-join';
 
-import * as paths from './../../../paths';
-
 if (require('exenv').canUseDOM) require('./sidenav.scss');
 
 const handleExternalClick = (path) => (e) => {
@@ -20,7 +18,7 @@ const Sidenav = ({ children, community }) => (
       <div className="item">
         <div className="item-icon">
           <Link
-            to={paths.mobilizations()}
+            to='/'
             style={{ height: '43px', display: 'block' }}
           >
             <u
@@ -35,7 +33,7 @@ const Sidenav = ({ children, community }) => (
         </div>
         <div className="item-content">
           <div className="item-community-name">
-            <Link to={paths.mobilizations()}>{community.name || 'Bonde'}</Link>
+            <Link to='/'>{community.name || 'Bonde'}</Link>
           </div>
           <div className="item-community-change">
             <button

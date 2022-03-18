@@ -105,6 +105,7 @@ export const MobilizationBasicsForm = ({
           </Radio>
         </RadioGroup>
       </FormGroup>
+
       <FormGroup
         {...slug}
         controlId="slug"

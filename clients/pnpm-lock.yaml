@@ -995,6 +995,7 @@ importers:
       axios: ^0.18.0
       axios-mock-adapter: ^1.16.0
       basscss-sass: ^4.0.0
+      bonde-components: workspace:*
       bonde-core-tools: workspace:*
       bonde-webpage: workspace:*
       chai: ^4.2.0
@@ -1025,9 +1026,7 @@ importers:
       react-intl: 2.7.2
       react-lifecycles-compat: ^3.0.4
       react-redux: 5.0.7
-      react-router: 4.3.1
       react-router-config: ^1.0.0-beta.4
-      react-router-dom: 4.3.1
       react-s3-uploader: 4.8.0
       react-scripts: 3.4.1
       react-select-plus: 1.2.0
@@ -1071,6 +1070,7 @@ importers:
       axios: 0.18.1
       axios-mock-adapter: 1.20.0_axios@0.18.1
       basscss-sass: 4.0.0
+      bonde-components: link:../../libs/components
       bonde-core-tools: link:../../libs/core-tools
       bonde-webpage: link:../../libs/webpage
       chai: 4.3.4
@@ -1101,9 +1101,7 @@ importers:
       react-intl: 2.7.2_prop-types@15.7.2+react@17.0.2
       react-lifecycles-compat: 3.0.4
       react-redux: 5.0.7_react@17.0.2+redux@3.7.2
-      react-router: 4.3.1_react@17.0.2
-      react-router-config: 1.0.0-beta.4_react-router@4.3.1+react@17.0.2
-      react-router-dom: 4.3.1_react@17.0.2
+      react-router-config: 1.0.0-beta.4_react@17.0.2
       react-s3-uploader: 4.8.0
       react-scripts: 3.4.1_67db08d3bc52a3cbf62eae1f66d89746
       react-select-plus: 1.2.0_react-dom@17.0.2+react@17.0.2
@@ -6383,7 +6381,7 @@ packages:
       '@emotion/react': '>=10.0.35'
       react: '>=16.8.6'
     dependencies:
-      '@emotion/react': 11.6.0_f6c5a15aa5ec2e0fdeb6035d8ba56bed
+      '@emotion/react': 11.6.0_740a948703592b63b980d9a4f1bb96de
       react: 17.0.2
     dev: false
 
@@ -17657,7 +17655,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       aria-query: 3.0.0
       array-includes: 3.1.4
       ast-types-flow: 0.0.7
@@ -18787,6 +18785,18 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
+
+  /follow-redirects/1.14.5_debug@4.3.2:
+    resolution: {integrity: sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.2_supports-color@6.1.0
 
   /follow-redirects/1.5.10:
     resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
@@ -19825,7 +19835,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.5
+      follow-redirects: 1.14.5_debug@4.3.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -24964,7 +24974,7 @@ packages:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.2.0_typescript@3.9.10
+      ts-pnp: 1.2.0_typescript@4.6.2
     transitivePeerDependencies:
       - typescript
 
@@ -26491,7 +26501,7 @@ packages:
       final-form: 4.20.4
       react: ^16.8.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       final-form: 4.20.4
       react: 17.0.2
     dev: false
@@ -27028,28 +27038,13 @@ packages:
       resize-observer-polyfill: 1.5.1
     dev: false
 
-  /react-router-config/1.0.0-beta.4_react-router@4.3.1+react@17.0.2:
+  /react-router-config/1.0.0-beta.4_react@17.0.2:
     resolution: {integrity: sha512-4jWfQK+PNAYeMU7dZ5h/dNDTReVjm41p761+XP+II360Jz5TfzHiuP27tAasIQ+JcGWwX2l2dCWG8jEmcS5SBA==}
     peerDependencies:
       react: '>=15'
       react-router: ^4.2.0
     dependencies:
       react: 17.0.2
-      react-router: 4.3.1_react@17.0.2
-    dev: false
-
-  /react-router-dom/4.3.1_react@17.0.2:
-    resolution: {integrity: sha512-c/MlywfxDdCp7EnB7YfPMOfMD3tOtIjrQlj/CKfNMBxdmpJP8xcz5P/UAFn3JbnQCNUxsHyVVqllF9LhgVyFCA==}
-    peerDependencies:
-      react: '>=15'
-    dependencies:
-      history: 4.10.1
-      invariant: 2.2.4
-      loose-envify: 1.4.0
-      prop-types: 15.7.2
-      react: 17.0.2
-      react-router: 4.3.1_react@17.0.2
-      warning: 4.0.3
     dev: false
 
   /react-router-dom/5.3.0_react@17.0.2:
@@ -27434,7 +27429,7 @@ packages:
       semver: 7.3.2
       style-loader: 1.3.0_webpack@4.44.2
       terser-webpack-plugin: 4.2.3_webpack@4.44.2
-      ts-pnp: 1.2.0_typescript@3.9.10
+      ts-pnp: 1.2.0_typescript@4.6.2
       typescript: 4.6.2
       url-loader: 4.1.1_file-loader@6.1.1+webpack@4.44.2
       webpack: 4.44.2
@@ -29192,7 +29187,7 @@ packages:
       slate: '>=0.32.0 <0.50.0'
     dependencies:
       isomorphic-base64: 1.0.2
-      slate: 0.41.3_immutable@3.8.2+react@17.0.2
+      slate: 0.41.3_immutable@4.0.0+react@17.0.2
     dev: false
 
   /slate-dev-environment/0.2.5:
@@ -30542,7 +30537,7 @@ packages:
     dev: true
 
   /to-fast-properties/2.0.0:
-    resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz}
+    resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
     engines: {node: '>=4'}
 
   /to-object-path/0.3.0:
@@ -30820,6 +30815,7 @@ packages:
         optional: true
     dependencies:
       typescript: 3.9.10
+    dev: true
 
   /ts-pnp/1.2.0_typescript@4.6.2:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
@@ -30831,7 +30827,6 @@ packages:
         optional: true
     dependencies:
       typescript: 4.6.2
-    dev: true
 
   /tsconfig-paths/3.11.0:
     resolution: {integrity: sha512-7ecdYDnIdmv639mmDwslG6KQg1Z9STTz1j7Gcz0xa+nshh/gKDAHcPxRbWOsA3SPp0tXP2leTcY9Kw+NAkfZzA==}
@@ -32039,7 +32034,7 @@ packages:
     resolution: {integrity: sha512-UHdwrN3FrDvicM3AqJS/J07X0KXj67R8Cg0waq1MKEOqzo89ap6zh6LmaLnRAjpB+bDIz+7OlPye9iii9KBnxw==}
     engines: {node: '>=4.0.0'}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       '@hapi/joi': 15.1.1
       common-tags: 1.8.2
       fs-extra: 4.0.3
@@ -32234,7 +32229,7 @@ packages:
     peerDependencies:
       webpack: ^2.0.0 || ^3.0.0 || ^4.0.0
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       json-stable-stringify: 1.0.1
       webpack: 4.42.0
       workbox-build: 4.3.1

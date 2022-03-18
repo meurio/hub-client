@@ -1,5 +1,5 @@
-import React from 'react';
-import { gql, useQuery } from 'bonde-core-tools';
+import React, { useContext } from 'react';
+import { Context as SessionContext, gql, useQuery } from 'bonde-core-tools';
 //
 // @route /mobilizations/:mobilization_id/templates/choose/custom
 //
@@ -7,18 +7,15 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import * as SelectableActions from '../../../components/selectable-list/actions';
-import MobSelectors from '../../../mobrender/redux/selectors';
 import * as MobActions from '../../../mobrender/redux/action-creators';
 import * as TemplateSelectors from '../../../mobilizations/templates/selectors';
-import * as CommunitySelectors from '../../../community/selectors';
 
 import { setFilterableSearchBarList } from '../../../components/filterable-search-bar/actions';
 
 import Page from './page';
+import { SidebarContext } from '../../sidebar/Provider';
 
 const mapStateToProps = (state, props) => ({
-  communityId: CommunitySelectors.getCurrentId(state),
-  mobilization: MobSelectors(state, props).getMobilization(),
   selectedIndex: TemplateSelectors.getSelectableIndex(state),
   filterableTemplates: TemplateSelectors.getFilterableTemplates(state),
 });
@@ -58,8 +55,10 @@ const FETCH_TEMPLATES = gql`
 `;
 
 const PageGraphQL = (props) => {
+  const { mobilization } = useContext(SidebarContext);
+  const { community } = useContext(SessionContext);
   const { data, loading, error } = useQuery(FETCH_TEMPLATES, {
-    variables: { communityId: props.communityId },
+    variables: { communityId: community.id },
     fetchPolicy: 'network-only',
   });
 
@@ -71,6 +70,7 @@ const PageGraphQL = (props) => {
   return (
     <Page
       {...props}
+      mobilization={mobilization}
       loading={loading}
       templates={(data || {}).customTemplates ? data.customTemplates : []}
     />

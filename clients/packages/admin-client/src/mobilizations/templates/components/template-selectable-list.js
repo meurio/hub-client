@@ -51,11 +51,18 @@ const TemplateSelectableList = (props) => {
             />
           }
         />
-        <div className={styles.buttonContainer}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: '10px'
+          }}
+        >
           {handleGoBack !== undefined ? (
-            <div className="col-4">
               <button
                 onClick={() => handleGoBack()}
+                style={{ minWidth: '120px' }}
                 className={classnames(
                   'btn h3 white p2 rounded bg-gray',
                   styles.button
@@ -66,24 +73,22 @@ const TemplateSelectableList = (props) => {
                   defaultMessage="Voltar"
                 />
               </button>
-            </div>
           ) : undefined}
-          <div className={classnames(!handleGoBack ? 'col-12' : 'col-8 pl1')}>
-            <button
-              disabled={!item}
-              onClick={() => handleSelectItem(item)}
-              className={classnames(
-                'btn h3 white p2 rounded',
-                !item ? 'bg-gray95' : 'bg-pagenta',
-                styles.button
-              )}
-            >
-              <FormattedMessage
-                id="templates.components--selectable-list.button.next"
-                defaultMessage="Continuar"
-              />
-            </button>
-          </div>
+          <button
+            disabled={!item}
+            style={{ minWidth: '120px' }}
+            onClick={() => handleSelectItem(item)}
+            className={classnames(
+              'btn h3 white p2 rounded',
+              !item ? 'bg-gray95' : 'bg-pagenta',
+              styles.button
+            )}
+          >
+            <FormattedMessage
+              id="templates.components--selectable-list.button.next"
+              defaultMessage="Continuar"
+            />
+          </button>
         </div>
       </div>
     </div>

@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import * as paths from '../../../paths';
+// import * as paths from '../../../paths';
 import { PageTabLayout } from '../../../mobilizations/components';
-import MobilizationBasicsForm from '../../../mobilizations/components/mobilization-basics-form';
+// import MobilizationBasicsForm from '../../../mobilizations/components/mobilization-basics-form';
+import CreateForm from './CreateForm';
 
 const MobilizationsNewPage = (props) => (
   <PageTabLayout location={props.location}>
@@ -15,14 +16,15 @@ const MobilizationsNewPage = (props) => (
           defaultMessage="Qual o objetivo da sua mobilização?"
         />
       </h2>
-      <MobilizationBasicsForm
+      <CreateForm />
+      {/* <MobilizationBasicsForm
         className="bg-white"
         onFinishSubmit={(mobilization) => {
           mobilization &&
             props.history.push(paths.mobilizationTemplatesChoose(mobilization));
         }}
         {...props}
-      />
+      /> */}
       <p
         className="lightgray center"
         style={{ fontSize: '.9rem', marginTop: '1.5rem' }}

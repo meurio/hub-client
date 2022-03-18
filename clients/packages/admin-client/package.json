@@ -29,6 +29,7 @@
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.16.0",
     "basscss-sass": "^4.0.0",
+    "bonde-components": "workspace:*",
     "bonde-core-tools": "workspace:*",
     "bonde-webpage": "workspace:*",
     "chai": "^4.2.0",

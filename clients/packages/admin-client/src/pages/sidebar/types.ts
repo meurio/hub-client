@@ -27,4 +27,5 @@ export interface SidebarContextValues {
   selectMobilization: (id: number) => void;
   mobilization?: Mobilization;
   changeStatus: (status: 'active' | 'archived') => void;
+  refetch: any;
 }

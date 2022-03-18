@@ -40,11 +40,16 @@ export const MobilizationDetailContext = createContext<MobilizationDetailContext
 
 const MobilizationDetailProvider: React.FC = ({ children }) => {
   const { mobilization } = useContext(SidebarContext);
-  const { loading, data } = useQuery(FETCH_MOBILIZATION_DETAIL_QUERY, {
+  const { loading, data, refetch } = useQuery(FETCH_MOBILIZATION_DETAIL_QUERY, {
     variables: { mobilization_id: mobilization?.id }
   });
 
+  const updateBlocksAndWidgets = () => {
+    refetch({ mobilization_id: mobilization?.id });
+  }
+
   const mobilizationDetailValues = {
+    updateBlocksAndWidgets,
     fetching: loading,
     widgets: data?.widgets || [],
     blocks: data?.blocks || []

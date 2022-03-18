@@ -7,33 +7,35 @@ import MobilizationDetailProvider from './MobilizationDetailProvider';
 import MobilizationEditPage from './edit/page.connected';
 import CreateBlockPage from './create-block';
 import CreateTemplatePage from './create-template';
-import ChooseTemplatePage from './choose-custom-template';
+import ChooseTemplatePage from './choose-template';
 import ChooseCustomTemplatePage from './choose-custom-template';
 import LaunchPage from './launch';
 import LaunchEndPage from './launch-end';
 
 const MobilizationDetail: React.FC = () => {
   const { mobilization_id }: any = useParams();
-  const { fetching, mobilization, selectMobilization } = useContext(SidebarContext);
+  const { fetching, mobilization, selectMobilization, mobilizations } = useContext(SidebarContext);
 
   useEffect(() => {
     if (!fetching && (!mobilization || mobilization.id !== Number(mobilization_id))) {
       selectMobilization(Number(mobilization_id));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetching]);
+  }, [fetching, mobilizations.length]);
 
-  return !mobilization ? <Loading /> : (
-    <MobilizationDetailProvider>
-      <Route exact path='/mobilizations/:mobilization_id/edit' component={MobilizationEditPage} />
-      <Route exact path='/mobilizations/:mobilization_id/launch' component={LaunchPage} />
-      <Route exact path='/mobilizations/:mobilization_id/launch' component={LaunchEndPage} />
-      <Route exact path='/mobilizations/:mobilization_id/blocks/create' component={CreateBlockPage} />
-      <Route exact path='/mobilizations/:mobilization_id/templates/create' component={CreateTemplatePage} />
-      <Route exact path='/mobilizations/:mobilization_id/templates/choose' component={ChooseTemplatePage} />
-      <Route exact path='/mobilizations/:mobilization_id/templates/choose/custom' component={ChooseCustomTemplatePage} />
-    </MobilizationDetailProvider>
-  );
+  return !mobilization
+    ? <Loading />
+    : (
+      <MobilizationDetailProvider>
+        <Route exact path='/mobilizations/:mobilization_id/edit' component={MobilizationEditPage} />
+        <Route exact path='/mobilizations/:mobilization_id/launch' component={LaunchPage} />
+        <Route exact path='/mobilizations/:mobilization_id/launch' component={LaunchEndPage} />
+        <Route exact path='/mobilizations/:mobilization_id/blocks/create' component={CreateBlockPage} />
+        <Route exact path='/mobilizations/:mobilization_id/templates/create' component={CreateTemplatePage} />
+        <Route exact path='/mobilizations/:mobilization_id/templates/choose' component={ChooseTemplatePage} />
+        <Route exact path='/mobilizations/:mobilization_id/templates/choose/custom' component={ChooseCustomTemplatePage} />
+      </MobilizationDetailProvider>
+    );
 }
 
 export default MobilizationDetail;

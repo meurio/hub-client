@@ -995,6 +995,7 @@ importers:
       axios: ^0.18.0
       axios-mock-adapter: ^1.16.0
       basscss-sass: ^4.0.0
+      bonde-components: workspace:*
       bonde-core-tools: workspace:*
       bonde-webpage: workspace:*
       chai: ^4.2.0
@@ -1069,6 +1070,7 @@ importers:
       axios: 0.18.1
       axios-mock-adapter: 1.20.0_axios@0.18.1
       basscss-sass: 4.0.0
+      bonde-components: link:../../libs/components
       bonde-core-tools: link:../../libs/core-tools
       bonde-webpage: link:../../libs/webpage
       chai: 4.3.4
@@ -26499,7 +26501,7 @@ packages:
       final-form: 4.20.4
       react: ^16.8.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       final-form: 4.20.4
       react: 17.0.2
     dev: false
@@ -30535,7 +30537,7 @@ packages:
     dev: true
 
   /to-fast-properties/2.0.0:
-    resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz}
+    resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
     engines: {node: '>=4'}
 
   /to-object-path/0.3.0:

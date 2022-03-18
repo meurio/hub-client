@@ -26,4 +26,5 @@ export interface MobilizationDetailContextValues {
   widgets: Widget[];
   blocks: Block[];
   fetching: boolean;
+  updateBlocksAndWidgets?: any
 }

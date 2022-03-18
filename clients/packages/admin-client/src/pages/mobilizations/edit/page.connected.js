@@ -9,6 +9,7 @@ const MobilizationEditConnected = (props) => {
   const { blocks, widgets } = useContext(MobilizationDetailContext);
   const history = useHistory();
 
+  console.log("blocks, widgets", { blocks, widgets });
   const pageProps = {
     ...props,
     history,

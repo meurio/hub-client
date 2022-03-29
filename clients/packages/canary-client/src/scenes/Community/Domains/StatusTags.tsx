@@ -9,6 +9,10 @@ import type { DNSHostedZone } from './types';
 const StatusTags: React.FC<{ dnsHostedZone: DNSHostedZone }> = ({ dnsHostedZone }) => {
   const { dns, certificate } = getStatus(dnsHostedZone);
 
+  if (dns === 'created') {
+    return <Tag colorScheme="red">Configuração pendente</Tag>;
+  }
+
   return (
     <HStack>
       {dns === 'propagated' ? <Tag colorScheme="green">Propagado</Tag> : <Tag colorScheme="yellow">Propagando</Tag>}

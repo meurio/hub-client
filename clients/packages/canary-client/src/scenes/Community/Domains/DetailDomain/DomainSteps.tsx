@@ -22,13 +22,13 @@ const Status: React.FC<StatusProperties> = ({ icon, children }) => {
       css={`
         ${Icon} {
           path {
-            fill: ${icon === 'Check' ? '#50E3C2' : '#aaaaaa'}
+            fill: ${icon === 'Check' ? '#50E3C2' : icon === 'Warning' ? '#FF2B4E' : '#ee0099'}
           }
         }
       `}
     >
       <Icon size='small' name={icon} />
-      <Text color={icon === "Check" ? 'green.200' : 'gray.400'}>{children}</Text>
+      <Text color={icon === "Check" ? 'green.200' : icon === 'Warning' ? 'red.200' : 'pink.200'}>{children}</Text>
     </HStack>
   );
 }
@@ -101,13 +101,15 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
           </>
         }
       >
-        {dns === 'propagated' ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Aguardando ação</Status>}
+        {dns === 'propagated' || dns === 'propagating'
+          ? <Status icon="Check">Concluído</Status>
+          : <Status icon="Warning">Aguardando ação</Status>}
       </StepWrapper>
       
       <Icon name='ArrowRight' size='small' />
       
       <StepWrapper
-        disabled={dns !== 'propagated'}
+        disabled={dns === 'created'}
         icon={PropagateDomainIcon}
         title="Propagar Domínio"
         description={

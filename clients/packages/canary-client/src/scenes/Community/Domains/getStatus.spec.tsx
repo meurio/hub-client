@@ -1,4 +1,4 @@
-import type { CertificateTLS, DNSHostedZone } from 'bonde-core-tools';
+import type { Certificate, DNSHostedZone } from './types';
 import getStatus from './getStatus';
 
 describe('Domain getStatus', () => {
@@ -6,8 +6,13 @@ describe('Domain getStatus', () => {
     id: 23,
     domain_name: 'bonde.org',
     status: 'created',
-    community_id: 2,
+    community: {
+      id: 2,
+      name: 'Test'
+    },
     certificates: [],
+    hosted_zone: {},
+    name_servers: [],
     dns_records: [],
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
@@ -35,14 +40,8 @@ describe('Domain getStatus', () => {
   });
 
   it('should return a Status with certificated', () => {
-    const certificate: CertificateTLS = {
-      id: 12,
-      domain: 'bonde.org',
-      dns_hosted_zone_id: dns.id,
-      community_id: dns.community_id,
-      is_active: true,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+    const certificate: Certificate = {
+      is_active: true
     }
 
     expect(getStatus({ ...dns, ns_ok: true, certificates: [certificate] })).toEqual({
@@ -52,14 +51,8 @@ describe('Domain getStatus', () => {
   });
 
   it('should return a Status with certificate not verify', () => {
-    const certificate: CertificateTLS = {
-      id: 12,
-      domain: 'bonde.org',
-      dns_hosted_zone_id: dns.id,
-      community_id: dns.community_id,
-      is_active: false,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+    const certificate: Certificate = {
+      is_active: false
     }
 
     expect(getStatus({ ...dns, ns_ok: true, certificates: [certificate] })).toEqual({

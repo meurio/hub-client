@@ -10,8 +10,9 @@ import {
 } from 'bonde-components/chakra';
 import { useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
 import { useHistory } from 'react-router-dom';
-import { Status, MainTitle } from '../Styles';
-import { DNSHostedZone } from '../types';
+import { MainTitle } from '../Styles';
+import StatusTags from '../StatusTags';
+import type { DNSHostedZone } from '../types';
 
 // Types
 type Record = {
@@ -44,21 +45,29 @@ const handleCheckDNS = ({ dnsHostedZone, refetch, action }: Props) => async () =
     ) : false;
 
     if (nsOK) {
-      if (dnsHostedZone.status === 'propagating' || dnsHostedZone.status === 'created' || !dnsHostedZone.ns_ok) {
-        // Change domain to propagated only required change status
-        await action({ variables: { dns_hosted_zone_id: dnsHostedZone.id, status: 'propagated' } });
+      if (dnsHostedZone.status !== 'propagated' || !dnsHostedZone.ns_ok) {
+        // Atualiza status do domínio somente quando estiver desatualizado
+        await action({
+          variables: {
+            dns_hosted_zone_id: dnsHostedZone.id,
+            updated_fields: { status: 'propagated', ns_ok: true }
+          }
+        });
         refetch();
       }
       toast(<Success message='DNS propagado com sucesso.' />, { type: toast.TYPE.SUCCESS });
-    } else {
-      if ((dnsHostedZone.status !== 'propagating' && dnsHostedZone.status !== 'created') || dnsHostedZone.ns_ok) {
-        // Change domain to created only required change status
-        await action({ variables: { dns_hosted_zone_id: dnsHostedZone.id, status: 'created' } });
-        toast('Verifique se o seu dominio foi configurado corretamente.', { type: toast.TYPE.INFO });
-        refetch();
-      } else {
-        toast('DNS ainda não foi propagado, tente novamente mais tarde.', { type: toast.TYPE.INFO });
-      }
+    } else if (dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok) {
+      // Atualiza status do domínio quando já estava propagado mas no momento desta verificação não está
+      await action({
+        variables: {
+          dns_hosted_zone_id: dnsHostedZone.id,
+          updated_fields: { status: 'created', ns_ok: false }
+        }
+      });
+      toast('Verifique se o seu dominio foi configurado corretamente.', { type: toast.TYPE.INFO });
+      refetch();
+    } else if (dnsHostedZone.status === 'propagating') {
+      toast('DNS ainda não foi propagado, tente novamente mais tarde.', { type: toast.TYPE.INFO });
     }
   } catch (err) {
     console.log('err', err);
@@ -96,10 +105,10 @@ const deleteDomainGQL = gql`
 `;
 
 const updateDomainGQL = gql`
-  mutation ($dns_hosted_zone_id: Int!, $status: dnshostedzonestatus!) {
+  mutation ($dns_hosted_zone_id: Int!, $updated_fields: dns_hosted_zones_set_input!) {
     update_dns_hosted_zones_by_pk(
       pk_columns: { id: $dns_hosted_zone_id },
-      _set: { status: $status, ns_ok: true }
+      _set: $updated_fields
     ) {
       id
       domain_name
@@ -134,10 +143,7 @@ const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
             <Text bold>{props.dnsHostedZone?.domain_name}</Text>
           </GridItem>
           <GridItem>
-            <Status
-              value={props.dnsIsActivated ? 'active' : 'inactive'}
-              labels={{ 'active': 'Ativo', 'inactive': 'Inativo' }}
-            />
+            <StatusTags dnsHostedZone={props.dnsHostedZone} />
           </GridItem>
           <GridItem>
             <Stack direction="row" spacing={6}>

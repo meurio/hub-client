@@ -3,6 +3,7 @@ import { useParams, Redirect } from 'react-router-dom';
 import { Stack } from "bonde-components/chakra";
 import NameServers from '../NameServers';
 import { DNSHostedZone } from '../types';
+import getStatus from '../getStatus';
 // Scene components
 import Navigation from './Navigation';
 import Domain from './Domain';
@@ -20,10 +21,7 @@ const DetailDomain: React.FC<Props> = ({ dnsHostedZones, refetch }) => {
 
   if (!dnsHostedZone) return <Redirect to='/community/domains' />
 
-  const dnsIsActivated = !!(
-    (dnsHostedZone.status !== 'created' && dnsHostedZone.status !== 'propagating' )
-      || dnsHostedZone.ns_ok
-  );
+  const { dns } = getStatus(dnsHostedZone);
 
   return (
     <Stack direction="column" spacing={8}>
@@ -31,13 +29,13 @@ const DetailDomain: React.FC<Props> = ({ dnsHostedZones, refetch }) => {
       <Domain
         refetch={refetch}
         dnsHostedZone={dnsHostedZone}
-        dnsIsActivated={dnsIsActivated}
+        dnsIsActivated={dns === 'propagated'}
       />
       <Explain
         dnsHostedZone={dnsHostedZone}
-        dnsIsActivated={dnsIsActivated}
+        dnsIsActivated={dns === 'propagated'}
       />
-      {(dnsIsActivated) && (
+      {dns === 'propagated' && (
         <Records dnsHostedZone={dnsHostedZone} refetch={refetch} />
       )}
       <NameServers dnsHostedZone={dnsHostedZone} />

@@ -22,7 +22,7 @@ export type DNSHostedZone = {
   comment?: string
   domain_name: string
   ns_ok?: boolean
-  status: 'created' | 'propagating' | 'propagated' | 'certifying' | 'certified'
+  status: 'created' | 'propagating' | 'propagated'
   hosted_zone: any
   name_servers: string[]
   certificates: Cerfificate[]

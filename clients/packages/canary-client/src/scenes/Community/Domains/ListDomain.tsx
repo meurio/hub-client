@@ -10,26 +10,15 @@ import {
   Stack,
   Heading
 } from 'bonde-components/chakra';
-import { Status } from './Styles';
 import CreateDomainModal from './CreateDomainModal';
-
-type Certificate = {
-  is_active: boolean
-}
-
-type DNSHostedZone = {
-  id: number
-  domain_name: string
-  name_servers?: string[]
-  ns_ok?: boolean
-  certificates?: Certificate[]
-  status: 'created' | 'propagating' | 'propagated' | 'certifying' | 'certified'
-}
+import StatusTags from './StatusTags';
+import type { DNSHostedZone } from './types';
 
 type DomainsProps = {
   refetch: any
   dnsHostedZones: DNSHostedZone[]
 }
+
 
 const Domains: React.FC<DomainsProps> = ({ dnsHostedZones, refetch }) => (
   <Stack spacing={4}>
@@ -59,16 +48,7 @@ const Domains: React.FC<DomainsProps> = ({ dnsHostedZones, refetch }) => (
                 <Text bold>{dnsHostedZone.domain_name}</Text>
               </GridItem>
               <GridItem>
-                <Status
-                  activeStatus='propagated'
-                  inactiveStatus='created'
-                  value={dnsHostedZone.status === 'propagated' || dnsHostedZone.ns_ok ? 'propagated' : dnsHostedZone.status}
-                  labels={{
-                    created: 'Aguardando configurar DNS',
-                    propagating: 'Propagando',
-                    propagated: 'Propagado'
-                  }}
-                />
+                <StatusTags dnsHostedZone={dnsHostedZone} />
               </GridItem>
               <GridItem>
                 <Icon size='small' name='ArrowRight' />

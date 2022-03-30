@@ -140,7 +140,7 @@ const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
       <Box bg="white" boxShadow="sm">
         <Grid templateColumns='500px auto 280px' p={4}>
           <GridItem>
-            <Text bold>{props.dnsHostedZone?.domain_name}</Text>
+            <Text fontSize="xl">{props.dnsHostedZone?.domain_name}</Text>
           </GridItem>
           <GridItem>
             <StatusTags dnsHostedZone={props.dnsHostedZone} />

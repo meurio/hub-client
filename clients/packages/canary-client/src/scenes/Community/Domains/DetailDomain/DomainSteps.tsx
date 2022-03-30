@@ -50,7 +50,7 @@ const StepWrapper: React.FC<StepWrapperProperties> = ({
 }) => (
   <VStack align="center" spacing={4} px={8} opacity={disabled ? '45%' : 'inherit'}>
     <Icon />
-    <Heading fontSize="xl">{title}</Heading>
+    <Heading textAlign="center" fontSize="md">{title}</Heading>
     <Text
       align="center"
       css={`

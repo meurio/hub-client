@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   Heading,
   Stack,
   Table,
@@ -9,6 +8,7 @@ import {
   Tr,
   Th,
   Td,
+  Tag,
   Tooltip
 } from "bonde-components/chakra";
 import { ActivityFeedEmail } from "./hooks/usePerformance";
@@ -26,13 +26,9 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
       }
       maxW="220px"
     >
-      <Button
-        variant="tag"
-        colorScheme={isOpened ? "green" : "yellow"}
-        textTransform="none"
-        fontWeight="400">
+      <Tag colorScheme={isOpened ? "green" : "yellow"}>
         {isOpened ? `Abriu ${openingCount}x` : "Não abriu"}
-      </Button>
+      </Tag>
     </Tooltip>
   )
 }
@@ -48,13 +44,7 @@ const StatusLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
         label="Pelo menos um e-mail foi entregue com sucesso na caixa de entrada do alvo."
         maxW="220px"
       >
-        <Button
-          variant="tag"
-          colorScheme="green"
-          textTransform="none"
-          fontWeight="400">
-          Entregue
-        </Button>
+        <Tag colorScheme="green">Entregue</Tag>
       </Tooltip>
     )
   }
@@ -65,13 +55,7 @@ const StatusLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
         label="O e-mail do alvo está incorreto ou a caixa de entrada dele está cheia. Confira o e-mail do alvo para conseguir pressioná-lo."
         maxW="220px"
       >
-        <Button
-          variant="tag"
-          bg="red.100"
-          textTransform="none"
-          fontWeight="400">
-          Falhou
-        </Button>
+        <Tag colorScheme="red">Falhou</Tag>
       </Tooltip>
     )
   }
@@ -82,13 +66,7 @@ const StatusLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
         label="O e-mail do alvo está correto, mas foi bloqueado porque ele se desinscreveu ou porque muitos emails foram marcados como spam."
         maxW="220px"
       >
-        <Button
-          variant="tag"
-          bg="red.100"
-          textTransform="none"
-          fontWeight="400">
-          Bloqueou
-        </Button>
+        <Tag colorScheme="red">Bloqueou</Tag>
       </Tooltip>
     )
   } else {

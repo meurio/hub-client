@@ -12,6 +12,7 @@ import {
 } from 'bonde-components/chakra';
 import CreateDomainModal from './CreateDomainModal';
 import StatusTags from './StatusTags';
+import { MainTitle } from './Styles';
 import type { DNSHostedZone } from './types';
 
 type DomainsProps = {
@@ -32,10 +33,10 @@ const Domains: React.FC<DomainsProps> = ({ dnsHostedZones, refetch }) => (
     <Box display={["none", "flex"]}>
       <Grid templateColumns='500px auto 70px' gap={4}>
         <GridItem>
-          <Text>Domínio</Text>
+          <MainTitle>Domínio</MainTitle>
         </GridItem>
         <GridItem colSpan={2}>
-          <Text>Status</Text>
+          <MainTitle>Status</MainTitle>
         </GridItem>
       </Grid>
     </Box>
@@ -43,7 +44,7 @@ const Domains: React.FC<DomainsProps> = ({ dnsHostedZones, refetch }) => (
       {dnsHostedZones.map((dnsHostedZone: DNSHostedZone, index: number) => (
         <Link key={`dns-hosted-zone-${index}`} to={`/community/domains/${dnsHostedZone.id}`}>
           <Box bg="white" p={4} borderBottomWidth={1} borderColor="gray.100">
-            <Grid key={`domain-item-${index}`} templateColumns={["auto", "500px auto 70px"]} gap={4}>
+            <Grid key={`domain-item-${index}`} templateColumns={["auto", "500px auto 70px"]}>
               <GridItem>
                 <Text bold>{dnsHostedZone.domain_name}</Text>
               </GridItem>

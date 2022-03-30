@@ -1,7 +1,8 @@
 import React from 'react';
-import { Stack, Text } from 'bonde-components/chakra';
+import { Stack } from 'bonde-components/chakra';
 import DomainsSteps from './DomainSteps';
 import { DNSHostedZone } from '../types';
+import { MainTitle } from '../Styles';
 
 type Props = {
   dnsHostedZone: DNSHostedZone
@@ -11,9 +12,9 @@ type Props = {
 const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
   return (
     <Stack direction="column" spacing={2}>
-      <Text fontWeight="semibold" fontSize="13px" textTransform="uppercase">
+      <MainTitle>
         {!dnsIsActivated ? 'Entenda o processo' : 'Detalhes'}
-      </Text>
+      </MainTitle>
       <DomainsSteps dnsHostedZone={dnsHostedZone} />
     </Stack>
   );

@@ -106,11 +106,9 @@ Status.defaultProps = {
   activeStatus: 'active'
 }
 
-export const MainTitle = styled(Text).attrs({ uppercase: true })`
-  display: flex;
-  font-size: 13px;
-  font-weight: 600;
-`;
+export const MainTitle: React.FC = ({ children }) => (
+  <Text fontSize="sm" color="gray.400" textTransform="uppercase">{children}</Text>
+)
 
 export const SmallText = styled(Text)`
   font-size: 13px;

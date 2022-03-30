@@ -11,13 +11,14 @@ import {
   Button
 } from 'bonde-components/chakra';
 import copy from 'clipboard-copy';
+import { MainTitle } from './Styles';
 import { DNSHostedZone } from './types';
 
 const NameServers: React.FC<{ dnsHostedZone: DNSHostedZone }> = ({ dnsHostedZone }) => {
   return (
     <Stack direction="column" spacing={2}>
       <Stack direction="row" spacing={2} align="center">
-        <Text fontWeight="semibold" fontSize="13px" textTransform="uppercase">{`Registros de nome (Name servers)`}</Text>
+        <MainTitle>{`Registros de nome (Name servers)`}</MainTitle>
         <Tooltip label='Os registros de nome ("name servers" na gringa) são usados para conectar seu domínio ao BONDE.'>
           <InfoIcon color="gray.300" boxSize={3} />
         </Tooltip>

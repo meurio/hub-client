@@ -126,7 +126,7 @@ const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
 
   return (
     <Stack direction="column" spacing={2}>
-      <Grid templateColumns='500px auto 280px' gap={4}>
+      <Grid templateColumns='500px auto 280px' gap={6}>
         <GridItem>
           <MainTitle>Domínio</MainTitle>
         </GridItem>
@@ -137,10 +137,10 @@ const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
           <MainTitle>Ações</MainTitle>
         </GridItem>
       </Grid>
-      <Box bg="white" boxShadow="sm" p={4}>
+      <Box bg="white" boxShadow="sm" p={6}>
         <Grid templateColumns='500px auto 280px'>
           <GridItem>
-            <Text fontSize="xl">{props.dnsHostedZone?.domain_name}</Text>
+            <Text fontWeight="bold" fontSize="xl">{props.dnsHostedZone?.domain_name}</Text>
           </GridItem>
           <GridItem>
             <StatusTags dnsHostedZone={props.dnsHostedZone} />

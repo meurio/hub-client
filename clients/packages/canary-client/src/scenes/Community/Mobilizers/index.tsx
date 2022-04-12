@@ -18,6 +18,7 @@ const InvitationsQuery = gql`
         user {
           first_name
           email
+          reset_password_token
         }
         created_at
         role

@@ -192,6 +192,10 @@
         }
       },
       "actions": {
+        "copy": {
+          "success": "Link p/ Convite copiado com sucesso",
+          "label": "Copiar Link"
+        },
         "resend": {
           "success": "Convite reenviado com sucesso",
           "label": "Reenviar"

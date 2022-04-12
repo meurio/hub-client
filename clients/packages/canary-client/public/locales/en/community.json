@@ -192,6 +192,10 @@
         }
       },
       "actions": {
+        "copy": {
+          "success": "Invitation Link copied successfully",
+          "label": "Copy Link"
+        },
         "resend": {
           "success": "Invitation resent successfully",
           "label": "Resent"

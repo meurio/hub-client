@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next';
 import Table, { Styles } from './Table';
 import Role from './Role';
 import Resend from './Resend';
+import Reseted from './Reseted';
 import 'moment/locale/pt-br';
 
-type Row = {
+export type Row = {
   original: any
 }
 
-type RowProps = {
+export type RowProps = {
   row: Row
 }
 
@@ -66,6 +67,11 @@ function App({ data: defaultData, refetch }: Props) {
         Header: <Header.H5>{t('mobilizers.table.columns.expires.header')}</Header.H5>,
         accessor: 'expires',
         Cell: Expired(refetch)
+      },
+      {
+        Header: <Header.H5>Ações</Header.H5>,
+        accessor: 'user.reset_password_token',
+        Cell: Reseted(t)
       }
     ],
     [refetch, t]

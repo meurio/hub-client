@@ -1,7 +1,13 @@
 import React from 'react';
-import { Heading, Text, Stack, Flex } from 'bonde-components/chakra';
+import { Heading, Text, Stack, Flex, Button, useToast } from 'bonde-components/chakra';
 import CheckIcon from "../../../icons/CheckIcon"
 import LoadingIcon from "../../../icons/LoadingIcon"
+import { gql, useMutation, checkDNS } from 'bonde-core-tools';
+
+const IP_LISTS = [
+  '54.85.56.248',
+  '3.236.227.166'
+]
 
 interface Certificate {
   id: number;
@@ -33,6 +39,37 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
   const hasCertificate = domain?.certificates[0]?.is_active
   const isExternalDomain = domain?.is_external_domain
   const failedIp = !domain?.ns_ok && isExternalDomain
+  const toast = useToast()
+
+  const [updateDnsHostedZone] = useMutation(
+    gql`
+      mutation ($id: Int!) {
+        update_dns_hosted_zones_by_pk(
+          pk_columns: { id: $id }, _set: { ns_ok: true }
+        ) {
+          id
+          domain_name
+          ns_ok
+        }
+      }
+    `
+  );
+
+  //TODO: update domain para atualizar o estado da aplicação
+
+  const handleCheckDns = async (updateDomain: any) => {
+
+    if (await checkDNS(domain.domain_name, 'A', { ip: IP_LISTS })) {
+      await updateDnsHostedZone({
+        variables: {
+          id: domain.id // "A" verifica por IP
+        }
+      })
+      toast({ title: 'IP propagado!', status: 'success', duration: 4000, isClosable: true })
+    } else {
+      toast({ title: 'IP não propagado!', status: 'error', duration: 4000, isClosable: true })
+    }
+  }
 
   return (
     <Stack mt={6}>
@@ -66,16 +103,21 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
             <CheckIcon />
             <Text fontSize="sm" color="green.200" fontWeight="bold" textTransform="uppercase">Ativo</Text>
           </Flex>
-          <Text>O endereço <b>{domain?.domain_name}</b> está ativo e com certificado de segurança.</Text>
+          <Text>O endereço <b>{customDomain}</b> está ativo e com certificado de segurança.</Text>
         </>
       )}
 
       {/* FALTOU CONFIGURAR IP */}
       {failedIp && (
-        <Flex >
-          <LoadingIcon />
-          <Text fontSize="sm" fontWeight="bold" ml={2} textTransform="uppercase" color="gray.400">Ops, falta configurar o ip</Text>
-        </Flex>
+        <>
+          <Flex >
+            <LoadingIcon />
+            <Text fontSize="sm" fontWeight="bold" ml={2} textTransform="uppercase" color="gray.400">Ops, falta configurar o ip</Text>
+          </Flex>
+          <Text>Siga o passo a passo acima e <Button variant='link' textTransform='lowercase' onClick={handleCheckDns}
+          >clique aqui
+          </Button> para verificar novamente.</Text>
+        </>
       )}
     </Stack>
   );

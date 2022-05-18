@@ -141,7 +141,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
         const { data } = await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
         certificate = data?.create_or_update_certificate;
       }
-      
+
       updateDomain && updateDomain(
         {
           ...hostedZone,
@@ -152,8 +152,8 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
       toast({
-        title: 'Falha ao submeter formulário',
-        description: err?.message || err,
+        title: 'Falha ao atualizar o domínio',
+        description: 'Esse endereço já está sendo usado em outra página.',
         status: 'error',
         isClosable: true
       });

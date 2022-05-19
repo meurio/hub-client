@@ -35,7 +35,7 @@ interface Properties {
   updateDomain?: (dnsHostedZone: any, mobilization?: any) => void;
 }
 
-const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDomain, hostedZones = [] }) => {
+export const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDomain, hostedZones = [] }) => {
   const domain: any | undefined = hostedZones.filter(
     (v) => customDomain?.endsWith(v.domain_name)
   )[0];
@@ -58,39 +58,22 @@ const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDomain, h
     `
   );
 
-  const [updateMobilization] = useMutation(
-    gql`
-      mutation ($id: Int!, $customDomain: String!) {
-        update_mobilizations_by_pk(pk_columns: { id: $id }, _set: { custom_domain: $customDomain }) {
-          id
-          custom_domain
-        }
-      }
-    `
-  );
-
   const handleCheckDns = async () => {
-    console.log("DOMAIN", domain)
-
     if (await checkDNS(domain.domain_name, 'A', { ip: IP_LISTS })) {
-      await updateDnsHostedZone({
+      const { data } = await updateDnsHostedZone({
         variables: {
           id: domain.id // "A" verifica por IP
         }
       })
-      toast({ title: 'IP propagado!', status: 'success', duration: 4000, isClosable: true })
-
-      const update_mobilizations_by_pk = await updateMobilization({ variables: { id: domain.id, customDomain: `www.${customDomain}` } });
-
-      let certificate;
 
       updateDomain && updateDomain(
         {
           ...domain,
-          certificates: certificate ? [certificate] : []
-        },
-        { ...domain, ...update_mobilizations_by_pk }
+          ...data.update_dns_hosted_zones_by_pk
+        }
       );
+
+      toast({ title: 'IP propagado!', status: 'success', duration: 4000, isClosable: true });
     } else {
       toast({ title: 'IP não propagado!', status: 'error', duration: 4000, isClosable: true })
     }
@@ -111,7 +94,7 @@ const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDomain, h
       )}
 
       {/* GERANDO CERTIFICADO  */}
-      {customDomain && !domain?.certificates[0]?.is_active && !isExternalDomain && (
+      {customDomain && domain.ns_ok && !domain?.certificates[0]?.is_active && (
         <>
           <Flex >
             <LoadingIcon />

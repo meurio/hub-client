@@ -3,6 +3,8 @@ import { Heading, Text, Stack, Flex, Button, useToast } from 'bonde-components/c
 import CheckIcon from "../../../icons/CheckIcon"
 import LoadingIcon from "../../../icons/LoadingIcon"
 import { gql, useMutation, checkDNS } from 'bonde-core-tools';
+import { connect } from 'react-redux';
+import * as dnsControlActions from '../../../community/action-creators/dns-control';
 
 const IP_LISTS = [
   '54.85.56.248',
@@ -30,9 +32,10 @@ interface HostedZone {
 interface Properties {
   customDomain?: string;
   hostedZones?: HostedZone[];
+  updateDomain?: (dnsHostedZone: any, mobilization?: any) => void;
 }
 
-const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [] }) => {
+const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDomain, hostedZones = [] }) => {
   const domain: any | undefined = hostedZones.filter(
     (v) => customDomain?.endsWith(v.domain_name)
   )[0];
@@ -55,9 +58,19 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
     `
   );
 
-  //TODO: update domain para atualizar o estado da aplicação
+  const [updateMobilization] = useMutation(
+    gql`
+      mutation ($id: Int!, $customDomain: String!) {
+        update_mobilizations_by_pk(pk_columns: { id: $id }, _set: { custom_domain: $customDomain }) {
+          id
+          custom_domain
+        }
+      }
+    `
+  );
 
-  const handleCheckDns = async (updateDomain: any) => {
+  const handleCheckDns = async () => {
+    console.log("DOMAIN", domain)
 
     if (await checkDNS(domain.domain_name, 'A', { ip: IP_LISTS })) {
       await updateDnsHostedZone({
@@ -66,6 +79,18 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
         }
       })
       toast({ title: 'IP propagado!', status: 'success', duration: 4000, isClosable: true })
+
+      const update_mobilizations_by_pk = await updateMobilization({ variables: { id: domain.id, customDomain: `www.${customDomain}` } });
+
+      let certificate;
+
+      updateDomain && updateDomain(
+        {
+          ...domain,
+          certificates: certificate ? [certificate] : []
+        },
+        { ...domain, ...update_mobilizations_by_pk }
+      );
     } else {
       toast({ title: 'IP não propagado!', status: 'error', duration: 4000, isClosable: true })
     }
@@ -123,4 +148,4 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
   );
 }
 
-export default CertificateStatus;
+export default connect(undefined, { updateDomain: dnsControlActions.updateDomain })(CertificateStatus);

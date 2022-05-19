@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Heading, Text } from 'bonde-components/chakra';
-import CertificateStatus from './CertificateStatus';
+import { CertificateStatus } from './CertificateStatus';
 import LoadingIcon from '../../../icons/LoadingIcon';
 
 describe("CertificateStatus tests", () => {

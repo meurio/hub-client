@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useLocation, Link } from 'react-router-dom';
 import { useMutation, gql } from 'bonde-core-tools';
-import { ConnectedForm, InputField, Header, Hint, Link as LinkStyled, Validators } from 'bonde-components';
-import { Button } from 'bonde-components/chakra';
-import Container from '../../components/Container';
+import { ConnectedForm, InputField, Hint, Link as LinkStyled, Validators } from 'bonde-components';
+import { Flex, Heading, Button, Stack } from 'bonde-components/chakra';
 
 const { composeValidators, required, min } = Validators;
 
@@ -36,7 +35,7 @@ const RegisterForm: React.FC<{ to: string, t: any }> = ({ to, t }) => {
 
   return (
     <>
-      <Header.H1>{t('welcome.subtitle')}</Header.H1>
+      <Heading size="6xl" lineHeight={1} mb={6}>{t('welcome.subtitle')}</Heading>
       <ConnectedForm
         initialValues={{ input: { email, code } }}
         onSubmit={async (values: any) => {
@@ -55,7 +54,7 @@ const RegisterForm: React.FC<{ to: string, t: any }> = ({ to, t }) => {
         {({ submitting }: any) => (
           <Styles>
             {error && <Hint color='error'>{error}</Hint>}
-            <Container column>
+            <Stack direction="row" spacing={2}>
               <InputField
                 name='input.first_name'
                 label={t('fields.firstName.label')}
@@ -68,7 +67,7 @@ const RegisterForm: React.FC<{ to: string, t: any }> = ({ to, t }) => {
                 placeholder={t('fields.lastName.placeholder')}
                 onBlur={required(t('fields.lastName.errors.isEmpty'))}
               />
-            </Container>
+            </Stack>
             <InputField
               disabled
               name='input.email'
@@ -85,14 +84,14 @@ const RegisterForm: React.FC<{ to: string, t: any }> = ({ to, t }) => {
                 min(6, t('fields.password.errors.min'))
               )}
             />
-            <Container reverse>
+            <Flex direction="row" justify="space-between" align="center">
               <LinkStyled to='/login' component={Link}>
                 {t('links.iHaveAccount')}
               </LinkStyled>
               <Button type='submit' disabled={submitting}>
                 {t('button.submit')}
               </Button>
-            </Container>
+            </Flex>
           </Styles>
         )}
       </ConnectedForm>

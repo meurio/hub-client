@@ -75,28 +75,28 @@ export default (mobilization, widget, { intl }) => [
     },
     redirect: Paths.pressure(mobilization.id, widget.id),
   },
-  // {
-  //   component: Pressure,
-  //   kind: 'pressure-phone',
-  //   // TODO: propriedades relacionadas ao draft
-  //   svgIcon: PressurePhoneIcon,
-  //   label: intl.formatMessage({
-  //     id: 'widgets.config--pressure-phone.label',
-  //     defaultMessage: 'Pressão por telefone',
-  //   }),
-  //   settings: {
-  //     main_color: '#f23392',
-  //     title_text: intl.formatMessage({
-  //       id: 'widgets.config--pressure-phone.default.title',
-  //       defaultMessage: 'Ligue para quem pode tomar essa decisão',
-  //     }),
-  //     button_text: intl.formatMessage({
-  //       id: 'widgets.config--pressure-phone.default.button-text',
-  //       defaultMessage: 'Ligar',
-  //     }),
-  //   },
-  //   redirect: Paths.pressure(mobilization.id, widget.id),
-  // },
+  {
+    component: () => <div>Pressão por telefone</div>,
+    kind: 'pressure-phone',
+    // TODO: propriedades relacionadas ao draft
+    svgIcon: PressurePhoneIcon,
+    label: intl.formatMessage({
+      id: 'widgets.config--pressure-phone.label',
+      defaultMessage: 'Pressão por telefone',
+    }),
+    settings: {
+      main_color: '#f23392',
+      title_text: intl.formatMessage({
+        id: 'widgets.config--pressure-phone.default.title',
+        defaultMessage: 'Ligue para quem pode tomar essa decisão',
+      }),
+      button_text: intl.formatMessage({
+        id: 'widgets.config--pressure-phone.default.button-text',
+        defaultMessage: 'Ligar',
+      }),
+    },
+    redirect: Paths.pressure(mobilization.id, widget.id),
+  },
   {
     component: Donation,
     kind: 'donation',

@@ -20,21 +20,21 @@ jobs:
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-      
+
       - name: Install pnpm
-        run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
-      
+        run: curl -L https://unpkg.com/@pnpm/self-installer | node
+
       - name: Install dependencies
-        run: cd clients && pnpm i --no-frozen-lockfile
-      
+        run: cd clients && pnpm i
+
       - name: Build components and core-tools to run tests in clients
-        run: cd clients && pnpm m run build --filter bonde-components --filter bonde-core-tools
+        run: cd clients && pnpm --filter "./libs/**" m run build
 
       - name: Run tests
         run: cd clients && pnpm test && exit 0
         env:
           REACT_APP_DOMAIN_API_GRAPHQL: http://localhost:3000
-      
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:

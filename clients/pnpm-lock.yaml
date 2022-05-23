@@ -10,7 +10,7 @@ importers:
       '@chakra-ui/react': ^1.6.6
       '@emotion/react': 11.6.0
       '@emotion/styled': ^11
-      '@testing-library/jest-dom': ^5.11.6
+      '@testing-library/jest-dom': ^5.15.0
       '@testing-library/react': ^11.2.7
       '@testing-library/user-event': ^12.6.0
       '@types/enzyme': ^3.10.11
@@ -960,6 +960,7 @@ importers:
       bonde-components: workspace:*
       bonde-core-tools: workspace:*
       framer-motion: ^4
+      jest-environment-jsdom-sixteen: ^1.0.3
     dependencies:
       '@chakra-ui/react': 1.7.1_nwmiptbhd5tysta5sueyqdamte
       '@emotion/react': 11.6.0
@@ -969,6 +970,7 @@ importers:
       bonde-components: link:../../libs/components
       bonde-core-tools: link:../../libs/core-tools
       framer-motion: 4.1.17
+      jest-environment-jsdom-sixteen: 1.0.3
     devDependencies:
       '@types/prettier': 2.4.2
       '@types/scheduler': 0.16.2
@@ -1349,7 +1351,6 @@ importers:
       '@slate-editor/list-plugin': workspace:^5.1.2
       '@slate-editor/strikethrough-plugin': workspace:^5.1.2
       '@slate-editor/underline-plugin': workspace:^5.1.2
-      '@testing-library/jest-dom': ^5.15.0
       '@testing-library/react': ^12.1.2
       '@types/draft-js': ^0.11.6
       '@types/jest': ^27.4.0
@@ -1510,7 +1511,6 @@ importers:
     devDependencies:
       '@next/bundle-analyzer': 12.0.10
       '@next/eslint-plugin-next': 12.0.10
-      '@testing-library/jest-dom': 5.15.0
       '@testing-library/react': 12.1.2_sfoxds7t5ydpegc3knd667wn6m
       '@types/draft-js': 0.11.9
       '@types/jest': 27.4.0
@@ -10383,7 +10383,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       '@babel/code-frame': 7.16.7
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       '@types/aria-query': 4.2.2
       aria-query: 4.2.2
       chalk: 4.1.2
@@ -10410,7 +10410,7 @@ packages:
     resolution: {integrity: sha512-lOMuQidnL1tWHLEWIhL6UvSZC1Qt3OkNe1khvi2h6xFiqpe5O8arYs46OU0qyUGq0cSTbroQyMktYNXu3a7sAA==}
     engines: {node: '>=8', npm: '>=6', yarn: '>=1'}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       '@types/testing-library__jest-dom': 5.14.1
       aria-query: 4.2.2
       chalk: 3.0.0
@@ -11692,7 +11692,7 @@ packages:
     dev: true
 
   /@types/jest/27.4.0:
-    resolution: {integrity: sha512-gHl8XuC1RZ8H2j5sHv/JqsaxXkDDM9iDOgu0Wp8sjs4u/snb2PVehyWXJPr+ORA0RPpgw231mnutWI1+0hgjIQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/@types/jest/-/jest-27.4.0.tgz}
+    resolution: {integrity: sha512-gHl8XuC1RZ8H2j5sHv/JqsaxXkDDM9iDOgu0Wp8sjs4u/snb2PVehyWXJPr+ORA0RPpgw231mnutWI1+0hgjIQ==}
     dependencies:
       jest-diff: 27.5.1
       pretty-format: 27.5.1
@@ -13064,7 +13064,7 @@ packages:
     hasBin: true
 
   /ansi-regex/2.1.1:
-    resolution: {integrity: sha1-w7M6te42DYbg5ijwRorn7yfWVN8=}
+    resolution: {integrity: sha512-TIGnTpdo+E3+pCyAluZvtED5p5wCqLdezCyhPZzKPcxvFplEt4i+W7OONCKgeZFT3+y5NZZfOOS/Bdcanm1MYA==}
     engines: {node: '>=0.10.0'}
 
   /ansi-regex/3.0.0:
@@ -13250,7 +13250,7 @@ packages:
     resolution: {integrity: sha512-o/HelwhuKpTj/frsOsbNLNgnNGVIFsVP/SW2BSF14gVl7kAfMOJ6/8wUAUvG1R1NHKrfG+2sHZTu0yauT1qBrA==}
     engines: {node: '>=6.0'}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       '@babel/runtime-corejs3': 7.16.3
 
   /aria-query/5.0.0:
@@ -14219,7 +14219,7 @@ packages:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
     engines: {node: '>=10', npm: '>=6'}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       cosmiconfig: 7.0.1
       resolve: 1.20.0
 
@@ -15132,7 +15132,7 @@ packages:
       '@babel/preset-env': 7.16.4_@babel+core@7.16.0
       '@babel/preset-react': 7.16.0_@babel+core@7.16.0
       '@babel/preset-typescript': 7.16.7_@babel+core@7.16.0
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       babel-plugin-macros: 3.1.0
       babel-plugin-transform-react-remove-prop-types: 0.4.24
     transitivePeerDependencies:
@@ -17832,7 +17832,7 @@ packages:
     engines: {node: '>= 10.14.2'}
 
   /diff-sequences/27.5.1:
-    resolution: {integrity: sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-27.5.1.tgz}
+    resolution: {integrity: sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
 
   /diff/3.5.0:
@@ -19065,7 +19065,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       aria-query: 4.2.2
       array-includes: 3.1.4
       ast-types-flow: 0.0.7
@@ -19086,7 +19086,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       aria-query: 4.2.2
       array-includes: 3.1.4
       ast-types-flow: 0.0.7
@@ -21203,7 +21203,7 @@ packages:
   /history/4.10.1:
     resolution: {integrity: sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       loose-envify: 1.4.0
       resolve-pathname: 3.0.0
       tiny-invariant: 1.2.0
@@ -22973,7 +22973,7 @@ packages:
       pretty-format: 26.6.2
 
   /jest-diff/27.5.1:
-    resolution: {integrity: sha512-m0NvkX55LDt9T4mctTEgnZk3fmEg3NRYutvMPWM/0iPnkFj2wIeF45O1718cMSOFO1vINkqmxqD8vE37uTEbqw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/jest-diff/-/jest-diff-27.5.1.tgz}
+    resolution: {integrity: sha512-m0NvkX55LDt9T4mctTEgnZk3fmEg3NRYutvMPWM/0iPnkFj2wIeF45O1718cMSOFO1vINkqmxqD8vE37uTEbqw==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       chalk: 4.1.2
@@ -27726,7 +27726,7 @@ packages:
     dev: true
 
   /pretty-format/26.6.2:
-    resolution: {integrity: sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/pretty-format/-/pretty-format-26.6.2.tgz}
+    resolution: {integrity: sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==}
     engines: {node: '>= 10'}
     dependencies:
       '@jest/types': 26.6.2
@@ -27735,7 +27735,7 @@ packages:
       react-is: 17.0.2
 
   /pretty-format/27.5.1:
-    resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.yarnpkg.com/pretty-format/-/pretty-format-27.5.1.tgz}
+    resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       ansi-regex: 5.0.1
@@ -29234,7 +29234,7 @@ packages:
     peerDependencies:
       react: '>=15'
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       history: 4.10.1
       hoist-non-react-statics: 3.3.2
       loose-envify: 1.4.0
@@ -30335,7 +30335,7 @@ packages:
   /regenerator-transform/0.14.5:
     resolution: {integrity: sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw==}
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
 
   /regex-cache/0.4.4:
     resolution: {integrity: sha512-nVIZwtCjkC9YgvWkpM55B5rBhBYRZhAaJbgcFYXXsHnbZ9UZI9nnVWYZpBlCqv9ho2eZryPnWrZGsOdPwVWXWQ==}
@@ -31850,6 +31850,7 @@ packages:
 
   /source-map-resolve/0.6.0:
     resolution: {integrity: sha512-KXBr9d/fO/bWo97NXsPIAW1bFSBOuCnjbNTBMO7N59hsv5i9yzRDfcYwwt0l04+VqnKC+EwzvJZIP/qkuMgR/w==}
+    deprecated: See https://github.com/lydell/source-map-resolve#deprecated
     dependencies:
       atob: 2.1.2
       decode-uri-component: 0.2.0
@@ -34489,7 +34490,7 @@ packages:
     dependencies:
       '@babel/core': 7.16.0
       '@babel/preset-env': 7.16.4_@babel+core@7.16.0
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       '@hapi/joi': 15.1.1
       '@rollup/plugin-node-resolve': 7.1.3_rollup@1.32.1
       '@rollup/plugin-replace': 2.4.2_rollup@1.32.1
@@ -34665,7 +34666,7 @@ packages:
     peerDependencies:
       webpack: ^4.0.0
     dependencies:
-      '@babel/runtime': 7.16.3
+      '@babel/runtime': 7.17.2
       fast-json-stable-stringify: 2.1.0
       source-map-url: 0.4.1
       upath: 1.2.0

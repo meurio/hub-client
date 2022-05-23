@@ -187,8 +187,8 @@ describe('FormPanel tests', () => {
       expect(mockUpdateMobilization.mock.calls.length).toEqual(0);
       // Expect call toast failed message
       expect(mockToast.mock.calls[0][0]).toEqual({
-        title: 'Falha ao submeter formulário',
-        description: 'Failed fetch!',
+        title: 'Falha ao atualizar o domínio',
+        description: 'Esse endereço já está sendo usado em outra página.',
         status: 'error',
         isClosable: true
       });

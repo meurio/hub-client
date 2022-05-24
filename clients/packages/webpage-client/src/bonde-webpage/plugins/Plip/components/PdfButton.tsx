@@ -63,11 +63,14 @@ const PdfButton = (props: PdfButtonProps): React.ReactElement => {
       <a className="disabled" href="javascript:void(0);"><EyeIcon />Confira seu e-mail! Sua ficha foi enviada lá</a>
     )
   } else if (renderAsLink) {
+    const blobUrl = URL.createObjectURL(blob)
+    window.location.href = blobUrl
+
     return (
       <a
-        href={URL.createObjectURL(blob)}
+        href={blobUrl}
         rel="nooperer"
-        download={props.fileName}
+        target='_blank'
       >
         <EyeIcon />
         Ver ficha de assinatura

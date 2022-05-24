@@ -17,7 +17,8 @@ const Block = styled.div`
 
 const getBackgroundStyle = (block: any) => {
   if (block.bg_image) {
-    if (process.env.REACT_APP_DOMAIN_IMAGINARY) {
+
+    if ("REACT_APP_DOMAIN_IMAGINARY" in process.env) {
       return {
         background: `url('${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${block.bg_image}&type=auto') no-repeat`,
         backgroundSize: 'cover',

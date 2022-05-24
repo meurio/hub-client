@@ -1,13 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": [
-      "@emotion/react/types/css-prop"
-    ],
+    // "types": ["node", "jest", "@testing-library/jest-dom"],
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx"
   },
   "include": [
+    "../../webpage-client/src/setupTests.ts",
     "src"
   ]
 }

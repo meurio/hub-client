@@ -21,6 +21,6 @@
     "jsx": "react",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["libs/*", "packages/*"],
-  "exclude": ["*/**/dist/**", "./out/**/*", "./node_modules/**/*", "**/*stories*", "**/*spec*", "**/*__tests__*", "**/setupTests.ts"],
+  "include": ["packages/webpage-client/src/setupTests.ts", "libs/**/*", "packages/**/*",],
+  "exclude": ["*/**/dist/**", "./out/**/*", "./node_modules/**/*", "**/*stories*", "**/*spec*", "**/*__tests__*"],
 }

@@ -18,6 +18,7 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       REACT_APP_ENVIRONMENT: production
+      REACT_APP_DOMAIN_IMAGINARY: https://imaginary.bonde.org
       REACT_APP_DOMAIN_ACCOUNTS: https://accounts.bonde.org
       REACT_APP_DOMAIN_ADMIN: https://app.bonde.org
       REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.bonde.org

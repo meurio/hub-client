@@ -16,12 +16,18 @@ const Block = styled.div`
 `;
 
 const getBackgroundStyle = (block: any) => {
-  if (block.bg_image)
+  if (block.bg_image) {
+    if (process.env.REACT_APP_DOMAIN_IMAGINARY) {
+      return {
+        background: `url('${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${block.bg_image}&type=auto') no-repeat`,
+        backgroundSize: 'cover',
+      };
+    }
     return {
       background: `url('${block.bg_image}') no-repeat`,
       backgroundSize: 'cover',
     };
-  else if (block.bg_class) {
+  } else if (block.bg_class) {
     try {
       const rgba = JSON.parse(block.bg_class);
       return {

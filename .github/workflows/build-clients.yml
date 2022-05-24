@@ -8,6 +8,8 @@ on:
     secrets:
       REACT_APP_ENVIRONMENT:
         required: true
+      REACT_APP_DOMAIN_IMAGINARY:
+        required: true
       REACT_APP_DOMAIN_ACCOUNTS:
         required: true
       REACT_APP_DOMAIN_ADMIN:
@@ -86,6 +88,7 @@ jobs:
           build-args: |
             SKIP_PREFLIGHT_CHECK=true
             "REACT_APP_ENVIRONMENT=${{ secrets.REACT_APP_ENVIRONMENT }}"
+            "REACT_APP_DOMAIN_IMAGINARY=${{ secrets.REACT_APP_DOMAIN_IMAGINARY }}"
             "REACT_APP_DOMAIN_ACCOUNTS=${{ secrets.REACT_APP_DOMAIN_ACCOUNTS }}"
             "REACT_APP_DOMAIN_ADMIN=${{ secrets.REACT_APP_DOMAIN_ADMIN }}"
             "REACT_APP_DOMAIN_ADMIN_CANARY=${{ secrets.REACT_APP_DOMAIN_ADMIN_CANARY }}"

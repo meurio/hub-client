@@ -20,6 +20,7 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       REACT_APP_ENVIRONMENT: staging
+      REACT_APP_DOMAIN_IMAGINARY: https://imaginary.staging.bonde.org
       REACT_APP_DOMAIN_ACCOUNTS: https://accounts.staging.bonde.org
       REACT_APP_DOMAIN_ADMIN: https://app.staging.bonde.org
       REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.staging.bonde.org

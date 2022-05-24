@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.6",
+    "@testing-library/jest-dom": "^4.2.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@turf/distance": "^6.0.1",
@@ -22,7 +23,6 @@
     "bonde-core-tools": "workspace:*",
     "deep-object-diff": "^1.1.0",
     "framer-motion": "^4",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
     "react-table": "^7.6.0"
   },
   "devDependencies": {

@@ -53,17 +53,23 @@ const useWithInstagram = () => {
 
 const PdfButton = (props: PdfButtonProps): React.ReactElement => {
   const renderAsLink = useIosWithChrome();
-  const renderAsMessage = useWithInstagram();
+  const renderAsInstagram = useWithInstagram();
 
   const blob = b64toBlob(props.dataPdf.replace('data:application/pdf;filename=generated.pdf;base64,', ''));
-
+  const blobUrl = window.URL.createObjectURL(blob)
   // console.log("renderAsLink", renderAsLink);
-  if (renderAsMessage) {
+  if (renderAsInstagram) {
     return (
-      <a className="disabled" href="javascript:void(0);"><EyeIcon />Confira seu e-mail! Sua ficha foi enviada lá</a>
+      <a
+        href={blobUrl}
+        rel="nooperer"
+      >
+        <EyeIcon />
+        Ver ficha de assinatura
+      </a>
     )
   } else if (renderAsLink) {
-    const blobUrl = window.URL.createObjectURL(blob)
+
 
     return (
       <a

@@ -66,6 +66,7 @@
     "react-router-dom": "4.3.1",
     "react-s3-uploader": "4.8.0",
     "react-scripts": "3.4.1",
+    "typescript": "^3",
     "react-select-plus": "1.2.0",
     "react-test-renderer": "16.7.0",
     "react-toastify": "^5",

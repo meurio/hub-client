@@ -23,6 +23,8 @@
     "bonde-core-tools": "workspace:*",
     "deep-object-diff": "^1.1.0",
     "framer-motion": "^4",
+    "typescript": "^4.5",
+    "react-scripts": "^4",
     "react-table": "^7.6.0"
   },
   "devDependencies": {

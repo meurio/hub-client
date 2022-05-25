@@ -10,6 +10,7 @@ jest.mock('react-i18next', () => ({
 const authenticateSpy = jest.fn((values: any) => ({ data: {} }));
 
 jest.mock('bonde-core-tools', () => ({
+  useQuery: () => [authenticateSpy],
   useMutation: () => [authenticateSpy],
   gql: jest.fn()
 }))
@@ -20,22 +21,22 @@ jest.mock('react-router-dom', () => ({
   })
 }));
 
-import LoginPage from './LoginPage';
-import LoginForm from './LoginPage/Form';
+import ResetPasswordPage from './ResetPasswordPage/index';
+import ResetPasswordForm from './ResetPasswordPage/Form';
 
-describe('LoginPage tests', () => {
+describe('ResetPasswordPage tests', () => {
 
   it('should be render is ok', () => {
-    const wrapper = shallow(<LoginPage to="/admin" />);
+    const wrapper = shallow(<ResetPasswordPage />);
 
     expect(wrapper).toBeTruthy();
   })
 
-  it('should call authenticate mutation when submit LoginForm', () => {
+  xit('should call verifyTokenQuery when submit ResetPasswordForm', () => {
     const values = { field1: 'value1' };
-    const wrapper = shallow(<LoginPage to="/admin" />);
+    const wrapper = shallow(<ResetPasswordPage />);
 
-    wrapper.find(LoginForm).props().onSubmit(values)
+    wrapper.find(ResetPasswordForm).props().onSubmit(values)
 
     expect(authenticateSpy.mock.calls[0][0]).toEqual({
       variables: values

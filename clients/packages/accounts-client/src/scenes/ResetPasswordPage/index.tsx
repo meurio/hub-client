@@ -13,7 +13,7 @@ const verifyTokenQuery = gql`
   }
 `;
 
-export default () => {
+export default (): JSX.Element => {
   const { t } = useTranslation('auth');
   const { search } = useLocation();
   const params = new URLSearchParams(search);

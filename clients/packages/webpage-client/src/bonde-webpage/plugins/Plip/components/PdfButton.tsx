@@ -63,8 +63,7 @@ const PdfButton = (props: PdfButtonProps): React.ReactElement => {
       <a className="disabled" href="javascript:void(0);"><EyeIcon />Confira seu e-mail! Sua ficha foi enviada lá</a>
     )
   } else if (renderAsLink) {
-    const blobUrl = URL.createObjectURL(blob)
-    window.location.href = blobUrl
+    const blobUrl = window.URL.createObjectURL(blob)
 
     return (
       <a

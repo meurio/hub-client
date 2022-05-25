@@ -22,16 +22,6 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "tsdx lint --fix"
-    ]
-  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
@@ -53,8 +43,6 @@
     "@types/react-table": "7.0.22",
     "@types/styled-components": "^5.0.1",
     "babel-loader": "^8.0.6",
-    "husky": "^7",
-    "lint-staged": "^12",
     "react": "^16.9 || ^17",
     "react-dom": "^16.8 || ^17",
     "ts-loader": "^6.2.1",

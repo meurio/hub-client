@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
 import React from 'react';
+import fetch from 'node-fetch';
 import {
   PlipPlugin,
 } from '../bonde-webpage';
@@ -17,6 +17,6 @@ const PlipConnected = (props): JSX.Element =>
       ).json()
     }
   />
-;
+  ;
 
 export default PlipConnected;

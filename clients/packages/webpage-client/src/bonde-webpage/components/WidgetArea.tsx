@@ -1,9 +1,11 @@
 import React from 'react';
-
+import {
+  PluggableWidget,
+} from '../';
 const WidgetArea = ({
   block,
   widget,
-  widgetComponent: WidgetComponent,
+  // widgetComponent: WidgetComponent,
   extraWidgetProps,
 }: any) => {
   const { sm_size, md_size, lg_size } = widget;
@@ -11,7 +13,7 @@ const WidgetArea = ({
 
   return (
     <div className={containerClass}>
-      <WidgetComponent
+      <PluggableWidget
         block={block}
         widget={widget}
         extraWidgetProps={extraWidgetProps}

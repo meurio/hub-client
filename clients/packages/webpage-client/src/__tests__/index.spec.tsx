@@ -1,6 +1,7 @@
 // __tests__/index.test.jsx
 import React from 'react';
 import { render, screen } from '@testing-library/react'
+import { act } from 'react-dom/test-utils';
 import Home from '../pages/index'
 import '@testing-library/jest-dom'
 
@@ -520,7 +521,9 @@ const widgets = [
 
 describe('Index Page', () => {
   it('renders mobilization with block and widget donation plugin buton', () => {
-    render(<Home mobilization={mobilization} blocks={blocks} widgets={widgets} />)
+    act(() => {
+      render(<Home mobilization={mobilization} blocks={blocks} widgets={widgets} />)
+    });
 
     const heading = screen.getByRole('button', {
       name: /Doar agora/i,
@@ -530,7 +533,9 @@ describe('Index Page', () => {
   })
 
   it('renders mobilization with 404', () => {
-    render(<Home mobilization={false} blocks={blocks} widgets={widgets} />)
+    act(() => {
+      render(<Home mobilization={false} blocks={blocks} widgets={widgets} />)
+    });
 
     const heading = screen.getByRole('img', {
       name: /404 Not Found/i,

@@ -1,3 +1,4 @@
+import fetch from 'cross-fetch';
 import "colors";
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
@@ -7,6 +8,7 @@ const { publicRuntimeConfig } = getConfig();
 
 const httpLink = createHttpLink({
   uri: publicRuntimeConfig.domainApiGraphql || "https://api-v2.staging.bonde.org/graphql",
+  fetch
 });
 
 const authLink = setContext((_, { headers }) => {

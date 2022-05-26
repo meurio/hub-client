@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import React from 'react';
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -67,9 +64,9 @@ const block = {
 
 const analyticsEvents = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  pressureIsFilled: () => {},
+  pressureIsFilled: () => { },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  pressureSavedData: () => {},
+  pressureSavedData: () => { },
 };
 
 const targetsList = getTargetList(widget.settings.targets);
@@ -400,7 +397,7 @@ describe('Plugin unsuccessful behavior paths', () => {
     const { container, getByText, getAllByText } = renderEmailPlugin({
       ...props,
       widget: {
-      ...props.widget,
+        ...props.widget,
         settings: {
           ...props.widget.settings,
           targets: 'Viviane <vivi@email.com>;Camila <camila@email.com>',

@@ -2,15 +2,15 @@ import React from 'react';
 import PlipDetailsStyles from './PlipDetailsStyles';
 import PdfButton from './PdfButton';
 
-interface PropsPlipDetails {
-  pdf: any
-}
+// interface PropsPlipDetails {
+//   pdf: any
+// }
 
-const PlipDetails = (props: PropsPlipDetails) => {
+const PlipDetails = (): JSX.Element => {
   return (
     <PlipDetailsStyles>
       <h3><strong>Eba! Geramos uma ficha para você assinar:</strong></h3>
-      <PdfButton dataPdf={props.pdf.data.data?.pdf_data} fileName={props.pdf.data.data?.filename} />
+      <PdfButton />
       <ol>
         <li><strong>Imprima sua ficha:</strong> Não pode imprimir agora? Tudo bem! Já enviamos uma cópia da ficha no seu e-mail também.</li>
         <li><strong>Colete assinaturas:</strong> Assine e chame mais pessoas para assinar também.</li>

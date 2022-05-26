@@ -43,7 +43,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
 
   return (
     <PlipFormStyles style={{ backgroundColor: bgcolor }}>
-      {pdf.submited ? <PlipDetails pdf={pdf} /> : <Form
+      {pdf.submited ? <PlipDetails /> : <Form
         onSubmit={(values) => {
           asyncFillWidget({ ...values, widget_id: widget.id })
             .then(({ create_plip }: any) => {

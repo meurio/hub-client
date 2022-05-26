@@ -52,7 +52,7 @@ const Section = (props: SectionProps) => {
     anchor,
     block,
     widgets,
-    widgetComponent,
+    // widgetComponent,
     extraWidgetProps,
     editable,
     wrapper: BlockWrapper,
@@ -76,7 +76,7 @@ const Section = (props: SectionProps) => {
                 key={`widget-${widget.id}`}
                 block={block}
                 widget={widget}
-                widgetComponent={widgetComponent}
+                // widgetComponent={widgetComponent}
                 extraWidgetProps={extraWidgetProps}
               />
             )}
@@ -113,7 +113,7 @@ type SectionProps = {
   widgets: any[];
   /* Component responsible to render a widget logic,
    * receive { widget } props */
-  widgetComponent: any;
+  // widgetComponent: any;
   // TODO: documentation
   extraWidgetProps: any;
 };

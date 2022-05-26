@@ -5,22 +5,22 @@ import { useTranslation, Trans } from 'react-i18next';
 
 import {
   // Plugins
-  ContentPlugin,
-  DraftPlugin,
+  // ContentPlugin,
+  // DraftPlugin,
   MobilizationClass as Mobilization,
-  PluggableWidget,
+  // PluggableWidget,
   // FinishMessageCustom,
   // selectors as MobilizationSelectors,
   // PressureAnalytics,
   // PressureTellAFriend,
 } from '../bonde-webpage';
 // import Utils from '../../Utils';
-import DonationPlugin from './DonationConnected';
+// import DonationPlugin from './DonationConnected';
 import Footer from './Footer';
-import FormPlugin from './FormConnected';
-import PressureEmailPlugin from './PressureEmailConnected';
-import PressurePhonePlugin from './PressurePhoneConnected';
-import PlipPlugin from './PlipConnected';
+// import FormPlugin from './FormConnected';
+// import PressureEmailPlugin from './PressureEmailConnected';
+// import PressurePhonePlugin from './PressurePhoneConnected';
+// import PlipPlugin from './PlipConnected';
 // import PressurePhonePlugin from './PressurePhoneConnected';
 
 // const mapStateToProps = (state: any, props: any) => {
@@ -37,75 +37,75 @@ import PlipPlugin from './PlipConnected';
 //   <h2>{widget.kind} - {widget.id}</h2>
 // )
 
-const plugins = [
-  {
-    kind: 'draft',
-    // component: DummyWidget,
-    component: DraftPlugin,
-    options: { noOverlay: true },
-  },
-  {
-    kind: 'form',
-    // component: DummyWidget,
-    component: FormPlugin,
-  },
-  {
-    kind: 'donation',
-    // component: DummyWidget,
-    component: DonationPlugin,
-  },
-  {
-    kind: 'pressure',
-    // component: DummyWidget,
-    component: PressureEmailPlugin,
-    // component: (props: any) => (
-    //   <PressureEmailPlugin
-    //     {...props}
-    //     analyticsEvents={PressureAnalytics}
-    //     overrides={{
-    //       FinishCustomMessage: { component: FinishMessageCustom },
-    //       FinishDefaultMessage: {
-    //         component: PressureTellAFriend,
-    //         props: {
-    //           imageUrl: Utils.imageUrl,
-    //           href: Utils.getSharedPath(props.mobilization),
-    //         },
-    //       },
-    //     }}
-    //   />
-    // ),
-  },
-  {
-    kind: 'pressure-phone',
-    // component: DummyWidget,
-    component: PressurePhonePlugin,
-    // component: (props: any) => (
-    //   <PressurePhonePlugin
-    //     {...props}
-    //     analyticsEvents={PressureAnalytics}
-    //     overrides={{
-    //       FinishCustomMessage: { component: FinishMessageCustom },
-    //       FinishDefaultMessage: {
-    //         component: PressureTellAFriend,
-    //         props: {
-    //           imageUrl: Utils.imageUrl,
-    //           href: Utils.getSharedPath(props.mobilization),
-    //         },
-    //       },
-    //     }}
-    //   />
-    // ),
-  },
-  {
-    kind: 'content',
-    // component: DummyWidget,
-    component: ContentPlugin,
-  },
-  {
-    kind: 'plip',
-    component: PlipPlugin
-  },
-];
+// const plugins = [
+//   {
+//     kind: 'draft',
+//     // component: DummyWidget,
+//     component: DraftPlugin,
+//     options: { noOverlay: true },
+//   },
+//   {
+//     kind: 'form',
+//     // component: DummyWidget,
+//     component: FormPlugin,
+//   },
+//   {
+//     kind: 'donation',
+//     // component: DummyWidget,
+//     component: DonationPlugin,
+//   },
+//   {
+//     kind: 'pressure',
+//     // component: DummyWidget,
+//     component: PressureEmailPlugin,
+//     // component: (props: any) => (
+//     //   <PressureEmailPlugin
+//     //     {...props}
+//     //     analyticsEvents={PressureAnalytics}
+//     //     overrides={{
+//     //       FinishCustomMessage: { component: FinishMessageCustom },
+//     //       FinishDefaultMessage: {
+//     //         component: PressureTellAFriend,
+//     //         props: {
+//     //           imageUrl: Utils.imageUrl,
+//     //           href: Utils.getSharedPath(props.mobilization),
+//     //         },
+//     //       },
+//     //     }}
+//     //   />
+//     // ),
+//   },
+//   {
+//     kind: 'pressure-phone',
+//     // component: DummyWidget,
+//     component: PressurePhonePlugin,
+//     // component: (props: any) => (
+//     //   <PressurePhonePlugin
+//     //     {...props}
+//     //     analyticsEvents={PressureAnalytics}
+//     //     overrides={{
+//     //       FinishCustomMessage: { component: FinishMessageCustom },
+//     //       FinishDefaultMessage: {
+//     //         component: PressureTellAFriend,
+//     //         props: {
+//     //           imageUrl: Utils.imageUrl,
+//     //           href: Utils.getSharedPath(props.mobilization),
+//     //         },
+//     //       },
+//     //     }}
+//     //   />
+//     // ),
+//   },
+//   {
+//     kind: 'content',
+//     // component: DummyWidget,
+//     component: ContentPlugin,
+//   },
+//   {
+//     kind: 'plip',
+//     component: PlipPlugin
+//   },
+// ];
 
 export interface MobilizationProperties {
   mobilization: any;
@@ -135,7 +135,7 @@ const MobilizationConnected = ({
         linkTo={(b: any) => `block-${b.id}`}
         blocks={blocks}
         widgets={widgets}
-        widgetComponent={PluggableWidget}
+        // widgetComponent={PluggableWidget}
         footerComponent={Footer}
         colorScheme={colorScheme}
         headerFont={headerFont}
@@ -143,7 +143,6 @@ const MobilizationConnected = ({
         extraWidgetProps={{
           mobilization,
           editable: false,
-          plugins,
           t,
           i18n,
           Trans,

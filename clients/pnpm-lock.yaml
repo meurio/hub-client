@@ -1362,6 +1362,7 @@ importers:
       classnames: ^2.3.1
       clipboard-copy: ^3.1.0
       colors: ^1.4.0
+      cross-fetch: ^2
       cypress: ^9.7.0
       dotenv: ^16
       draft-js: ^0.11.7
@@ -1453,6 +1454,7 @@ importers:
       classnames: 2.3.1
       clipboard-copy: 3.2.0
       colors: 1.4.0
+      cross-fetch: 2.2.6
       dotenv: 16.0.0
       draft-js: 0.11.7_sfoxds7t5ydpegc3knd667wn6m
       elliptic: 6.5.4
@@ -17840,6 +17842,15 @@ packages:
     dependencies:
       cross-spawn: 7.0.3
     dev: true
+
+  /cross-fetch/2.2.6:
+    resolution: {integrity: sha512-9JZz+vXCmfKUZ68zAptS7k4Nu8e2qcibe7WVZYps7sAgk5R8GYTc+T1WR0v1rlP9HxgARmOX1UTIJZFytajpNA==}
+    dependencies:
+      node-fetch: 2.6.7
+      whatwg-fetch: 2.0.4
+    transitivePeerDependencies:
+      - encoding
+    dev: false
 
   /cross-fetch/3.1.4:
     resolution: {integrity: sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==}
@@ -35034,6 +35045,10 @@ packages:
     resolution: {integrity: sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==}
     dependencies:
       iconv-lite: 0.4.24
+
+  /whatwg-fetch/2.0.4:
+    resolution: {integrity: sha512-dcQ1GWpOD/eEQ97k66aiEVpNnapVj90/+R+SXTPYGHpYBBypfKJEQjLrvMZ7YXbKm21gXd4NcuxUTjiv1YtLng==}
+    dev: false
 
   /whatwg-fetch/3.0.0:
     resolution: {integrity: sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==}

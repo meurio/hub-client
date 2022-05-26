@@ -44,7 +44,7 @@ export interface MobilizationProps {
   widgets: any[];
   /* Component responsible to render a widget logic,
    * receive { widget } props */
-  widgetComponent: any;
+  // widgetComponent: any;
   // TODO: Documentation
   extraWidgetProps: any;
   /* Function used to link widgets with block, receives (block, widgets)
@@ -99,7 +99,7 @@ class Mobilization extends React.Component<
       linkTo,
       blockWidgetsRef,
       widgets,
-      widgetComponent,
+      // widgetComponent,
       footerComponent: FooterComponent,
       extraWidgetProps: {
         t,
@@ -131,7 +131,7 @@ class Mobilization extends React.Component<
                 block={b}
                 editable={!!editable}
                 widgets={blockWidgetsRef ? blockWidgetsRef(b, widgets) : []}
-                widgetComponent={widgetComponent}
+                // widgetComponent={widgetComponent}
                 extraWidgetProps={extraWidgetProps}
               />
             ))}

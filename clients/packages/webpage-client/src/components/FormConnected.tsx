@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   FormPlugin,
   // asyncFormEntryCreate,
@@ -25,7 +26,7 @@ import Utils from '../Utils';
 // });
 
 const FormConnected = (props: any) =>
-    <FormPlugin
+  <FormPlugin
     {...props}
     asyncFormEntryCreate={async (args: any) =>
       (
@@ -57,6 +58,6 @@ const FormConnected = (props: any) =>
       },
     }}
   />
-;
+  ;
 
 export default FormConnected;

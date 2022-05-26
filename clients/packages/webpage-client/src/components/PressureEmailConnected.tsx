@@ -1,3 +1,4 @@
+import React from 'react';
 import fetch from 'node-fetch';
 import {
   EmailPressurePlugin,
@@ -40,6 +41,6 @@ const PressureEmailConnected = (props: any) =>
       },
     }}
   />
-;
+  ;
 
 export default PressureEmailConnected;

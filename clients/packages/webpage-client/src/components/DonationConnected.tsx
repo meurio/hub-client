@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import {
   DonationPlugin,
   PagarMeCheckout,
@@ -97,7 +97,7 @@ const DonationConnected = (props: any) =>
       },
     }}
   />
-;
+  ;
 
 export default DonationConnected;
 // export default connect(

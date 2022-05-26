@@ -46,6 +46,7 @@
     "clipboard-copy": "^3.1.0",
     "colors": "^1.4.0",
     "node-fetch": "2.6.1",
+    "cross-fetch": "^2",
     "dotenv": "^16",
     "draft-js": "^0.11.7",
     "elliptic": "^6.5.4",

@@ -36,7 +36,8 @@
       "performance": "Performance",
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
-      "finish": "Pós-Ação"
+      "finish": "Pós-Ação",
+      "sync": "Sincronizar"
     },
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",

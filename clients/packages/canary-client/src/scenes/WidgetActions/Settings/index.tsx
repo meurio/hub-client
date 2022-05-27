@@ -12,6 +12,7 @@ import Labels from "../Labels";
 import Navigation from './Navigation';
 import Adjusts from './Adjusts';
 import Autofire from "./Autofire";
+import { ForceSync } from "./Synchronize/index"
 
 import ConfigurePostAction from "./ConfigurePostAction";
 import Performance from "./Pressure";
@@ -119,6 +120,9 @@ const Settings: React.FC<Props> = ({ widgets }) => {
         </Route>
         <Route exact path={`${match.path}/finish`}>
           <ConfigurePostAction widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/sync`}>
+          <ForceSync widget={widget} updateCache={updateCache} />
         </Route>
         {/* Render scenes to settings widget by kind */}
         <RoutesByKind widget={widget} updateCache={updateCache} />

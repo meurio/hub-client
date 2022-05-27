@@ -59,4 +59,17 @@ describe("async-add-mobilization", () =>  {
       payload: error
     });
   });
+
+  it('should be correct call mobilizations_subthemes', async () => {
+    const subthemes = [1234, 2342, 12345]
+    await asyncAddMobilization({ ...values, subthemes })(dispatch);
+    expect(requestMock.mock.calls[0]).toEqual([INSERT_MOBILIZATION_QUERY, {
+      input: {
+        ...values,
+        mobilizations_subthemes: {
+          data: subthemes.map((subtheme_id) => ({ subtheme_id }))
+        }
+      }
+    }]);
+  });
 });

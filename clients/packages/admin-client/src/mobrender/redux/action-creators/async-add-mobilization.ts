@@ -8,7 +8,9 @@ const graphQLClient = new GraphQLClient(process.env.REACT_APP_DOMAIN_API_GRAPHQL
 
 export const INSERT_MOBILIZATION_QUERY = gql`
   mutation ($input: mobilizations_insert_input!) {
-    insert_mobilizations_one(object: $input) {
+    insert_mobilizations_one(
+      object: $input
+    ) {
       id
       body_font
       color_scheme
@@ -37,9 +39,20 @@ export const INSERT_MOBILIZATION_QUERY = gql`
   }
 `;
 
-export default (values: any) => (dispatch): Promise<void> => {
+interface Values extends Record<string, any> {
+  subthemes?: number[]
+}
+
+export default ({ subthemes, ...values }: Values) => (dispatch): Promise<void> => {
   dispatch(createAction(t.ADD_MOBILIZATION_REQUEST));
-  return graphQLClient.request(INSERT_MOBILIZATION_QUERY, { input: values })
+  const input = values;
+  if (subthemes && subthemes?.length > 0) {
+    input.mobilizations_subthemes = {
+      data: subthemes?.map((subtheme_id) => ({ subtheme_id }))
+    }
+  }
+
+  return graphQLClient.request(INSERT_MOBILIZATION_QUERY, { input })
     .then((data) => {
       dispatch(createAction(t.ADD_MOBILIZATION_SUCCESS, data.insert_mobilizations_one));
       return data.insert_mobilizations_one;

@@ -14,6 +14,7 @@ import {
   FormGroup,
   ControlLabel,
   FormControl,
+  FormSelect,
   RadioGroup,
   Radio,
   HelpBlock,
@@ -22,7 +23,7 @@ import {
 import * as paths from '../../paths';
 
 export const MobilizationBasicsForm = ({
-  fields: { name, slug, goal, favicon, language },
+  fields: { name, slug, goal, favicon, language, subthemes },
   floatSubmit,
   intl,
   ...formProps
@@ -76,6 +77,142 @@ export const MobilizationBasicsForm = ({
           maxLength={500}
           rows="4"
         />
+      </FormGroup>
+      <FormGroup controlId="subthemes" {...subthemes}>
+        <ControlLabel>
+          {/* <FormattedMessage
+            id="mobilizations.components--basics-form.goal.label"
+            defaultMessage="Temas"
+          /> */}
+          Temas
+        </ControlLabel>
+        <FormSelect
+          maxLength={3}
+          options={[
+            {
+              "value": 1,
+              "label": "Criança e Adolescente"
+            },
+            {
+              "value": 2,
+              "label": "Gênero"
+            },
+            {
+              "value": 3,
+              "label": "Indígenas"
+            },
+            {
+              "value": 4,
+              "label": "Quilombolas e Povos Tradicionais"
+            },
+            {
+              "value": 5,
+              "label": "Imigrantes e Refugiados"
+            },
+            {
+              "value": 6,
+              "label": "Justiça racial"
+            },
+            {
+              "value": 7,
+              "label": "LGBTQIA+"
+            },
+            {
+              "value": 8,
+              "label": "Terceira Idade"
+            },
+            {
+              "value": 9,
+              "label": "Prevenção à violência policial"
+            },
+            {
+              "value": 10,
+              "label": "Maternidade e Famílias"
+            },
+            {
+              "value": 11,
+              "label": "Corrupção e Transparência"
+            },
+            {
+              "value": 12,
+              "label": "Mal Uso dos Recursos Públicos"
+            },
+            {
+              "value": 13,
+              "label": "Eleições"
+            },
+            {
+              "value": 14,
+              "label": "Cultura e Artes"
+            },
+            {
+              "value": 15,
+              "label": "Infraestrutura e Patrimônio"
+            },
+            {
+              "value": 16,
+              "label": "Parques e Praças"
+            },
+            {
+              "value": 17,
+              "label": "Transportes"
+            },
+            {
+              "value": 18,
+              "label": "Moradia e Habitação"
+            },
+            {
+              "value": 19,
+              "label": "Bikes, skates e afins"
+            },
+            {
+              "value": 20,
+              "label": "Educação"
+            },
+            {
+              "value": 21,
+              "label": "Saúde"
+            },
+            {
+              "value": 22,
+              "label": "Segurança Pública"
+            },
+            {
+              "value": 23,
+              "label": "Trabalho e Renda"
+            },
+            {
+              "value": 24,
+              "label": "Combate à Desigualdade"
+            },
+            {
+              "value": 25,
+              "label": "Covid"
+            },
+            {
+              "value": 26,
+              "label": "Direito do Consumidor"
+            },
+            {
+              "value": 27,
+              "label": "Água e Saneamento"
+            },
+            {
+              "value": 28,
+              "label": "Meio Ambiente e Clima"
+            }
+          ]}
+        />
+        {/* <FormControl
+          componentClass="textarea"
+          placeholder={intl.formatMessage({
+            id: 'mobilizations.components--basics-form.goal.placeholder',
+            defaultMessage:
+              'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
+          })}
+          maxLength={500}
+          rows="4"
+        /> */}
       </FormGroup>
       <FormGroup {...language} controlId="language">
         <ControlLabel>
@@ -159,6 +296,7 @@ export const fields = [
   'favicon',
   'community_id',
   'language',
+  'subthemes'
 ];
 
 export const validate = (values, { intl }) => {
@@ -205,7 +343,7 @@ const mapActionsCreators = (dispatch, props) => ({
       .then((mobilization) => {
         const {
           mobilization: { slug: slugInitial },
-          onFinishSubmit,
+          onFinishSubmit
         } = props;
         const { slug: slugResult } = mobilization;
         const hasSlugUpdated = slugInitial && slugInitial !== slugResult;

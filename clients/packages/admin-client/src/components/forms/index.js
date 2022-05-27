@@ -15,3 +15,4 @@ export { default as SuccessMessage } from './success-message'
 export { default as UploadImageField } from './upload-image-field'
 export { default as Form } from './form'
 export { default as Button } from './button'
+export { default as FormSelect } from './FormSelect';

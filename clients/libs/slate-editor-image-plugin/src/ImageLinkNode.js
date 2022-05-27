@@ -56,14 +56,26 @@ class ImageLinkNode extends Component {
             href={node.data.get('href')}
             target={node.data.get('openExternal') ? '_blank' : '_self'}
           >
-            <img
-              {...attributes}
-              role="presentation"
-              className={`image-node ${!readOnly && isSelected && 'selected'}`}
-              src={node.data.get('src')}
-              title={node.data.get('title')}
-              alt={node.data.get('title')}
-            />
+            {("REACT_APP_DOMAIN_IMAGINARY" in process.env) ?
+              <img
+                {...attributes}
+                role="presentation"
+                loading="lazy"
+                className={`image-node ${!readOnly && isSelected && 'selected'}`}
+                src={`${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${node.data.get('src')}&type=auto`}
+                title={node.data.get('title')}
+                alt={node.data.get('title')}
+              /> :
+              <img
+                {...attributes}
+                role="presentation"
+                loading="lazy"
+                className={`image-node ${!readOnly && isSelected && 'selected'}`}
+                src={node.data.get('src')}
+                title={node.data.get('title')}
+                alt={node.data.get('title')}
+              />
+            }
           </a>
         </div>
       </span>

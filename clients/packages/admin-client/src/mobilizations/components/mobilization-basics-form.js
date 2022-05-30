@@ -1,3 +1,9 @@
+// Select Tema Principal, seleciona esta com a cor branca
+//
+// Adicionar subthemas e theme no fetch de mobilizações
+
+
+
 import React from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
@@ -26,7 +32,7 @@ import MainThemeField from './MainThemeField';
 
 const FETCH_SUBTHEMES_QUERY = gql`
   query {
-    subthemes {
+    subthemes (order_by: { label: asc }) {
       id
       label
       theme {

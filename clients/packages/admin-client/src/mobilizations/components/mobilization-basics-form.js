@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { FormattedMessage, intlShape } from 'react-intl';
+import { useQuery, gql } from 'bonde-core-tools';
 
 import { slugUpdatedMessage } from '../../utils/notifications';
 import { slugify } from '../../utils/string-helper';
@@ -21,13 +22,64 @@ import {
   UploadImageField,
 } from '../../components/forms';
 import * as paths from '../../paths';
+// TODO: Remove this
+import Select from 'react-select';
+
+const FETCH_SUBTHEMES_QUERY = gql`
+  query {
+    subthemes {
+      id
+      label
+      theme {
+        id
+        label
+      }
+    }
+  }
+`;
+
+class ThemeField extends React.Component {
+  render() {
+    const {
+      subthemesField,
+      subthemes,
+      value,
+      onChange
+    } = this.props;
+
+    if (subthemesField.value && subthemesField.value.length === 3) {
+      // Seleciona temas relacionados
+      const themes = subthemesField.value.map((id) => {
+        return subthemes.filter((subtheme) => subtheme.id === id)[0].theme;
+      });
+      // Remove duplicados
+      const filtered = themes.filter(
+        (este, i) => themes.findIndex(({ id }) => id === este.id) === i);
+
+      return (
+        <Select
+          getValue={() => filtered.filter(({ id }) => value === id)[0]}
+          onChange={(item) => onChange(item.value)}
+          options={filtered.map(({ id, label }) => ({ value: id, label }))}
+        />
+      );
+    }
+
+    return null;
+  }
+}
 
 export const MobilizationBasicsForm = ({
-  fields: { name, slug, goal, favicon, language, subthemes },
+  fields: { name, slug, goal, favicon, language, subthemes, theme_id },
   floatSubmit,
   intl,
   ...formProps
 }) => {
+  const { data, loading, error } = useQuery(FETCH_SUBTHEMES_QUERY);
+
+  if (error) return <p>Houve um problema ao tentar carregar temas</p>;
+  if (loading) return <p>Carregando temas</p>;
+
   const ComponentForm = floatSubmit ? SettingsForm : FormRedux;
   const {
     location: { pathname },
@@ -79,140 +131,16 @@ export const MobilizationBasicsForm = ({
         />
       </FormGroup>
       <FormGroup controlId="subthemes" {...subthemes}>
-        <ControlLabel>
-          {/* <FormattedMessage
-            id="mobilizations.components--basics-form.goal.label"
-            defaultMessage="Temas"
-          /> */}
-          Temas
-        </ControlLabel>
+        <ControlLabel>Temas</ControlLabel>
         <FormSelect
           maxLength={3}
-          options={[
-            {
-              "value": 1,
-              "label": "Criança e Adolescente"
-            },
-            {
-              "value": 2,
-              "label": "Gênero"
-            },
-            {
-              "value": 3,
-              "label": "Indígenas"
-            },
-            {
-              "value": 4,
-              "label": "Quilombolas e Povos Tradicionais"
-            },
-            {
-              "value": 5,
-              "label": "Imigrantes e Refugiados"
-            },
-            {
-              "value": 6,
-              "label": "Justiça racial"
-            },
-            {
-              "value": 7,
-              "label": "LGBTQIA+"
-            },
-            {
-              "value": 8,
-              "label": "Terceira Idade"
-            },
-            {
-              "value": 9,
-              "label": "Prevenção à violência policial"
-            },
-            {
-              "value": 10,
-              "label": "Maternidade e Famílias"
-            },
-            {
-              "value": 11,
-              "label": "Corrupção e Transparência"
-            },
-            {
-              "value": 12,
-              "label": "Mal Uso dos Recursos Públicos"
-            },
-            {
-              "value": 13,
-              "label": "Eleições"
-            },
-            {
-              "value": 14,
-              "label": "Cultura e Artes"
-            },
-            {
-              "value": 15,
-              "label": "Infraestrutura e Patrimônio"
-            },
-            {
-              "value": 16,
-              "label": "Parques e Praças"
-            },
-            {
-              "value": 17,
-              "label": "Transportes"
-            },
-            {
-              "value": 18,
-              "label": "Moradia e Habitação"
-            },
-            {
-              "value": 19,
-              "label": "Bikes, skates e afins"
-            },
-            {
-              "value": 20,
-              "label": "Educação"
-            },
-            {
-              "value": 21,
-              "label": "Saúde"
-            },
-            {
-              "value": 22,
-              "label": "Segurança Pública"
-            },
-            {
-              "value": 23,
-              "label": "Trabalho e Renda"
-            },
-            {
-              "value": 24,
-              "label": "Combate à Desigualdade"
-            },
-            {
-              "value": 25,
-              "label": "Covid"
-            },
-            {
-              "value": 26,
-              "label": "Direito do Consumidor"
-            },
-            {
-              "value": 27,
-              "label": "Água e Saneamento"
-            },
-            {
-              "value": 28,
-              "label": "Meio Ambiente e Clima"
-            }
-          ]}
+          options={data.subthemes.map((subtheme) => ({ value: subtheme.id, label: subtheme.label }))}
         />
-        {/* <FormControl
-          componentClass="textarea"
-          placeholder={intl.formatMessage({
-            id: 'mobilizations.components--basics-form.goal.placeholder',
-            defaultMessage:
-              'Faça um texto curto, capaz de motivar outras pessoas a se unirem à sua mobilização. Você poderá alterar este texto depois.',
-          })}
-          maxLength={500}
-          rows="4"
-        /> */}
+        <ThemeField
+          {...theme_id}
+          subthemesField={subthemes}
+          subthemes={data.subthemes}
+        />
       </FormGroup>
       <FormGroup {...language} controlId="language">
         <ControlLabel>
@@ -296,7 +224,8 @@ export const fields = [
   'favicon',
   'community_id',
   'language',
-  'subthemes'
+  'subthemes',
+  'theme_id'
 ];
 
 export const validate = (values, { intl }) => {

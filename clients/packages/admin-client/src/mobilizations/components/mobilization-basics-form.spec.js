@@ -3,8 +3,18 @@ import shallowWithIntl from '../../intl/helpers/shallow-with-intl';
 import { expect } from 'chai';
 
 import * as mock from '../../utils/mock';
-import { MobilizationBasicsForm } from '../../mobilizations/components/mobilization-basics-form';
 import { IntlProvider } from 'react-intl';
+
+jest.mock('bonde-core-tools', () => ({
+  useQuery: jest.fn().mockImplementation(() => ({
+    data: { subthemes: [] },
+    loading: false
+  })),
+  gql: jest.fn()
+}))
+
+// eslint-disable-next-line import/first
+import { MobilizationBasicsForm } from '../../mobilizations/components/mobilization-basics-form';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});
 const { intl } = intlProvider.getChildContext();

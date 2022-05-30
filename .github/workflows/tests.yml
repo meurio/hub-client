@@ -34,7 +34,7 @@ jobs:
         run: cd clients && pnpm test && exit 0
         env:
           REACT_APP_DOMAIN_API_GRAPHQL: http://localhost:3000
-
+          DISABLE_MOCKED_WARNING: true
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:

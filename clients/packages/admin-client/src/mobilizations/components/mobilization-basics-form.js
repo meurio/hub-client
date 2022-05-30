@@ -39,30 +39,51 @@ const FETCH_SUBTHEMES_QUERY = gql`
 `;
 
 class ThemeField extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.subthemesField.value !== this.props.subthemesField.value) {
+      const filtered = this.getThemes();
+      if (filtered.length === 1) {
+        this.props.onChange(filtered[0].id)
+      }
+    }
+  }
+
+  getThemes() {
+    // Seleciona temas relacionados
+    const themes = (this.props.subthemesField?.value || []).map((id) => {
+      return this.props.subthemes.filter((subtheme) => subtheme.id === id)[0].theme;
+    });
+
+    // Remove duplicados
+    const filtered = themes.filter(
+      (este, i) => themes.findIndex(({ id }) => id === este.id) === i);
+
+    return filtered;
+  }
+
   render() {
     const {
       subthemesField,
-      subthemes,
       value,
       onChange
     } = this.props;
 
-    if (subthemesField.value && subthemesField.value.length === 3) {
-      // Seleciona temas relacionados
-      const themes = subthemesField.value.map((id) => {
-        return subthemes.filter((subtheme) => subtheme.id === id)[0].theme;
-      });
-      // Remove duplicados
-      const filtered = themes.filter(
-        (este, i) => themes.findIndex(({ id }) => id === este.id) === i);
+    if (subthemesField.value && subthemesField.value.length > 0) {
+      const filtered = this.getThemes();
 
-      return (
-        <Select
-          getValue={() => filtered.filter(({ id }) => value === id)[0]}
-          onChange={(item) => onChange(item.value)}
-          options={filtered.map(({ id, label }) => ({ value: id, label }))}
-        />
-      );
+      if (filtered.length > 1) {
+        return (
+          <div className='form-group'>
+            <ControlLabel>Tema principal</ControlLabel>
+            <Select
+              getValue={() => filtered.filter(({ id }) => value === id)[0]}
+              onChange={(item) => onChange(item.value)}
+              options={filtered.map(({ id, label }) => ({ value: id, label }))}
+            />
+          </div>
+        );
+      }
     }
 
     return null;
@@ -136,12 +157,12 @@ export const MobilizationBasicsForm = ({
           maxLength={3}
           options={data.subthemes.map((subtheme) => ({ value: subtheme.id, label: subtheme.label }))}
         />
-        <ThemeField
-          {...theme_id}
-          subthemesField={subthemes}
-          subthemes={data.subthemes}
-        />
       </FormGroup>
+      <ThemeField
+        {...theme_id}
+        subthemesField={subthemes}
+        subthemes={data.subthemes}
+      />
       <FormGroup {...language} controlId="language">
         <ControlLabel>
           <FormattedMessage

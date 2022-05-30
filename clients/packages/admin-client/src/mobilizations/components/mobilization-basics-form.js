@@ -1,4 +1,3 @@
-// Select Tema Principal, seleciona esta com a cor branca
 //
 // Adicionar subthemas e theme no fetch de mobilizações
 

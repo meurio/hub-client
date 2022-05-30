@@ -17,11 +17,12 @@ const formSelectStyles = {
   }),
   option: (provided, { isFocused, isSelected }) => ({
     ...provided,
-    backgroundColor: isFocused || isSelected ? '#eee' : 'none',
+    backgroundColor: isFocused ? '#eee' : isSelected ? '#e6e6e6' : 'none',
     ':active': {
       ...provided[':active'],
-      backgroundColor: '#e6e6e6'
-    }
+      backgroundColor: 'none'
+    },
+    color: '#000'
   })
 }
 

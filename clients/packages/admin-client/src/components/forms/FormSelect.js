@@ -44,19 +44,23 @@ const formSelectStyles = {
 
 class FormSelect extends React.Component {
   render() {
-    const { options, maxLength, placeholder } = this.props;
+    const { options, maxLength, placeholder, disabled } = this.props;
     // TODO: Remove this
     const {
       // $formRedux: { formInline, submitting, dirty },
       $formGroup: { value: values, onChange }
     } = this.context
 
+    const filtervalues = ({ value }) => values.indexOf(value) !== -1;
+
     return (
       <Select
         isMulti
+        isDisabled={disabled}
         styles={formSelectStyles}
         placeholder={placeholder}
-        getValue={() => options.filter(({ value }) => value in values)}
+        defaultValue={options.filter(filtervalues)}
+        getValue={() => options.filter(filtervalues)}
         onChange={(items) => onChange(items?.map((item) => item.value))}
         options={values?.length === maxLength ? [] : options}
         noOptionsMessage={() => values?.length === maxLength

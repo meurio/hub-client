@@ -28,6 +28,8 @@ const formSelectStyles = {
 
 interface Props {
   value?: any;
+  initialValue?: any;
+  disabled?: boolean;
   onChange: any;
   subthemes: any[];
   subthemesField: {
@@ -62,7 +64,9 @@ class MainThemeField extends React.Component<Props> {
   render() {
     const {
       subthemesField,
+      // initialValue,
       value,
+      disabled,
       onChange
     } = this.props;
 
@@ -74,8 +78,10 @@ class MainThemeField extends React.Component<Props> {
           <div className='form-group'>
             <ControlLabel>Tema principal</ControlLabel>
             <Select
+              isDisabled={disabled}
               styles={formSelectStyles}
               placeholder="Escolha o tema principal"
+              defaultValue={filtered.filter(({ id }) => value === id)[0]}
               getValue={() => filtered.filter(({ id }) => value === id)[0]}
               onChange={(item) => onChange(item.value)}
               options={filtered.map(({ id, label }) => ({ value: id, label }))}

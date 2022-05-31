@@ -55,7 +55,7 @@ interface DataResult {
 
 type HostedZone = Omit<HostedZoneFull, 'hosted_zone_new' | 'delegation_set_new'>
 
-if (!process.env.REACT_APP_DOMAIN_API_GRAPHQL) throw new Error('REACT_APP_DOMAIN_API_GRAPHQL is empty');
+// if (!process.env.REACT_APP_DOMAIN_API_GRAPHQL) throw new Error('REACT_APP_DOMAIN_API_GRAPHQL is empty');
 
 const graphQLClient = new GraphQLClient(process.env.REACT_APP_DOMAIN_API_GRAPHQL || '', { credentials: 'include' });
 

@@ -35,6 +35,16 @@ export const INSERT_MOBILIZATION_QUERY = gql`
         id
         name
       }
+      mobilizations_subthemes {
+        subtheme {
+          id
+          label
+        }
+      }
+      theme {
+        id
+        label
+      }
     }
   }
 `;

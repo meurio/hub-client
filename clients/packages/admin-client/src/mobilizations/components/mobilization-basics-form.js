@@ -58,6 +58,7 @@ export const MobilizationBasicsForm = ({
     location: { pathname },
   } = formProps;
   const isNewMobilizationPath = pathname === paths.newMobilization();
+  const isThemeDisabled = !isNewMobilizationPath && formProps.mobilization.mobilizations_subthemes.length > 0
 
   return (
     <ComponentForm {...formProps}>
@@ -107,12 +108,14 @@ export const MobilizationBasicsForm = ({
         <ControlLabel>Temas</ControlLabel>
         <FormSelect
           maxLength={3}
+          disabled={isThemeDisabled}
           options={data.subthemes.map((subtheme) => ({ value: subtheme.id, label: subtheme.label }))}
           placeholder="Ex: violência de gênero, direitos reprodutivos, LGBTQIA+, etc"
         />
       </FormGroup>
       <MainThemeField
         {...theme_id}
+        disabled={isThemeDisabled}
         subthemesField={subthemes}
         subthemes={data.subthemes}
       />

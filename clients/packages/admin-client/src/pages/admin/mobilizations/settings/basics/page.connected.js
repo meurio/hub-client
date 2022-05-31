@@ -17,9 +17,14 @@ const form = 'mobilizationBasicsForm';
 
 const mapStateToProps = (state, props) => {
   const mobilization = MobSelectors(state, props).getMobilization();
+  console.log("mobilization", { mobilization });
   return {
     formName: form,
-    initialValues: mobilization,
+    initialValues: {
+      ...mobilization,
+      subthemes: mobilization.mobilizations_subthemes.map(({ subtheme }) => subtheme.id),
+      theme_id: mobilization.theme?.id
+    },
     mobilization,
   };
 };

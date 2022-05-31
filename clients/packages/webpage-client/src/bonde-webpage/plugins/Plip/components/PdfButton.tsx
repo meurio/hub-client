@@ -23,10 +23,10 @@ import React from 'react';
 //   return blob;
 // }
 
-// interface PdfButtonProps {
-//   dataPdf: string
-//   // fileName: string;
-// }
+interface PdfButtonProps {
+  dataPdf: string
+  // fileName: string;
+}
 
 // const useIosWithChrome = () => {
 //   if (typeof navigator !== 'undefined') {
@@ -51,8 +51,8 @@ import React from 'react';
 //   return false;
 // }
 
-const PdfButton = (): JSX.Element => (
-  <a href='https://amazoniadepe-staging.s3.amazonaws.com/Edital-Nacional-30%C2%BA-FIG-2022-11.05.2022.pdf' >Ver ficha de assinatura</a>
+const PdfButton = (props: PdfButtonProps): JSX.Element => (
+  <a href={props.dataPdf}>Ver ficha de assinatura</a>
 )
 
 //   const renderAsLink = useIosWithChrome();

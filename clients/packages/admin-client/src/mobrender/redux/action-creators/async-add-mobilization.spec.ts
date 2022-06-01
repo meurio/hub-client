@@ -52,6 +52,7 @@ describe("async-add-mobilization", () =>  {
   it('should be call dispatch errors with ADD_MOBILIZATION_FAILURE', async () => {
     const error = 'failed!';
     requestMock.mockRejectedValueOnce(error);
+    expect.assertions(2);
 
     try {
       await asyncAddMobilization(values)(dispatch)
@@ -67,6 +68,7 @@ describe("async-add-mobilization", () =>  {
   it('should be call dispatch errors when slug exists', async () => {
     const error = { message: 'Uniqueness violation. duplicate key value violates unique constraint "index_mobilizations_on_slug"' };
     requestMock.mockRejectedValueOnce(error);
+    expect.assertions(2);
 
     try {
       await asyncAddMobilization(values)(dispatch)
@@ -77,7 +79,6 @@ describe("async-add-mobilization", () =>  {
         payload: `Mobilização com nome "${values.name}" já existe!`
       });
     }
-
   });
 
   it('should be correct call mobilizations_subthemes', async () => {

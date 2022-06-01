@@ -71,18 +71,24 @@ export default ({ fieldName, id, subthemes, ...values }: Values) => (dispatch): 
     input: values,
     subthemes: subthemes?.map((subtheme_id) => ({ mobilization_id: id, subtheme_id }))
   })
-    .then((data) => {
-      dispatch(createAction(t.UPDATE_MOBILIZATION_SUCCESS, data.update_mobilizations_by_pk));
-      
-      if (values.template_mobilization_id) {
-        dispatch(asyncFetchBlocks(data.update_mobilizations_by_pk.id));
-        dispatch(asyncFetchWidgets(data.update_mobilizations_by_pk.id));
-      }
+  .then((data) => {
+    dispatch(createAction(t.UPDATE_MOBILIZATION_SUCCESS, data.update_mobilizations_by_pk));
+    
+    if (values.template_mobilization_id) {
+      dispatch(asyncFetchBlocks(data.update_mobilizations_by_pk.id));
+      dispatch(asyncFetchWidgets(data.update_mobilizations_by_pk.id));
+    }
 
-      return data.update_mobilizations_by_pk;
-    })
-    .catch((err) => {
+    return data.update_mobilizations_by_pk;
+  })
+  .catch((err) => {
+    if (err?.message?.startsWith('Uniqueness violation. duplicate key value violates unique constraint "index_mobilizations_on_slug"')) {
+      const message = `Slug deve ser único e "${values.slug}" já existe!`;
+      dispatch(createAction(t.UPDATE_MOBILIZATION_FAILURE, message));
+      return Promise.reject({ slug: message });
+    } else {
       dispatch(createAction(t.UPDATE_MOBILIZATION_FAILURE, err));
-      // return Promise.reject(err);
-    });
+      return Promise.reject({ _error: err });
+    }
+  });
 }

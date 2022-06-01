@@ -9,7 +9,7 @@ import asyncUpdateMobilization, { UPDATE_MOBILIZATION_QUERY } from './async-upda
 describe("async-update-mobilization", () =>  {
   const dispatch = jest.fn();
   const id = 3;
-  const values = { name: 'Test Mobilization' };
+  const values = { name: 'Test Mobilization', slug: 'test-mobilization' };
   requestMock.mockResolvedValue({
     update_mobilizations_by_pk: { ...values, id }
   })
@@ -54,12 +54,33 @@ describe("async-update-mobilization", () =>  {
   it('should be call dispatch errors with UPDATE_MOBILIZATION_FAILURE', async () => {
     const error = 'failed!';
     requestMock.mockRejectedValueOnce(error);
+    expect.assertions(2);
 
-    await asyncUpdateMobilization({ ...values, id })(dispatch);
-    expect(dispatch.mock.calls[1][0]).toEqual({
-      type: t.UPDATE_MOBILIZATION_FAILURE,
-      payload: error
-    });
+    try {
+      await asyncUpdateMobilization({ ...values, id })(dispatch)
+    } catch (err) {
+      expect(err).toEqual({ _error: error });
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: t.UPDATE_MOBILIZATION_FAILURE,
+        payload: error
+      });
+    }
+  });
+
+  it('should be call dispatch errors when slug exists', async () => {
+    const error = { message: 'Uniqueness violation. duplicate key value violates unique constraint "index_mobilizations_on_slug"' };
+    requestMock.mockRejectedValueOnce(error);
+    expect.assertions(2);
+
+    try {
+      await asyncUpdateMobilization({ ...values, id })(dispatch)
+    } catch (err) {
+      expect(err).toEqual({ slug: `Slug deve ser único e "${values.slug}" já existe!` });
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: t.UPDATE_MOBILIZATION_FAILURE,
+        payload: `Slug deve ser único e "${values.slug}" já existe!`
+      });
+    }
   });
 
   it('should be correct call mobilizations_subthemes', async () => {

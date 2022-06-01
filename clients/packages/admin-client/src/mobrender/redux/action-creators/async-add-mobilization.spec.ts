@@ -53,11 +53,31 @@ describe("async-add-mobilization", () =>  {
     const error = 'failed!';
     requestMock.mockRejectedValueOnce(error);
 
-    await asyncAddMobilization(values)(dispatch);
-    expect(dispatch.mock.calls[1][0]).toEqual({
-      type: t.ADD_MOBILIZATION_FAILURE,
-      payload: error
-    });
+    try {
+      await asyncAddMobilization(values)(dispatch)
+    } catch (err) {
+      expect(err).toEqual({ _error: error });
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: t.ADD_MOBILIZATION_FAILURE,
+        payload: error
+      });
+    }
+  });
+
+  it('should be call dispatch errors when slug exists', async () => {
+    const error = { message: 'Uniqueness violation. duplicate key value violates unique constraint "index_mobilizations_on_slug"' };
+    requestMock.mockRejectedValueOnce(error);
+
+    try {
+      await asyncAddMobilization(values)(dispatch)
+    } catch (err) {
+      expect(err).toEqual({ name: `Mobilização com nome "${values.name}" já existe!` });
+      expect(dispatch.mock.calls[1][0]).toEqual({
+        type: t.ADD_MOBILIZATION_FAILURE,
+        payload: `Mobilização com nome "${values.name}" já existe!`
+      });
+    }
+
   });
 
   it('should be correct call mobilizations_subthemes', async () => {

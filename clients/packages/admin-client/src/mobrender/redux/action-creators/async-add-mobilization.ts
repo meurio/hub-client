@@ -68,7 +68,13 @@ export default ({ subthemes, ...values }: Values) => (dispatch): Promise<void> =
       return data.insert_mobilizations_one;
     })
     .catch((err) => {
-      dispatch(createAction(t.ADD_MOBILIZATION_FAILURE, err));
-      // return Promise.reject(err);
+      if (err?.message?.startsWith('Uniqueness violation. duplicate key value violates unique constraint "index_mobilizations_on_slug"')) {
+        const message = `Mobilização com nome "${values.name}" já existe!`;
+        dispatch(createAction(t.ADD_MOBILIZATION_FAILURE, message));
+        return Promise.reject({ name: message });
+      } else {
+        dispatch(createAction(t.ADD_MOBILIZATION_FAILURE, err));
+        return Promise.reject({ _error: err });
+      }
     });
 }

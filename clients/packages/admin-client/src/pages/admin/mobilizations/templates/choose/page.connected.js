@@ -20,6 +20,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapActionsToProps = (dispatch, props) => ({
   createMobilizationFromTemplate: ({ mobilization, template }) => {
+    console.log("createMobilizationFromTemplate", { mobilization, template });
     dispatch(
       asyncUpdateMobilization({
         id: mobilization.id,
@@ -30,6 +31,7 @@ const mapActionsToProps = (dispatch, props) => ({
     });
   },
   createEmptyMobilization: ({ mobilization }) => {
+    console.log("createEmptyMobilization", { mobilization });
     props.history.push(paths.createBlock(mobilization));
   },
 });

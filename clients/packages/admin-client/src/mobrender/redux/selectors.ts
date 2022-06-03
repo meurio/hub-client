@@ -24,10 +24,10 @@ export default (state?: any, props?: any) => ({
     return state.mobilizations.list.menuActiveIndex
   },
 
-  getMobilizations: (f) => {
+  getMobilizations: (filter?: any) => {
     const { list: { data } } = state.mobilizations
-    if (f && f.status) {
-      return data.filter(m => m.status === f.status)
+    if (filter && filter.status) {
+      return data.filter(m => m.status === filter.status)
     }
     return data.filter(m => m.status === 'active')
   },

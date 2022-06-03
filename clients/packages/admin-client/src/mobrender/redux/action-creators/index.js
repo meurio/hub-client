@@ -30,3 +30,5 @@ export { default as selectMobilization } from './select-mobilization'
 export { default as selectWidget } from './select-widget'
 export { default as toggleMobilizationMenu } from './toggle-mobilization-menu'
 export { default as asyncFilterMobilization } from './async-filter-mobilization'
+
+export { default as asyncUpdateMobilizationWithTemplate } from './async-update-mobilization-with-template';

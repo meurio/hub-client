@@ -26,7 +26,7 @@ const mapStateToProps = (state, props) => ({
 const mapActionsToProps = {
   setFilterableSearchBarList,
   setSelectedIndex: SelectableActions.setSelectedIndex,
-  createMobilizationFromTemplate: MobActions.asyncUpdateMobilization,
+  createMobilizationFromTemplate: MobActions.asyncUpdateMobilizationWithTemplate,
 };
 
 const FETCH_TEMPLATES = gql`

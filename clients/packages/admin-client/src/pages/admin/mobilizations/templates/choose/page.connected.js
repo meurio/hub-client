@@ -6,7 +6,7 @@ import { gql, useQuery } from 'bonde-core-tools';
 import { connect } from 'react-redux';
 import * as CommunitySelectors from '../../../../../community/selectors';
 import MobSelectors from '../../../../../mobrender/redux/selectors';
-import { asyncUpdateMobilization } from '../../../../../mobrender/redux/action-creators';
+import { asyncUpdateMobilizationWithTemplate } from '../../../../../mobrender/redux/action-creators';
 import * as TemplateSelectors from '../../../../../mobilizations/templates/selectors';
 import * as paths from '../../../../../paths';
 import Page from './page';
@@ -20,9 +20,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapActionsToProps = (dispatch, props) => ({
   createMobilizationFromTemplate: ({ mobilization, template }) => {
-    console.log("createMobilizationFromTemplate", { mobilization, template });
     dispatch(
-      asyncUpdateMobilization({
+      asyncUpdateMobilizationWithTemplate({
         id: mobilization.id,
         template_mobilization_id: template.id,
       })

@@ -6,7 +6,7 @@ const graphQLClient = new GraphQLClient(process.env.REACT_APP_DOMAIN_API_GRAPHQL
 
 export const FETCH_MOBILIZATIONS_QUERY = gql`
   query ($where: mobilizations_bool_exp) {
-    mobilizations(where: $where) {
+    mobilizations(where: $where, order_by: { updated_at: desc }) {
       id
       body_font
       color_scheme

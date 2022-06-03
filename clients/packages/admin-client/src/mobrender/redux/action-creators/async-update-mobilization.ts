@@ -1,6 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { createAction } from './create-action'
 import * as t from '../action-types'
+import MobSelectors from '../selectors';
 import asyncFetchBlocks from './async-fetch-blocks'
 import asyncFetchWidgets from './async-fetch-widgets'
 
@@ -107,18 +108,22 @@ interface Values extends Record<string, any> {
   fieldName?: string
 }
 
-export default ({ fieldName, id, subthemes, ...values }: Values) => (dispatch): Promise<any> => {
+export default ({ fieldName, id, subthemes, ...values }: Values) => (dispatch, getState: any): Promise<any> => {
+  const mobilization = MobSelectors(getState()).getMobilization();
+  const mob_subthemes = mobilization?.mobilizations_subthemes.map(({ subtheme }) => subtheme.id);
+  const subthemesIsEqual = JSON.stringify(mob_subthemes?.sort()) === JSON.stringify(subthemes?.sort());
+
   dispatch(createAction(t.UPDATE_MOBILIZATION_REQUEST));
-  const requestPromise = (subthemes || []).length > 0
+
+  const requestPromise = (subthemes || []).length > 0 && !subthemesIsEqual
     ? graphQLClient.request(UPDATE_MOBILIZATION_QUERY, {
         id,
         input: values,
         subthemes: subthemes?.map((subtheme_id) => ({ mobilization_id: id, subtheme_id }))
       })
-    : graphQLClient.request(UPDATE_MOBILIZATION_QUERY, {
+    : graphQLClient.request(UPDATE_MOBILIZATION_ONLY_QUERY, {
         id,
-        input: values,
-        subthemes: subthemes?.map((subtheme_id) => ({ mobilization_id: id, subtheme_id }))
+        input: values
       })
 
   return requestPromise.then((data) => {

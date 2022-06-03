@@ -1,6 +1,9 @@
-export default (state, props) => ({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { Mobilization } from "../types"
 
-  getMobilization: () => {
+export default (state?: any, props?: any) => ({
+
+  getMobilization: (): Mobilization | undefined => {
     const { list: { currentId: id, data } } = state.mobilizations
     return id ? data.filter(mob => mob.id === id)[0] : undefined
   },

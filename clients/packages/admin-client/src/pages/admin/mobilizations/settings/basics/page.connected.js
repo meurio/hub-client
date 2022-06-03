@@ -17,7 +17,7 @@ const form = 'mobilizationBasicsForm';
 
 const mapStateToProps = (state, props) => {
   const mobilization = MobSelectors(state, props).getMobilization();
-  console.log("mobilization", { mobilization });
+
   return {
     formName: form,
     initialValues: {

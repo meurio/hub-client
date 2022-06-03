@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import { fromJS } from 'immutable';
 
-import { reducer as rootReducer } from '../../mobrender/redux';
+import redux from '../../mobrender/redux';
 import Selectors from '../../mobrender/redux/selectors';
 
-const state = fromJS({
-  mobilizations: rootReducer,
+const state: any = fromJS({
+  mobilizations: redux.reducer,
 });
 
 describe('mobrender/redux/selectors', () => {

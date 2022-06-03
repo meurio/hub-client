@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-// import * as paths from '../../../../../paths';
+import * as paths from '../../../../../paths';
 import {
   BrowsableList,
   BrowsableListItem,
@@ -14,19 +14,17 @@ class TemplatesChoosePage extends Component {
     const {
       mobilization,
       loading,
-      // customTemplatesLength,
+      customTemplatesLength,
       globalTemplates,
-      // createMobilizationFromTemplate,
+      createMobilizationFromTemplate,
       createEmptyMobilization,
       location,
     } = this.props;
 
     if (loading) return <Loading />;
 
-    // const renderEmptyChoice =
-    //   customTemplatesLength === 0 && globalTemplates.length === 0;
-
-    console.log("globalTemplates", { globalTemplates });
+    const renderEmptyChoice =
+      customTemplatesLength === 0 && globalTemplates.length === 0;
 
     return (
       <PageTabLayout {...{ location }}>
@@ -38,19 +36,21 @@ class TemplatesChoosePage extends Component {
             />
           </h3>
           <BrowsableList>
-            <BrowsableListItem
-              title={
-                <FormattedMessage
-                  id="page--mobilizations.templates-choose.browsable-list-item.blank"
-                  defaultMessage="Criar mobilização do zero"
-                />
-              }
-              leftIcon="plus-square-o"
-              onClick={() => {
-                createEmptyMobilization({ mobilization });
-              }}
-            />
-            {/* {globalTemplates &&
+            {renderEmptyChoice && (
+              <BrowsableListItem
+                title={
+                  <FormattedMessage
+                    id="page--mobilizations.templates-choose.browsable-list-item.blank"
+                    defaultMessage="Criar mobilização do zero"
+                  />
+                }
+                leftIcon="plus-square-o"
+                onClick={() => {
+                  createEmptyMobilization({ mobilization });
+                }}
+              />
+            )}
+            {globalTemplates &&
               globalTemplates.map((template) => (
                 <BrowsableListItem
                   title={template.name}
@@ -71,7 +71,7 @@ class TemplatesChoosePage extends Component {
               leftIcon="columns"
               subtitle={customTemplatesLength}
               path={paths.mobilizationTemplatesChooseCustomList(mobilization)}
-            /> */}
+            />
           </BrowsableList>
         </div>
       </PageTabLayout>

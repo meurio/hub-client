@@ -62,7 +62,7 @@ class ImageNode extends Component {
               text="Selecione a imagem para editar"
             />
           )}
-          {("REACT_APP_DOMAIN_IMAGINARY" in process.env) ?
+          {(("REACT_APP_DOMAIN_IMAGINARY" in process.env) && (!node.data.get('src').match(/gif$/i))) ?
             <img
               {...attributes}
               role="presentation"

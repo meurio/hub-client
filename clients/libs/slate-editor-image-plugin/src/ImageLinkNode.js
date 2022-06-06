@@ -56,7 +56,7 @@ class ImageLinkNode extends Component {
             href={node.data.get('href')}
             target={node.data.get('openExternal') ? '_blank' : '_self'}
           >
-            {("REACT_APP_DOMAIN_IMAGINARY" in process.env) ?
+            {(("REACT_APP_DOMAIN_IMAGINARY" in process.env) && (!node.data.get('src').match(/gif$/i))) ?
               <img
                 {...attributes}
                 role="presentation"

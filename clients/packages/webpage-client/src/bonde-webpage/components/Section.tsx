@@ -55,9 +55,7 @@ const Section = (props: SectionProps) => {
     anchor,
     block,
     widgets,
-    // mobilization,
-    // widgetComponent,
-    extraWidgetProps,
+    mobilization,
     editable,
     wrapper: BlockWrapper,
   } = props;
@@ -80,9 +78,7 @@ const Section = (props: SectionProps) => {
                 key={`widget-${widget.id}`}
                 block={block}
                 widget={widget}
-                // mobilization={mobilization}
-              // widgetComponent={widgetComponent}
-              extraWidgetProps={extraWidgetProps}
+                mobilization={mobilization}
               />
             )}
           </Block>
@@ -110,18 +106,13 @@ type SectionProps = {
    * customize the rendering of your block, get block and editable
    * as property. */
   wrapper?: any;
-  // mobilization: any;
+  mobilization: any;
   /* Data structure of block, passed to blockWrapper component */
   block: any;
   /* True if mobilization is editable mode */
   editable: boolean;
   /* Array of widgets related on Section */
   widgets: any[];
-  /* Component responsible to render a widget logic,
-   * receive { widget } props */
-  // widgetComponent: any;
-  // TODO: documentation
-  extraWidgetProps: any;
 };
 
 export default Section;

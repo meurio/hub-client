@@ -42,11 +42,15 @@ export interface MobilizationProps {
   // blockWrapper: PropTypes.any,
   /* Array of widgets object used on render. */
   widgets: any[];
+  mobilization: any;
   /* Component responsible to render a widget logic,
    * receive { widget } props */
   // widgetComponent: any;
   // TODO: Documentation
-  extraWidgetProps: any;
+  // extraWidgetProps: any;
+  t: any;
+  i18n: any;
+  Trans: any;
   /* Function used to link widgets with block, receives (block, widgets)
    * as param.
    * Default function use the attrs widget.block_id to relationship. */
@@ -78,7 +82,7 @@ class Mobilization extends React.Component<
     editable: false,
     blocks: [],
     widgets: [],
-    extraWidgetProps: {},
+    mobilization: {},
     blockWidgetsRef: (b: any, ws: any) =>
       ws.filter((w: any) => w.block_id === b.id),
   };
@@ -99,21 +103,19 @@ class Mobilization extends React.Component<
       linkTo,
       blockWidgetsRef,
       widgets,
+      mobilization,
       // widgetComponent,
       footerComponent: FooterComponent,
-      extraWidgetProps: {
-        t,
-        Trans,
-        i18n,
-        ...extraWidgetProps
-      },
+      t,
+      Trans,
+      i18n,
     } = this.props;
 
     // TODO: remove this and get of fetch
     const blocks = getVisibleBlocks(this.props.blocks, editable);
 
     return (
-      <TranslateContext.Provider value={{ t, Trans, i18n, mobilization: extraWidgetProps.mobilization }}>
+      <TranslateContext.Provider value={{ t, Trans, i18n, mobilization }}>
         <div
           className={`flex flex-column ${themeClassName} ${layoutClassName}`}
           style={layoutStyle}
@@ -126,17 +128,16 @@ class Mobilization extends React.Component<
           >
             {blocks.map((b: any, i: any) => (
               <Section
+                mobilization={mobilization}
                 key={`section-${i}`}
                 anchor={linkTo(b)}
                 block={b}
                 editable={!!editable}
                 widgets={blockWidgetsRef ? blockWidgetsRef(b, widgets) : []}
-                // widgetComponent={widgetComponent}
-                extraWidgetProps={extraWidgetProps}
               />
             ))}
           </div>
-          <FooterComponent mobilization={extraWidgetProps.mobilization} />
+          <FooterComponent mobilization={mobilization} />
         </div>
       </TranslateContext.Provider>
     );

@@ -3,25 +3,12 @@ import React from 'react';
 import Overlay from './Overlay';
 import FormPlugin from './../../../../components/FormConnected';
 import PressureEmailPlugin from './../../../../components/PressureEmailConnected';
-// import PressurePhonePlugin from './../../../../components/PressurePhoneConnected';
 import PlipPlugin from './../../../../components/PlipConnected';
 import DonationConnected from './../../../../components/DonationConnected';
-// const FormPlugin = dynamic(() => import('./../../../../components/FormConnected'));
-// const PressureEmailPlugin = dynamic(() => import('./../../../../components/PressureEmailConnected'));
-// // import PressurePhonePlugin from './../../../../components/PressurePhoneConnected';
-// const PlipPlugin = dynamic(() => import('./../../../../components/PlipConnected'));
-// // import DonationConnected from './../../../../components/DonationConnected';
-// const DonationConnected = dynamic(() => import('./../../../../components/DonationConnected'));
-
 
 import {
-  // Plugins
   ContentPlugin,
   DraftPlugin,
-  // FinishMessageCustom,
-  // selectors as MobilizationSelectors,
-  // PressureAnalytics,
-  // PressureTellAFriend,
 } from '../../../../bonde-webpage';
 
 const PluggableWidget = (props: any) => {
@@ -35,7 +22,7 @@ const PluggableWidget = (props: any) => {
     return options;
   };
 
-  const { block, widget, extraWidgetProps, onEdit, onDelete } = props;
+  const { block, widget, onEdit, onDelete, mobilization } = props;
   const plugins = [
     {
       kind: 'draft',
@@ -48,55 +35,18 @@ const PluggableWidget = (props: any) => {
     },
     {
       kind: 'donation',
-      // component: DummyWidget,
-      // component: DonationConnected,
       component: DonationConnected
     },
     {
       kind: 'pressure',
-      // component: DummyWidget,
       component: PressureEmailPlugin,
-      // component: (props: any) => (
-      //   <PressureEmailPlugin
-      //     {...props}
-      //     analyticsEvents={PressureAnalytics}
-      //     overrides={{
-      //       FinishCustomMessage: { component: FinishMessageCustom },
-      //       FinishDefaultMessage: {
-      //         component: PressureTellAFriend,
-      //         props: {
-      //           imageUrl: Utils.imageUrl,
-      //           href: Utils.getSharedPath(props.mobilization),
-      //         },
-      //       },
-      //     }}
-      //   />
-      // ),
     },
     {
       kind: 'pressure-phone',
-      // component: DummyWidget,
       component: () => <></>,
-      // component: (props: any) => (
-      //   <PressurePhonePlugin
-      //     {...props}
-      //     analyticsEvents={PressureAnalytics}
-      //     overrides={{
-      //       FinishCustomMessage: { component: FinishMessageCustom },
-      //       FinishDefaultMessage: {
-      //         component: PressureTellAFriend,
-      //         props: {
-      //           imageUrl: Utils.imageUrl,
-      //           href: Utils.getSharedPath(props.mobilization),
-      //         },
-      //       },
-      //     }}
-      //   />
-      // ),
     },
     {
       kind: 'content',
-      // component: DummyWidget,
       component: ContentPlugin,
     },
     {
@@ -110,11 +60,11 @@ const PluggableWidget = (props: any) => {
   );
 
   const { noOverlay } = getOptions(plugin);
-  extraWidgetProps.plugins = plugins;
   const widgetProps = {
     block,
     widget,
-    ...extraWidgetProps,
+    mobilization,
+    editable: false,
   };
 
   return !noOverlay ? (

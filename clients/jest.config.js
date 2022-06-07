@@ -32,9 +32,9 @@ module.exports = {
     "^.+\\.module\\.(css|sass|scss)$",
   ],
   testPathIgnorePatterns: [
+    // "<rootDir>/packages/webpage-client/*",
     "<rootDir>/packages/webpage-client/node_modules/",
     "<rootDir>/packages/webpage-client/.next/",
-    "<rootDir>/packages/webpage-client/cypress-tpackages/admin-client/src/jest/mock-style.jsests/",
   ],
   setupFilesAfterEnv: ["<rootDir>/packages/webpage-client/src/setupTests.ts"]
 };

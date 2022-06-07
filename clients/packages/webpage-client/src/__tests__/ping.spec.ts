@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 
-import ping from './ping';
+import ping from '../pages/api/ping';
 
 describe('ping', () => {
     const mockJson = jest.fn();

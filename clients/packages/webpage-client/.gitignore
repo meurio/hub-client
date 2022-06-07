@@ -36,7 +36,8 @@ local
 .vercel
 .env
 
-cypress-tests/cypress/downloads/
-cypress-tests/cypress/plugins/
-cypress-tests/cypress/support/
-cypress-tests/cypress/videos/
+cypress/downloads/
+cypress/plugins/
+cypress/support/
+cypress/videos/
+cypress/screenshots/

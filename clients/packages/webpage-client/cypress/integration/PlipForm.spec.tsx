@@ -22,7 +22,7 @@ describe('Submit Plip Form', () => {
         .click();
 
       //download signature form
-      cy.get('.PlipDetails_PlipDetails__KQbZT > a')
+      cy.get('.css-161qoga > a')
         .should('be.visible').click();
     });
 

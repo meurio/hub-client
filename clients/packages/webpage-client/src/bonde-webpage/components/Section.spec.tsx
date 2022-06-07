@@ -6,26 +6,31 @@ import { render } from '@testing-library/react';
 
 import Section from './Section';
 
-describe('App', () => {
-    //   let wrapper;
-    //   const props = {
-    //     mobilization: { id: 1 },
-    //   };
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {}
+}))
 
-    //   beforeEach(() => {
-    const { container } = render(<Section
-        key={`section-1`}
-        anchor='#1234'
-        block={{ bg_class: '' }}
-        editable={true}
-        widgets={[]}
-        widgetComponent={{}}
-        extraWidgetProps={{}}
-    />);
-    //   });
-    it('should render button with text', () => {
-        console.log(container);
-        expect(container.querySelector('div')).toBeInTheDocument();
-        // expect(getAllByText('1234')).toHaveLength(1);
-    });
+describe('App', () => {
+  //   let wrapper;
+  //   const props = {
+  //     mobilization: { id: 1 },
+  //   };
+
+  //   beforeEach(() => {
+  const { container } = render(<Section
+    key={`section-1`}
+    mobilization={{ name: "teste" }}
+    anchor='#1234'
+    block={{ bg_class: '' }}
+    editable={true}
+    widgets={[]}
+  // widgetComponent={{}}
+  // extraWidgetProps={{}}
+  />);
+  //   });
+  it('should render button with text', () => {
+    console.log(container);
+    expect(container.querySelector('div')).toBeInTheDocument();
+    // expect(getAllByText('1234')).toHaveLength(1);
+  });
 });

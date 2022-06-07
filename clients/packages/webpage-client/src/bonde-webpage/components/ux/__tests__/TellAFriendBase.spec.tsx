@@ -7,6 +7,10 @@ import '@testing-library/jest-dom/extend-expect';
 import { TranslateContext } from '../../MobilizationClass';
 import TellAFriendBase from '../TellAFriendBase';
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {}
+}))
+
 const renderTellAFriend = (props: any) => render(
   <TranslateContext.Provider
     value={{

@@ -10,6 +10,10 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {}
+}))
+
 const widget = {
   action_community: false,
   action_opportunity: false,

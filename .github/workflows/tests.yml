@@ -4,7 +4,7 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted 
     strategy:
       matrix:
         node-version: [14]
@@ -27,11 +27,8 @@ jobs:
       - name: Install dependencies
         run: cd clients && pnpm i
 
-      - name: Build components and core-tools to run tests in clients
-        run: cd clients && pnpm --filter "./libs/**" m run build
-
       - name: Run tests
-        run: cd clients && pnpm test && exit 0
+        run: cd clients && pnpm test
         env:
           REACT_APP_DOMAIN_API_GRAPHQL: http://localhost:3000
           DISABLE_MOCKED_WARNING: true
@@ -40,7 +37,7 @@ jobs:
         run: sudo echo "127.0.0.1 testes-de-widgets-com-cypress.bonde.devel" | sudo tee -a /etc/hosts
 
       - name: Run e2e tests
-        run: cd clients && pnpm --filter webpage-client m run build && pnpm --filter webpage-client m run e2e:headless && exit 0
+        run: cd clients && pnpm --filter webpage-client m run build && pnpm --filter webpage-client m run e2e:headless
         env:
           REACT_APP_DOMAIN_API_GRAPHQL: https://api-graphql.staging.bonde.org/v1/graphql
 

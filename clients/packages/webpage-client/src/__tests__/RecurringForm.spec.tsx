@@ -6,12 +6,12 @@ jest.mock('next/config', () => () => ({
   publicRuntimeConfig: {}
 }))
 
-const submitSpy = jest.fn();
-jest.mock('../src/pages/subscriptions/_components/CreditCardForm/submit', () => submitSpy);
+const rechargeSpy = jest.fn();
+jest.mock('../apis/rest/recharge', () => rechargeSpy);
 
-import CreditCardForm from '../src/pages/subscriptions/_components/CreditCardForm';
+import RecurringForm from '../components/subscriptions/RecurringForm';
 
-describe('CreditCardForm tests', () => {
+describe('RecurringForm tests', () => {
   const properties = {
     id: 78,
     token: '1234jasdb-asdads2-asdat553'
@@ -22,16 +22,16 @@ describe('CreditCardForm tests', () => {
   })
 
   it('should be renders ok', () => {
-    const wrapper = shallow(<CreditCardForm {...properties} />);
+    const wrapper = shallow(<RecurringForm {...properties} />);
 
     expect(wrapper).toBeTruthy();
   })
 
   it('should call recharge on submit', () => {
-    const wrapper = shallow(<CreditCardForm {...properties} />);
+    const wrapper = shallow(<RecurringForm {...properties} />);
     wrapper.find(Form).simulate('submit')
 
-    expect(submitSpy.mock.calls.length).toEqual(1);
-    expect(submitSpy.mock.calls[0][0]).toEqual(properties);
+    expect(rechargeSpy.mock.calls.length).toEqual(1);
+    expect(rechargeSpy.mock.calls[0][0]).toEqual(properties);
   })
 })

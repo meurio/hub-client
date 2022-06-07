@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import getConfig from 'next/config';
 import i18n from "i18next";

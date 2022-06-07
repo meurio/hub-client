@@ -35,6 +35,12 @@ jobs:
         env:
           REACT_APP_DOMAIN_API_GRAPHQL: http://localhost:3000
           DISABLE_MOCKED_WARNING: true
+
+      - name: Run e2e tests
+        run: cd clients && pnpm --filter webpage-client m run build && pnpm --filter webpage-client m run e2e:headless && exit 0
+        env:
+          REACT_APP_DOMAIN_API_GRAPHQL: https://api-graphql.staging.bonde.org/v1/graphql
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:

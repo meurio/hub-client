@@ -14,6 +14,10 @@ const renderFormPlugin = (props: any) => render(
   </TranslateContext.Provider>
 )
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {}
+}))
+
 afterEach(() => {
   cleanup();
   jest.clearAllMocks();

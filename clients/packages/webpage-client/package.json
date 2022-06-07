@@ -14,8 +14,8 @@
     "build-types": "tsc --noEmit --pretty",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test start http://plip.bonde.devel:3000 cypress",
-    "e2e:headless": "start-server-and-test start http://plip.bonde.devel:3000 cypress:headless",
+    "e2e": "start-server-and-test start http://teste-de-widgets.bonde.devel:3000 cypress",
+    "e2e:headless": "start-server-and-test start http://teste-de-widgets.bonde.devel:3000 cypress:headless",
     "test": "jest --passWithNoTests",
     "coverage": "jest --passWithNoTests --coverage --testPathIgnorePatterns=cypress-tests"
   },

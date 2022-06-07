@@ -7,6 +7,10 @@ import '@testing-library/jest-dom/extend-expect';
 import { TranslateContext } from '../../../../MobilizationClass';
 import Twitter from '../Twitter';
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {}
+}))
+
 const renderButton = (props: any) => render(
   <TranslateContext.Provider
     value={{

@@ -36,6 +36,9 @@ jobs:
           REACT_APP_DOMAIN_API_GRAPHQL: http://localhost:3000
           DISABLE_MOCKED_WARNING: true
 
+      - name: Map webpage hostname
+        run: sudo echo "127.0.0.1 testes-de-widgets-com-cypress.bonde.devel" | sudo tee -a /etc/hosts
+
       - name: Run e2e tests
         run: cd clients && pnpm --filter webpage-client m run build && pnpm --filter webpage-client m run e2e:headless && exit 0
         env:

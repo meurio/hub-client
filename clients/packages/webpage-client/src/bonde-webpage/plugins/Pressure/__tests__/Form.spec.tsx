@@ -9,6 +9,10 @@ import { TranslateContext } from '../../../components/MobilizationClass';
 import Form from '../components/Form';
 import EmailFields from '../Email/EmailFields';
 
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {}
+}))
+
 const renderFormPlugin = (props: any) => render(
   <TranslateContext.Provider value={{ t: (key: string) => key, Trans: () => <div />, i18n: { language: 'pt-BR' } }}>
     <Form {...props} />
@@ -21,7 +25,7 @@ const FormI18n = (props: any) => (
   </TranslateContext.Provider>
 );
 
-describe('Pressure Form', function() {
+describe('Pressure Form', function () {
   const widget = {
     id: 1,
     count: 0,
@@ -72,7 +76,7 @@ describe('Pressure Form', function() {
   });
 
   it('should render button "Enviando..." when saving form', () => {
-    const { container, getAllByText } = renderFormPlugin({...props, saving: true });
+    const { container, getAllByText } = renderFormPlugin({ ...props, saving: true });
 
     expect(container.querySelector('button[type="submit"]')).toBeInTheDocument();
     expect(getAllByText('Pressure Saving')).toHaveLength(1);

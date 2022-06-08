@@ -1,19 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Heading, Text } from 'bonde-components/chakra';
-import { CertificateStatus } from './CertificateStatus';
+import { Button, Heading, Text } from 'bonde-components/chakra';
 import LoadingIcon from '../../../icons/LoadingIcon';
+import { CertificateStatus } from './CertificateStatus';
+
+const authenticateSpy = jest.fn((values: any) => ({ data: {} }));
+
+jest.mock('bonde-core-tools', () => ({
+  useMutation: () => [authenticateSpy],
+  gql: jest.fn()
+}));
 
 describe("CertificateStatus tests", () => {
   const defaultMessage = 'Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.';
-  const activeMessage = ["O endereço ", <b>nossas.link</b>, " está ativo e com certificado de segurança."];
+  const activeMessage = ["O endereço ", <b>www.nossas.link</b>, " está ativo e com certificado de segurança."];
+  const activeMessage2 = ["O endereço ", <b>www.nova-pagina.nossas.link</b>, " está ativo e com certificado de segurança."];
   const inactiveMessage = 'Inativo';
-  const loadingMessage = 'Gerando certificado'
   const failedMessage = 'Ops, falta configurar o ip'
 
   it('should renders is ok', () => {
     const wrapper = shallow(<CertificateStatus />);
     expect(wrapper).toBeTruthy();
+
   });
 
   it('should render default/inactive status message', () => {
@@ -22,6 +30,7 @@ describe("CertificateStatus tests", () => {
     expect(wrapper.find(Heading).props().children).toEqual('Status');
     expect(wrapper.find(Text).at(0).props().children).toEqual(inactiveMessage);
     expect(wrapper.find(Text).at(1).props().children).toEqual(defaultMessage);
+
   });
 
   it('should render message when certificate is in progress', () => {
@@ -33,7 +42,7 @@ describe("CertificateStatus tests", () => {
     const wrapper = shallow(<CertificateStatus customDomain={customDomain} hostedZones={hostedZones} />);
 
     expect(wrapper.find(LoadingIcon).at(0));
-    expect(wrapper.find(Text).at(0).props().children).toEqual(loadingMessage);
+    expect(wrapper.find(Text).at(0));
   });
 
   it('should render active status', () => {
@@ -71,7 +80,8 @@ describe("CertificateStatus tests", () => {
 
     expect(wrapper.find(Heading).props().children).toEqual('Status');
     expect(wrapper.find(Text).at(0).props().children).toEqual('Ativo');
-    expect(wrapper.find(Text).at(1).props().children).toEqual(activeMessage);
+    expect(wrapper.find(Text).at(1).props().children).toEqual(activeMessage2);
+
   });
 
   it('should render when ip is failed', () => {
@@ -84,5 +94,9 @@ describe("CertificateStatus tests", () => {
 
     expect(wrapper.find(LoadingIcon).at(0));
     expect(wrapper.find(Text).at(0).props().children).toEqual(failedMessage);
+    expect(wrapper.find(Button));
+
+    const button = wrapper.find(Button);
+    button.simulate('click');
   })
 });

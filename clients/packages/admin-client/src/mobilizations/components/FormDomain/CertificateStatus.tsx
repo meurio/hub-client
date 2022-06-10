@@ -73,9 +73,9 @@ export const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDo
         }
       );
 
-      toast({ title: 'IP propagado!', status: 'success', duration: 4000, isClosable: true });
+      toast({ title: 'Tudo certo!', description: 'Ip verificado', status: 'success', duration: 4000, isClosable: true });
     } else {
-      toast({ title: 'IP não propagado!', status: 'error', duration: 4000, isClosable: true })
+      toast({ title: 'Ops, IP não verificado', description: 'Aguarde mais alguns minutos e tente novamente', status: 'error', duration: 4000, isClosable: true })
     }
   }
 

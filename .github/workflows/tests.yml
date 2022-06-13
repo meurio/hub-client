@@ -4,25 +4,36 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        node-version: [14]
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Cache .pnpm-store
-        uses: actions/cache@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          node-version: 14
 
-      - name: Install pnpm
-        run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/clients/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: cd clients && pnpm i
@@ -31,18 +42,25 @@ jobs:
         run: cd clients && pnpm --filter "./libs/**" m run build
 
       - name: Run tests
-        run: cd clients && pnpm test && exit 0
+        run: cd clients && pnpm test
         env:
           REACT_APP_DOMAIN_API_GRAPHQL: http://localhost:3000
           DISABLE_MOCKED_WARNING: true
 
-      - name: Map webpage hostname
-        run: sudo echo "127.0.0.1 testes-de-widgets-com-cypress.bonde.devel" | sudo tee -a /etc/hosts
+      # - name: Map webpage hostname
+      #   run: sudo echo "127.0.0.1 testes-de-widgets-com-cypress.bonde.devel" | sudo tee -a /etc/hosts
 
-      - name: Run e2e tests
-        run: cd clients && pnpm --filter webpage-client m run build && pnpm --filter webpage-client m run e2e:headless && exit 0
-        env:
-          REACT_APP_DOMAIN_API_GRAPHQL: https://api-graphql.staging.bonde.org/v1/graphql
+      # - name: Run e2e tests
+      #   run: cd clients && pnpm --filter webpage-client m run build && pnpm --filter webpage-client m run e2e:headless && exit 0
+      #   env:
+      #     REACT_APP_DOMAIN_API_GRAPHQL: https://api-graphql.staging.bonde.org/v1/graphql
+
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: webpage-client-cypress-results
+      #     path: |
+      #       clients/packages/webpage-client/cypress/screenshots/
+      #       clients/packages/webpage-client/cypress/videos/
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2

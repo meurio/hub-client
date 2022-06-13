@@ -61,7 +61,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     outputs:
       tags: ${{ steps.meta.outputs.tags }}

@@ -11,6 +11,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
   const formAutofirePath = paths.formAutofire(mobilization.id, widget.id);
   const formExportPath = paths.formExport(mobilization.id, widget.id);
   const finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id);
+  const sync = paths.widgetFormSync(mobilization.id, widget.id);
 
   return (
     <SettingsPageMenuLayout
@@ -69,6 +70,16 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
             <FormattedMessage
               id="form-widget.components--settings-menu.items.post-action"
               defaultMessage="Pós-inscrição"
+            />
+          }
+        />
+        <Tab
+          path={sync}
+          isActive={sync === location.pathname}
+          text={
+            <FormattedMessage
+              id="MailchimpSync"
+              defaultMessage="Sincronizar"
             />
           }
         />

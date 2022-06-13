@@ -14,7 +14,7 @@ import Adjustments from './settings/adjustments';
 import Autofire from './settings/autofire';
 import Finish from './settings/finish';
 import Settings from './settings/donation';
-
+import Sync from '../../../../../mobilizations/widgets/components/Sync'
 class WidgetsDonation extends React.Component {
   render() {
     const {
@@ -36,6 +36,7 @@ class WidgetsDonation extends React.Component {
           <Route exact path={`${path}/autofire`} component={Autofire} />
           <Route exact path={`${path}/finish`} component={Finish} />
           <Route exact path={`${path}/settings`} component={Settings} />
+          <Route exact path={`${path}/sync`} component={Sync} />
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     );

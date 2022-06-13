@@ -14,6 +14,7 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
     widget.id
   );
   const donationFinishPath = paths.donationFinish(mobilization.id, widget.id);
+  const sync = paths.sync(mobilization.id, widget.id);
 
   return (
     <SettingsPageMenuLayout
@@ -62,6 +63,16 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
             <FormattedMessage
               id="donation.components--settings-menu.tabs.post-action"
               defaultMessage="Pós-doação"
+            />
+          }
+        />
+        <Tab
+          path={sync}
+          isActive={sync === location.pathname}
+          text={
+            <FormattedMessage
+              id="Mailchimp Sync"
+              defaultMessage="Sincronizar"
             />
           }
         />

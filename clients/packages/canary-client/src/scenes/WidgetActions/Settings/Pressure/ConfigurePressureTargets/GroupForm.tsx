@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, InputField } from 'bonde-components';
-import {
+import { Icon, InputField, chakra } from 'bonde-components';
+import { FieldArray } from 'react-final-form-arrays';
+import { useTranslation } from 'react-i18next';
+import SubjectBodyFields from './SubjectBodyFields';
+import DeleteTargetPopup from './DeleteTargetPopup';
+const {
   Box,
   Button,
   FormLabel,
@@ -14,11 +18,7 @@ import {
   ModalFooter,
   ModalOverlay,
   ModalHeader
-} from 'bonde-components/chakra';
-import { FieldArray } from 'react-final-form-arrays';
-import { useTranslation } from 'react-i18next';
-import SubjectBodyFields from './SubjectBodyFields';
-import DeleteTargetPopup from './DeleteTargetPopup';
+}= chakra;
 
 type GroupFieldProps = {
   name: string

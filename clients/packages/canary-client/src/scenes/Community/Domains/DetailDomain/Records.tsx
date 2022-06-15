@@ -1,6 +1,9 @@
 import React from 'react';
-import { Header, toast, Success, Icon } from 'bonde-components';
-import {
+import { Header, toast, Success, Icon, chakra } from 'bonde-components';
+import { useMutation, gql } from 'bonde-core-tools';
+import { MainTitle } from '../Styles';
+import { DNSHostedZone, DNSRecord } from '../types';
+const {
   Text,
   Grid,
   GridItem,
@@ -8,10 +11,7 @@ import {
   Button,
   Stack,
   VStack
-} from 'bonde-components/chakra';
-import { useMutation, gql } from 'bonde-core-tools';
-import { MainTitle } from '../Styles';
-import { DNSHostedZone, DNSRecord } from '../types';
+} = chakra;
 
 const deleteRecordGQL = gql`
   mutation ($records: DeleteRecordsInput) {
@@ -93,7 +93,7 @@ const Records: React.FC<Props> = ({ dnsHostedZone, refetch }) => {
                 >
                   <Icon name='Trash' size='small' /> Excluir
                 </Button>
-              </GridItem>  
+              </GridItem>
             </Grid>
           </VStack>
         ))}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Tag, TagLabel } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import type { PlipForm } from './QueryFiltersProvider';
+const { Tag, TagLabel } = chakra;
 
 const StatusLabel: React.FC<{ plipForm: PlipForm }> = ({ plipForm }) => {
   if (plipForm.status === 'CONCLUIDO') {

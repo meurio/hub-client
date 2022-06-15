@@ -1,7 +1,9 @@
 import React from 'react';
-import { toast, Icon, Success } from 'bonde-components';
-import { InfoIcon } from 'bonde-components/icons';
-import {
+import { toast, Icon, Success, chakra, InfoIcon } from 'bonde-components';
+import copy from 'clipboard-copy';
+import { MainTitle } from './Styles';
+import { DNSHostedZone } from './types';
+const {
   Text,
   Tooltip,
   Grid,
@@ -9,10 +11,7 @@ import {
   Box,
   Stack,
   Button
-} from 'bonde-components/chakra';
-import copy from 'clipboard-copy';
-import { MainTitle } from './Styles';
-import { DNSHostedZone } from './types';
+} = chakra;
 
 const NameServers: React.FC<{ dnsHostedZone: DNSHostedZone }> = ({ dnsHostedZone }) => {
   return (

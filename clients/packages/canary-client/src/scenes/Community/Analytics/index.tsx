@@ -1,12 +1,6 @@
 import React, { useContext } from 'react';
 import { Context as SessionContext } from 'bonde-core-tools';
-import { Header, Message } from 'bonde-components';
-import {
-  Text,
-  Stack,
-  Grid,
-  GridItem
-} from 'bonde-components/chakra';
+import { Header, Message, chakra } from 'bonde-components';
 import styled from 'styled-components';
 import TotalActivists from './TotalActivists';
 import LastActivists from './LastActivists';
@@ -16,6 +10,12 @@ import SubscriptionDonationsLastMonth from './SubscriptionDonationsLastMonth';
 import UniqueDonationsLastMonth from './UniqueDonationsLastMonth';
 import TotalDonations from './TotalDonations';
 import AnalyticsCard, { Download, Number } from './AnalyticsCard';
+const {
+  Text,
+  Stack,
+  Grid,
+  GridItem
+} = chakra;
 
 type PositionProps = {
   direction?: 'right' | 'left'
@@ -32,7 +32,7 @@ Position.defaultProps = {
 
 const Analytics: React.FC = () => {
   const { community } = useContext(SessionContext);
-  
+
   return (
     <Stack direction="column" spacing={8}>
       <Stack spacing={4}>

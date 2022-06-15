@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button } from 'bonde-components/chakra';
-import { Form as FinalForm } from 'bonde-components/form';
+import { chakra, form } from 'bonde-components';
 import styled from "@emotion/styled";
 import MenuActions from './MenuActions';
+const { Button } = chakra;
+const FinalForm = form.Form;
 
 const Form = styled.form`
   display: flex;
@@ -18,7 +19,7 @@ export interface Properties {
 
 export interface State {
   page: number;
-  values: any
+  values: any;
 }
 
 export default class Wizard extends React.Component<Properties, State> {
@@ -32,7 +33,7 @@ export default class Wizard extends React.Component<Properties, State> {
       values: props.initialValues || {}
     }
   }
-  
+
   next = (values: any) =>
     this.setState(state => ({
       page: Math.min(state.page + 1, (this.props.children as any[]).length - 1),

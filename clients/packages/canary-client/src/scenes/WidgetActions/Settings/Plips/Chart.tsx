@@ -1,7 +1,8 @@
 import React from 'react';
-import { Flex, Stack, Heading, Text } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { Header } from '../../../../components/CardWithHeader';
+const { Flex, Stack, Heading, Text } = chakra;
 
 const SubscribersChart: React.FC<any> = ({ subscribers }) => (
   <div style={{ width: "100%", height: "100%" }}>

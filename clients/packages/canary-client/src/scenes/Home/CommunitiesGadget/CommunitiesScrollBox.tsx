@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom';
-import {   Empty, CommunityMenu } from 'bonde-components';
+import { Empty, CommunityMenu, chakra } from 'bonde-components';
 import {
+  Context as SessionContext
+} from "bonde-core-tools";
+import { isMobile } from "react-device-detect";
+const {
   Button,
   Flex,
   Box,
@@ -10,11 +14,7 @@ import {
   ListItem,
   Stack,
   Image,
-} from "bonde-components/chakra";
-import {
-  Context as SessionContext
-} from "bonde-core-tools";
-import { isMobile } from "react-device-detect";
+} = chakra;
 
 type Props = {
   communities: any[];

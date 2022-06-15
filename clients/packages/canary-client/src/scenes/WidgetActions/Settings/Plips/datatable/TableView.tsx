@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  Flex,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Td,
-  Tbody,
-  TableCaption,
-  Skeleton,
-  Stack,
-  Heading
-} from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import EmailFilter from './EmailFilter';
 import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
 import ExportCSV from './ExportCSV';
@@ -25,6 +13,19 @@ import QueryFiltersProvider, {
   useQueryFiltersPage,
   useQueryFiltersFields
 } from './QueryFiltersProvider';
+const {
+  Flex,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Td,
+  Tbody,
+  TableCaption,
+  Skeleton,
+  Stack,
+  Heading
+} = chakra;
 
 const Row: React.FC<any> = ({ data }) => (
   <Tr>

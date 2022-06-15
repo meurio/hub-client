@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
-import {
+import { chakra } from 'bonde-components';
+import { Link as LinkStyled } from 'bonde-components';
+import Mailchimp from './Mailchimp';
+import Twilio from './Twilio';
+const {
   Heading,
   Text,
   Box,
   Stack
-} from 'bonde-components/chakra';
-import { Link as LinkStyled } from 'bonde-components';
-import Mailchimp from './Mailchimp';
-import Twilio from './Twilio';
+} = chakra;
 
 const MenuStyled = styled.div`
   ${LinkStyled} {

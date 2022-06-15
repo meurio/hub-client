@@ -1,7 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SelectField } from 'bonde-components';
-import {
+import { SelectField, chakra } from 'bonde-components';
+import { FieldPrefix, PrefixedField } from './FieldPrefix';
+import SpyField from '../../../components/SpyField';
+const {
   Text,
   Grid,
   GridItem,
@@ -9,9 +11,7 @@ import {
   Stack,
   UnorderedList,
   ListItem
-} from 'bonde-components/chakra';
-import { FieldPrefix, PrefixedField } from './FieldPrefix';
-import SpyField from '../../../components/SpyField';
+} = chakra;
 
 const TransferPanel: React.FC = () => {
   const { t } = useTranslation('community');

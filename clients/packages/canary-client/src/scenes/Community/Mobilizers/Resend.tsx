@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { toast } from 'bonde-components';
-import { Button } from 'bonde-components/chakra';
+import { toast, chakra } from 'bonde-components';
 import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { InviteMutation } from './InviteForm';
 import DeleteException from './DeleteException';
+const { Button } = chakra;
 
 const DeleteInviteMutation = gql`
   mutation DeleteInvite($id: Int!) {

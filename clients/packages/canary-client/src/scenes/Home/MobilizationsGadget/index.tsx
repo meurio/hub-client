@@ -3,12 +3,13 @@ import {
   useQuery,
   Context as SessionContext
 } from "bonde-core-tools";
-import { SimpleGrid } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import { useTranslation } from "react-i18next";
 import MobilizationBox, { MobilizationProps } from "./MobilizationCard";
 import mobilizationsLastUpdated from "./query.graphql";
 import LoadingCards from "./Loading";
 import GadgetHeader from "../GadgetHeader";
+const { SimpleGrid } = chakra;
 
 const MobilizationsGadget = (): React.ReactElement => {
   const { t } = useTranslation("home");
@@ -45,7 +46,7 @@ const MobilizationsGadget = (): React.ReactElement => {
                 const community = communities.filter(
                   (c: any) => c.id === mobilization.community.id
                 )[0];
-                
+
                 updateSession("community", community)
                   .then(() => {
                     window.location.href = new URL(

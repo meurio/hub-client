@@ -1,6 +1,6 @@
 import React from "react";
-import { Alert, Text, Stack } from 'bonde-components/chakra';
-import { ChartIcon } from 'bonde-components/icons';
+import { chakra, ChartIcon } from 'bonde-components';
+const { Alert, Text, Stack } = chakra;
 
 type Props = {
   firstEventTimestamp: Date

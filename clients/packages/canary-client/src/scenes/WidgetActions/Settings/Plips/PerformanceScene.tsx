@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import { Link, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
@@ -10,6 +10,7 @@ import MenuActions from "./components/MenuActions";
 import PlipsFormTable from './datatable/TableView';
 import { usePerformanceQuery } from "./performance/fetchData";
 import eleitorado from "./performance/eleitorado";
+const { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex } = chakra;
 
 interface Properties {
   widget: Widget
@@ -54,7 +55,7 @@ const calcPercentage = (value = 0, total = 0): number => {
 
 const Percent = ({ value = 0, total = 0 }) => {
   const percent = calcPercentage(value, total);
-  
+
   let color = 'inherit';
   if (percent > 0.2) color = 'pink.300';
   if (percent > 0.3) color = 'green.300';

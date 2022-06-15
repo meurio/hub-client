@@ -4,9 +4,10 @@ import {
   ConnectedForm,
   InputField,
   Hint,
-  Validators
+  Validators,
+  chakra
 } from 'bonde-components';
-import {
+const {
   Text,
   Button,
   Link,
@@ -16,7 +17,7 @@ import {
   ModalHeader,
   ModalFooter,
   Stack
-} from 'bonde-components/chakra';
+} = chakra;
 
 const RichText = styled(Text)`
   a {

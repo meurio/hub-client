@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
-import { Button, Modal, ModalOverlay } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import DomainForm from './DomainForm';
 import ConnectDNS from './ConnectDNS';
+const { Button, Modal, ModalOverlay } = chakra;
 
 const createDomainGQL = gql`
   mutation ($domain: DomainInput) {

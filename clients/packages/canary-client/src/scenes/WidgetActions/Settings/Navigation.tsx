@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tab } from 'bonde-components';
-import { Flex } from 'bonde-components/chakra';
+import { Tab, chakra } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import TabRoute from '../TabRoute';
 import type { Widget } from '../FetchWidgets';
+const { Flex } = chakra;
 
 interface NavigationProps {
   widget: Widget

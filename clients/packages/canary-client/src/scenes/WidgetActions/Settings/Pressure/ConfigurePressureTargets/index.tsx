@@ -1,16 +1,5 @@
 import React from "react";
-import { toast, Success, RadioField } from 'bonde-components';
-import {
-  Heading,
-  Text,
-  Box,
-  Grid,
-  GridItem,
-  Flex,
-  Button,
-  Radio,
-  Stack
-} from 'bonde-components/chakra';
+import { toast, Success, RadioField, chakra } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import slugify from 'slugify';
@@ -23,6 +12,17 @@ import SettingsForm from '../../SettingsForm';
 import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupFormFields from './GroupForm';
 import { Targets } from "../../../../Community/Domains/Icons";
+const {
+  Heading,
+  Text,
+  Box,
+  Grid,
+  GridItem,
+  Flex,
+  Button,
+  Radio,
+  Stack
+} = chakra;
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {

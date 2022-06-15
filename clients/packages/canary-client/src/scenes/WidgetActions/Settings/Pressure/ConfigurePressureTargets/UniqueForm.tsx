@@ -1,7 +1,8 @@
 import React from 'react';
-import { Heading, Text, Stack } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
+const { Heading, Text, Stack } = chakra;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const UniqueFormExplainCard = () => {

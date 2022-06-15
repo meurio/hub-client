@@ -1,6 +1,8 @@
 import React from 'react';
-import { ColorField, InputField, RadioField } from 'bonde-components';
-import {
+import { ColorField, InputField, RadioField, chakra } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
+import SettingsForm from '../SettingsForm';
+const {
   Button,
   Box,
   Flex,
@@ -8,9 +10,7 @@ import {
   Heading,
   Grid,
   GridItem
-} from 'bonde-components/chakra';
-import { useTranslation } from 'react-i18next';
-import SettingsForm from '../SettingsForm';
+} = chakra;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const AdjustsFields = ({ widget, updateCache }: any) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'bonde-components';
-import { Heading, HStack, VStack, Text, SimpleGrid, Link } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import {
   ActiveDomainIcon,
   CertifyDomainIcon,
@@ -10,6 +10,7 @@ import {
 } from '../Icons';
 import { DNSHostedZone } from '../types';
 import getStatus from '../getStatus';
+const { Heading, HStack, VStack, Text, SimpleGrid, Link } = chakra;
 
 
 interface StatusProperties {
@@ -89,9 +90,9 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
       >
         <Status icon="Check">Concluído</Status>
       </StepWrapper>
-      
+
       <Icon name='ArrowRight' size='small' />
-      
+
       <StepWrapper
         icon={ConnectDomainIcon}
         title="Conectar ao BONDE"
@@ -105,9 +106,9 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
           ? <Status icon="Check">Concluído</Status>
           : <Status icon="Warning">Aguardando ação</Status>}
       </StepWrapper>
-      
+
       <Icon name='ArrowRight' size='small' />
-      
+
       <StepWrapper
         disabled={dns === 'created'}
         icon={PropagateDomainIcon}
@@ -120,9 +121,9 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
       >
         {dns === 'propagated' ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Conferir DNS</Status>}
       </StepWrapper>
-      
+
       <Icon name='ArrowRight' size='small' />
-      
+
       <StepWrapper
         disabled={dns !== 'propagated'}
         icon={CertifyDomainIcon}
@@ -135,7 +136,7 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
       >
         {dns === 'propagated' && dnsHostedZone.certificates?.length > 0 ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
       </StepWrapper>
-      
+
       <Icon name='ArrowRight' size='small' />
 
       <StepWrapper

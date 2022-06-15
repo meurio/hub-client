@@ -1,5 +1,7 @@
 import React from 'react';
-import {
+import { chakra, form } from 'bonde-components';
+import { useLazyQuery, gql } from 'bonde-core-tools';
+const {
   Box,
   Stack,
   Input,
@@ -7,9 +9,9 @@ import {
   FormControl,
   FormLabel,
   FormHelperText
-} from 'bonde-components/chakra';
-import { Form as FinalForm, Field } from 'bonde-components/form';
-import { useLazyQuery, gql } from 'bonde-core-tools';
+} = chakra;
+const { Field } =form;
+const FinalForm = form.Form;
 
 const SEARCH_SUBSCRIPTIONS_QUERY = gql`
   query ($filters: [activists_bool_exp!]) {
@@ -29,7 +31,7 @@ const SEARCH_SUBSCRIPTIONS_QUERY = gql`
         name
         email
       }
-      
+
       widget {
         block {
           mobilization {

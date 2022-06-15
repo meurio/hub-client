@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Icon, Header } from 'bonde-components';
-import { Button, Flex } from 'bonde-components/chakra';
+import { Icon, Header, chakra } from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import RecordModal from './RecordModal';
+const { Button, Flex } = chakra;
 
 const LinkStyled = styled(Link)`
   display: flex;

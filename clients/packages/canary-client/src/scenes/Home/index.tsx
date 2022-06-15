@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container, SimpleGrid, Box } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import { isMobile } from "react-device-detect";
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';
+const { Container, SimpleGrid, Box } = chakra;
 
 const HomePage = (): React.ReactElement => (
   <Container>

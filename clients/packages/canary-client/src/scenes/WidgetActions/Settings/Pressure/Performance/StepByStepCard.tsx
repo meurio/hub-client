@@ -1,7 +1,8 @@
 import React from "react";
-import { Stack, Box, Button, Heading, Text } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import { useLocation, Link } from "react-router-dom";
 import CheckIcon from "../../../../../Icons/CheckIcon";
+const { Stack, Box, Button, Heading, Text } = chakra;
 
 interface Props {
   stepsValidation: boolean[]

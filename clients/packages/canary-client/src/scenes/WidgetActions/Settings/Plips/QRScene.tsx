@@ -1,7 +1,6 @@
 import React from "react";
 import QrReader from "react-qr-reader";
-import { ArrowLeftIcon } from "bonde-components/icons";
-import { Flex, Text, IconButton, Stack } from "bonde-components/chakra";
+import { chakra, ArrowLeftIcon } from 'bonde-components';
 import styled from "@emotion/styled";
 
 import QRCodeIcon from "./QRCodeIcon";
@@ -9,6 +8,7 @@ import QRForm from "./QRForm";
 import { Route, useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import type { Widget } from "../../FetchWidgets";
 import useQueryParams from "./useQueryParams";
+const { Flex, Text, IconButton, Stack } = chakra;
 
 const Styles = styled.div`
   display: flex;

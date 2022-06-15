@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
-import { Tab, Empty } from 'bonde-components';
-import { Flex, Heading, DarkMode, Container, Stack } from 'bonde-components/chakra';
+import { Tab, Empty, chakra } from 'bonde-components';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 // Subroutes
@@ -11,6 +10,7 @@ import Integrations from './Integrations';
 import Mobilizers from './Mobilizers';
 import Recipient from './Recipient';
 import Settings from './Settings';
+const { Flex, Heading, DarkMode, Container, Stack } = chakra;
 
 type Props = {
   match: any

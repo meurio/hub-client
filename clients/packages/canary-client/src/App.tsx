@@ -13,14 +13,9 @@ import {
 import {
   Loading,
   ToastContainer,
-  FontsLoader,
-  SessionUI
+  SessionUI,
+  chakra,
 } from 'bonde-components';
-import {
-  ChakraProvider,
-  theme as chakraTheme,
-  CSSReset
-} from 'bonde-components/chakra';
 import { hotjar } from 'react-hotjar';
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';
@@ -34,9 +29,14 @@ import NotFound from './components/NotFound';
 import LanguageTool from './LanguageTool';
 import * as Flag from './Flag';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as types from "styled-components/cssprop";
+// import * as types from "styled-components/cssprop";
 
 import 'react-toastify/dist/ReactToastify.css'
+const {
+  ChakraProvider,
+  theme,
+  CSSReset
+} = chakra;
 
 const RouteIsAdmin = (props: any) => {
   const { currentUser: user } = useContext(SessionContext);
@@ -138,8 +138,7 @@ const App: React.FC = () => {
   return (
     <React.Suspense fallback={Loading}>
       <>
-        <FontsLoader />
-        <ChakraProvider theme={chakraTheme}>
+        <ChakraProvider theme={theme}>
           <CSSReset />
           <ToastContainer
             className='BondeToastify'

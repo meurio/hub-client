@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
-import { Link, Hint } from 'bonde-components';
-import { useField } from 'bonde-components/form';
-import { Text, FormLabel } from 'bonde-components/chakra';
+import { Link, Hint, form, chakra } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from './Image';
 import UploadImageIcon from './UploadImageIcon';
+const { useField } = form;
+const { Text, FormLabel } = chakra;
 
 interface UploadFieldProps {
   scale?: number

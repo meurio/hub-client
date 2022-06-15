@@ -1,6 +1,7 @@
 import React from 'react';
-import { FormControl } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import Select from "../components/ChakraReactSelect";
+const { FormControl } = chakra;
 
 const STATES = [
   { value: "AC", label: "AC" },

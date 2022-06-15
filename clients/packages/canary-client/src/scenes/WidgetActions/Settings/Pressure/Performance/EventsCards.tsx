@@ -1,9 +1,9 @@
 import React from "react";
 // import Card from "./Card";
-import { InfoIcon } from 'bonde-components/icons';
-import { Flex, Text, Stack, Tooltip } from "bonde-components/chakra";
+import { chakra, InfoIcon } from 'bonde-components';
 import { ActivityFeedEvent } from "./hooks/usePerformance";
 import { CardHeader } from "./Card";
+const { Flex, Text, Stack, Tooltip } = chakra;
 
 type Props = {
   aggregateEvents: ActivityFeedEvent[]

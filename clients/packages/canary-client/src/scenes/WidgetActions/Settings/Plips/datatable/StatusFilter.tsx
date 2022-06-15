@@ -1,7 +1,8 @@
 import React from 'react';
-import { FormControl } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import Select from "../components/ChakraReactSelect";
 import type { FilterStatus } from './QueryFiltersProvider';
+const { FormControl } = chakra;
 
 const STATUS = [
   { value: 'todos', label: 'Status' },

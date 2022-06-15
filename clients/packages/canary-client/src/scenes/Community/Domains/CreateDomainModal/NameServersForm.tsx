@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {
+import { chakra } from 'bonde-components';
+import NameServers from '../NameServers';
+import Radio from './Radio';
+import { DNSHostedZone } from '../types';
+const {
   Heading,
   Text,
   Button,
@@ -8,10 +12,7 @@ import {
   Icon,
   Grid,
   GridItem
-} from 'bonde-components/chakra';
-import NameServers from '../NameServers';
-import Radio from './Radio';
-import { DNSHostedZone } from '../types';
+} = chakra;
 
 const TopicList = styled.ol`
   margin-left: 20px;

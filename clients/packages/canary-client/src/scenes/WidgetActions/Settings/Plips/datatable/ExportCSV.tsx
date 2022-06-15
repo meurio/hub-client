@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { Button } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import { gql, useLazyQuery } from 'bonde-core-tools';
 import { createVariables, useQueryFiltersFields } from './QueryFiltersProvider';
+const { Button } = chakra;
 
 export const QUERY = gql`
   query ($where: plips_bool_exp) {
@@ -27,7 +28,7 @@ interface Props {
 
 const jsonToCSV = (data: any[]): string => {
   const rows: any[][] = [];
-  
+
   data.forEach((obj, index) => {
     if (index === 0) {
       rows.push(Object.keys(obj));
@@ -44,7 +45,7 @@ const ExportCSV: React.FC<Props> = ({ widgetId, fileName }) => {
   const [fetchPlipForms, { called, loading, data }] = useLazyQuery(QUERY, {
     variables: createVariables({ widgetId, status, states, signatures })
   });
-  
+
   useEffect(() => {
     if (called && !loading && !!data) {
       const encodedUri = encodeURI(jsonToCSV(data.plips));
@@ -56,7 +57,7 @@ const ExportCSV: React.FC<Props> = ({ widgetId, fileName }) => {
       link.click();
     }
   }, [called, loading, data, fileName]);
-  
+
   return (
     <Button variant="outline" colorScheme="gray" onClick={fetchPlipForms} disabled={called && loading}>
       {called && loading ? 'Exportando CSV ...' : 'Exportar'}

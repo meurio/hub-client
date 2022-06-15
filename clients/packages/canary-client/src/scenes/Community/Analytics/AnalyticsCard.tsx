@@ -1,17 +1,16 @@
 import React from 'react';
-import { Header, Icon, Loading } from 'bonde-components';
-import { InfoIcon } from 'bonde-components/icons';
-import {
+import { Header, Icon, Loading, chakra, InfoIcon } from 'bonde-components';
+import NumberFormat from 'react-number-format';
+import useDownloadCSV from './hooks/useDownloadCSV';
+import type { PathDownload } from './hooks/useDownloadCSV';
+const {
   Button,
   Box,
   Flex,
   Text,
   Tooltip,
   Stack
-} from 'bonde-components/chakra';
-import NumberFormat from 'react-number-format';
-import useDownloadCSV from './hooks/useDownloadCSV';
-import type { PathDownload } from './hooks/useDownloadCSV';
+} = chakra;
 
 interface NumberProps {
   total?: number;
@@ -25,7 +24,7 @@ export const Number: React.FC<NumberProps> = ({ children, total, waiting, format
     thousandSeparator: '.',
     decimalSeparator: ','
   }
-  
+
   if (format === 'money') {
     formatProps.decimalScale = 2
     formatProps.fixedDecimalScale = true
@@ -84,7 +83,7 @@ export const Download: React.FC<DownloadProps> = ({ path, icon, label }) => {
         white-space: normal;
         border: none;
         outline: none;
-      
+
         &:active, &:focus, &:hover {
           border: none;
           outline: none;
@@ -93,13 +92,13 @@ export const Download: React.FC<DownloadProps> = ({ path, icon, label }) => {
         h5 {
           text-align: left;
         }
-      
+
         &:hover {
           background-color: white;
           h5 {
             color: #a4a4a4 !important;
           }
-      
+
           .fill {
             path {
               fill: #a4a4a4 !important;

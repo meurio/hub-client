@@ -1,6 +1,7 @@
 import React from "react";
-import { Stack } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import Card from "./Card";
+const { Stack } = chakra;
 
 type Props = {
   targetsCount: number

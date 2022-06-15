@@ -1,14 +1,14 @@
 import React from "react";
-import { useField } from 'bonde-components/form';
-import { CloseIcon } from 'bonde-components/icons';
-import {
+import { chakra, form, CloseIcon } from 'bonde-components';
+const { useField } = form;
+const {
   FormControl,
   FormLabel,
   IconButton,
   Box,
   Flex,
   Input,
-} from "bonde-components/chakra";
+} = chakra;
 
 interface State {
   tags: string[]

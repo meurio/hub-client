@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Skeleton } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import TargetsStatistics from "./TargetsStatistics";
 import { Widget } from "../../../FetchWidgets";
 import EventsCards from "./EventsCards";
@@ -9,6 +9,7 @@ import usePerformance from "./hooks/usePerformance";
 import Card from "./Card";
 import Charts from "./Charts";
 import StepByStepCard from "./StepByStepCard";
+const { Stack, Skeleton } = chakra;
 
 type Props = {
   widget: Widget

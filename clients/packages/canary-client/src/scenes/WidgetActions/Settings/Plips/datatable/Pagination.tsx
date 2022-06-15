@@ -1,13 +1,14 @@
 import React from 'react';
-import {
+import { chakra } from 'bonde-components';
+import Select from "../components/ChakraReactSelect";
+const {
   Button,
   Text,
   Flex,
   FormControl,
   Stack,
   createIcon
-} from 'bonde-components/chakra';
-import Select from "../components/ChakraReactSelect";
+} = chakra;
 
 const ArrowLeftIcon = createIcon({
   displayName: "ArrowRightIcon",

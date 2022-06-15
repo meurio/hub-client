@@ -6,10 +6,14 @@ import {
   Validators,
   SelectField,
   Link,
-  toast
+  toast,
+  chakra,
+  form
 } from 'bonde-components';
-import { useField } from 'bonde-components/form';
-import {
+import { useMutation, gql } from 'bonde-core-tools';
+import { DNSHostedZone } from '../types';
+const { useField }= form;
+const {
   Modal,
   ModalContent,
   ModalBody,
@@ -22,9 +26,7 @@ import {
   GridItem,
   Stack,
   FormLabel
-} from 'bonde-components/chakra';
-import { useMutation, gql } from 'bonde-core-tools';
-import { DNSHostedZone } from '../types';
+} = chakra;
 
 const createRecordGQL = gql`
   mutation ($input: RecordInput) {

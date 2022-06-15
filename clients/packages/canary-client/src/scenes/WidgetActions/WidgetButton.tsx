@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Text, Box, Flex, Image, Stack } from 'bonde-components/chakra';
-import { Header, Icon } from 'bonde-components';
+import { Header, Icon, chakra } from 'bonde-components';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { Link } from 'react-router-dom';
 import { Widget } from './FetchWidgets';
 import Labels from './Labels';
+const { Text, Box, Flex, Image, Stack } = chakra;
 
 type Props = {
   widget: Widget

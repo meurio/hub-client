@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import { SearchIcon } from 'bonde-components/icons';
-import {
+import { chakra, SearchIcon } from "bonde-components";
+const {
   InputGroup,
   InputRightElement,
   Input,
   IconButton,
   Box
-} from 'bonde-components/chakra';
+} = chakra;
 
 type Props = {
   field: string,

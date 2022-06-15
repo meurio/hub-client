@@ -1,7 +1,9 @@
 import React from 'react';
-import { Heading, Stack, Flex, DarkMode, Container as Content } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import { isMobile } from 'react-device-detect';
 import TabRoute from './TabRoute';
+const { Heading, Stack, Flex, DarkMode } = chakra;
+const Content = chakra.Container;
 
 type Props = {
   title: string

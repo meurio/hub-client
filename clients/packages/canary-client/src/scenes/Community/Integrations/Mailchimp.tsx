@@ -1,6 +1,10 @@
 import React from 'react';
-import { InputField, Success } from 'bonde-components';
-import {
+import { InputField, Success, chakra } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
+import CommunityForm from '../BaseForm';
+import MailchimpIcon from './MailchimpIcon';
+import ForceSync from './ForceSync';
+const {
   Heading,
   Text,
   Button,
@@ -10,11 +14,7 @@ import {
   Stack,
   UnorderedList,
   ListItem
-} from 'bonde-components/chakra';
-import { useTranslation } from 'react-i18next';
-import CommunityForm from '../BaseForm';
-import MailchimpIcon from './MailchimpIcon';
-import ForceSync from './ForceSync';
+} = chakra;
 
 const MailchimpPanel: React.FC = () => {
   const { t } = useTranslation('community');

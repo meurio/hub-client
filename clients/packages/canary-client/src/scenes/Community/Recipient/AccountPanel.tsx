@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { SelectField, InputField, Validators } from 'bonde-components';
-import {
-  Grid,
-  GridItem,
-  Heading,
-  Box
-} from 'bonde-components/chakra';
+import { SelectField, InputField, Validators, chakra } from 'bonde-components';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
 import BankField from './BankField';
 import * as normalize from './normalize';
 import { cpfCnpj } from './validators';
+const {
+  Grid,
+  GridItem,
+  Heading,
+  Box
+} = chakra;
 
 const AccountPanel: React.FC = () => {
   const { t } = useTranslation('community');

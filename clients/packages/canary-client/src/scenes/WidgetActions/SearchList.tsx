@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Flex } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import SearchInput from '../../components/SearchInput';
+const { Stack, Flex } = chakra;
 
 type RenderProps = {
   result: any[]

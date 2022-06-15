@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { SelectField, SwitchField } from 'bonde-components'
-import {
+import { SelectField, SwitchField, chakra } from 'bonde-components'
+import { useTranslation } from "react-i18next";
+
+import SpyField from "../../../../../components/SpyField";
+import { OptimizedPressure } from "../../../../Community/Domains/Icons";
+import { Widget } from "../../../FetchWidgets";
+import SettingsForm from '../../SettingsForm';
+
+const {
   Heading,
   Text,
   Button,
@@ -15,14 +22,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalOverlay
-} from "bonde-components/chakra";
-import { useTranslation } from "react-i18next";
-
-import SpyField from "../../../../../components/SpyField";
-import { OptimizedPressure } from "../../../../Community/Domains/Icons";
-import { Widget } from "../../../FetchWidgets";
-import SettingsForm from '../../SettingsForm';
-
+} = chakra;
 type Props = {
   widget: Widget;
   updateCache: any;

@@ -1,6 +1,7 @@
 import React from 'react';
-import { FormControl, Input } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import { useQueryFiltersFields } from './QueryFiltersProvider';
+const { FormControl, Input } = chakra;
 
 const EmailFilter: React.FC = () => {
   const { onChangeEmail } = useQueryFiltersFields()

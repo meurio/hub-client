@@ -1,8 +1,9 @@
 import React from 'react';
-import { Stack } from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import DomainsSteps from './DomainSteps';
 import { DNSHostedZone } from '../types';
 import { MainTitle } from '../Styles';
+const { Stack } = chakra;
 
 type Props = {
   dnsHostedZone: DNSHostedZone

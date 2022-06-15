@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import { InputField } from "bonde-components";
-import { Button, Flex, Heading, Text, Stack } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import { useMutation, useQuery, gql, Context as SessionContext } from "bonde-core-tools";
 
 import type { Widget } from "../../FetchWidgets";
 import Wizard from "./components/Wizard";
 import useQueryParams from "./useQueryParams";
+const { Button, Flex, Heading, Text, Stack } = chakra;
 
 const GET_PLIP_SIGNATURES = gql`
   query ($code: String!, $widget_id: Int!) {

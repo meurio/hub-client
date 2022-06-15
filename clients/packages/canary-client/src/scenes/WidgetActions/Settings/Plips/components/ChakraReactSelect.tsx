@@ -3,7 +3,8 @@ import React, { cloneElement, forwardRef } from "react";
 import ReactSelect, { components as selectComponents } from "react-select";
 // import AsyncReactSelect from "react-select/async";
 import CreatableReactSelect from "react-select/creatable";
-import {
+import { chakra } from 'bonde-components';
+const {
   Flex,
   Tag,
   TagCloseButton,
@@ -20,7 +21,7 @@ import {
   useColorModeValue,
   useFormControl,
   createIcon
-} from "bonde-components/chakra";
+} = chakra;
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
@@ -320,7 +321,7 @@ const ChakraReactSelect: React.FC<any> = ({
       ...styles
     },
     theme: (baseTheme: any) => {
-      const propTheme = theme(baseTheme);
+      const propTheme = chakraTheme();
 
       return {
         ...baseTheme,

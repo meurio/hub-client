@@ -2,8 +2,8 @@ import React from "react";
 import FetchPressureTargets, {
   PressureTarget as PressureTargetsType,
 } from "./FetchPressureTargets";
-import { CleanButton } from 'bonde-components';
-import { Text, Icon } from "bonde-components/chakra";
+import { CleanButton, chakra } from 'bonde-components';
+const { Text, Icon } = chakra;
 import styled from '@emotion/styled';
 
 type Props = {

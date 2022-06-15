@@ -135,7 +135,7 @@ const BaseForm: React.FC<Props> = ({ children, formName, success }) => {
 
       // Update Session
       await updateSession('community', returning[0]);
-    } catch (e: any) {
+    } catch (e) {
       // invalid_permission
       if (e.message === 'invalid_permission') {
         toast(t('messages.invalid_permission'), { type: toast.TYPE.ERROR });

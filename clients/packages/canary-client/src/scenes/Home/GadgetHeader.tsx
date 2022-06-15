@@ -1,5 +1,6 @@
 import React from "react";
-import { Stack, Heading } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
+const { Stack, Heading } = chakra;
 
 type Props = {
   title?: string

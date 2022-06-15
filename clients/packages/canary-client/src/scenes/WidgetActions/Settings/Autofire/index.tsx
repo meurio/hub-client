@@ -1,17 +1,17 @@
 import React from "react";
-import { InputField, TextareaField, Validators } from 'bonde-components';
-import {
+import { InputField, TextareaField, Validators, chakra } from 'bonde-components';
+import { useTranslation } from "react-i18next";
+import { Widget } from "../../FetchWidgets";
+import { noSpecialCharacters } from "../../../../services/utils";
+import SettingsForm from '../SettingsForm';
+const {
   Box,
   Button,
   Flex,
   Grid,
   GridItem,
   Heading
-} from "bonde-components/chakra";
-import { useTranslation } from "react-i18next";
-import { Widget } from "../../FetchWidgets";
-import { noSpecialCharacters } from "../../../../services/utils";
-import SettingsForm from '../SettingsForm';
+} = chakra;
 
 type Props = {
   widget: Widget;

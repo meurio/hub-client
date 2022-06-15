@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Success, Icon, toast } from 'bonde-components';
-import {
+import { chakra } from 'bonde-components';
+import copy from 'clipboard-copy';
+import Radio from './Radio';
+import { MainTitle } from '../Styles';
+
+const {
   Heading,
   Text,
   Grid,
   GridItem,
   Button
-} from 'bonde-components/chakra';
-import copy from 'clipboard-copy';
-import Radio from './Radio';
-import { MainTitle } from '../Styles';
+} = chakra;
 
 const TopicList = styled.ol`
   margin-left: 20px;

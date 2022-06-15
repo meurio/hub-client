@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { useQuery, useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
 import { MailchimpStart } from './types';
-import { toast, Success } from 'bonde-components';
-import {
+import { toast, Success, chakra } from 'bonde-components';
+const {
   Heading,
   Flex,
   Button,
   Text,
-  Stack  
-} from 'bonde-components/chakra';
+  Stack
+} = chakra;
 
 const fetchGraphqlQuery = gql`
 
@@ -45,10 +45,10 @@ const lastSync = (last_sync: any) =>{
 }
 
 const total = (data: any) => {
-  return (data.resync_mailchimp_status.waiting + 
-          data.resync_mailchimp_status.completed + 
-          data.resync_mailchimp_status.failed + 
-          data.resync_mailchimp_status.active); 
+  return (data.resync_mailchimp_status.waiting +
+          data.resync_mailchimp_status.completed +
+          data.resync_mailchimp_status.failed +
+          data.resync_mailchimp_status.active);
 }
 
 const ForceSync: React.FC = () => {
@@ -68,14 +68,14 @@ const ForceSync: React.FC = () => {
 
   const done = async () => {
     const a: MailchimpStart = await setPropagating();
-    if (typeof a !== 'undefined' && 
+    if (typeof a !== 'undefined' &&
         typeof a.data.resync_mailchimp_start.status !== 'undefined' &&
         a.data.resync_mailchimp_start.status === 'started to add contacts to the queue') {
-      toast(<Success message={`Ae! Sincronização em andamento.`} />, { type: toast.TYPE.SUCCESS }); 
+      toast(<Success message={`Ae! Sincronização em andamento.`} />, { type: toast.TYPE.SUCCESS });
     } else {
       toast(`Ish! Ocorreu um erro, tente sincronizar novamente. Se o problema persistir, contacte o suporte. ${a.data.resync_mailchimp_start.status}`, { type: toast.TYPE.ERROR });
     }
-  }; 
+  };
 
   if (loading) {
     return <Text>Carregando Mailchimp Status</Text>;
@@ -101,7 +101,7 @@ const ForceSync: React.FC = () => {
         </Flex>
       </Stack>
     );
-  } 
+  }
 
   return (
     <Stack>

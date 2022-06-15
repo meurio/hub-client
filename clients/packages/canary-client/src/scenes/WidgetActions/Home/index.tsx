@@ -1,6 +1,5 @@
 import React from 'react';
-import { Tab, Header } from "bonde-components"
-import { Box, Stack, Grid, GridItem } from 'bonde-components/chakra';
+import { Tab, Header, chakra } from "bonde-components"
 import { useTranslation } from 'react-i18next';
 import { isMobile } from 'react-device-detect';
 import SearchList from '../SearchList';
@@ -8,6 +7,7 @@ import WidgetButton from '../WidgetButton';
 import { Widget, WidgetLoading } from '../FetchWidgets';
 import Container, { NavigationArgs } from '../Container';
 import Shortcuts from './Shortcuts';
+const { Box, Stack, Grid, GridItem } = chakra;
 
 type Props = {
   community: {
@@ -32,7 +32,7 @@ const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
       )}
     >
       <Stack direction="column" spacing={4} flex={1}>
-        {!isMobile ? 
+        {!isMobile ?
           <section style={{ marginBottom: '15px' }}>
             <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
             <Shortcuts community={community} />

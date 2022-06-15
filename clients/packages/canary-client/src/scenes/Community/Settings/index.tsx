@@ -4,14 +4,15 @@ import {
   InputField,
   Success,
   Validators,
-  S3UploadField
+  S3UploadField,
+  chakra
 } from 'bonde-components';
-import { Text, Box, Flex, Image } from 'bonde-components/chakra';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
 import CommunityForm from '../BaseForm';
 import ButtonStyled from '../../../components/ButtonStyled';
 const { isEmail } = Validators;
+const { Text, Box, Flex, Image } = chakra;
 
 export const isValidFromEmail = (value: string): string | undefined => {
   const regex = /^[a-zà-úA-ZÀ-Ú0-9 ]+<(.*)>$/

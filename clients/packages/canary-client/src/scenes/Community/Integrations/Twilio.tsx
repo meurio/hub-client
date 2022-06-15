@@ -1,7 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputField, Success } from 'bonde-components';
-import {
+import { InputField, Success, chakra } from 'bonde-components';
+import CommunityForm from '../BaseForm';
+import TwilioIcon from './TwilioIcon';
+const {
   Heading,
   Text,
   Button,
@@ -11,9 +13,7 @@ import {
   Stack,
   UnorderedList,
   ListItem
-} from 'bonde-components/chakra';
-import CommunityForm from '../BaseForm';
-import TwilioIcon from './TwilioIcon';
+} = chakra;
 
 const TwilioPanel = () => {
   const { t } = useTranslation('community');

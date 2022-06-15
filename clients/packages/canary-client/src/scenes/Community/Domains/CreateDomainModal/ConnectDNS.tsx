@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
-import { toast, Success } from 'bonde-components';
-import {
+import { toast, Success, chakra } from 'bonde-components';
+import { DNSHostedZone } from '../types';
+import NameServersForm from './NameServersForm';
+import IPConnectForm from './IPConnectForm';
+const {
   Button,
   Stack,
   ModalHeader,
   ModalContent,
   ModalBody,
   ModalFooter
-} from 'bonde-components/chakra';
-import { DNSHostedZone } from '../types';
-import NameServersForm from './NameServersForm';
-import IPConnectForm from './IPConnectForm';
+} = chakra;
 
 const propagatingDNSGQL = gql`
   mutation ($dns_hosted_zone_id: Int!) {

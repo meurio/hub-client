@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon } from 'bonde-components';
-import {
+import { Icon, chakra } from 'bonde-components';
+import CreateDomainModal from './CreateDomainModal';
+import StatusTags from './StatusTags';
+import { MainTitle } from './Styles';
+import type { DNSHostedZone } from './types';
+const {
   Text,
   Grid,
   GridItem,
@@ -9,11 +13,7 @@ import {
   Flex,
   Stack,
   Heading
-} from 'bonde-components/chakra';
-import CreateDomainModal from './CreateDomainModal';
-import StatusTags from './StatusTags';
-import { MainTitle } from './Styles';
-import type { DNSHostedZone } from './types';
+} = chakra;
 
 type DomainsProps = {
   refetch: any

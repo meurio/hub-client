@@ -1,17 +1,17 @@
 import React from 'react';
-import { Success } from 'bonde-components';
-import {
+import { Success, chakra } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
+import AccountPanel from './AccountPanel';
+import TransferPanel from './TransferPanel';
+import CommunityForm from '../BaseForm';
+const {
   Button,
   Flex,
   Text,
   Stack,
   Box,
   Heading
-} from 'bonde-components/chakra';
-import { useTranslation } from 'react-i18next';
-import AccountPanel from './AccountPanel';
-import TransferPanel from './TransferPanel';
-import CommunityForm from '../BaseForm';
+} = chakra;
 
 const RecipientPage = () => {
   const { t } = useTranslation('community');

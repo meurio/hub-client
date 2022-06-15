@@ -1,7 +1,8 @@
 import React from "react";
 import { useMutation, gql } from "bonde-core-tools";
-import { toast } from 'bonde-components';
-import {
+import { toast, chakra } from 'bonde-components';
+import { useTranslation } from "react-i18next";
+const {
   Text,
   Button,
   Modal,
@@ -10,8 +11,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalOverlay
-} from "bonde-components/chakra";
-import { useTranslation } from "react-i18next";
+} = chakra;
 
 type Props = {
   open: boolean;
@@ -39,10 +39,10 @@ const DeleteTargetPopup = ({
   const onSubmit = async (pressureTargetId: number) => {
     try {
       await deleteTarget({ variables: { id: { _eq: pressureTargetId } } });
-      
+
       remove();
       onClose();
-      
+
       return toast(t("settings.pressure.delete.success"), {
         type: toast.TYPE.SUCCESS,
       });

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
-import { ConnectedForm, InputField, SelectField, Validators, toast } from 'bonde-components';
-import {
+import { ConnectedForm, InputField, SelectField, Validators, toast, chakra } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
+import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
+const {
   Button,
   Text,
   Icon,
@@ -8,9 +10,7 @@ import {
   GridItem,
   Stack,
   Flex,
-} from 'bonde-components/chakra';
-import { useTranslation } from 'react-i18next';
-import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
+} = chakra;
 
 export const InviteMutation = gql`
   mutation SendInvitation ($input: InvitationInput) {

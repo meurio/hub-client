@@ -1,10 +1,11 @@
 import React from 'react';
-import {
-  HStack,
-  Tag
-} from 'bonde-components/chakra';
+import { chakra } from 'bonde-components';
 import getStatus from './getStatus';
 import type { DNSHostedZone } from './types';
+const {
+  HStack,
+  Tag
+} = chakra;
 
 const StatusTags: React.FC<{ dnsHostedZone: DNSHostedZone }> = ({ dnsHostedZone }) => {
   const { dns, certificate } = getStatus(dnsHostedZone);

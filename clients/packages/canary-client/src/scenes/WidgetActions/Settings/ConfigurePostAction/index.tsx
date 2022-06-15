@@ -1,14 +1,5 @@
 import React from "react";
-import { TextareaField, RadioField } from 'bonde-components';
-import {
-	Box,
-	Button,
-	Flex,
-	Heading,
-	Grid,
-	GridItem,
-	Radio
-} from "bonde-components/chakra";
+import { TextareaField, RadioField, chakra } from 'bonde-components';
 import { useTranslation } from "react-i18next";
 
 import { Widget } from "../../FetchWidgets";
@@ -17,6 +8,15 @@ import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
 
+const {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	Grid,
+	GridItem,
+	Radio
+} = chakra;
 type Props = {
 	widget: Widget;
 	updateCache: any;

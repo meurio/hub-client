@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { Loading } from 'bonde-components';
-import { Heading, Box, Stack, Button } from 'bonde-components/chakra';
+import { Loading, chakra } from 'bonde-components';
 import { Context as SessionContext, useQuery, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import UsersTable from './UsersTable';
 import InvitationsTable from './InvitationsTable';
 import InviteForm from './InviteForm';
+const { Heading, Box, Stack, Button } = chakra;
 
 const InvitationsQuery = gql`
   query InvitationsByCommunity($communityId: Int!) {

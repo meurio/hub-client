@@ -1,5 +1,7 @@
 import React from "react";
-import {
+import { chakra } from 'bonde-components';
+import { ActivityFeedEmail } from "./hooks/usePerformance";
+const {
   Heading,
   Stack,
   Table,
@@ -10,8 +12,7 @@ import {
   Td,
   Tag,
   Tooltip
-} from "bonde-components/chakra";
-import { ActivityFeedEmail } from "./hooks/usePerformance";
+} = chakra;
 
 const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
   const openingCount = activityFeed.events.filter((evt) => evt.eventType === "open").length

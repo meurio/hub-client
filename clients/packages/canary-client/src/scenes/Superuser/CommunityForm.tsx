@@ -5,14 +5,15 @@ import {
   ConnectedForm,
   InputField,
   Validators,
-  toast
+  toast,
+  chakra
 } from 'bonde-components';
-import { Button } from 'bonde-components/chakra';
 import { Row, Col } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 
 import UploadField from "../../components/UploadFile";
 import Panel from '../../components/Panel';
+const { Button } = chakra;
 
 const { isEmail, required } = Validators;
 

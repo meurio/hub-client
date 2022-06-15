@@ -1,11 +1,11 @@
 import React from 'react';
-import { Header, Icon, toast } from 'bonde-components';
-import { Button } from 'bonde-components/chakra';
+import { Header, Icon, toast, chakra } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import Table, { Styles } from './Table';
 import Role from './Role';
 import DeleteException from './DeleteException';
+const { Button } = chakra;
 
 const DeleteCommunityUsersMutation = gql`
   mutation DeleteCommunityUsers($id: Int!) {
@@ -48,7 +48,7 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
           throw DeleteException({
             graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
           })
-        } catch (e: any) {
+        } catch (e) {
           if (e.graphQLErrors && e.graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
             toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
           } else {

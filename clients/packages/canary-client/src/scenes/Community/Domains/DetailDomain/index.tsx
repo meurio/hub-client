@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import { Stack } from "bonde-components/chakra";
+import { chakra } from 'bonde-components';
 import NameServers from '../NameServers';
 import { DNSHostedZone } from '../types';
 import getStatus from '../getStatus';
@@ -9,6 +9,7 @@ import Navigation from './Navigation';
 import Domain from './Domain';
 import Explain from './Explain';
 import Records from './Records';
+const { Stack } = chakra;
 
 type Props = {
   refetch: any

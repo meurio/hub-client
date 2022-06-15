@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { FormField, Hint, Label } from "bonde-components";
-import { useField } from 'bonde-components/form';
+import { FormField, Hint, Label, form } from "bonde-components";
+const { useField } = form;
 import styled from "@emotion/styled";
 
 type RadioFieldProps = {

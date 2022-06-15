@@ -1,4 +1,4 @@
-export { default as FontsLoader } from './FontsLoader';
+// export { default as FontsLoader } from './FontsLoader';
 
 // Chakra
 export { default as theme } from './chakra/theme';

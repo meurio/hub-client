@@ -1,6 +1,6 @@
 // import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
+import * as ReactDOM from 'react-dom';
 import {
   BrowserRouter,
   Routes,
@@ -219,7 +219,7 @@ const App = () => {
   );
 };
 
-const root = ReactDOM.createRoot(
-  document.getElementById('app')!
+ReactDOM.render(
+  <App />,
+  document.getElementById("app")
 );
-root.render(<App />);

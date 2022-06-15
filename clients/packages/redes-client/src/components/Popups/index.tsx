@@ -111,7 +111,7 @@ export default function Popups({
       const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
       setCustomLink(customWhatsappLink);
       return setData(data);
-    } catch (e: any) {
+    } catch (e) {
       e.graphQLErrors.map((error: any) => console.log(error));
       return setError(e.message);
     }

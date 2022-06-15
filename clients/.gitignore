@@ -12,9 +12,9 @@ coverage
 
 # production
 build
-packages/**/build
+packages/**/build/*
 dist
-libs/**/dist
+libs/**/dist/*
 
 # misc
 .DS_Store

@@ -1,30 +1,30 @@
-import { StyleFunctionProps } from '@chakra-ui/theme-tools';
+import { StyleFunctionProps } from "@chakra-ui/theme-tools";
 
 const baseButton = {
-  textTransform: 'uppercase',
+  textTransform: "uppercase",
 };
 
 const baseList = {
-  borderRadius: 'none',
-  border: 'none',
-  boxShadow: 'sm',
+  borderRadius: "none",
+  border: "none",
+  boxShadow: "sm",
 };
 
 const baseItem = {
   _focus: {
-    bg: 'transparent',
+    bg: "transparent",
   },
   _active: {
-    bg: 'transparent',
+    bg: "transparent",
   },
   _expanded: {
-    bg: 'transparent',
+    bg: "transparent",
   },
 };
 
 const baseGroupTitle = {
-  fontWeight: 'normal',
-  fontSize: 'inherit',
+  fontWeight: "normal",
+  fontSize: "inherit",
 };
 
 const baseStyle = ({ colorScheme }: StyleFunctionProps): any => {
@@ -45,8 +45,8 @@ const link = {
   item: {
     ...baseItem,
     _hover: {
-      bg: 'transparent',
-      color: 'pink.200',
+      bg: "transparent",
+      color: "pink.200",
     },
   },
 };
@@ -57,6 +57,6 @@ export default {
     link,
   },
   defaultProps: {
-    colorScheme: 'gray',
+    colorScheme: "gray",
   },
 };

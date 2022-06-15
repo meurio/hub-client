@@ -1,9 +1,9 @@
-import React from 'react';
-import { useField } from 'react-final-form';
-import { SketchPicker } from 'react-color';
-import { Flex, FormControl, FormLabel, Stack, Tooltip } from '@chakra-ui/react';
-import { InfoIcon } from '../../icons';
-import Hint from './Hint';
+import React from "react";
+import { useField } from "react-final-form";
+import { SketchPicker } from "react-color";
+import { Flex, FormControl, FormLabel, Stack, Tooltip } from "@chakra-ui/react";
+import { InfoIcon } from "../../icons";
+import Hint from "./Hint";
 
 // interface ColorFieldProps extends {
 //   name: string

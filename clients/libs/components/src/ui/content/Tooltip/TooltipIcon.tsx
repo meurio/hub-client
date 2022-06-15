@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Icon() {
   return (
@@ -26,6 +26,6 @@ function Icon() {
   );
 }
 
-Icon.displayName = 'TooltipIcon';
+Icon.displayName = "TooltipIcon";
 
 export default Icon;

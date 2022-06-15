@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import {
   FormControl,
   FormLabel,
   Flex,
   Stack,
   RadioGroup,
-} from '@chakra-ui/react';
-import { useField } from 'react-final-form';
-import Hint from './Hint';
+} from "@chakra-ui/react";
+import { useField } from "react-final-form";
+import Hint from "./Hint";
 
 type RadioFieldProps = {
   children: any;
   label: string;
   name: string;
-  direction?: 'row' | 'column';
+  direction?: "row" | "column";
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -41,7 +41,7 @@ const RadioField = ({ children, label, name, direction }: RadioFieldProps) => {
 };
 
 RadioField.defaultProps = {
-  direction: 'row',
+  direction: "row",
 };
 
 export default RadioField;

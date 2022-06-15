@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import theme from '../base/theme';
+import styled from "styled-components";
+import theme from "../base/theme";
 
 type TextareaProps = {
   invalid?: boolean;
@@ -10,19 +10,19 @@ type TextareaProps = {
 };
 
 const Textarea = styled.textarea<TextareaProps>`
-  ${props => props.fullWidth && 'width: 100%;'}
+  ${(props) => props.fullWidth && "width: 100%;"}
   font-family: ${theme.fontFamily};
   font-size: 16px;
   color: #000000;
   border: none;
-  border-bottom: 1px solid #AAAAAA;
+  border-bottom: 1px solid #aaaaaa;
   padding: 0 0 8px;
   flex: 1;
   background: none;
   min-height: 109px;
 
   &[disabled] {
-    color: #D1CDD2;
+    color: #d1cdd2;
     background: none;
   }
 
@@ -47,10 +47,10 @@ const Textarea = styled.textarea<TextareaProps>`
     color: ${theme.commons.dark};
   }
 
-  ${props => props.invalid && `border-color: #ff0931;`}
+  ${(props) => props.invalid && `border-color: #ff0931;`}
 `;
 
-Textarea.displayName = 'Textarea';
+Textarea.displayName = "Textarea";
 
 /** @component */
 export default Textarea;

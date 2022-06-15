@@ -1,6 +1,6 @@
 export default {
   baseStyle: {
-    textTransform: 'none',
-    color: 'gray.400',
+    textTransform: "none",
+    color: "gray.400",
   },
 };

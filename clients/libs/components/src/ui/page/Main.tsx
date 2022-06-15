@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import theme from '../base/theme';
+import styled from "styled-components";
+import theme from "../base/theme";
 
 const Main = styled.div`
   display: flex;

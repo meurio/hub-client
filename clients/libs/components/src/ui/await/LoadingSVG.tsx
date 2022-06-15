@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import Sparkles from './Sparkles';
+import React from "react";
+import styled from "styled-components";
+import Sparkles from "./Sparkles";
 
 export interface LoadingSVGProps {
-  size?: 'small' | 'default' | 'large';
+  size?: "small" | "default" | "large";
   color?: string;
   sparklesColor?: string;
   sparklesColorInit?: string;
@@ -13,7 +13,7 @@ export interface LoadingSVGProps {
 /**
  * Animated loading transition component.
  */
-const LoadingSVG = styled(props => {
+const LoadingSVG = styled((props) => {
   const {
     className,
     color,
@@ -44,20 +44,20 @@ const LoadingSVG = styled(props => {
     </svg>
   );
 })<LoadingSVGProps>`
-  ${props =>
-    props.size === 'small' &&
+  ${(props) =>
+    props.size === "small" &&
     `
     width: calc(0.5*176px);
     height: calc(0.5*135px);
   `}
-  ${props =>
-    props.size === 'default' &&
+  ${(props) =>
+    props.size === "default" &&
     `
     width: calc(0.75*176px);
     height: calc(0.75*135px);
   `}
-  ${props =>
-    props.size === 'large' &&
+  ${(props) =>
+    props.size === "large" &&
     `
     width: calc(1*176px);
     height: calc(1*135px);
@@ -65,11 +65,11 @@ const LoadingSVG = styled(props => {
 `;
 
 LoadingSVG.defaultProps = {
-  color: '#050505',
-  size: 'default',
-  sparklesColor: '#35E3C3',
-  sparklesColorInit: '#DBDBDB',
-  sparklesDuration: '6s',
+  color: "#050505",
+  size: "default",
+  sparklesColor: "#35E3C3",
+  sparklesColorInit: "#DBDBDB",
+  sparklesDuration: "6s",
 };
 
 export default LoadingSVG;

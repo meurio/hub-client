@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={className + ' stroke'}
+    className={className + " stroke"}
     fill="none"
     viewBox="0 0 18 18"
   >
@@ -14,6 +14,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.Search';
+Icon.displayName = "Icon.Search";
 
 export default Icon;

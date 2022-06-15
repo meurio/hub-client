@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import React from 'react';
+import styled from "styled-components";
+import React from "react";
 
 type Props = {
   /** The margin property. */
@@ -78,7 +78,7 @@ const Spacing = ({
   );
 };
 
-Spacing.displayName = 'Spacing';
+Spacing.displayName = "Spacing";
 
 Spacing.defaultProps = {
   margin: {},

@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Loading } from '../src';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Loading } from "../src";
 
-describe('it', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
+describe("it", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
     ReactDOM.render(<Loading />, div);
     ReactDOM.unmountComponentAtNode(div);
   });

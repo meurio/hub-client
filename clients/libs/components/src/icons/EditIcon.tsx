@@ -1,8 +1,8 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const EditIcon = createIcon({
-  displayName: 'EditIcon',
+  displayName: "EditIcon",
   path: (
     <>
       <circle cx="12" cy="12" r="11.5" fill="#E09" stroke="currentColor" />

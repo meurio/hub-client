@@ -1,5 +1,5 @@
-import React from 'react';
-import { useField } from 'react-final-form';
+import React from "react";
+import { useField } from "react-final-form";
 import {
   Input,
   FormControl,
@@ -7,9 +7,9 @@ import {
   Flex,
   Tooltip,
   Stack,
-} from '@chakra-ui/react';
-import { InfoIcon } from '../../icons';
-import Hint from './Hint';
+} from "@chakra-ui/react";
+import { InfoIcon } from "../../icons";
+import Hint from "./Hint";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const InputField = (props: any): React.ReactElement => {
@@ -51,7 +51,7 @@ const InputField = (props: any): React.ReactElement => {
         placeholder={placeholder}
         type={type || input.type}
         disabled={disabled}
-        onBlur={e => {
+        onBlur={(e) => {
           onBlur && onBlur(e);
           input.onBlur(e);
         }}

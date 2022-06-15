@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Button,
@@ -7,15 +7,16 @@ import {
   FormLabel,
   FormHelperText,
   Stack,
-} from '@chakra-ui/react';
-import { useField, FieldInputProps } from 'react-final-form';
-import ReactS3Uploader from 'react-s3-uploader';
-import { EditIcon, UploadImageIcon } from '../../icons';
+} from "@chakra-ui/react";
+import { useField, FieldInputProps } from "react-final-form";
+import ReactS3Uploader from "react-s3-uploader";
+import { EditIcon, UploadImageIcon } from "../../icons";
 
 interface S3UploadFileFieldProps {
   signingUrl: string;
   onChange: any;
   disabled?: boolean;
+  children?: any;
 }
 
 const S3UploadFileField: React.FC<S3UploadFileFieldProps> = ({
@@ -23,19 +24,19 @@ const S3UploadFileField: React.FC<S3UploadFileFieldProps> = ({
   onChange,
   signingUrl,
   disabled,
-}) => {
+}: any) => {
   const inputRef: any = React.useRef(null);
 
   // Override callbacks
   const onProgress = (args: any) => {
-    console.log('onProgress', { args });
+    console.log("onProgress", { args });
   };
   const onError = (args: any) => {
-    console.log('onError', { args });
+    console.log("onError", { args });
   };
   const onFinish = ({ signedUrl }: any) => {
-    const imageUrl: string = signedUrl.substring(0, signedUrl.indexOf('?'));
-    console.log('onFinish', { imageUrl });
+    const imageUrl: string = signedUrl.substring(0, signedUrl.indexOf("?"));
+    console.log("onFinish", { imageUrl });
     onChange(imageUrl);
   };
   // Button should be ReactS3Uploader active.
@@ -56,7 +57,7 @@ const S3UploadFileField: React.FC<S3UploadFileFieldProps> = ({
         onError={onError}
         onFinish={onFinish}
         inputRef={inputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
       />
     </div>
   );
@@ -72,6 +73,7 @@ interface S3UploadFieldProps extends FieldInputProps<string> {
   removeTextButton?: string;
   borderRadius?: any;
   boxSize?: any;
+  children?: any;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -138,9 +140,9 @@ const S3UploadField = (props: S3UploadFieldProps) => {
 
 S3UploadField.defaultProps = {
   uploadImageIcon: UploadImageIcon,
-  removeTextButton: 'Remover',
-  borderRadius: '50%',
-  boxSize: '85px',
+  removeTextButton: "Remover",
+  borderRadius: "50%",
+  boxSize: "85px",
 };
 
 export default S3UploadField;

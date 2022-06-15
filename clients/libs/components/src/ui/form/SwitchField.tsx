@@ -1,11 +1,11 @@
-import React from 'react';
-import { useField } from 'react-final-form';
-import styled from 'styled-components';
+import React from "react";
+import { useField } from "react-final-form";
+import styled from "styled-components";
 
-import FormField from './FormField';
-import Hint from './Hint';
-import Switch from './Switch';
-import Label from './Label';
+import FormField from "./FormField";
+import Hint from "./Hint";
+import Switch from "./Switch";
+import Label from "./Label";
 
 const SwitchField = (props: any) => {
   const { label, name, disabled, textOff, textOn, ...config } = props;
@@ -40,10 +40,10 @@ const Container = styled.div<ContainerProps>`
   align-items: center;
 
   .text {
-    font-size: '13px';
+    font-size: "13px";
     font-weight: 800;
     margin-right: 8px;
-    color: ${({ disabled }) => (disabled ? '#858585' : '#50E3C2')};
+    color: ${({ disabled }) => (disabled ? "#858585" : "#50E3C2")};
   }
 `;
 

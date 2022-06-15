@@ -1,14 +1,14 @@
-import React from 'react';
-import { IconButton, Stack } from '@chakra-ui/react';
-import { Session, Community } from './types';
+import React from "react";
+import { IconButton, Stack } from "@chakra-ui/react";
+import { Session, Community } from "./types";
 
-import { SettingsIcon, PagesIcon, BotIcon, NetIcon } from '../icons';
+import { SettingsIcon, PagesIcon, BotIcon, NetIcon } from "../icons";
 
 const items: any = {
-  settings: [SettingsIcon, 'Configurações'],
-  mobilization: [PagesIcon, 'Mobilizações'],
-  redes: [NetIcon, 'Redes'],
-  chatbot: [BotIcon, 'Chatbot'],
+  settings: [SettingsIcon, "Configurações"],
+  mobilization: [PagesIcon, "Mobilizações"],
+  redes: [NetIcon, "Redes"],
+  chatbot: [BotIcon, "Chatbot"],
 };
 
 interface CommunityMenuProps {
@@ -26,7 +26,7 @@ const CommunityMenu = ({
   const { modules } = community;
 
   const handleClick = (url: string) => async () => {
-    updateSession('community', community).then(() => {
+    updateSession("community", community).then(() => {
       window.location.href = url;
     });
   };
@@ -36,13 +36,13 @@ const CommunityMenu = ({
       {Object.keys(modules)
         .filter((key: string) => !!modules[key])
         .map((key: any, index: number) => {
-          let moduleHost = '';
-          let baseHost = '';
+          let moduleHost = "";
+          let baseHost = "";
           try {
-            moduleHost = new URL('', config[key]).host;
-            baseHost = new URL('', window.location.href).host;
+            moduleHost = new URL("", config[key]).host;
+            baseHost = new URL("", window.location.href).host;
           } catch (err) {
-            console.log('error URL', err);
+            console.log("error URL", err);
           }
 
           const hoverColor = (color: string) => ({ color: `${color}.200` });
@@ -51,13 +51,13 @@ const CommunityMenu = ({
 
           const colorSystem = inverted
             ? {
-              color: isActive ? 'pink.200' : 'white',
-              _hover: isActive ? hoverColor('pink') : hoverColor('gray'),
-            }
+                color: isActive ? "pink.200" : "white",
+                _hover: isActive ? hoverColor("pink") : hoverColor("gray"),
+              }
             : {
-              color: 'gray.400',
-              _hover: hoverColor('gray'),
-            };
+                color: "gray.400",
+                _hover: hoverColor("gray"),
+              };
 
           return (
             <IconButton

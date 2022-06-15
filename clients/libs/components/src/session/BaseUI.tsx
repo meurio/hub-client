@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import { Flex } from '@chakra-ui/react';
-import { Main, Footer, Navbar } from '../ui';
-import CommunitiesDropdown from './CommunitiesDropdown';
-import UserDropdown from './UserDropdown';
-import Logout from './Logout';
-import { BaseUIProperties } from './types';
+import React from "react";
+import styled from "@emotion/styled";
+import { Flex } from "@chakra-ui/react";
+import { Main, Footer, Navbar } from "../ui";
+import CommunitiesDropdown from "./CommunitiesDropdown";
+import UserDropdown from "./UserDropdown";
+import Logout from "./Logout";
+import { BaseUIProperties } from "./types";
 
 interface ContentProps {
   isMobile: boolean;
@@ -42,13 +42,13 @@ const BaseUI: React.FC<BaseUIProperties> = ({
   isMobile,
   session,
   languageTool: LanguageTool,
-}) => {
+}: any) => {
   return (
     <Main>
       <Navbar
         fixed={isMobile}
         indexRoute={indexRoute}
-        brand={disableNavigation ? 'default' : 'small'}
+        brand={disableNavigation ? "default" : "small"}
       >
         <Flex direction="row" grow={1} justify="space-between">
           {disableNavigation ? (
@@ -63,7 +63,7 @@ const BaseUI: React.FC<BaseUIProperties> = ({
           )}
         </Flex>
       </Navbar>
-      <Content isMobile={!!isMobile} bgColor={bgColor || 'rgb(247,247,247)'}>
+      <Content isMobile={!!isMobile} bgColor={bgColor || "rgb(247,247,247)"}>
         {children}
       </Content>
       {!isMobile ? <FooterTool languageTool={LanguageTool} /> : null}

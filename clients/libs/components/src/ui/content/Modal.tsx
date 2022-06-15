@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import theme from '../base/theme';
-import CleanButton from './CleanButton';
+import React from "react";
+import styled from "styled-components";
+import theme from "../base/theme";
+import CleanButton from "./CleanButton";
 
 type ModalProps = {
   isOpen?: boolean;
 };
 
 const ModalStyled = styled.div<ModalProps>`
-  display: ${props =>
-    !props.isOpen ? 'none' : 'block'}; /* Hidden by default */
+  display: ${(props) =>
+    !props.isOpen ? "none" : "block"}; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -29,12 +29,12 @@ type ModalContent = {
 };
 
 const ModalContentStyled = styled.div<ModalContent>`
-  background-color: ${props => props.theme.brand.light};
+  background-color: ${(props) => props.theme.brand.light};
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 30px;
-  width: ${props => props.width};
-  height: ${props => (props.height ? `${props.height}` : 'auto')};
+  width: ${(props) => props.width};
+  height: ${(props) => (props.height ? `${props.height}` : "auto")};
   position: absolute;
   left: 50%;
   top: 50%;
@@ -42,13 +42,13 @@ const ModalContentStyled = styled.div<ModalContent>`
 `;
 
 const CloseButtonStyled = styled(CleanButton)`
-  color: ${props => props.theme.commons.main};
+  color: ${(props) => props.theme.commons.main};
   font-size: 28px;
   font-weight: bold;
   float: right;
   &:hover,
   &:focus {
-    color: ${props => props.theme.brand.dark};
+    color: ${(props) => props.theme.brand.dark};
     text-decoration: none;
     cursor: pointer;
   }

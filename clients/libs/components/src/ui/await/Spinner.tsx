@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import theme from '../base/theme';
+import React from "react";
+import styled from "styled-components";
+import theme from "../base/theme";
 
 const Ring = styled.div<{ theme: any }>`
   display: inline-block;

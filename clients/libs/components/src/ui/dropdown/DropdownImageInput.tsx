@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface Img {
   src: string;
@@ -25,7 +25,7 @@ const DropdownImageInput = styled(({ className, value }: any) => {
       {label}
     </div>
   );
-}) <DropdownImageInputProps>`
+})<DropdownImageInputProps>`
   display: flex;
   flex-grow: 1;
   align-items: center;

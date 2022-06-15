@@ -1,6 +1,6 @@
-import React from 'react';
-import { Button } from '@chakra-ui/react';
-import { Session } from './types';
+import React from "react";
+import { Button } from "@chakra-ui/react";
+import { Session } from "./types";
 
 const Logout: React.FC<{ session: Session }> = ({ session }) => {
   return (

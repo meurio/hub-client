@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Button,
   Text,
@@ -9,9 +9,9 @@ import {
   MenuList,
   MenuItem,
   MenuGroup,
-} from '@chakra-ui/react';
-import { ArrowDownIcon, ArrowUpIcon, CloseIcon } from '../icons';
-import { Session } from './types';
+} from "@chakra-ui/react";
+import { ArrowDownIcon, ArrowUpIcon, CloseIcon } from "../icons";
+import { Session } from "./types";
 
 interface UserDropdownProperties {
   session: Session;

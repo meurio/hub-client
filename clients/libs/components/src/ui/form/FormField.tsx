@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import Hint from './Hint';
+import styled from "styled-components";
+import Hint from "./Hint";
 
 interface FormFieldProps {
-  direction?: 'row' | 'column';
+  direction?: "row" | "column";
 }
 
 const FormField = styled.div<FormFieldProps>`
@@ -10,9 +10,9 @@ const FormField = styled.div<FormFieldProps>`
   display: flex;
   padding: 0 0 30px;
 
-  flex-direction: ${props => props.direction};
-  ${props =>
-    props.direction === 'row' &&
+  flex-direction: ${(props) => props.direction};
+  ${(props) =>
+    props.direction === "row" &&
     `
     align-items: flex-end;
   `}
@@ -24,7 +24,7 @@ const FormField = styled.div<FormFieldProps>`
 `;
 
 FormField.defaultProps = {
-  direction: 'column',
+  direction: "column",
 };
 
 export default FormField;

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import TooltipIcon from './TooltipIcon';
+import React, { useState } from "react";
+import styled from "styled-components";
+import TooltipIcon from "./TooltipIcon";
 
 export const Message = styled.span`
   font-family: Nunito Sans;
@@ -34,7 +34,7 @@ const Tooltip = styled(({ label, info, className }: Props) => {
     <div className={className}>
       {label}
       <div
-        style={{ position: 'relative' }}
+        style={{ position: "relative" }}
         onMouseOver={() => setVisible(true)}
         onMouseOut={() => setVisible(false)}
       >

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
-    className={className + ' fill'}
+    className={className + " fill"}
     width="18"
     height="22"
     viewBox="0 0 18 22"
@@ -20,6 +20,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.MapMarker';
+Icon.displayName = "Icon.MapMarker";
 
 export default Icon;

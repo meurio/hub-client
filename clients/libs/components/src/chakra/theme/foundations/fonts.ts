@@ -1,4 +1,4 @@
 export default {
-  heading: 'Nunito Sans',
-  body: 'Nunito Sans',
+  heading: "Nunito Sans",
+  body: "Nunito Sans",
 };

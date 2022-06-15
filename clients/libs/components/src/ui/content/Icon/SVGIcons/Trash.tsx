@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Icon({ className }: any) {
   return (
@@ -7,7 +7,7 @@ function Icon({ className }: any) {
       width="18"
       height="18"
       fill="none"
-      className={className + ' fill'}
+      className={className + " fill"}
       viewBox="0 0 18 18"
     >
       <path
@@ -26,6 +26,6 @@ function Icon({ className }: any) {
   );
 }
 
-Icon.displayName = 'Icon.Trash';
+Icon.displayName = "Icon.Trash";
 
 export default Icon;

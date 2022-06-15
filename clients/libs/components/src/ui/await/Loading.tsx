@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import LoadingSVG, { LoadingSVGProps } from './LoadingSVG';
-import Header from '../content/Header';
+import React from "react";
+import styled from "styled-components";
+import LoadingSVG, { LoadingSVGProps } from "./LoadingSVG";
+import Header from "../content/Header";
 
 interface FullSizeProps {
   background?: string;
@@ -15,7 +15,7 @@ const FullSize = styled.div<FullSizeProps>`
   height: 100vh;
   align-items: center;
   justify-content: center;
-  background: ${props => props.background};
+  background: ${(props) => props.background};
 `;
 
 interface LoadingProps extends LoadingSVGProps {
@@ -23,17 +23,17 @@ interface LoadingProps extends LoadingSVGProps {
   background?: string;
   message?: string;
   messageComponent?: any;
-  align?: 'center' | 'left' | 'right';
+  align?: "center" | "left" | "right";
 }
 
-type LoadingStylesProps = Pick<LoadingProps, 'align'>;
+type LoadingStylesProps = Pick<LoadingProps, "align">;
 
 const LoadingStyles = styled.div<LoadingStylesProps>`
-  text-align: ${props => props.align};
+  text-align: ${(props) => props.align};
 `;
 
 interface LoadingProps {
-  align?: 'center' | 'left' | 'right';
+  align?: "center" | "left" | "right";
   fullsize?: boolean;
   background?: string;
   message?: string;
@@ -51,7 +51,7 @@ const Loading: React.FC<LoadingProps> = ({
   message,
   messageComponent: MessageComponent,
   ...props
-}) => {
+}: any) => {
   return fullsize ? (
     <FullSize background={background}>
       <LoadingSVG {...props} />
@@ -66,14 +66,14 @@ const Loading: React.FC<LoadingProps> = ({
 };
 
 Loading.defaultProps = {
-  align: 'center',
+  align: "center",
   fullsize: false,
-  background: 'rgba(219,219,219,0.31)',
-  color: '#050505',
-  size: 'default',
-  sparklesColor: '#35E3C3',
-  sparklesColorInit: '#DBDBDB',
-  sparklesDuration: '6s',
+  background: "rgba(219,219,219,0.31)",
+  color: "#050505",
+  size: "default",
+  sparklesColor: "#35E3C3",
+  sparklesColorInit: "#DBDBDB",
+  sparklesDuration: "6s",
   messageComponent: Header.H3,
 };
 

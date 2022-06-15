@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
-    className={className + ' fill'}
+    className={className + " fill"}
     width="17"
     height="18"
     viewBox="0 0 17 18"
@@ -22,6 +22,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.User';
+Icon.displayName = "Icon.User";
 
 export default Icon;

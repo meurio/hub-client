@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import Header from '../content/Header';
+import React from "react";
+import styled from "styled-components";
+import Header from "../content/Header";
 
 interface Img {
   src: string;
@@ -26,7 +26,7 @@ const DropdownImageItem = styled(({ className, value }: any) => {
       {label}
     </div>
   );
-}) <DropdownImageItemProps>`
+})<DropdownImageItemProps>`
   display: flex;
   padding: 10px 25px;
   flex-grow: 1;
@@ -37,7 +37,7 @@ const DropdownImageItem = styled(({ className, value }: any) => {
     height: 40px;
     margin-right: 10px;
   }
-  ${props =>
+  ${(props) =>
     props.clickable &&
     `
     &:hover {

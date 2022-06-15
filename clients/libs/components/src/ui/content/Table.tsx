@@ -1,29 +1,33 @@
 /* eslint-disable react/jsx-key */
-import React from 'react';
-import { useTable, useSortBy, useFlexLayout } from 'react-table';
-import { Stack } from '@chakra-ui/react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import {
+  useTable,
+  useSortBy,
+  useFlexLayout
+} from "react-table";
+import { Stack } from "@chakra-ui/react";
+import styled, { css } from "styled-components";
 
-import Pagination from './Pagination';
-import Icon from './Icon';
-import theme from '../base/theme';
+import Pagination from "./Pagination";
+import Icon from "./Icon";
+import theme from "../base/theme";
 
-interface Columns {
-  accessor?: string;
-  Header: any;
-  Cell?: (arg0: any) => string | React.ReactElement | null;
-  className?: string;
-  bold?: boolean;
-  show?: boolean;
-  Column?: any;
-  columns?: Array<any>;
-  minWidth?: number;
-  width?: number;
-  collapse?: boolean;
-}
+// interface Columns {
+//   accessor?: string;
+//   Header: any;
+//   Cell?: (arg0: any) => string | React.ReactElement | null;
+//   className?: string;
+//   bold?: boolean;
+//   show?: boolean;
+//   Column?: any;
+//   columns?: Array<any>;
+//   minWidth?: number;
+//   width?: number;
+//   collapse?: boolean;
+// }
 
 const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${(props) => props.theme.fontFamily};
   font-size: 13px;
   font-weight: 600;
   line-height: 18px;
@@ -40,7 +44,7 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
   /* Sticky */
   position: sticky !important;
   top: 0;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
 
   &.hide {
     display: none;
@@ -48,11 +52,11 @@ const StyledTh = styled.th<{ theme: any; backgroundColor: string }>`
 `;
 
 const StyledTd = styled.td<{ theme: any; bold?: boolean; hide?: boolean }>`
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${(props) => props.theme.fontFamily};
   font-size: 16px;
-  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
+  font-weight: ${(props) => (props.bold ? "bold" : "normal")};
   line-height: 22px;
-  color: ${props => props.theme.commons.dark};
+  color: ${(props) => props.theme.commons.dark};
   letter-spacing: normal;
   word-break: break-word;
   min-height: 60px;
@@ -80,7 +84,7 @@ const StyledTr = styled.tr`
 const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
   border-spacing: 0;
   border: 1px solid #e5e5e5;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${(props) => props.backgroundColor};
   width: 100%;
 
   thead {
@@ -111,7 +115,7 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
   }
 
   ${({ sticky }) =>
-    sticky === 'end' &&
+    sticky === "end" &&
     css`
       .sticky {
         right: 0;
@@ -130,7 +134,7 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
     `}
 
   ${({ sticky }) =>
-    sticky === 'start' &&
+    sticky === "start" &&
     css`
       .sticky {
         left: 0;
@@ -151,7 +155,7 @@ const StyledTable = styled.table<{ backgroundColor: string; sticky: string }>`
     position: sticky !important;
     top: 0;
     z-index: 1;
-    background-color: ${props => props.backgroundColor};
+    background-color: ${(props) => props.backgroundColor};
   }
 `;
 
@@ -163,10 +167,10 @@ const Main = styled.div`
 `;
 
 type Props = {
-  columns: Array<Columns>;
+  columns: any;
   data: Array<any>;
   backgroundColor: string;
-  sticky?: 'end' | 'start';
+  sticky?: "end" | "start";
   pagination?: {
     totalPages: number;
     goToPage: (page: number) => void;
@@ -193,21 +197,16 @@ function Table({
     []
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable(
-    {
-      columns,
-      data,
-      defaultColumn,
-    },
-    useSortBy,
-    useFlexLayout
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns,
+        data,
+        defaultColumn,
+      },
+      useSortBy,
+      useFlexLayout
+    );
 
   // Render the UI for your table
   return (
@@ -219,15 +218,15 @@ function Table({
           {...getTableProps()}
         >
           <thead>
-            {headerGroups.map(headerGroup => (
+            {headerGroups.map((headerGroup) => (
               <StyledTr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column: any) => (
                   <StyledTh
                     {...column.getHeaderProps({
                       ...column.getSortByToggleProps(),
                       className: column.collapse
-                        ? 'collapse '
-                        : '' + column.className || '',
+                        ? "collapse "
+                        : "" + column.className || "",
                       style: column.style,
                     })}
                     theme={theme}
@@ -235,12 +234,12 @@ function Table({
                   >
                     <div
                       style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        paddingRight: '5px',
+                        display: "flex",
+                        justifyContent: "space-between",
+                        paddingRight: "5px",
                       }}
                     >
-                      {column.render('Header')}
+                      {column.render("Header")}
                       <span>
                         {column.isSorted ? (
                           column.isSortedDesc ? (
@@ -249,7 +248,7 @@ function Table({
                             <Icon name="ArrowUp" size="small" />
                           )
                         ) : (
-                          ''
+                          ""
                         )}
                       </span>
                     </div>
@@ -259,7 +258,7 @@ function Table({
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
+            {rows.map((row) => {
               prepareRow(row);
               return (
                 <StyledTr {...row.getRowProps()}>
@@ -272,7 +271,7 @@ function Table({
                       })}
                       theme={theme}
                     >
-                      {cell.render('Cell')}
+                      {cell.render("Cell")}
                     </StyledTd>
                   ))}
                 </StyledTr>
@@ -296,7 +295,7 @@ function Table({
 }
 
 Table.defaultProps = {
-  backgroundColor: '#fff',
+  backgroundColor: "#fff",
 };
 
 export default Table;

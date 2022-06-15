@@ -1,9 +1,9 @@
-import React from 'react';
-import { useField } from 'react-final-form';
-import FormField from './FormField';
-import Hint from './Hint';
-import RoundSelect from './RoundSelect';
-import Label from './Label';
+import React from "react";
+import { useField } from "react-final-form";
+import FormField from "./FormField";
+import Hint from "./Hint";
+import RoundSelect from "./RoundSelect";
+import Label from "./Label";
 
 type Props = {
   name: string;
@@ -18,7 +18,7 @@ type Props = {
   isClearable?: boolean;
   onChange?: (event: any) => void;
   maxMenuHeight?: number;
-  menuPlacement?: 'auto' | 'top' | 'bottom';
+  menuPlacement?: "auto" | "top" | "bottom";
 };
 
 const RoundSelectField = ({
@@ -31,7 +31,7 @@ const RoundSelectField = ({
   isClearable,
   onChange,
   maxMenuHeight = 300,
-  menuPlacement = 'bottom',
+  menuPlacement = "bottom",
   ...config
 }: Props) => {
   const { input, meta } = useField(name, config);
@@ -51,7 +51,7 @@ const RoundSelectField = ({
         isClearable={isClearable}
         maxMenuHeight={maxMenuHeight}
         menuPlacement={menuPlacement}
-        onChange={e => {
+        onChange={(e) => {
           onChange && onChange(e);
           input.onChange(e);
         }}

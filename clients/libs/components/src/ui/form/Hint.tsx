@@ -1,23 +1,23 @@
-import styled from 'styled-components';
-import theme from '../base/theme';
+import styled from "styled-components";
+import theme from "../base/theme";
 
 interface HintProps {
-  color?: 'error' | 'warning' | 'info';
+  color?: "error" | "warning" | "info";
 }
 
 const handleColor = ({ color }: HintProps) => {
   switch (color) {
-    case 'info':
-      return '#aaa';
-    case 'error':
-      return '#ff0931';
+    case "info":
+      return "#aaa";
+    case "error":
+      return "#ff0931";
     default:
-      return '#50e3c2';
+      return "#50e3c2";
   }
 };
 
 const Hint = styled.span`
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${(props) => props.theme.fontFamily};
   font-size: 11px;
   font-weight: 600;
   line-height: 1.36;
@@ -28,7 +28,7 @@ const Hint = styled.span`
 
 Hint.defaultProps = {
   theme,
-  color: 'info',
+  color: "info",
 };
 
 export default Hint;

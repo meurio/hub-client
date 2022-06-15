@@ -1,9 +1,9 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const InfoIcon = createIcon({
-  displayName: 'InfoIcon',
-  viewBox: '0 0 14 14',
+  displayName: "InfoIcon",
+  viewBox: "0 0 14 14",
   path: (
     <>
       <path

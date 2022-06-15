@@ -1,9 +1,9 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const UploadImageIcon = createIcon({
-  displayName: 'UploadImageIcon',
-  viewBox: '0 0 84 84',
+  displayName: "UploadImageIcon",
+  viewBox: "0 0 84 84",
   path: (
     <>
       <circle cx="42" cy="42" r="41.5" fill="#424242" stroke="#EEE" />

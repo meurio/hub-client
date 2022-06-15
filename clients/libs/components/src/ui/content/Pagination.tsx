@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Stack, Button } from '@chakra-ui/react';
-import RoundSelect from '../form/RoundSelect';
-import theme from '../base/theme';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Stack, Button } from "@chakra-ui/react";
+import RoundSelect from "../form/RoundSelect";
+import theme from "../base/theme";
 
 type Props = {
   goToPage: (arg: number) => void;
@@ -10,7 +10,7 @@ type Props = {
   pageSize: number;
   setPageSize: (arg: number) => void;
   totalPages: number;
-  showMorePlacement?: 'auto' | 'top' | 'bottom';
+  showMorePlacement?: "auto" | "top" | "bottom";
 };
 
 const WrapSelect = styled.div<{ theme: any }>`
@@ -100,8 +100,8 @@ const Pagination = ({
         onClick={() => setPage(0)}
         disabled={pageIndex === 0}
       >
-        {'<<'}
-      </Button>{' '}
+        {"<<"}
+      </Button>{" "}
       <Button
         variant="link"
         colorScheme="gray"
@@ -109,14 +109,14 @@ const Pagination = ({
         disabled={pageIndex === 0}
       >
         anterior
-      </Button>{' '}
+      </Button>{" "}
       <Stack direction="row" spacing={2}>
         {items.map((item: number, i: number) => (
           <Button
             key={`page-item-${i}`}
             variant="link"
             colorScheme="gray"
-            color={item - 1 === pageIndex ? 'pink.200' : 'gray.300'}
+            color={item - 1 === pageIndex ? "pink.200" : "gray.300"}
             onClick={() => setPage(item - 1)}
           >
             {item}
@@ -130,37 +130,37 @@ const Pagination = ({
         disabled={pageIndex === totalPages - 1}
       >
         próxima
-      </Button>{' '}
+      </Button>{" "}
       <Button
         variant="link"
         colorScheme="gray"
         onClick={() => setPage(totalPages - 1)}
         disabled={pageIndex === totalPages - 1}
       >
-        {'>>'}
-      </Button>{' '}
+        {">>"}
+      </Button>{" "}
       <WrapSelect>
         <RoundSelect
           options={[
             {
               value: 10,
-              label: 'Mostrar 10',
+              label: "Mostrar 10",
             },
             {
               value: 20,
-              label: 'Mostrar 20',
+              label: "Mostrar 20",
             },
             {
               value: 30,
-              label: 'Mostrar 30',
+              label: "Mostrar 30",
             },
             {
               value: 40,
-              label: 'Mostrar 40',
+              label: "Mostrar 40",
             },
             {
               value: 50,
-              label: 'Mostrar 50',
+              label: "Mostrar 50",
             },
           ]}
           placeholder=""
@@ -168,8 +168,8 @@ const Pagination = ({
             value: pageSize,
             label: `Mostrar ${pageSize}`,
           }}
-          onChange={e => setPageSize(Number(e.value))}
-          menuPortalTarget={document.querySelector('body')}
+          onChange={(e) => setPageSize(Number(e.value))}
+          menuPortalTarget={document.querySelector("body")}
           menuPlacement={showMorePlacement}
         />
       </WrapSelect>

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Stack, Image, Text } from '@chakra-ui/react';
+import React from "react";
+import { Stack, Image, Text } from "@chakra-ui/react";
 import {
   PerformDropdown,
   PerformDropdownList,
   PerformDropdownItem,
   PerformDropdownButton,
-} from '../ui';
-import CommunityMenu from './CommunityMenu';
+} from "../ui";
+import CommunityMenu from "./CommunityMenu";
 
-import { Session } from './types';
+import { Session } from "./types";
 
 interface CommunitiesDropdownProperties {
   isMobile?: boolean;
@@ -48,7 +48,7 @@ const CommunitiesDropdown: React.FC<CommunitiesDropdownProperties> = ({
               </Text>
             </Stack>
           ) : (
-            'Selecione uma comunidade'
+            "Selecione uma comunidade"
           )}
         </PerformDropdownButton>
         <PerformDropdownList scroll={communities.length > 10}>
@@ -56,7 +56,7 @@ const CommunitiesDropdown: React.FC<CommunitiesDropdownProperties> = ({
             <PerformDropdownItem
               key={c.id}
               onClick={() => {
-                updateSession('community', c);
+                updateSession("community", c);
               }}
             >
               <Stack direction="row" spacing={4} p={4}>

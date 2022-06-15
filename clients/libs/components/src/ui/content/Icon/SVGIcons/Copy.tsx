@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Icon: React.FC = ({ className }: any) => {
   return (
@@ -8,7 +8,7 @@ const Icon: React.FC = ({ className }: any) => {
       height="16"
       fill="none"
       viewBox="0 0 14 16"
-      className={className + ' fill'}
+      className={className + " fill"}
     >
       <path
         fill="#000"
@@ -20,6 +20,6 @@ const Icon: React.FC = ({ className }: any) => {
   );
 };
 
-Icon.displayName = 'Icon.Copy';
+Icon.displayName = "Icon.Copy";
 
 export default Icon;

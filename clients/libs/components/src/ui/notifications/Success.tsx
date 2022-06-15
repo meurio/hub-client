@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { SuccessIcon } from './Icons';
+import React from "react";
+import styled from "styled-components";
+import { SuccessIcon } from "./Icons";
 
-const Message: React.FC = styled.div`
+const Message = styled.div`
   display: flex;
   flex-direction: row;
 

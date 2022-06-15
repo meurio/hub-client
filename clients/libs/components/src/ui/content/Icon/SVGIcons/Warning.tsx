@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Icon: React.FC = ({ className }: any) => {
   return (
@@ -7,7 +7,7 @@ const Icon: React.FC = ({ className }: any) => {
       width="14"
       height="14"
       fill="none"
-      className={className + ' fill'}
+      className={className + " fill"}
       viewBox="0 0 14 14"
     >
       <g fill="#424242" clipPath="url(#clip0)">
@@ -23,6 +23,6 @@ const Icon: React.FC = ({ className }: any) => {
   );
 };
 
-Icon.displayName = 'Icon.Warning';
+Icon.displayName = "Icon.Warning";
 
 export default Icon;

@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import theme from '../base/theme';
+import styled, { css } from "styled-components";
+import theme from "../base/theme";
 
 type Props = {
   type?: string;
@@ -16,10 +16,10 @@ const RoundInput = styled.input<Props>`
   width: 100%;
   height: 40px;
 
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${(props) => props.theme.fontFamily};
   font-size: 14px;
   line-height: 22px;
-  color: ${props => props.theme.commons.dark};
+  color: ${(props) => props.theme.commons.dark};
   border: none;
   box-sizing: border-box;
   background-color: unset;
@@ -34,8 +34,8 @@ const RoundInput = styled.input<Props>`
   &::-moz-placeholder,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
-    color: ${props => props.theme.commons.dark};
-    font-family: ${props => props.theme.fontFamily};
+    color: ${(props) => props.theme.commons.dark};
+    font-family: ${(props) => props.theme.fontFamily};
   }
 
   ${({ border, value, theme, invalid }) =>
@@ -64,7 +64,7 @@ const RoundInput = styled.input<Props>`
 
 RoundInput.defaultProps = {
   invalid: false,
-  type: 'text',
+  type: "text",
   theme,
 };
 

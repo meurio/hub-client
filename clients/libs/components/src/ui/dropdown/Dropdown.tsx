@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import DropdownList from './ui/DropdownList';
-import DropdownItem from './ui/DropdownItem';
-import DropdownInput from './ui/DropdownInput';
-import Icon from '../content/Icon';
-import theme from '../base/theme';
+import React, { useRef, useEffect, useState } from "react";
+import styled from "styled-components";
+import DropdownList from "./ui/DropdownList";
+import DropdownItem from "./ui/DropdownItem";
+import DropdownInput from "./ui/DropdownInput";
+import Icon from "../content/Icon";
+import theme from "../base/theme";
 
 const useOutsideAlerter = (ref: any, onEvent: any) => {
   const handleClickOutside = (event: any) => {
@@ -14,9 +14,9 @@ const useOutsideAlerter = (ref: any, onEvent: any) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   });
 };
@@ -24,7 +24,7 @@ const useOutsideAlerter = (ref: any, onEvent: any) => {
 export const DropdownFluid = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: ${props => props.theme.fontFamily};
+  font-family: ${(props) => props.theme.fontFamily};
 `;
 
 DropdownFluid.defaultProps = {
@@ -32,7 +32,7 @@ DropdownFluid.defaultProps = {
 };
 
 interface DropdownFluidListProps {
-  direction?: 'left' | 'right';
+  direction?: "left" | "right";
 }
 
 const DropdownFluidList = styled.div<DropdownFluidListProps>`
@@ -41,24 +41,26 @@ const DropdownFluidList = styled.div<DropdownFluidListProps>`
   display: flex;
   flex-direction: column;
   z-index: 3;
-  ${props =>
-    props.direction === 'left' &&
+  ${(props) =>
+    props.direction === "left" &&
     `
     left: 0;
   `}
-  ${props =>
-    props.direction === 'right' &&
+  ${(props) =>
+    props.direction === "right" &&
     `
     right: 0;
   `}
 `;
 
-const DropdownFluidInput = styled(({ children, className, onToggle, open }: any) => (
-  <div className={className} onClick={onToggle}>
-    {children}
-    <Icon name={!open ? 'ArrowDown' : 'ArrowUp'} color="#fff" size="small" />
-  </div>
-))`
+const DropdownFluidInput = styled(
+  ({ children, className, onToggle, open }: any) => (
+    <div className={className} onClick={onToggle}>
+      {children}
+      <Icon name={!open ? "ArrowDown" : "ArrowUp"} color="#fff" size="small" />
+    </div>
+  )
+)`
   display: flex;
   z-index: 2;
   cursor: pointer;
@@ -81,7 +83,7 @@ interface DropdownFluidItemProps {
 
 const DropdownFluidItem = styled.div<DropdownFluidItemProps>`
   display: flex;
-  ${props => props.clickable && `cursor: pointer;`}
+  ${(props) => props.clickable && `cursor: pointer;`}
 `;
 
 const DropdownFluidLayout = styled.div`
@@ -97,7 +99,7 @@ interface DropdownProps {
   dropdownInput?: any;
   dropdownItem?: any;
   dropdownList?: any;
-  direction?: 'left' | 'right';
+  direction?: "left" | "right";
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -133,20 +135,20 @@ const Dropdown: React.FC<DropdownProps> = ({
             <DropdownListUI>
               {items.map((value, index) => {
                 const clickable =
-                  typeof value === 'string'
+                  typeof value === "string"
                     ? true
-                    : typeof value.clickable === 'undefined'
-                      ? true
-                      : value.clickable;
+                    : typeof value.clickable === "undefined"
+                    ? true
+                    : value.clickable;
 
                 const itemProps = {
                   clickable,
                   onClick: !clickable
                     ? null
                     : () => {
-                      onSelect(value);
-                      setOpen(false);
-                    },
+                        onSelect(value);
+                        setOpen(false);
+                      },
                 };
 
                 return (
@@ -154,7 +156,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                     key={`dropdown-item-${index}`}
                     {...itemProps}
                   >
-                    {typeof value !== 'string' && value.render ? (
+                    {typeof value !== "string" && value.render ? (
                       <value.render value={value} selected={item} />
                     ) : (
                       <DropdownItemUI clickable value={value} selected={item} />
@@ -171,7 +173,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 };
 
 Dropdown.defaultProps = {
-  direction: 'left',
+  direction: "left",
   selectable: true,
   items: [],
   dropdownInput: DropdownInput,

@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface BondeProps {
   large?: boolean;
@@ -10,7 +10,7 @@ const Bonde = styled(({ className, large }: any) => (
     xmlns="http://www.w3.org/2000/svg"
     className={className}
     width={large ? 260 : 85}
-    viewBox={large ? '0 0 200 100' : '50 25 100 50'}
+    viewBox={large ? "0 0 200 100" : "50 25 100 50"}
   >
     <path
       fill="#FFF"
@@ -80,9 +80,9 @@ const Bonde = styled(({ className, large }: any) => (
       <path d="M243.752 71.648h-17.338V30.52h16.185c7.608 0 13.131 5.013 13.131 11.921 0 3.107-1.127 5.808-3.269 7.847 3.042 2.112 4.709 5.345 4.709 9.152 0 7.074-5.642 12.208-13.418 12.208zm-16.546-.792h16.546c7.317 0 12.628-4.802 12.628-11.416 0-3.702-1.695-6.818-4.772-8.769l-.449-.285.4-.349c2.211-1.92 3.379-4.547 3.379-7.596 0-6.448-5.188-11.13-12.339-11.13h-15.393v39.545zm16.546-7.849h-8.117v-8.515h8.117c2.474 0 4.198 1.751 4.198 4.257 0 2.504-1.724 4.258-4.198 4.258zm-7.327-.793h7.327c2.038 0 3.408-1.393 3.408-3.465 0-2.073-1.37-3.465-3.408-3.465h-7.327v6.93zm6.174-15.112h-6.964v-7.937h6.964c2.303 0 3.911 1.632 3.911 3.968 0 2.3-1.646 3.969-3.911 3.969zm-6.174-.792h6.174c1.837 0 3.12-1.307 3.12-3.178 0-1.898-1.253-3.176-3.12-3.176h-6.174v6.354z"></path>
     </g>
   </svg>
-)) <BondeProps>`
+))<BondeProps>`
   display: flex;
-  ${props =>
+  ${(props) =>
     !props.large &&
     `
     height: calc(1.5 * 15px);

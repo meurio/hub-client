@@ -1,31 +1,23 @@
 {
-  "include": ["src", "types", "test"],
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "importHelpers": true,
-    "declaration": true,
-    "sourceMap": true,
-    "rootDir": "./",
+    "rootDir": "./src",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
     "strict": true,
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
-    "baseUrl": "./",
-    "paths": {
-      "@": ["./"],
-      "*": ["src/*", "node_modules/*"]
-    },
     "jsx": "react",
-    "esModuleInterop": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vite/client", "node", "jest"]
+  },
+  "include": ["src"],
+  "exclude": ["**/*.test.ts", "node_modules", "test/**", ".history/**"]
 }

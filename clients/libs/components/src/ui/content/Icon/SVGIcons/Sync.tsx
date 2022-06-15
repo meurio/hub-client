@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 function Icon({ className }: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={className + ' fill'}
+      className={className + " fill"}
       width="14"
       height="15"
       fill="none"
@@ -26,6 +26,6 @@ function Icon({ className }: any) {
   );
 }
 
-Icon.displayName = 'Icon.Sync';
+Icon.displayName = "Icon.Sync";
 
 export default Icon;

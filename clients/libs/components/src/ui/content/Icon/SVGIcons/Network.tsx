@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={className + ' fill'}
+    className={className + " fill"}
     fill="none"
     viewBox="0 0 25 18"
   >
@@ -38,6 +38,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.Network';
+Icon.displayName = "Icon.Network";
 
 export default Icon;

@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={className + ' stroke'}
+    className={className + " stroke"}
     viewBox="0 0 10 10"
   >
     <path
@@ -17,6 +17,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.Times';
+Icon.displayName = "Icon.Times";
 
 export default Icon;

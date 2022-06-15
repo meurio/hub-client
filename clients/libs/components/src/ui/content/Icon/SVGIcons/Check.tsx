@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => {
   return (
@@ -7,7 +7,7 @@ const Icon = ({ className }: any) => {
       width="13"
       height="10"
       fill="none"
-      className={className + ' fill'}
+      className={className + " fill"}
       viewBox="0 0 13 10"
     >
       <path
@@ -20,6 +20,6 @@ const Icon = ({ className }: any) => {
   );
 };
 
-Icon.displayName = 'Icon.Check';
+Icon.displayName = "Icon.Check";
 
 export default Icon;

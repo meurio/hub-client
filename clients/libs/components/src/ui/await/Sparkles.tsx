@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 interface SparkProps {
   colorInit: string;
@@ -9,9 +9,9 @@ interface SparkProps {
 }
 
 const Spark = styled.path<SparkProps>`
-  fill: ${props => props.colorInit};
-  animation-name: ${props => props.pulse};
-  animation-duration: ${props => props.duration};
+  fill: ${(props) => props.colorInit};
+  animation-name: ${(props) => props.pulse};
+  animation-duration: ${(props) => props.duration};
   animation-iteration-count: infinite;
 `;
 
@@ -85,9 +85,9 @@ const Sparkles: React.FC<SparklesProps> = ({ color, colorInit, duration }) => {
 };
 
 Sparkles.defaultProps = {
-  colorInit: '#DBDBDB',
-  color: '#35E3C3',
-  duration: '6s',
+  colorInit: "#DBDBDB",
+  color: "#35E3C3",
+  duration: "6s",
 };
 
 export default Sparkles;

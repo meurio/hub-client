@@ -1,9 +1,9 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const ArrowUpIcon = createIcon({
-  displayName: 'ArrowUpIcon',
-  viewBox: '4 4 15 15',
+  displayName: "ArrowUpIcon",
+  viewBox: "4 4 15 15",
   path: (
     <>
       <path

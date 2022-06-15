@@ -1,15 +1,15 @@
 const baseStyle = ({ colorScheme }: any) => ({
   control: {
-    border: '1px solid',
-    borderColor: 'gray.400',
+    border: "1px solid",
+    borderColor: "gray.400",
     _checked: {
       bg: `none`,
       borderColor: `${colorScheme}.200`,
       _before: {
-        w: '100%',
-        h: '100%',
+        w: "100%",
+        h: "100%",
         bg: `${colorScheme}.200`,
-        borderColor: 'white',
+        borderColor: "white",
         border: `1px solid`,
         color: `white`,
       },
@@ -18,14 +18,14 @@ const baseStyle = ({ colorScheme }: any) => ({
       borderColor: `${colorScheme}.200`,
     },
     _focus: {
-      boxShadow: 'none',
+      boxShadow: "none",
     },
     _disabled: {
-      borderColor: 'gray.100',
-      bg: 'gray.100',
+      borderColor: "gray.100",
+      bg: "gray.100",
       _hover: {
-        borderColor: 'gray.100',
-        bg: 'gray.100',
+        borderColor: "gray.100",
+        bg: "gray.100",
       },
     },
   },
@@ -34,6 +34,6 @@ const baseStyle = ({ colorScheme }: any) => ({
 export default {
   baseStyle: baseStyle,
   defaultProps: {
-    colorScheme: 'pink',
+    colorScheme: "pink",
   },
 };

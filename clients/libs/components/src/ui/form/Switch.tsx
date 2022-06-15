@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import React from 'react';
+import styled from "styled-components";
+import React from "react";
 
 interface SwitchProps {
   onClick?: () => void;
@@ -51,7 +51,7 @@ const Label = styled.label`
 
   .slider::before {
     position: absolute;
-    content: '';
+    content: "";
     height: 12px;
     width: 12px;
     border-radius: 50%;

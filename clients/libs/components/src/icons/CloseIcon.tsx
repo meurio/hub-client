@@ -1,9 +1,9 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const CloseIcon = createIcon({
-  displayName: 'CloseIcon',
-  viewBox: '0 0 10 10',
+  displayName: "CloseIcon",
+  viewBox: "0 0 10 10",
   path: (
     <>
       <path

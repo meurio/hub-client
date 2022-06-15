@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className, color }: any) => (
   <svg
@@ -42,7 +42,7 @@ const Icon = ({ className, color }: any) => (
       />
       {/* avoid this type of code, this is the type of component that we should discuss if it is in the right place. */}
       <path
-        fill={color || '#000'}
+        fill={color || "#000"}
         d="M0 13.058l2.52 1.632v-.78L.216 12.49 0 12.348zM0 11.78l2.52 1.491v-2.555L.216 9.296 0 9.156zM2.664 1.49L0 0h1.08l2.88 1.49zM17.352 15.4c0 3.477-2.88 5.748-6.48 5.748H2.52V1.49h7.848c3.456 0 6.336 2.2 6.336 5.607a4.852 4.852 0 0 1-1.728 3.832 5.315 5.315 0 0 1 2.376 4.471zM7.056 5.677v3.478h3.24c.475.013.934-.172 1.263-.51.329-.338.498-.797.465-1.264a1.647 1.647 0 0 0-.465-1.265 1.697 1.697 0 0 0-1.263-.51l-3.24.071zm5.688 9.368a1.795 1.795 0 0 0-.51-1.362 1.85 1.85 0 0 0-1.362-.554H7.056v3.761h3.816a1.721 1.721 0 0 0 1.381-.483c.363-.358.544-.858.491-1.362z"
       />
       <path
@@ -53,6 +53,6 @@ const Icon = ({ className, color }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.Bonde';
+Icon.displayName = "Icon.Bonde";
 
 export default Icon;

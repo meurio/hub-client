@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import Header from './Header';
-import CleanButton from './CleanButton';
-import theme from '../base/theme';
+import React from "react";
+import styled from "styled-components";
+import Header from "./Header";
+import CleanButton from "./CleanButton";
+import theme from "../base/theme";
 
 const Wrapper = styled(CleanButton)<{ theme: any }>`
   width: 200px;

@@ -1,7 +1,7 @@
-import React from 'react';
-import { useField } from 'react-final-form';
-import { Select, FormControl, FormLabel, Flex } from '@chakra-ui/react';
-import Hint from './Hint';
+import React from "react";
+import { useField } from "react-final-form";
+import { Select, FormControl, FormLabel, Flex } from "@chakra-ui/react";
+import Hint from "./Hint";
 
 type Props = {
   children: any;

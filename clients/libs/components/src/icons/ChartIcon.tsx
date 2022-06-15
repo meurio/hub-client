@@ -1,9 +1,9 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const ChartIcon = createIcon({
-  displayName: 'CloseIcon',
-  viewBox: '0 0 21 21',
+  displayName: "CloseIcon",
+  viewBox: "0 0 21 21",
   path: (
     <>
       <g fill="currentColor" clipPath="url(#clip0)">

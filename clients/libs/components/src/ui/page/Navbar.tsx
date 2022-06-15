@@ -1,14 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Flex } from '@chakra-ui/react';
-import Icon from '../content/Icon';
-import Bonde from '../content/Bonde';
+import React from "react";
+import styled from "styled-components";
+import { Flex } from "@chakra-ui/react";
+import Icon from "../content/Icon";
+import Bonde from "../content/Bonde";
 
 interface NavbarProps {
+  children?: any;
   className?: string;
   indexRoute: string;
   fixed?: boolean;
-  brand?: 'default' | 'small';
+  brand?: "default" | "small";
 }
 
 // Reset link to keep BondeSVG render
@@ -27,9 +28,9 @@ const Navbar: React.FC<NavbarProps> = ({
   children,
   indexRoute,
   fixed = false,
-}) => (
+}: any) => (
   <Flex
-    position={fixed ? 'fixed' : 'relative'}
+    position={fixed ? "fixed" : "relative"}
     direction="row"
     w="100%"
     bg="black"
@@ -38,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({
     alignItems="center"
   >
     <HomeLink href={indexRoute} title="Bonde Home Link">
-      {brand !== 'small' ? <Bonde /> : <Icon name="Bonde" />}
+      {brand !== "small" ? <Bonde /> : <Icon name="Bonde" />}
     </HomeLink>
     {children}
   </Flex>

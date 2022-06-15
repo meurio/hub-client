@@ -1,11 +1,11 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { useField } from 'react-final-form';
-import FormField from './FormField';
-import Hint from './Hint';
-import RoundInput from './RoundInput';
-import Label from './Label';
-import theme from '../base/theme';
+import React from "react";
+import styled, { css } from "styled-components";
+import { useField } from "react-final-form";
+import FormField from "./FormField";
+import Hint from "./Hint";
+import RoundInput from "./RoundInput";
+import Label from "./Label";
+import theme from "../base/theme";
 
 type Props = {
   name: string;
@@ -23,7 +23,7 @@ const StyledFormField = styled(FormField)<{
   border: 1px solid;
   border-radius: 7px;
   padding: 0;
-  ${props =>
+  ${(props) =>
     !props.value
       ? css`
           &:hover,
@@ -40,7 +40,7 @@ const StyledFormField = styled(FormField)<{
           border-color: ${props.theme.brand.main};
         `}
 
-  ${props =>
+  ${(props) =>
     props.invalid &&
     `
     border-color: ${props.theme.error};

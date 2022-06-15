@@ -1,3 +1,3 @@
-export { default as theme } from './theme';
+export { default as theme } from "./theme";
 
-export * from '@chakra-ui/react';
+export * from "@chakra-ui/react";

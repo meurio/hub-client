@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import ReactSelect, { components } from 'react-select';
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
+import ReactSelect, { components } from "react-select";
 
-import theme from '../base/theme';
-import Icon from '../content/Icon';
+import theme from "../base/theme";
+import Icon from "../content/Icon";
 
 const SelectIcon = styled.div<{ show: boolean }>`
   transition: all 350ms;
 
-  ${props =>
+  ${(props) =>
     props.show &&
     css`
       transform: rotate(180deg);
@@ -25,10 +25,10 @@ const StyledControl = styled.div<{
   & > .Select__control {
     // Sets clear button color dinamically
     & > .Select__indicators > .Select__clear-indicator {
-      color: ${props => props.theme.brand.main};
+      color: ${(props) => props.theme.brand.main};
     }
     background-color: unset;
-    ${props =>
+    ${(props) =>
       !props.value
         ? css`
             &:hover,
@@ -44,7 +44,7 @@ const StyledControl = styled.div<{
             }
             border-color: ${props.theme.brand.main};
           `}
-    ${props =>
+    ${(props) =>
       props.invalid &&
       css`
         &:hover,
@@ -57,8 +57,8 @@ const StyledControl = styled.div<{
     width: 100%;
     & > .Select__value-container {
       & > .Select__placeholder {
-        font-family: ${props => props.theme.fontFamily};
-        color: ${props => props.theme.commons.dark};
+        font-family: ${(props) => props.theme.fontFamily};
+        color: ${(props) => props.theme.commons.dark};
       }
     }
   }
@@ -74,10 +74,10 @@ const StyledSingleValue = styled.div<{
   value: string;
 }>`
   & > .Select__single-value {
-    opacity: ${props => (props.isDisabled ? 0.5 : 1)};
+    opacity: ${(props) => (props.isDisabled ? 0.5 : 1)};
     transition: opacity 300ms;
-    font-family: ${props => props.theme.fontFamily};
-    color: ${props =>
+    font-family: ${(props) => props.theme.fontFamily};
+    color: ${(props) =>
       !props.value ? props.theme.commons.main : props.theme.brand.main};
   }
 `;
@@ -93,9 +93,9 @@ const StyledOption = styled.div<{
   isDisabled: boolean;
 }>`
   & > .Select__option {
-    font-family: ${props => props.theme.fontFamily};
-    cursor: ${props => (props.isDisabled ? 'not-allowed' : 'default')};
-    ${props =>
+    font-family: ${(props) => props.theme.fontFamily};
+    cursor: ${(props) => (props.isDisabled ? "not-allowed" : "default")};
+    ${(props) =>
       props.isSelected &&
       css`
         background-color: rgba(74, 74, 74, 0.5);
@@ -103,17 +103,17 @@ const StyledOption = styled.div<{
           backgroundcolor: rgba(74, 74, 74, 0.5);
         }
       `}
-    ${props =>
+    ${(props) =>
       props.isFocused &&
       css`
         background-color: rgba(74, 74, 74, 0.3);
       `}
-    ${props =>
+    ${(props) =>
       props.isDisabled &&
       css`
         color: #ccc;
       `}
-    color: ${props =>
+    color: ${(props) =>
       props.isSelected ? props.theme.brand.light : props.theme.commons.dark};
   }
 `;
@@ -183,7 +183,7 @@ type Props = {
   menuPortalTarget?: HTMLBodyElement | null;
   isClearable?: boolean;
   maxMenuHeight?: number;
-  menuPlacement?: 'auto' | 'top' | 'bottom';
+  menuPlacement?: "auto" | "top" | "bottom";
 };
 
 const RoundSelect = ({ ...props }: Props) => {
@@ -203,7 +203,7 @@ const RoundSelect = ({ ...props }: Props) => {
       onMenuClose={() => toggle(false)}
       onInputChange={() => toggle(false)}
       show={show}
-      classNamePrefix={'Select'}
+      classNamePrefix={"Select"}
     />
   );
 };
@@ -213,6 +213,6 @@ RoundSelect.defaultProps = {
   menuHeight: 300,
 };
 
-RoundSelect.displayName = 'RoundSelect';
+RoundSelect.displayName = "RoundSelect";
 
 export default RoundSelect;

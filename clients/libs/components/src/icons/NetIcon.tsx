@@ -1,8 +1,8 @@
-import React from 'react';
-import { createIcon } from '@chakra-ui/react';
+import React from "react";
+import { createIcon } from "@chakra-ui/react";
 
 const NetIcon = createIcon({
-  displayName: 'NetIcon',
+  displayName: "NetIcon",
   path: (
     <>
       <path

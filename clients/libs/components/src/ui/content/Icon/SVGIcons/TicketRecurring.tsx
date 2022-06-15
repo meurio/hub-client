@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
@@ -6,7 +6,7 @@ const Icon = ({ className }: any) => (
     width="30"
     height="23"
     fill="none"
-    className={className + ' fill'}
+    className={className + " fill"}
     viewBox="0 0 30 23"
   >
     <g fill="#000" clipPath="url(#clip0)">
@@ -27,6 +27,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.TicketRecurring';
+Icon.displayName = "Icon.TicketRecurring";
 
 export default Icon;

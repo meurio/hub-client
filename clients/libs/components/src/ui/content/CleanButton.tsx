@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const CleanButton = styled.button`
   border: none;
@@ -30,6 +30,6 @@ const CleanButton = styled.button`
   }
 `;
 
-CleanButton.displayName = 'CleanButton';
+CleanButton.displayName = "CleanButton";
 
 export default CleanButton;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Icon: React.FC = () => {
   return (
@@ -24,6 +24,6 @@ const Icon: React.FC = () => {
   );
 };
 
-Icon.displayName = 'SuccessIcon';
+Icon.displayName = "SuccessIcon";
 
 export default Icon;

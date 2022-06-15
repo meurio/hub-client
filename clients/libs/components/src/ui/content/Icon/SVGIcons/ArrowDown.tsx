@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={className + ' fill'}
+    className={className + " fill"}
     viewBox="4 4 15 15"
   >
     <path
@@ -13,6 +13,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.ArrowDown';
+Icon.displayName = "Icon.ArrowDown";
 
 export default Icon;

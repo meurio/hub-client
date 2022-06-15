@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Icon = ({ className }: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className={className + ' fill'}
+    className={className + " fill"}
     width="28"
     height="28"
     fill="none"
@@ -16,6 +16,6 @@ const Icon = ({ className }: any) => (
   </svg>
 );
 
-Icon.displayName = 'Icon.Cloud';
+Icon.displayName = "Icon.Cloud";
 
 export default Icon;

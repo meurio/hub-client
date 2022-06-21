@@ -95,13 +95,11 @@ describe('FormPanel tests', () => {
   describe('onSubmit validate', () => {
     const mockUpdateMobilization = jest.fn();
     const mockCreateDnsHostedZone = jest.fn();
-    const mockUpdateDnsHostedZone = jest.fn();
     const mockCreateOrUpdateCertificate = jest.fn();
 
     beforeEach(() => {
       mockUseMutation.mockReturnValueOnce([mockUpdateMobilization]);
       mockUseMutation.mockReturnValueOnce([mockCreateDnsHostedZone]);
-      mockUseMutation.mockReturnValueOnce([mockUpdateDnsHostedZone]);
       mockUseMutation.mockReturnValueOnce([mockCreateOrUpdateCertificate]);
       // jest.clearAllMocks();
     });
@@ -160,7 +158,6 @@ describe('FormPanel tests', () => {
 
       await form.props().onSubmit({ customDomain, isExternalDomain: true });
 
-      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(1);
       expect(mockCreateDnsHostedZone.mock.calls[0][0]).toEqual({
         variables: {
           comment: `mobilization_id:${mobilization.id}`,
@@ -183,7 +180,6 @@ describe('FormPanel tests', () => {
 
       await form.props().onSubmit({ customDomain, isExternalDomain: true });
 
-      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(1);
       expect(mockUpdateMobilization.mock.calls.length).toEqual(0);
       // Expect call toast failed message
       expect(mockToast.mock.calls[0][0]).toEqual({
@@ -229,13 +225,6 @@ describe('FormPanel tests', () => {
 
       await form.props().onSubmit({ customDomain, isExternalDomain: true });
 
-      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(1);
-      expect(mockUpdateDnsHostedZone.mock.calls.length).toEqual(1);
-      expect(mockUpdateDnsHostedZone.mock.calls[0][0]).toEqual({
-        variables: {
-          id: 13
-        }
-      });
       expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
       // Expect call toast success message
       expect(mockToast.mock.calls[0][0]).toEqual({
@@ -279,12 +268,6 @@ describe('FormPanel tests', () => {
 
       expect(mockCheckDNS.mock.calls.length).toEqual(1);
       expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(0);
-      expect(mockUpdateDnsHostedZone.mock.calls.length).toEqual(1);
-      expect(mockUpdateDnsHostedZone.mock.calls[0][0]).toEqual({
-        variables: {
-          id: hostedZones[0].id
-        }
-      });
       expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
       // Expect call toast success message
       expect(mockToast.mock.calls[0][0]).toEqual({

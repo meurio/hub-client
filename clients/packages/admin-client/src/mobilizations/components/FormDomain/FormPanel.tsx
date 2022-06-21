@@ -151,12 +151,22 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       );
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
-      toast({
-        title: 'Falha ao atualizar o domínio',
-        description: 'Esse endereço já está sendo usado em outra página.',
-        status: 'error',
-        isClosable: true
-      });
+      if (!customDomain) {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'O endereço não pode ficar em branco',
+          status: 'error',
+          isClosable: true
+        })
+      }
+      else {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'Esse endereço já está sendo usado em outra página.',
+          status: 'error',
+          isClosable: true
+        })
+      }
     }
   }
 

@@ -105,7 +105,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
       const hostedZone = internalHostedZones.filter((hz) => customDomain.endsWith(hz.domain_name))[0];
-      if (isExternalDomain) {
+      if (isExternalDomain && mobilization.community_id) {
         // Create dns hosted zone
         const { data } = await createDnsHostedZone({
           variables: {
@@ -127,7 +127,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
         }
       } else {
         if (!hostedZone?.ns_ok) {
-          if (await checkDNS(customDomain, 'NS', { ns: hostedZone.name_servers })) {
+          if (await checkDNS(customDomain, 'NS', { ns: hostedZone?.name_servers })) {
             await updateDnsHostedZone({ variables: { id: hostedZone.id } })
           }
         }

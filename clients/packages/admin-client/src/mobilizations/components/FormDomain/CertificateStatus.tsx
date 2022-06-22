@@ -41,7 +41,7 @@ export const CertificateStatus: React.FC<Properties> = ({ updateDomain, customDo
   )[0];
   const hasCertificate = domain?.certificates[0]?.is_active
   const isExternalDomain = domain?.is_external_domain
-  const failedIp = (!domain?.ns_ok && isExternalDomain) || (domain === undefined)
+  const failedIp = (!domain?.ns_ok && isExternalDomain) || (domain === undefined && customDomain)
   const toast = useToast()
 
   const [updateDnsHostedZone] = useMutation(

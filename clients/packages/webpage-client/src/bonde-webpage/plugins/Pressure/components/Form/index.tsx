@@ -47,6 +47,7 @@ type Props = {
   };
   BeforeStandardFields?: any;
   AfterStandardFields?: any;
+  CaptchaFields?: any;
   saving: boolean;
   errors: Array<string>;
 };
@@ -56,6 +57,7 @@ const PressureForm = ({
   pureTargets,
   BeforeStandardFields,
   AfterStandardFields,
+  CaptchaFields,
   onSubmit,
   saving,
   errors,
@@ -192,6 +194,7 @@ const PressureForm = ({
                   )}
                   {AfterStandardFields && <AfterStandardFields />}
                 </WrapFields>
+                {CaptchaFields}
                 {errors.length >= 1 && (
                   <>
                     {errors.map((error: string, i: number) => (

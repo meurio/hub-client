@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import { createRef } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import { Translate } from '../../../components/MobilizationClass';
 import { Count, Form, Targets } from '../components';
@@ -60,12 +62,14 @@ type Props = {
   asyncFillWidget: (_params: {
     payload: Record<string, any>;
     widget: Record<string, any>;
+    captchaCode: any
   }) => Promise<any>;
 };
 
 const initialState = {
   loading: false,
   data: undefined,
+  form: undefined,
   errors: [],
 };
 
@@ -75,6 +79,8 @@ const reducer = (state: any, action: any) => {
       return { ...state, loading: true, data: undefined, errors: [] };
     case 'success':
       return { ...state, loading: false, data: action.payload, errors: [] };
+    case 'filled':
+      return { ...state, loading: true, form: action.payload, errors: [] };
     case 'failed':
       return {
         ...state,
@@ -95,6 +101,7 @@ export const EmailPressure = ({
   analyticsEvents,
   overrides,
 }: Props): any => {
+  const recaptchaRef = createRef<any>();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const {
@@ -118,50 +125,67 @@ export const EmailPressure = ({
     targetList = getTargetList(targets) || [];
   }
 
-  const handleSubmit =
-    (t: any) =>
-    ({ targetsInput, ...data }: any): Promise<any> | any => {
-      if (targetList.length < 1 && !targetsInput) {
-        dispatch({
-          type: 'failed',
-          payload: [t('Pressure TargetBlank Validation')],
-        });
-      } else {
-        dispatch({ type: 'fetching' });
+  const onReCAPTCHAChange = async (captchaCode) => {
+    // If the reCAPTCHA code is null or undefined indicating that
+    // the reCAPTCHA was expired then return early
+    if(!captchaCode) return;
 
-        const payload = {
-          activist: {
-            firstname: data.name,
-            lastname: data.lastname,
-            email: data.email,
-            city: data.city || null,
-            state: data.state || null,
-          },
-          targets_id: targetsInput,
-          mail: {
-            disableEditField,
-            subject: data.subject,
-            body: data.body,
-          },
-          form_data: data,
-        };
+    try {
+      // Else reCAPTCHA was executed successfully so proceed with the 
+      const resp = await asyncFillWidget({ payload: state.form, widget, captchaCode })
+      console.log("resp", resp);
+      if (!resp.create_email_pressure) throw new Error('pressure_failed');
 
-        return asyncFillWidget({ payload, widget })
-          .then((data: any) => {
-            if (!data.create_email_pressure) throw new Error('pressure_failed');
+      analyticsEvents && analyticsEvents.pressureSavedData();
+      return dispatch({ type: 'success', payload: resp });
+    } catch (error) {
+      console.log("error", error);
+      return dispatch({
+        type: 'failed',
+        payload: ['Pressure Network Failed']
+        // payload: [t('Pressure Network Failed')],
+      });
+    } finally {
+      // Reset the reCAPTCHA so that it can be executed again if user 
+      // submits another email.
+      recaptchaRef.current?.reset();
+      // dispatch({ type: 'success', payload: undefined });
+    }
+  }
 
-            analyticsEvents && analyticsEvents.pressureSavedData();
-            return dispatch({ type: 'success', payload: data });
-          })
-          .catch((_e: any) => {
-            // console.log('e', e);
-            return dispatch({
-              type: 'failed',
-              payload: [t('Pressure Network Failed')],
-            });
-          });
-      }
-    };
+  const handleSubmit = (t: any) => ({ targetsInput, ...data }: any): Promise<any> | any => {
+    // submit
+    if (targetList.length < 1 && !targetsInput) {
+      dispatch({
+        type: 'failed',
+        payload: [t('Pressure TargetBlank Validation')],
+      });
+    } else {
+      dispatch({ type: 'fetching' });
+      // captcha
+      // Execute the reCAPTCHA when the form is submitted
+      recaptchaRef.current.execute();
+
+      const payload = {
+        activist: {
+          firstname: data.name,
+          lastname: data.lastname,
+          email: data.email,
+          city: data.city || null,
+          state: data.state || null,
+        },
+        targets_id: targetsInput,
+        mail: {
+          disableEditField,
+          subject: data.subject,
+          body: data.body,
+        },
+        form_data: data,
+      };
+
+      return dispatch({ type: 'filled', payload });
+    }
+  };
 
   if (state.data) {
     const {
@@ -225,6 +249,12 @@ export const EmailPressure = ({
                 }
               />
             )}
+            CaptchaFields={<ReCAPTCHA
+              ref={recaptchaRef}
+              size="invisible"
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              onChange={onReCAPTCHAChange}
+            />}
             errors={state.errors}
           />
           {countText && (

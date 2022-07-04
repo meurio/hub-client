@@ -1,22 +1,22 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react'
-import classnames from 'classnames'
+import React, { Component } from "react";
+import classnames from "classnames";
 
-import ImageDataModal from './ImageDataModal'
-import ImageEditLayer from './ImageEditLayer'
+import ImageDataModal from "./ImageDataModal";
+import ImageEditLayer from "./ImageEditLayer";
 
 class ImageLinkNode extends Component {
   constructor(props) {
-    super(props)
-    this.state = { isModalActive: false }
+    super(props);
+    this.state = { isModalActive: false };
   }
 
   modal(isModalActive) {
-    this.setState({ isModalActive })
+    this.setState({ isModalActive });
   }
 
   render() {
-    const { isModalActive } = this.state
+    const { isModalActive } = this.state;
     const {
       node,
       attributes,
@@ -24,9 +24,9 @@ class ImageLinkNode extends Component {
       isSelected,
       editor: {
         onChange,
-        props: { value }
-      }
-    } = this.props
+        props: { value },
+      },
+    } = this.props;
 
     return (
       <span>
@@ -39,7 +39,11 @@ class ImageLinkNode extends Component {
           />
         )}
 
-        <div className={classnames('image-node--container', { readonly: readOnly })}>
+        <div
+          className={classnames("image-node--container", {
+            readonly: readOnly,
+          })}
+        >
           {this.props.children}
           {isSelected && (
             <ImageEditLayer
@@ -48,39 +52,45 @@ class ImageLinkNode extends Component {
             />
           )}
           {!readOnly && !isSelected && (
-            <ImageEditLayer
-              text="Selecione a imagem para editar"
-            />
+            <ImageEditLayer text="Selecione a imagem para editar" />
           )}
           <a
-            href={node.data.get('href')}
-            target={node.data.get('openExternal') ? '_blank' : '_self'}
+            href={node.data.get("href")}
+            target={node.data.get("openExternal") ? "_blank" : "_self"}
           >
-            {(("REACT_APP_DOMAIN_IMAGINARY" in process.env) && (!node.data.get('src').match(/gif$/i))) ?
+            {"REACT_APP_DOMAIN_IMAGINARY" in process.env &&
+            !node.data.get("src").match(/gif$/i) ? (
               <img
                 {...attributes}
                 role="presentation"
                 loading="lazy"
-                className={`image-node ${!readOnly && isSelected && 'selected'}`}
-                src={`${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${node.data.get('src')}&type=auto`}
-                title={node.data.get('title')}
-                alt={node.data.get('title')}
-              /> :
-              <img
-                {...attributes}
-                role="presentation"
-                loading="lazy"
-                className={`image-node ${!readOnly && isSelected && 'selected'}`}
-                src={node.data.get('src')}
-                title={node.data.get('title')}
-                alt={node.data.get('title')}
+                className={`image-node ${
+                  !readOnly && isSelected && "selected"
+                }`}
+                src={`${
+                  process.env.REACT_APP_DOMAIN_IMAGINARY
+                }/convert?url=${node.data.get("src")}&type=jpeg`}
+                title={node.data.get("title")}
+                alt={node.data.get("title")}
               />
-            }
+            ) : (
+              <img
+                {...attributes}
+                role="presentation"
+                loading="lazy"
+                className={`image-node ${
+                  !readOnly && isSelected && "selected"
+                }`}
+                src={node.data.get("src")}
+                title={node.data.get("title")}
+                alt={node.data.get("title")}
+              />
+            )}
           </a>
         </div>
       </span>
-    )
+    );
   }
 }
 
-export default ImageLinkNode
+export default ImageLinkNode;

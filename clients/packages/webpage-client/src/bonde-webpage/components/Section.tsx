@@ -22,7 +22,7 @@ const getBackgroundStyle = (block: any) => {
       // gif files should not be optimized
       if (!block.bg_image.match(/gif$/i)) {
         return {
-          background: `url('${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${block.bg_image}&type=jpeg') no-repeat`,
+          background: `url('${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${block.bg_image}&type=png') no-repeat`,
           backgroundSize: 'cover',
         };
       }

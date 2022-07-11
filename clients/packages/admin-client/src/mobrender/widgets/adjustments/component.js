@@ -92,7 +92,7 @@ const fieldsComponent = {
       </HelpBlock>
       <ColorPicker
         dispatch={dispatch}
-        theme={colorScheme.replace('-scheme', '')}
+        theme={colorScheme?.replace('-scheme', '')}
       />
     </FormGroup>
   ),

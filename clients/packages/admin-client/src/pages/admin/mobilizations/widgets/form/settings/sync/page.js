@@ -1,15 +1,9 @@
-import { Button, Flex, Heading, Stack, Text, useToast } from "bonde-components/chakra";
 import React, { useContext } from "react";
-import { MailchimpStart } from './mailchimpSync/types';
+import PropTypes from 'prop-types';
+import { Button, Flex, Heading, Stack, Text, useToast } from "bonde-components/chakra";
 import { useQuery, useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
-import type { Widget } from "./mailchimpSync/FetchWidgets";
-import SettingsForm from './mailchimpSync/SettingsForm';
-import MailchimpIcon from './mailchimpSync/MailchimpIcon'
-
-interface SyncProps {
-  widget: Widget
-  updateCache: (updated: Widget) => void
-}
+import SettingsForm from '../../../../../../../mobilizations/widgets/components/mailchimpSync/SettingsForm';
+import MailchimpIcon from '../../../../../../../mobilizations/widgets/components/mailchimpSync/MailchimpIcon'
 
 const fetchGraphqlMutation = gql`
 mutation($id:Int!, $is_community:Boolean!) {
@@ -36,26 +30,28 @@ query($id:Int!, $is_community:Boolean!) {
   }
 }
 `
-
-const lastSync = (last_sync: any) => {
+const lastSync = (last_sync) => {
   if (typeof last_sync === 'undefined' || last_sync === "") {
     return "";
   }
   return `Data da última atualização: ${last_sync}`;
 }
 
-const total = (data: any) => {
+const total = (data) => {
   return (data.resync_mailchimp_status.waiting +
     data?.resync_mailchimp_status.completed +
     data?.resync_mailchimp_status.failed +
     data?.resync_mailchimp_status.active);
 }
 
-//TODO: VER FORCESYNC.TSX
-const Sync: React.FC<SyncProps> = ({ widget, updateCache }) => {
+const SyncPage = ({ widget, updateCache }) => {
   const toast = useToast()
 
-  const community: any = useContext(SessionContext);
+  const context = useContext(SessionContext);
+  // console.log("ESSA COMMUNITY AQUI", context.community)
+  console.log("CONTEXT", context)
+  console.log("UPDATECACHE", updateCache)
+  console.log("WIDGET", widget)
 
   const [setPropagating] = useMutation(
     fetchGraphqlMutation,
@@ -65,25 +61,25 @@ const Sync: React.FC<SyncProps> = ({ widget, updateCache }) => {
   const { data, loading, error } = useQuery(
     fetchGraphqlQuery,
     {
-      variables: { is_community: false, id: widget?.id },
+      variables: { is_community: false, id: widget.id }, skip: true,
       pollInterval: 5000,
     },
   )
 
   const sync = async () => {
     // console.log("DATA", data)
-    const a: MailchimpStart = await setPropagating();
+    const a = await setPropagating();
     if (typeof a !== 'undefined' &&
       typeof a.data?.resync_mailchimp_start.status !== 'undefined' &&
       a.data?.resync_mailchimp_start.status === 'started to add contacts to the queue') {
       toast({ title: `Ae! Sincronização em andamento.`, status: 'success', isClosable: true });
     } else {
-      toast({ title: 'Ish! Ocorreu um erro, tente sincronizar novamente.', description: `Se o problema persistir, contate o suporte. ${a.data?.resync_mailchimp_start.status}` });
+      toast({ title: 'Ish! Ocorreu um erro, tente sincronizar novamente.', description: `Se o problema persistir, contacte o suporte. ${a.data?.resync_mailchimp_start.status}` });
     }
   };
 
   //TODO: MENSAGEM "PRECISA CONFIGURAR MAILCHIMP NA COMUNIDADE"
-  if (!community.mailchimp_api_key || !community.mailchimp_list_id) {
+  if (!context.community.mailchimp_api_key || !context.community.mailchimp_list_id) {
     return (
       <Stack direction="row" spacing={7} bg="white" p={6} maxW={742}>
         <MailchimpIcon />
@@ -136,12 +132,12 @@ const Sync: React.FC<SyncProps> = ({ widget, updateCache }) => {
   return (
     <SettingsForm
       widget={widget}
-      afterSubmit={async (values: any, result: any) => {
+      afterSubmit={async (values, result) => {
         updateCache(result.data.update_widgets.returning[0])
       }}
       initialValues={{
         settings: {
-          ...widget.settings
+          ...widget?.settings
         }
       }}
     >
@@ -172,4 +168,15 @@ const Sync: React.FC<SyncProps> = ({ widget, updateCache }) => {
   );
 }
 
-export default Sync
+SyncPage.propTypes = {
+  // Injected by redux-form
+  fields: PropTypes.object.isRequired,
+  // Injected by container
+  mobilization: PropTypes.object.isRequired,
+  widget: PropTypes.object.isRequired,
+  asyncWidgetUpdate: PropTypes.func.isRequired,
+};
+
+export default SyncPage;
+
+

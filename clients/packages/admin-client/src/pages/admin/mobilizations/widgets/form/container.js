@@ -15,7 +15,7 @@ import Autofire from './settings/autofire';
 import Export from './settings/export';
 import Fields from './settings/fields';
 import Finish from './settings/finish';
-import Sync from '../../../../../mobilizations/widgets/components/Sync'
+import Sync from './settings/sync'
 
 class WidgetsForm extends React.Component {
   render() {
@@ -25,6 +25,7 @@ class WidgetsForm extends React.Component {
       widget,
       location,
     } = this.props;
+    console.log("SETTINGS MENU WIDGET", widget)
 
     return (
       <SettingsPageLayout className="atomic">

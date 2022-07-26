@@ -15,6 +15,7 @@ import Autofire from './settings/autofire';
 import Export from './settings/export';
 import Fields from './settings/fields';
 import Finish from './settings/finish';
+import Sync from './settings/sync'
 
 class WidgetsForm extends React.Component {
   render() {
@@ -24,6 +25,7 @@ class WidgetsForm extends React.Component {
       widget,
       location,
     } = this.props;
+    console.log("SETTINGS MENU WIDGET", widget)
 
     return (
       <SettingsPageLayout className="atomic">
@@ -38,6 +40,7 @@ class WidgetsForm extends React.Component {
           <Route exact path={`${path}/export`} component={Export} />
           <Route exact path={`${path}/fields`} component={Fields} />
           <Route exact path={`${path}/finish`} component={Finish} />
+          <Route exact path={`${path}/sync`} component={Sync} />
         </SettingsPageContentLayout>
       </SettingsPageLayout>
     );

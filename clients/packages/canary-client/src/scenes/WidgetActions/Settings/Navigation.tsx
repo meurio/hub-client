@@ -38,12 +38,12 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
               </Tab>
             </>
           ) : (
-              <Tab
-                active={is(/\/widgets\/\d+\/settings\/*$/)}
-                onClick={() => push("")}
-              >
-                {t("settings.navigation.performance")}
-              </Tab>
+            <Tab
+              active={is(/\/widgets\/\d+\/settings\/*$/)}
+              onClick={() => push("")}
+            >
+              {t("settings.navigation.performance")}
+            </Tab>
           )}
           <Tab
             active={is(/\/widgets\/\d+\/settings\/adjusts\/*$/)}
@@ -62,6 +62,12 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
             onClick={() => push(`/finish`)}
           >
             {t("settings.navigation.finish")}
+          </Tab>
+          <Tab
+            active={is(/\/widgets\/\d+\/settings\/sync\/*$/)}
+            onClick={() => push(`/sync`)}
+          >
+            {t("settings.navigation.sync")}
           </Tab>
         </Flex>
       )}

@@ -19,7 +19,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/settings-menu
     });
     it('should render 5 <Tab /> components as a children', () => {
       const wrapper = shallow(<SettingsMenu {...props} />);
-      expect(wrapper.find('Tab')).to.have.length(5);
+      expect(wrapper.find('Tab')).to.have.length(6);
     });
   });
 

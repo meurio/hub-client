@@ -4,20 +4,13 @@ import { gql } from '@apollo/client';
 
 const query = gql`
 query {
-  plips_aggregate(where: {widget_id: {_eq: 70801}, status: {_in: ["PENDENTE", "INSCRITO"]}}) {
+  plips_aggregate(where: {widget_id: {_eq: 70801}}, distinct_on: unique_identifier) {
     aggregate {
       sum {
-        expected_signatures
+        id
       }
     }
   }
-  plip_signatures_aggregate(where: {widget_id: {_eq: 70801}}) {
-     aggregate {
-      sum {
-         confirmed_signatures
-      }
-     }
-   }
 }
 `
 

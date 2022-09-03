@@ -56,7 +56,7 @@
     "format-number": "^3.0.0",
     "graphql": "^15.5.0",
     "immutable": "^4.0.0-rc.12",
-    "node-sass": "^4.0.0",
+    "node-sass": "^6",
     "prop-types": "^15.7.2",
     "react-apollo": "3.1.5",
     "react-color": "^2.19.3",

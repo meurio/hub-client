@@ -4,7 +4,6 @@ import type { Filter, MobilizationGraphQL } from './types';
 import { client as GraphQLAPI } from '.';
 
 const asyncFilterMobilizationsGraphql = async ({ slug, custom_domain }: any) => {
-  // dispatch({ type: 'FILTER_MOBILIZATIONS_REQUEST' });
 
   const filter: Filter = {};
   if (slug) filter.slug = { _eq: slug };
@@ -41,17 +40,12 @@ const asyncFilterMobilizationsGraphql = async ({ slug, custom_domain }: any) => 
       }
     `,
     variables: { filter },
-    fetchPolicy: "no-cache"
+    fetchPolicy: ("REACT_APP_ACTIVE_API_CACHE" in process.env && process.env.REACT_APP_ACTIVE_API_CACHE === "true" ? "cache-first" : "network-only"),
   })
     .then(({ data }: { data: { mobilizations: MobilizationGraphQL[] } }) => {
-      // dispatch({
-      //   type: 'FILTER_MOBILIZATIONS_SUCCESS',
-      //   payload: data.mobilizations
-      // });
       return Promise.resolve({ mobilizations: data.mobilizations });
     })
     .catch((err: any) => {
-      // dispatch({ type: 'FILTER_MOBILIZATIONS_FAILURE', payload: err });
       console.log('failed', err);
       return Promise.reject(err);
     })

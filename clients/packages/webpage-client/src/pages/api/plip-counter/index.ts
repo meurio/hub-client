@@ -36,11 +36,11 @@ export default async function fetchSignatures(req: NextApiRequest, res: NextApiR
   if (method === "GET") {
     const signaturesTotal = await client.query({
       query: signaturesQuery,
-      fetchPolicy: "no-cache"
+      fetchPolicy: ("REACT_APP_ACTIVE_API_CACHE" in process.env && process.env.REACT_APP_ACTIVE_API_CACHE === "true" ? "cache-first" : "network-only"),
     })
     const activistsTotal = await client.query({
       query: activistsQuery,
-      fetchPolicy: "no-cache"
+      fetchPolicy: ("REACT_APP_ACTIVE_API_CACHE" in process.env && process.env.REACT_APP_ACTIVE_API_CACHE === "true" ? "cache-first" : "network-only"),
     })
     return res.status(200).json({
       data: {

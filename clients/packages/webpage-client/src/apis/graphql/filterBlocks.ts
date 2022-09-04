@@ -26,20 +26,20 @@ const asyncFilterBlocksGraphql = async ({ slug, custom_domain }: any) => {
       }
     `,
     variables: { filter },
-    fetchPolicy: "no-cache"
+    fetchPolicy: ("REACT_APP_ACTIVE_API_CACHE" in process.env && process.env.REACT_APP_ACTIVE_API_CACHE === "true" ? "cache-first" : "network-only"),
   })
-  .then(({ data }: { data: { blocks: BlockGraphQL[] } }) => {
-    // dispatch({
-    //   type: 'FILTER_BLOCKS_SUCCESS',
-    //   payload: data.blocks
-    // });
-    return Promise.resolve({ blocks: data.blocks });
-  })
-  .catch((err: any) => {
-    // dispatch({ type: 'FILTER_BLOCKS_FAILURE', payload: err });
-    console.log('failed', err);
-    return Promise.reject(err);
-  })
+    .then(({ data }: { data: { blocks: BlockGraphQL[] } }) => {
+      // dispatch({
+      //   type: 'FILTER_BLOCKS_SUCCESS',
+      //   payload: data.blocks
+      // });
+      return Promise.resolve({ blocks: data.blocks });
+    })
+    .catch((err: any) => {
+      // dispatch({ type: 'FILTER_BLOCKS_FAILURE', payload: err });
+      console.log('failed', err);
+      return Promise.reject(err);
+    })
 }
 
 export default asyncFilterBlocksGraphql;

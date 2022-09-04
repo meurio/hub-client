@@ -4,7 +4,6 @@ import type { Filter, WidgetGraphQL } from './types';
 import { client as GraphQLAPI } from '.';
 
 const asyncFilterWidgetGraphql = async ({ slug, custom_domain }: any) => {
-  // dispatch({ type: 'FILTER_WIDGETS_REQUEST' });
 
   const filter: Filter = {};
   if (slug) filter.slug = { _eq: slug };
@@ -46,30 +45,22 @@ const asyncFilterWidgetGraphql = async ({ slug, custom_domain }: any) => {
       }
     `,
     variables: { filter },
-    fetchPolicy: "no-cache"
+    fetchPolicy: ("REACT_APP_ACTIVE_API_CACHE" in process.env && process.env.REACT_APP_ACTIVE_API_CACHE === "true" ? "cache-first" : "network-only"),
   })
-  .then(({ data }: { data: { widgets: WidgetGraphQL[] } }) => {
-    // dispatch({
-    //   type: 'FILTER_WIDGETS_SUCCESS',
-    //   payload: data.widgets.map((w: WidgetGraphQL) => ({
-    //     ...w,
-    //     form_entries_count: w.form_entries_aggregate.aggregate.count,
-    //     donations_count: w.donations_aggregate.aggregate.count,
-    //     count: w.activist_pressures_aggregate.aggregate.count
-    //   }))
-    // });
-    return Promise.resolve({ widgets: data.widgets.map((w: WidgetGraphQL) => ({
-      ...w,
-      form_entries_count: w.form_entries_aggregate.aggregate.count,
-      donations_count: w.donations_aggregate.aggregate.count,
-      count: w.activist_pressures_aggregate.aggregate.count
-    }))})
-  })
-  .catch((err: any) => {
-    // dispatch({ type: 'FILTER_WIDGETS_FAILURE', payload: err });
-    console.log('failed', err);
-    return Promise.reject(err);
-  })
+    .then(({ data }: { data: { widgets: WidgetGraphQL[] } }) => {
+      return Promise.resolve({
+        widgets: data.widgets.map((w: WidgetGraphQL) => ({
+          ...w,
+          form_entries_count: w.form_entries_aggregate.aggregate.count,
+          donations_count: w.donations_aggregate.aggregate.count,
+          count: w.activist_pressures_aggregate.aggregate.count
+        }))
+      })
+    })
+    .catch((err: any) => {
+      console.log('failed', err);
+      return Promise.reject(err);
+    })
 }
 
 export default asyncFilterWidgetGraphql;

@@ -36,8 +36,14 @@ const RoutesByKind: React.FC<RoutesByKindProps> = ({ widget, updateCache }) => {
       </Route>
     );
   } else if (widget.kind === 'plip') {
+    let pathname = match.path
+    if (isMobile) {
+      // /widgets/${widget.id}/settings/workflow
+      pathname = `${match.path}/settings/workflow`
+    }
+
     return (
-      <Route path={`${match.path}`}>
+      <Route path={pathname}>
         <Plips widget={widget} />
       </Route>
     )

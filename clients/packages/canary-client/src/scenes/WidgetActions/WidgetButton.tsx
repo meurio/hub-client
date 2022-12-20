@@ -3,6 +3,7 @@ import { Text, Box, Flex, Image, Stack } from 'bonde-components/chakra';
 import { Header, Icon } from 'bonde-components';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { Link } from 'react-router-dom';
+import { isMobile } from "react-device-detect";
 import { Widget } from './FetchWidgets';
 import Labels from './Labels';
 
@@ -45,6 +46,10 @@ const WidgetButton: React.FC<Props> = ({ widget }) => {
 
   if (kind === 'pressure' || kind === 'plip') {
     linkProps = { to: `/widgets/${id}/settings` };
+    if (isMobile && kind === 'plip') {
+      // /widgets/${widget.id}/settings/workflow
+      linkProps = { to: `/widgets/${id}/settings/workflow` }
+    }
   }
 
   const mobilizationLinkProps: any = {

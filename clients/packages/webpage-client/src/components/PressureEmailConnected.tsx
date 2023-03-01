@@ -17,6 +17,7 @@ const PressureEmailConnected = (props: any) =>
           method: 'post',
           body: JSON.stringify(args),
           headers: { 'Content-Type': 'application/json' },
+          cache: "public"
         })
       ).json()
     }
@@ -26,6 +27,7 @@ const PressureEmailConnected = (props: any) =>
           method: 'post',
           body: JSON.stringify(args),
           headers: { 'Content-Type': 'application/json' },
+          cache: "public"
         })
       ).json()
     }

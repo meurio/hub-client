@@ -44,7 +44,7 @@ const FetchTargets = ({ asyncFetchTargets, widgetId, children }: Props) => {
   }, []);
 
   // TODO: Render Loading...
-  if (state.fetching) return <div />;
+  if (state.fetching) return <div id='fetch-targets' className='fetch-targets' />;
   return children({ data: state.data });
 };
 

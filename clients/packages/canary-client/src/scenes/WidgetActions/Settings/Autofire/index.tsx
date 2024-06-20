@@ -13,7 +13,6 @@ import {
 } from "bonde-components/chakra";
 
 
-
 import { noSpecialCharacters } from "../../../../services/utils";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';

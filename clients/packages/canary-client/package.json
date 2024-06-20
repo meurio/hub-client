@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.6",
+    "@ckeditor/ckeditor5-build-classic": "^41.4.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fnando/cnpj": "^1.0.2",
@@ -34,15 +35,17 @@
     "@types/normalize-package-data": "^2.4.0",
     "@types/react-color": "^3.0.4",
     "@types/react-table": "^7.0.22",
-    "bonde-components": "workspace:*",
+    "bonde-components": "0.2.0",
     "bonde-core-tools": "workspace:*",
     "bonde-styleguide": "^0.16.5-alpha.5",
+    "ckeditor5-custom-build": "workspace:*",
     "clipboard-copy": "^3.1.0",
     "downloadjs": "^1.4.7",
     "final-form-arrays": "^3.0.2",
     "framer-motion": "^4",
     "lodash": "^4.17.21",
     "moment": "^2.27.0",
+    "raw-loader": "^4.0.2",
     "react-color": "^2.19.3",
     "react-device-detect": "^2.1.2",
     "react-final-form-arrays": "^3.1.3",
@@ -50,7 +53,6 @@
     "react-number-format": "^4.4.1",
     "react-qr-reader": "^2.2.1",
     "react-s3-uploader": "^4.9.3",
-    "typescript": "^3",
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
     "react-table": "^7.5.0",
@@ -58,11 +60,15 @@
     "recharts": "^2.1.5",
     "slate-editor": "workspace:*",
     "slate-plain-serializer": "^0.7.13",
-    "slugify": "^1.4.6"
+    "slugify": "^1.4.6",
+    "typescript": "^3"
   },
   "devDependencies": {
     "@types/prettier": "^2.2.3",
     "@types/recharts": "^1.8.23",
-    "@types/scheduler": "^0.16.1"
+    "@types/scheduler": "^0.16.1",
+    "css-loader": "^7.1.2",
+    "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0"
   }
 }

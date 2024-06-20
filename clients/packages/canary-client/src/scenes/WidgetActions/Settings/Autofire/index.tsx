@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { InputField, TextareaField, Validators } from 'bonde-components';
 import {
   Box,
@@ -8,9 +10,13 @@ import {
   GridItem,
   Heading
 } from "bonde-components/chakra";
-import { useTranslation } from "react-i18next";
-import { Widget } from "../../FetchWidgets";
+
+import Editor from "ckeditor5-custom-build";
+// import 'ckeditor5-custom-build/build/translations/pt-br';
+
+
 import { noSpecialCharacters } from "../../../../services/utils";
+import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
 
 type Props = {
@@ -22,6 +28,9 @@ const { required, composeValidators, isEmail } = Validators;
 
 const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
+
+  const [editorData, setEditorData] = useState('');
+
 
   return (
     <SettingsForm
@@ -66,13 +75,43 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                   required(t("settings.autofire.validators.required"))
                 )}
               />
-              <TextareaField
+              {/* <TextareaField
                 label={t("settings.autofire.label.emailBody")}
                 name="settings.email_text"
                 placeholder={t("settings.autofire.placeholder.emailBody")}
                 validate={composeValidators(
                   required(t("settings.autofire.validators.required"))
                 )}
+              /> */}
+              <Editor
+                editor={ClassicEditor}
+                config={{
+                  plugins: [Underline, ...ClassicEditor.builtinPlugins],
+                  toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'link', '|',
+                    'bulletedList', 'numberedList', '|',
+                    'insertTable', 'blockQuote', 'mediaEmbed', '|',
+                    'alignment', '|',
+                    'fontColor', 'fontBackgroundColor', '|',
+                    'imageUpload'
+                  ],
+                }}
+                data={editorData}
+                onReady={editor => {
+                  console.log('Editor is ready to use!', editor);
+                }}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setEditorData(data);
+                  console.log({ event, editor, data });
+                }}
+                onBlur={(event, editor) => {
+                  console.log('Blur.', editor);
+                }}
+                onFocus={(event, editor) => {
+                  console.log('Focus.', editor);
+                }}
               />
               <Flex justify='end'>
                 <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>

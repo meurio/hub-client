@@ -13,7 +13,7 @@
     "@emotion/styled": "^11",
     "@types/graceful-fs": "^4.1.5",
     "@types/normalize-package-data": "^2.4.0",
-    "bonde-components": "workspace:*",
+    "bonde-components": "0.2.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "bonde-core-tools": "workspace:*",
     "react-scripts": "^4",

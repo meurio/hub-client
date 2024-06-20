@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { InputField, TextareaField, Validators } from 'bonde-components';
+import { InputField, Validators } from 'bonde-components';
 import {
   Box,
   Button,
@@ -11,9 +11,8 @@ import {
   Heading
 } from "bonde-components/chakra";
 
-import Editor from "ckeditor5-custom-build";
-// import 'ckeditor5-custom-build/build/translations/pt-br';
-
+import ClassicEditor from "ckeditor5-custom-build";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 import { noSpecialCharacters } from "../../../../services/utils";
 import { Widget } from "../../FetchWidgets";
@@ -83,34 +82,22 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                   required(t("settings.autofire.validators.required"))
                 )}
               /> */}
-              <Editor
+              <CKEditor
                 editor={ClassicEditor}
-                config={{
-                  plugins: [Underline, ...ClassicEditor.builtinPlugins],
-                  toolbar: [
-                    'heading', '|',
-                    'bold', 'italic', 'underline', 'link', '|',
-                    'bulletedList', 'numberedList', '|',
-                    'insertTable', 'blockQuote', 'mediaEmbed', '|',
-                    'alignment', '|',
-                    'fontColor', 'fontBackgroundColor', '|',
-                    'imageUpload'
-                  ],
-                }}
                 data={editorData}
-                onReady={editor => {
-                  console.log('Editor is ready to use!', editor);
+                config={{
+                  simpleUpload: {
+                    uploadUrl: process.env.REACT_APP_UPLOADS_URL,
+                    withCredentials: true,
+                    headers: {
+                      "X-CSRF-TOKEN": "CSRF-Token",
+                      Authorization: "Bearer <JSON Web Token>"
+                    }
+                  }
                 }}
                 onChange={(event, editor) => {
                   const data = editor.getData();
                   setEditorData(data);
-                  console.log({ event, editor, data });
-                }}
-                onBlur={(event, editor) => {
-                  console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                  console.log('Focus.', editor);
                 }}
               />
               <Flex justify='end'>

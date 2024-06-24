@@ -9,7 +9,8 @@ import {
   Flex,
   Grid,
   GridItem,
-  Heading
+  Heading,
+  FormLabel
 } from "bonde-components/chakra";
 
 
@@ -29,7 +30,6 @@ const Styles = styled.div`
     padding-bottom: 4px;
   }
 `
-
 
 type Props = {
   widget: Widget;

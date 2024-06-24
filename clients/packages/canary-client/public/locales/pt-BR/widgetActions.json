@@ -35,7 +35,7 @@
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",
       "success": "EBA! Suas alterações foram salvas.",
-      "submit": "Salvar"
+      "submit": "Salvar alterações"
     },
     "pressure": {
       "targets": {

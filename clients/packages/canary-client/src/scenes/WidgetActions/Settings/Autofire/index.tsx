@@ -9,8 +9,7 @@ import {
   Flex,
   Grid,
   GridItem,
-  Heading,
-  FormLabel
+  Heading
 } from "bonde-components/chakra";
 
 

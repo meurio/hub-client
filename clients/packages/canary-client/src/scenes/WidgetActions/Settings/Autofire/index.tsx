@@ -31,6 +31,7 @@ const Styles = styled.div`
   }
 `
 
+
 type Props = {
   widget: Widget;
   updateCache: any;

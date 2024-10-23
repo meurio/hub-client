@@ -18,7 +18,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      // 'x-hasura-admin-secret': publicRuntimeConfig.apiGraphqlSecret
+      // 'x-hasura-admin-secret': serverRuntimeConfig.apiGraphqlSecret
       // authorization: token ? `Bearer ${token}` : "",
     }
   }

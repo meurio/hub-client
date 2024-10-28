@@ -46,4 +46,4 @@ RUN pnpm i
 
 RUN pnpm --filter "./libs/**" m run build
 
-RUN pnpm --filter "./packages/**" m run build
+RUN pnpm --filter "./packages/webpage-client" m run build

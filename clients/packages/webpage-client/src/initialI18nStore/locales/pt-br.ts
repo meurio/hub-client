@@ -21,6 +21,8 @@ export default {
   "Pressure City Label": "Cidade",
   "Pressure City Placeholder": "Insira sua cidade",
   "Pressure State Label": "Estado",
+  "Pressure Phone Label": "Whatsapp",
+  "Pressure Phone Placeholder": "(DDD) X XXXX-XXXX",
   "Pressure Email Label": "E-mail",
   "Pressure Email Placeholder": "Insira seu e-mail",
   "Pressure Subject Label": "Assunto",
@@ -32,5 +34,5 @@ export default {
   "Pressure Network Failed": "Houve um erro ao fazer a pressão",
   "Pressure TargetBlank Validation": "Ops, você precisa selecionar pelo menos um alvo para poder pressionar",
   "Political Filename": "politica-de-privacidade",
-  "Share Social Midia": "Compartilhar no {{app}}"
+  "Share Social Midia": "Compartilhar no {{app}}",
 }

@@ -29,6 +29,7 @@ type Props = {
     settings: {
       main_color: string;
       show_city?: string;
+      show_phone?: string;
       button_text: string;
       pressure_subject?: string;
       pressure_body?: string;
@@ -67,6 +68,7 @@ const PressureForm = ({
     settings: {
       show_city: showCity,
       show_state: showState,
+      show_phone: showPhone,
       main_color: buttonColor,
       button_text: buttonText,
       is_subject_list: isSubjectList = 'n',
@@ -206,6 +208,16 @@ const PressureForm = ({
                         label={t('Pressure City Label')}
                         name="city"
                         placeholder={t('Pressure City Placeholder')}
+                        validate={required(t('Pressure Blank Validation'))}
+                      />
+                    </WrapInputs>
+                  )}
+                  {showPhone && showPhone == 's' && (
+                    <WrapInputs>
+                      <InputField
+                        label={t('Pressure Phone Label')}
+                        name="phone"
+                        placeholder={t('Pressure Phone Placeholder')}
                         validate={required(t('Pressure Blank Validation'))}
                       />
                     </WrapInputs>

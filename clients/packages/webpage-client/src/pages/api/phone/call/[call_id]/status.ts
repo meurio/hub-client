@@ -8,11 +8,11 @@ interface Request {
 }
 
 const {
-    publicRuntimeConfig: {
-        openApiUrl,
+    publicRuntimeConfig: { openApiUrl },
+    serverRuntimeConfig: { 
         // openApiToken
     }
-} = getConfig()
+} = getConfig();
 
 export default async (req: Request, res: any) => {
     if (req.method === 'GET') {

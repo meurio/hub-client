@@ -1,7 +1,7 @@
 import getConfig from 'next/config';
 import recharge from '../../../apis/rest/recharge';
 
-const { publicRuntimeConfig } = getConfig();
+const { serverRuntimeConfig } = getConfig();
 
 const submit = (values: any) => {
   //
@@ -17,7 +17,7 @@ const submit = (values: any) => {
   //
   const promise = new Promise((resolve, reject) => {
     // eslint-disable-next-line
-    (window as any).PagarMe.encryption_key = publicRuntimeConfig.pagarmeKey;
+    (window as any).PagarMe.encryption_key = serverRuntimeConfig.pagarmeKey;
 
     // eslint-disable-next-line
     const card = new (window as any).PagarMe.creditCard();

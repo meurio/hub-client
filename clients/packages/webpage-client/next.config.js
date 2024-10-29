@@ -25,17 +25,19 @@ module.exports = withTM(
     // So, the source code is "basePath-ready".
     // You can remove `basePath` if you don't need it.
     reactStrictMode: true,
+    // Variáveis acessíveis apenas no servidor (não expostas no cliente)
+    serverRuntimeConfig: {
+      apiGraphqlSecret: process.env.REACT_APP_API_GRAPHQL_SECRET,
+      pagarmeKey: process.env.REACT_APP_PAGARME_KEY,
+      openApiToken: process.env.REACT_APP_OPENAPI_TOKEN,
+    },
     publicRuntimeConfig: {
       domainImaginary: process.env.REACT_APP_DOMAIN_IMAGINARY,
       domainApiRest: process.env.REACT_APP_DOMAIN_API_REST,
       domainApiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL,
-      apiGraphqlSecret: process.env.REACT_APP_API_GRAPHQL_SECRET,
       domainApiGraphqlWs: process.env.REACT_APP_DOMAIN_API_GRAPHQL_WS,
       domainPublic: process.env.REACT_APP_DOMAIN_PUBLIC,
-      pagarmeKey: process.env.REACT_APP_PAGARME_KEY,
-      
       openApiUrl: process.env.REACT_APP_OPENAPI_URL,
-      openApiToken: process.env.REACT_APP_OPENAPI_TOKEN,
       openApiCampaignId: process.env.REACT_APP_OPENAPI_CAMPAIGN_ID
     },
   })

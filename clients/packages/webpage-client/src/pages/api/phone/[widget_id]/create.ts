@@ -15,12 +15,9 @@ interface Request {
 }
 
 const {
-    publicRuntimeConfig: {
-        openApiUrl,
-        openApiToken,
-        openApiCampaignId
-    }
-} = getConfig()
+    publicRuntimeConfig: { openApiUrl, openApiCampaignId },
+    serverRuntimeConfig: { openApiToken }
+} = getConfig();
 
 const campaign_id = openApiCampaignId;
 

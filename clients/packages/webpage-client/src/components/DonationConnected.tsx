@@ -13,7 +13,7 @@ import fetch from 'node-fetch';
 
 import Utils from '../Utils';
 
-const { publicRuntimeConfig } = getConfig();
+const { serverRuntimeConfig } = getConfig();
 
 // const mapDispatchToProps = () => ({
 //   createTransaction: async (args: any) =>
@@ -76,7 +76,7 @@ const DonationConnected = (props: any) =>
         })
       ).json()
     }
-    pagarmeKey={publicRuntimeConfig.pagarmeKey || 'setup env var'}
+    pagarmeKey={serverRuntimeConfig.pagarmeKey || 'setup env var'}
     donationComponent={DonationPlugin}
     analyticsEvents={DonationAnalytics}
     overrides={{
@@ -106,7 +106,7 @@ export default DonationConnected;
 // )((props: MobProps) => (
 //   <PagarMeCheckout
 //     {...props}
-//     pagarmeKey={publicRuntimeConfig.pagarmeKey || 'setup env var'}
+//     pagarmeKey={serverRuntimeConfig.pagarmeKey || 'setup env var'}
 //     donationComponent={DonationPlugin}
 //     analyticsEvents={DonationAnalytics}
 //     overrides={{

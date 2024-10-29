@@ -22,7 +22,7 @@ export default {
   "Pressure City Placeholder": "Insira sua cidade",
   "Pressure State Label": "Estado",
   "Pressure Phone Label": "Whatsapp",
-  "Pressure Phone Placeholder": "(DDD) X XXXX-XXXX",
+  "Pressure Phone Placeholder": "Insira seu número com DDD",
   "Pressure Email Label": "E-mail",
   "Pressure Email Placeholder": "Insira seu e-mail",
   "Pressure Subject Label": "Assunto",

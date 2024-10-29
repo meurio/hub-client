@@ -147,6 +147,16 @@ const PressureForm = ({
                       </SelectField>
                     </WrapInputs>
                   )}
+                  {BeforeStandardFields && <MemoBeforeStandardFields />}
+                  {showPhone && showPhone == 's' && (
+                    <WrapInputs>
+                      <InputField
+                        label={t('Pressure Phone Label')}
+                        name="phone"
+                        placeholder={t('Pressure Phone Placeholder')}
+                      />
+                    </WrapInputs>
+                  )}
                   <WrapInputs>
                     <InputField
                       label={t('Pressure Name Label')}
@@ -163,17 +173,6 @@ const PressureForm = ({
                       validate={required(t('Pressure Blank Validation'))}
                     />
                   </WrapInputs>
-                  {BeforeStandardFields && <MemoBeforeStandardFields />}
-                  {showPhone && showPhone == 's' && (
-                    <WrapInputs>
-                      <InputField
-                        label={t('Pressure Phone Label')}
-                        name="phone"
-                        placeholder={t('Pressure Phone Placeholder')}
-                        validate={required(t('Pressure Blank Validation'))}
-                      />
-                    </WrapInputs>
-                  )}
                   {showState && showState === 's' && (
                     <WrapInputs>
                       <SelectField

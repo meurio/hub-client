@@ -84,9 +84,6 @@ services:
       - REACT_APP_DOMAIN_API_REST=${PUBLIC_REST_API:-http://api-rest.bonde.devel}
       - REACT_APP_DOMAIN_PUBLIC=${DEFAULT_DOMAIN_RULE:-bonde.devel}
       - REACT_APP_ACTIVE_API_CACHE=${ACTIVE_API_CACHE:-false}
-      - REACT_APP_OPENAPI_URL=${PUBLIC_OPENAPI_URL:-https://openapi.staging.bonde.org}
-      - REACT_APP_OPENAPI_TOKEN=${PUBLIC_OPENAPI_TOKEN}
-      - REACT_APP_OPENAPI_CAMPAIGN_ID=${PUBLIC_OPENAPI_CAMPAIGN_ID}
     healthcheck:
       test: "${DOCKER_WEB_HEALTHCHECK_TEST:-wget -qO- localhost:3000/api/ping}"
       interval: "60s"

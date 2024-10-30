@@ -28,17 +28,14 @@ module.exports = withTM(
     // Variáveis acessíveis apenas no servidor (não expostas no cliente)
     serverRuntimeConfig: {
       apiGraphqlSecret: process.env.REACT_APP_API_GRAPHQL_SECRET,
-      pagarmeKey: process.env.REACT_APP_PAGARME_KEY,
-      openApiToken: process.env.REACT_APP_OPENAPI_TOKEN,
+      pagarmeKey: process.env.REACT_APP_PAGARME_KEY
     },
     publicRuntimeConfig: {
       domainImaginary: process.env.REACT_APP_DOMAIN_IMAGINARY,
       domainApiRest: process.env.REACT_APP_DOMAIN_API_REST,
       domainApiGraphql: process.env.REACT_APP_DOMAIN_API_GRAPHQL,
       domainApiGraphqlWs: process.env.REACT_APP_DOMAIN_API_GRAPHQL_WS,
-      domainPublic: process.env.REACT_APP_DOMAIN_PUBLIC,
-      openApiUrl: process.env.REACT_APP_OPENAPI_URL,
-      openApiCampaignId: process.env.REACT_APP_OPENAPI_CAMPAIGN_ID
+      domainPublic: process.env.REACT_APP_DOMAIN_PUBLIC
     },
   })
 );

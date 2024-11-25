@@ -41,11 +41,4 @@ export { default as PressureAnalytics } from './plugins/Pressure/Analytics';
 export { default as PressureTellAFriend } from './plugins/Pressure/components/TellAFriend';
 export { default as asyncPressureCreate } from './redux-mob/action-creators/FillWidget';
 
-/* DonationPlugin */
-export { default as DonationPlugin } from './plugins/Donation';
-export { default as DonationTellAFriend } from './plugins/Donation/TellAFriend';
-export { default as PagarMeCheckout } from './plugins/Donation/PagarMeCheckout';
-export { default as FinishDonationMessage } from './plugins/Donation/FinishDonationMessage';
-export { default as DonationAnalytics } from './plugins/Donation/Analytics';
-
 export * from './components'

@@ -4,7 +4,6 @@ import Overlay from './Overlay';
 import FormPlugin from './../../../../components/FormConnected';
 import PressureEmailPlugin from './../../../../components/PressureEmailConnected';
 import PlipPlugin from './../../../../components/PlipConnected';
-import DonationConnected from './../../../../components/DonationConnected';
 import PhoneWidgetConnected from '../../../../components/PhoneWidgetConnected';
 
 import {
@@ -36,7 +35,7 @@ const PluggableWidget = React.memo((props: any) => {
     },
     {
       kind: 'donation',
-      component: DonationConnected
+      component: () => <></>,
     },
     {
       kind: 'pressure',

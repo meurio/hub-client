@@ -1,7 +1,0 @@
-export { default } from './__content__'
-export { default as EditorOld } from './editor-old.connected'
-export { default as EditorNew } from './editor-new.connected'
-export { default as EditorSlate } from './editor-slate'
-export { default as ActionButton } from './action-button'
-export { default as Layer } from './layer'
-export { default as FooterEditor } from './footer-editor'

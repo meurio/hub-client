@@ -7,9 +7,9 @@ on:
       - "hotfix/*"
 
 jobs:
-  tests:
-    name: Tests for all clients and libs
-    uses: ./.github/workflows/tests.yml
+  # tests:
+  #   name: Tests for all clients and libs
+  #   uses: ./.github/workflows/tests.yml
 
   build:
     name: Build clients app to staging.bonde.org

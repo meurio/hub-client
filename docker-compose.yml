@@ -1,0 +1,141 @@
+x-app: &default-app
+  # image: ${DOCKER_IMAGE:-nossas/bonde-clients:main}
+  build:
+    context: "./clients"
+    # target: "app"
+    args:
+      - SKIP_PREFLIGHT_CHECK=true
+      - REACT_APP_ENVIRONMENT=${REACT_APP_ENVIRONMENT:-staging}
+      - REACT_APP_DOMAIN_ACCOUNTS=${REACT_APP_DOMAIN_ACCOUNTS:-http://accounts.staging.bonde.devel}
+      - REACT_APP_DOMAIN_ADMIN=${REACT_APP_DOMAIN_ADMIN:-http://app.staging.bonde.devel}
+      - REACT_APP_DOMAIN_ADMIN_CANARY=${REACT_APP_DOMAIN_ADMIN_CANARY:-http://admin-canary.staging.bonde.devel}
+      - REACT_APP_DOMAIN_BOT=${REACT_APP_DOMAIN_BOT:-http://chatbot.staging.bonde.devel}
+      - REACT_APP_DOMAIN_BETA=${REACT_APP_DOMAIN_BETA:-http://beta.staging.bonde.devel}
+      - REACT_APP_AWS_BUCKET=${REACT_APP_AWS_BUCKET:-bonde-assets-staging}
+      - REACT_APP_LOGIN_URL=${REACT_APP_LOGIN_URL:-http://accounts.staging.bonde.devel/login}
+      - REACT_APP_DOMAIN_REDES=${REACT_APP_DOMAIN_REDES:-http://redes.staging.bonde.devel}
+      - REACT_APP_UPLOADS_URL=${REACT_APP_UPLOADS_URL:-http://api-rest.staging.bonde.devel/uploads}
+      - REACT_APP_ZENDESK_ORGANIZATIONS_LAWYER=${REACT_APP_ZENDESK_ORGANIZATIONS_LAWYER:-'111111'}
+      - REACT_APP_ZENDESK_ORGANIZATIONS_INDIVIDUAL=${REACT_APP_ZENDESK_ORGANIZATIONS_INDIVIDUAL:-'111111'}
+      - REACT_APP_ZENDESK_ORGANIZATIONS_THERAPIST=${REACT_APP_ZENDESK_ORGANIZATIONS_THERAPIST:-'1111111'}
+      - REACT_APP_DOMAIN_PUBLIC=${REACT_APP_DOMAIN_PUBLIC:-staging.bonde.devel}
+      - REACT_APP_API_GRAPHQL_SECRET=${REACT_APP_API_GRAPHQL_SECRET:-111111111111}
+      - REACT_APP_DOMAIN_API_ACTIVISTS=${REACT_APP_DOMAIN_API_ACTIVISTS:-http://api-graphql.staging.bonde.devel/v1/graphql}
+      - REACT_APP_DOMAIN_API_GRAPHQL=${REACT_APP_DOMAIN_API_GRAPHQL:-http://api-graphql.staging.bonde.devel/v1/graphql}
+      - REACT_APP_DOMAIN_API_REST=${REACT_APP_DOMAIN_API_REST:-http://api-rest.staging.bonde.devel}
+      - REACT_APP_PAGARME_KEY=${REACT_APP_PAGARME_KEY:-111111111111}
+      - ACTION_SECRET_KEY=${ACTION_SECRET_KEY:-111111111111}
+      - AWS_ROUTE_IP=${AWS_ROUTE_IP:-'127.0.0.1'}
+      - HOTJAR_ID=${HOTJAR_ID:-111111111111}
+      - HOTJAR_SV=${HOTJAR_SV:-111111111111}
+  # depends_on:
+  #   - "postgres"
+  #   - "redis"
+  # env_file:
+  #   - ".env"
+  restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
+  stop_grace_period: "3s"
+  tty: true
+  volumes:
+    - "${DOCKER_WEB_VOLUME:-./public:/app/public}"
+
+services:
+
+  accounts:
+    <<: *default-app
+    ports:
+      - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:3000}:3000"
+    command: yarn pnpm m run start --filter accounts-client
+    healthcheck:
+      test: "${DOCKER_WEB_HEALTHCHECK_TEST:-wget -qO- localhost:3000}"
+      interval: "60s"
+      timeout: "3s"
+      start_period: "5s"
+      retries: 3
+    labels:
+      traefik.http.services.accounts.loadbalancer.server.port: '3000'
+      traefik.enable: 'true'
+      traefik.http.routers.accounts.tls: true
+      traefik.http.routers.accounts.tls.certresolver: myresolver
+  
+  app:
+    <<: *default-app
+    ports:
+      - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:5000}:5000"
+    command: yarn pnpm m run start --filter admin-client
+    healthcheck:
+      test: "${DOCKER_WEB_HEALTHCHECK_TEST:-wget -qO- localhost:5000}"
+      interval: "60s"
+      timeout: "3s"
+      start_period: "5s"
+      retries: 3
+    labels:
+      traefik.http.services.app.loadbalancer.server.port: '5000'
+      traefik.enable: 'true'
+      traefik.http.routers.app.tls: true
+      traefik.http.routers.app.tls.certresolver: myresolver
+
+  admin-canary:
+    <<: *default-app
+    ports:
+      - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:3000}:3000"
+    command: yarn pnpm m run start --filter canary-client
+    healthcheck:
+      test: "${DOCKER_WEB_HEALTHCHECK_TEST:-wget -qO- localhost:3000}"
+      interval: "60s"
+      timeout: "3s"
+      start_period: "5s"
+      retries: 3
+    labels:
+      traefik.http.services.admin-canary.loadbalancer.server.port: '3000'
+      traefik.enable: 'true'
+      traefik.http.routers.admin-canary.tls: true
+      traefik.http.routers.admin-canary.tls.certresolver: myresolver
+
+  redes:
+    <<: *default-app
+    ports:
+      - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:3000}:3000"
+    command: yarn pnpm m run start --filter redes-client
+    healthcheck:
+      test: "${DOCKER_WEB_HEALTHCHECK_TEST:-wget -qO- localhost:3000}"
+      interval: "60s"
+      timeout: "3s"
+      start_period: "5s"
+      retries: 3
+    labels:
+      traefik.http.services.redes.loadbalancer.server.port: '3000'
+      traefik.enable: 'true'
+      traefik.http.routers.redes.tls: true
+      traefik.http.routers.redes.tls.certresolver: myresolver
+
+  public:
+    <<: *default-app
+    ports:
+      - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:3000}:3000"
+    command: yarn pnpm m run start --filter webpage-client
+    environment:
+      - PORT=3000
+      - NODE_ENV=${PUBLIC_NODE_ENV:-development}
+      - ACTION_SECRET_KEY=${PUBLIC_ACTION_SECRET_KEY}
+      - REACT_APP_API_GRAPHQL_SECRET=${PUBLIC_HASURA_SECRET}
+      - REACT_APP_PAGARME_KEY=${PUBLIC_PAGARME_KEY}
+      - REACT_APP_DOMAIN_API_ACTIVISTS=${PUBLIC_HASURA_API:-http://api-graphql.bonde.devel/v1/graphql}
+      - REACT_APP_DOMAIN_API_GRAPHQL=${PUBLIC_HASURA_API:-http://api-graphql.bonde.devel/v1/graphql}
+      - REACT_APP_DOMAIN_API_REST=${PUBLIC_REST_API:-http://api-rest.bonde.devel}
+      - REACT_APP_DOMAIN_PUBLIC=${DEFAULT_DOMAIN_RULE:-bonde.devel}
+    healthcheck:
+      test: "${DOCKER_WEB_HEALTHCHECK_TEST:-wget -qO- localhost:3000}"
+      interval: "60s"
+      timeout: "3s"
+      start_period: "5s"
+      retries: 3
+    labels:
+      traefik.http.services.public.loadbalancer.server.port: '3000'
+      traefik.enable: 'true'
+      traefik.http.routers.public.tls: true
+      traefik.http.routers.public.tls.certresolver: myresolver
+
+networks:
+  default:
+    name: bonde

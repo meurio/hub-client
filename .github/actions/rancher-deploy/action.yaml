@@ -1,9 +1,0 @@
-name: 'Rancher Deploy Action 1.6'
-description: 'Action to deploy docker image in rancher-cli'
-author: 'NOSSAS'
-branding:
-  icon: 'check'
-  color: 'gray-dark'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

@@ -1,7 +1,0 @@
-bin/
-node_modules/
-public/
-src/
-
-.babelrc
-yarn.lock

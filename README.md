@@ -2,6 +2,8 @@
 
 Este repositório contém as configurações para executar um ambiente de desenvolvimento da plataforma BONDE, utilizando **Docker Compose** e **Git Submodules**.
 
+A plataforma utiliza compartilhamento de sessão por Cookie e isso requer uma estrutura funcional no mesmo domínio e protocolo, por isso nossos serviços serão executados como `.bonde.devel` e protocolo `https`.
+
 ## Estrutura do Projeto
 
 ```plaintext
@@ -95,7 +97,7 @@ Caso utilize outro sistema operacional, você pode ler mais sobre na [documenta�
 
 ### 8. Configurar variáveis de ambiente para submódulos
 
-Alguns submódulos (`clients/`) rodam diretamente no host e utilizam o `host.docker.internal` para comunicação com os serviços em Docker. Configure suas variáveis de ambiente conforme necessário no `.env`.
+Alguns submódulos (`clients/`) rodam diretamente no host e utilizam o `host.docker.internal` para comunicação com os serviços em Docker. Configure-o seguindo a [documentação do repositório](https://github.com/nossas/bonde-clients?tab=readme-ov-file#bonde-clients).
 
 ## Logs e Debug
 
@@ -116,10 +118,5 @@ docker exec -it bonde_api-rest sh
 
 # TODO
 
-- Configurar variaveis de ambiente backend
-- API Rest imagem docker privada
-- Configurar HTTPS local
-- Explicar domínios bonde.devel
-- Configurar hosts
-- Configurar variaveis de ambiente clients
-- Explicar como rodar localmente e usar o caddy
+- Atualizar README do clients
+- Adicionar variavel de ambiente para configurar Token Router API no Hasura

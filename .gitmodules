@@ -4,3 +4,9 @@
 [submodule "public"]
 	path = public
 	url = git@github.com:nossas/bonde-public.git
+[submodule "router"]
+	path = router
+	url = git@github.com:nossas/bonde-router.git
+[submodule "apis"]
+	path = apis
+	url = git@github.com:nossas/bonde-apis.git

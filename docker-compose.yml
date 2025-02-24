@@ -1,0 +1,239 @@
+services:
+  # Bonde Router Services
+  caddy:
+    image: nossas/caddy
+    platform: linux/amd64
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2019:2019"
+    volumes:
+      - ./data/caddy_etc:/etc/caddy
+      - ./data/caddy_data:/data
+      - ./data/caddy_config:/config
+      # Necessário para Caddy detectar os serviços
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - CADDY_ADMIN=0.0.0.0:2019
+
+  redis:
+    image: redis
+    platform: linux/amd64
+    command: redis-server
+    ports:
+      - "6379:6379"
+
+  router-api:
+    image: nossas/bonde-router:feature-caddy-api
+    platform: linux/amd64
+    command: uvicorn caddy_api.api:app --reload --host 0.0.0.0
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/caddy_etc:/app/data/caddy
+    depends_on:
+      - caddy
+      - redis
+    environment:
+      - DEBUG=True
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_ALGORITHM=${JWT_ALGORITHM}
+      - JWT_AUDIENCE=${JWT_AUDIENCE}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CADDY_API_URL=http://caddy:2019
+
+  router-celery:
+    image: nossas/bonde-router:feature-caddy-api
+    platform: linux/amd64
+    command: celery -A caddy_api.manager.celery_app.app worker --loglevel=info
+    volumes:
+      - ./data/caddy_etc:/app/data/caddy
+    depends_on:
+      - caddy
+      - redis
+    environment:
+      - DEBUG=True
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_ALGORITHM=${JWT_ALGORITHM}
+      - JWT_AUDIENCE=${JWT_AUDIENCE}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CADDY_API_URL=http://caddy:2019
+
+  # Bonde APIs Services
+  api-rest:
+    # deprecated
+    image: ghcr.io/nossas/bonde-server:latest
+    platform: linux/amd64
+    command: bundle exec puma -C config/puma.rb
+    environment:
+      - DATABASE_URL=${BONDE_DATABASE_URL:-postgres://user:pass@postgres:5432/bonde}
+      - AWS_ID=${AWS_ACCESS_KEY_ID:-xxxxxxx}
+      - AWS_SECRET=${AWS_SECRET_ACCESS_KEY:-xxxxxx}
+      - AWS_ROUTE53_REGION=${AWS_REGION:-us-east-1}
+      - AWS_BUCKET=${API_REST_AWS_BUCKET:-hub-central}
+      - AWS_ENDPOINT=${AWS_ENDPOINT:-https://s3.amazonaws.com}
+      - AWS_ROUTE53_SYNC=${AWS_ROUTE53_SYNC:-force}
+      - AWS_ROUTE_IP=${AWS_ROUTE_IP:-127.0.0.1}
+      - API_HOST=${API_REST_HOST:-api-rest.bonde.devel}
+      - CLIENT_HOST=${API_REST_CLIENT_HOST:-bonde.devel}
+      - JWT_SECRET=${JWT_SECRET}
+      - LOG_LEVEL=${API_REST_LOG_LEVEL:-info}
+      - RAILS_ENV=${API_REST_ENV:-production}
+      - RAILS_SERVE_STATIC_FILES=${API_REST__SERVE_STATIC_FILES:-enabled}
+      - SECRET_KEY_BASE=${API_REST_SECRET_KEY_BASE:-seeeeeeeeeee}
+      - SMTP_HOST=${SMTP_HOST:-smtp}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-SG.fdsafdsafdsafdsa}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USERNAME=${SMTP_USERNAME:-apikey}
+      - PORT=3000
+      - WEB_CONCURRENCY=2
+      - WEB_MEMORY=1024
+
+  api-graphql:
+    image: hasura/graphql-engine:v2.44.0
+    environment:
+      - HASURA_GRAPHQL_DATABASE_URL=${BONDE_DATABASE_URL:-postgres://user:pass@postgres:5432/bonde}
+      - HASURA_GRAPHQL_VOTEPELOCLIMA_DATABASE_URL=${VOTEPELOCLIMA_DATABASE_URL:-postgres://user:pass@postgres:5432/bonde}
+      - HASURA_GRAPHQL_ENABLE_CONSOLE=true
+      - HASURA_GRAPHQL_ADMIN_SECRET=admin
+      - HASURA_GRAPHQL_JWT_SECRET=${HASURA_GRAPHQL_JWT_SECRET}
+      - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
+      - HASURA_GRAPHQL_LOG_LEVEL=debug
+      - HASURA_GRAPHQL_CORS_DOMAIN=*
+      - PORT=8080
+      # Váriaveis de ambiente usadas dentro do Hasura
+      - API_ROUTER_URL=http://router-api:8000
+      - API_ACCOUNTS_URL=http://api-accounts:3000
+      - API_ACTIVISTS_URL=http://api-activists:3000
+      - API_DOMAINS_URL=http://api-domains:3000
+      - API_NOTIFICATIONS_URL=http://api-notifications:3000
+      - API_PAYMENTS_URL=http://api-payments:3000
+      - API_REDES_URL=http://api-redes:3000
+      - N8N_WEBHOOK_URL=http://n8n:5678
+    restart: always
+    pull_policy: always
+
+  api-accounts:
+    image: nossas/bonde-apis:v1.6.0
+    platform: linux/amd64
+    command: pnpm --filter accounts-api start
+    restart: always
+    pull_policy: always
+    environment:
+      ACCOUNTS_REGISTER_URL: https://accounts.bonde.devel/register
+      GRAPHQL_HTTP_URL: http://api-graphql:8080/v1/graphql
+      APP_DOMAIN: bonde.devel
+      HASURA_SECRET: admin
+      HOST: 0.0.0.0
+      JWT_SECRET: ${JWT_SECRET}
+      LOG_LEVEL: debug
+      PORT: '3000'
+
+  api-activists:
+    image: nossas/bonde-apis:v1.6.0
+    platform: linux/amd64
+    command: pnpm --filter activists-api start
+    restart: unless-stopped
+    pull_policy: always
+    environment:
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+      AWS_ENDPOINT: ${AWS_ENDPOINT}
+      AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+      AWS_BUCKET: ${AWS_BUCKET}
+      ACTION_SECRET_KEY: segredo123
+      GRAPHQL_HTTP_URL: https://api-graphql.bonde.devel/v1/graphql
+      HASURA_SECRET: admin
+      HOST: 0.0.0.0
+      PORT: '3000'
+
+  api-domains:
+    image: nossas/bonde-apis:v1.6.0
+    platform: linux/amd64
+    command: pnpm --filter domains-api start
+    restart: unless-stopped
+    pull_policy: always
+    environment:
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+      AWS_ROUTE53_REGION: ${AWS_ROUTE53_REGION}
+      AWS_ROUTE_IP: ${AWS_ROUTE_IP}
+      AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+      HASURA_SECRET: admin
+      GRAPHQL_HTTP_URL: http://api-graphql:8080/v1/graphql
+      ETCD_URL: ${ETCD_URL:-http://etcd:2379}
+      HOST: 0.0.0.0
+      JWT_SECRET: ${JWT_SECRET:-segredo123}
+      PORT: '3000'
+
+  api-notifications:
+    image: nossas/bonde-apis:v1.6.0
+    platform: linux/amd64
+    command: pnpm --filter notifications start
+    restart: unless-stopped
+    pull_policy: always
+    environment:
+      ELASTICSEARCH_CLOUD_ID: ${ELASTICSEARCH_CLOUD_ID}
+      ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD}
+      ELASTIC_APM_SECRET_TOKEN: ${ELASTIC_APM_SECRET_TOKEN}
+      ELASTIC_APM_SERVER_URL: ${ELASTIC_APM_SERVER_URL}
+      ELASTIC_APM_SERVICE_NAME: ${ELASTIC_APM_SERVICE_NAME:-notifications}
+      HOST: 0.0.0.0
+      PORT: '3000'
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      SENDGRID_WEBHOOK_KEY: ${SENDGRID_WEBHOOK_KEY}
+
+  api-payments:
+    image: nossas/bonde-apis:v1.6.0
+    platform: linux/amd64
+    command: pnpm --filter payments-api start
+    restart: unless-stopped
+    pull_policy: always
+    environment:
+      GRAPHQL_HTTP_URL: http://api-graphql:8080/v1/graphql
+      HASURA_SECRET: admin
+      HOST: 0.0.0.0
+      JWT_SECRET: ${JWT_SECRET}
+      PAGARME_API_KEY: ${PAGARME_KEY}
+      PORT: '3000'
+
+  api-redes:
+    image: nossas/bonde-apis:v1.6.0
+    platform: linux/amd64
+    command: pnpm --filter redes-api start
+    restart: unless-stopped
+    pull_policy: always
+    environment:
+      GRAPHQL_HTTP_URL: http://api-graphql:8080/v1/graphql
+      HASURA_SECRET: admin
+      HOST: 0.0.0.0
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: '3000'
+      ZENDESK_API_TOKEN: ${ZENDESK_API_TOKEN}
+      ZENDESK_API_URL: ${ZENDESK_API_URL}
+      ZENDESK_API_USER: ${ZENDESK_API_USER}
+      ZENDESK_ORGANIZATIONS: ${ZENDESK_ORGANIZATIONS}
+
+  # Integração com fluxos de trabalho
+  n8n:
+    image: n8nio/n8n:1.66.0
+    environment:
+      - DB_POSTGRESDB_DATABASE=${N8N_DB_POSTGRESDB_DATABASE:-n8n}
+      - DB_POSTGRESDB_HOST=${N8N_DB_POSTGRESDB_HOST:-postgres}
+      - DB_POSTGRESDB_PASSWORD=${N8N_DB_POSTGRESDB_PASSWORD:-postgres}
+      - DB_POSTGRESDB_PORT=${N8N_DB_POSTGRESDB_PORT:-5432}
+      - DB_POSTGRESDB_USER=${N8N_DB_POSTGRESDB_USER:-postgres}
+      - DB_TYPE=${N8N_DB_TYPE:-postgresdb}
+      - WEBHOOK_URL=${N8N_WEBHOOK_URL:-https://n8n.bonde.devel}
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - DB_LOGGING_ENABLED=true
+      - DB_LOGGING_OPTIONS=all
+    volumes:
+      - ./data/n8n:/home/node/.n8n
+
+# Todos os serviços devem pertencer a mesma rede para serem descobertos pelo Caddy
+networks:
+  default:
+    # Padronizar o nome da rede com o nome do domínio
+    name: bonde

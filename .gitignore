@@ -1,0 +1,4 @@
+# Arquivos de volumes compartilhados com containers
+data/
+# Váriaveis de ambiente
+.env

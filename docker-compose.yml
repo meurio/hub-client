@@ -25,7 +25,7 @@ services:
       - "6379:6379"
 
   router-api:
-    image: nossas/bonde-router:feature-caddy-api
+    image: nossas/bonde-router:v0.0.2
     platform: linux/amd64
     command: uvicorn caddy_api.api:app --reload --host 0.0.0.0
     ports:
@@ -40,12 +40,13 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - JWT_ALGORITHM=${JWT_ALGORITHM}
       - JWT_AUDIENCE=${JWT_AUDIENCE}
+      - HASURA_CRON_SECRET=${HASURA_CRON_SECRET}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - CADDY_API_URL=http://caddy:2019
 
   router-celery:
-    image: nossas/bonde-router:feature-caddy-api
+    image: nossas/bonde-router:v0.0.2
     platform: linux/amd64
     command: celery -A caddy_api.manager.celery_app.app worker --loglevel=info
     volumes:
@@ -58,6 +59,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - JWT_ALGORITHM=${JWT_ALGORITHM}
       - JWT_AUDIENCE=${JWT_AUDIENCE}
+      - HASURA_CRON_SECRET=${HASURA_CRON_SECRET}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - CADDY_API_URL=http://caddy:2019
@@ -113,6 +115,7 @@ services:
       - API_PAYMENTS_URL=http://api-payments:3000
       - API_REDES_URL=http://api-redes:3000
       - N8N_WEBHOOK_URL=http://n8n:5678
+      - HASURA_CRON_SECRET=${HASURA_CRON_SECRET}
     restart: always
     pull_policy: always
 

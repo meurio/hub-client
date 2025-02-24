@@ -235,10 +235,10 @@ services:
   # Versão pública do BONDE
   public:
     image: nossas/bonde-public:latest
+    platform: linux/amd64
     # Usa contexto local para rodar desenvolvimento
     # build:
     #   context: ./public
-    platform: linux/amd64
     command: pnpm --filter webpage-client run start
     restart: unless-stopped
     pull_policy: always

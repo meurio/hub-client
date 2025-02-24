@@ -184,8 +184,13 @@ services:
       ELASTIC_APM_SERVICE_NAME: ${ELASTIC_APM_SERVICE_NAME:-notifications}
       HOST: 0.0.0.0
       PORT: '3000'
-      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      # SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       SENDGRID_WEBHOOK_KEY: ${SENDGRID_WEBHOOK_KEY}
+      # Usa dados do serviço de e-mail mock
+      SMTP_HOST: mailhog
+      SMTP_PASS: pass
+      SMTP_PORT: 1025
+      SMTP_USER: user
 
   api-payments:
     image: nossas/bonde-apis:v1.6.0
@@ -259,6 +264,14 @@ services:
       - REACT_APP_DOMAIN_PUBLIC=bonde.devel
       - REACT_APP_ACTIVE_API_CACHE=false
       # - REACT_APP_DOMAIN_IMAGINARY=${PUBLIC_DOMAIN_IMAGINARY:-http://imaginary.bonde.devel}
+  
+  # Serviços mock para integrações
+  mailhog:
+    image: mailhog/mailhog
+    platform: linux/amd64
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 # Todos os serviços devem pertencer a mesma rede para serem descobertos pelo Caddy
 networks:

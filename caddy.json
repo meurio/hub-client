@@ -239,6 +239,25 @@
                             "match": [
                                 {
                                     "host": [
+                                        "smtp.bonde.devel"
+                                    ]
+                                }
+                            ],
+                            "handle": [
+                                {
+                                    "handler": "reverse_proxy",
+                                    "upstreams": [
+                                        {
+                                            "dial": "mailhog:8025"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "match": [
+                                {
+                                    "host": [
                                         "accounts.bonde.devel"
                                     ]
                                 }

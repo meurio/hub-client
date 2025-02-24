@@ -44,6 +44,7 @@ Adicione as seguintes entradas ao seu `/etc/hosts` para permitir o roteamento lo
 127.0.0.1   api-rest.bonde.devel
 127.0.0.1   api-graphql.bonde.devel
 127.0.0.1   n8n.bonde.devel
+127.0.0.1   smtp.bonde.devel
 127.0.0.1   accounts.bonde.devel
 127.0.0.1   app.bonde.devel
 127.0.0.1   admin-canary.bonde.devel
@@ -93,7 +94,7 @@ docker compose cp \
     -k /Library/Keychains/System.keychain /tmp/root.crt
 ```
 
-Caso utilize outro sistema operacional, você pode ler mais sobre na [documentação do Caddy](https://caddyserver.com/docs/running#local-https-with-docker).
+Saiba mais sobre executar HTTPS local na [documentação do Caddy](https://caddyserver.com/docs/running#local-https-with-docker).
 
 ### 8. Configurar variáveis de ambiente para submódulos
 
@@ -112,11 +113,3 @@ Para acessar um serviço específico (exemplo: `api-rest`):
 ```sh
 docker exec -it bonde_api-rest sh
 ```
-
----
-
-
-# TODO
-
-- Atualizar README do clients
-- Adicionar variavel de ambiente para configurar Token Router API no Hasura

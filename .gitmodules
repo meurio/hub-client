@@ -1,3 +1,6 @@
 [submodule "clients"]
 	path = clients
 	url = git@github.com:nossas/bonde-clients.git
+[submodule "public"]
+	path = public
+	url = git@github.com:nossas/bonde-public.git

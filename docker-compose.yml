@@ -231,6 +231,31 @@ services:
       - DB_LOGGING_OPTIONS=all
     volumes:
       - ./data/n8n:/home/node/.n8n
+  
+  # Versão pública do BONDE
+  public:
+    image: nossas/bonde-public:latest
+    # Usa contexto local para rodar desenvolvimento
+    # build:
+    #   context: ./public
+    platform: linux/amd64
+    command: pnpm --filter webpage-client run start
+    restart: unless-stopped
+    pull_policy: always
+    # volumes:
+    #   - ./public:/code
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - ACTION_SECRET_KEY=segredo123
+      - REACT_APP_API_GRAPHQL_SECRET=admin
+      - REACT_APP_PAGARME_KEY=xxx
+      - REACT_APP_DOMAIN_API_ACTIVISTS=http://api-graphql:8080/v1/graphql
+      - REACT_APP_DOMAIN_API_GRAPHQL=http://api-graphql:8080/v1/graphql
+      - REACT_APP_DOMAIN_API_REST=http://api-rest:3000
+      - REACT_APP_DOMAIN_PUBLIC=bonde.devel
+      - REACT_APP_ACTIVE_API_CACHE=false
+      # - REACT_APP_DOMAIN_IMAGINARY=${PUBLIC_DOMAIN_IMAGINARY:-http://imaginary.bonde.devel}
 
 # Todos os serviços devem pertencer a mesma rede para serem descobertos pelo Caddy
 networks:

@@ -49,6 +49,25 @@
                             "match": [
                                 {
                                     "host": [
+                                        "api-rest.bonde.devel"
+                                    ]
+                                }
+                            ],
+                            "handle": [
+                                {
+                                    "handler": "reverse_proxy",
+                                    "upstreams": [
+                                        {
+                                            "dial": "api-rest:3000"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "match": [
+                                {
+                                    "host": [
                                         "imaginary.bonde.devel"
                                     ]
                                 }
@@ -306,25 +325,6 @@
                                     "upstreams": [
                                         {
                                             "dial": "host.docker.internal:8383"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "match": [
-                                {
-                                    "host": [
-                                        "redes.bonde.devel"
-                                    ]
-                                }
-                            ],
-                            "handle": [
-                                {
-                                    "handler": "reverse_proxy",
-                                    "upstreams": [
-                                        {
-                                            "dial": "host.docker.internal:8484"
                                         }
                                     ]
                                 }

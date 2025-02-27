@@ -10,3 +10,6 @@
 [submodule "apis"]
 	path = apis
 	url = git@github.com:nossas/bonde-apis.git
+[submodule "hasura"]
+	path = hasura
+	url = git@github.com:nossas/bonde-hasura.git

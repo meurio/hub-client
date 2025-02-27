@@ -147,7 +147,7 @@ services:
       AWS_SECRET_KEY: ${AWS_SECRET_KEY}
       AWS_BUCKET: ${AWS_BUCKET}
       ACTION_SECRET_KEY: segredo123
-      GRAPHQL_HTTP_URL: https://api-graphql.bonde.devel/v1/graphql
+      GRAPHQL_HTTP_URL: http://api-graphql:8080/v1/graphql
       HASURA_SECRET: admin
       HOST: 0.0.0.0
       PORT: '3000'
